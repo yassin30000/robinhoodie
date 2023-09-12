@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap');
+
+
+#list-container {
+    width: 330px;
+	height: 85vh;
+	border: 1px solid #cccccc98;
+	border-radius: 5px;
+	float: right;
+	margin: 25px;
+    margin-top: 40px;
+	position: sticky;
+
+}
+
+#list-heading {
+    border-bottom: 1px solid #cccccc98;
+}
+
+#list-heading p {
+    padding: 16px;
+    padding-left: 25px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+#list-item {
+    padding-left: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 13px;
+}
+
+#list-item:hover {
+    background-color: #cccccc98;
+    cursor: pointer;
+}
+
+
