@@ -10,7 +10,7 @@
 	margin: 25px;
     margin-top: 40px;
 	position: sticky;
-
+    z-index: -1;
 }
 
 #list-heading {
