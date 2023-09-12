@@ -1,0 +1,109 @@
+body {
+	overflow: hidden;
+}
+
+#signup-container {
+	display: flex;
+}
+
+#signup-image {
+	position: fixed;
+	width: 50vw;
+    top: 0%;
+}
+
+#signup-form-container {
+	position: fixed;
+	width: 50%;
+	left: 50%;
+}
+
+#signup-form-wrapper {
+	width: max-content;
+	margin-top: 15%;
+	margin-left: 7%;
+}
+
+#signup-form-wrapper > p {
+	font-size: 21px;
+	margin-bottom: 40px;
+}
+
+#signup-label {
+	font-size: 13px;
+	margin-bottom: 10px;
+}
+
+#signup-input {
+	margin-bottom: 25px;
+	height: 35px;
+	width: 415px;
+	border-radius: 5px;
+	border: 1px solid #d3d3d3;
+	outline: none;
+	padding: 0 15px 0 15px;
+}
+
+#demo-user-signup-btn {
+	border: 1px solid black;
+	border-radius: 25px;
+	font-size: 13px;
+	font-weight: 500;
+	padding: 14px;
+	width: 200px;
+	background-color: white;
+	color: black;
+	margin-top: 15px;
+}
+
+#demo-user-signup-btn:hover {
+	background-color: rgb(247, 244, 244);
+	border-color: rgba(0, 0, 0, 0#865);
+	cursor: pointer;
+}
+
+#signup-submit-btn {
+	border: 1px solid black;
+	border-radius: 25px;
+	font-size: 13px;
+	font-weight: 500;
+	padding: 14px;
+	width: 130px;
+	background-color: black;
+	color: white;
+}
+
+#signup-submit-btn:hover {
+	background-color: rgba(0, 0, 0, 0.865);
+	border-color: rgba(0, 0, 0, 0.865);
+	cursor: pointer;
+}
+
+hr#signup-line {
+	margin-top: 50px;
+	height: 1px;
+}
+
+#already-have-account {
+	margin-top: 20px;
+	font-size: 13px;
+}
+
+#already-have-account > span {
+	font-weight: 500;
+	text-decoration: underline;
+}
+
+#already-have-account > span:hover {
+	cursor: pointer;
+}
+
+#signup-errors-div {
+	margin-bottom: 30px;
+}
+
+#signup-error {
+	color: rgb(250, 77, 77);
+	font-size: 13px;
+	margin-bottom: 5px;
+}
