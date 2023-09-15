@@ -28,7 +28,7 @@ export default function stocksReducer(state = initialState, action) {
 		case GET_STOCK:
             const stock_data = action.payload
             // console.log(stock_data)
-            let ticker = stock_data["Meta Data"]["2. Symbol"]
+            const ticker = stock_data["Meta Data"]["2. Symbol"]
             newState[ticker] = stock_data
             return newState
 		default:
