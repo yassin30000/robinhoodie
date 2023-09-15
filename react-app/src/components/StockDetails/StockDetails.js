@@ -1,29 +1,27 @@
 import "./StockDetails.css";
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { fetchStockData } from "../../store/stocks";
+import {Link, useParams} from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 
 function StockDetails() {
-    const [data, setData] = useState(null);
+    const { ticker } = useParams()
+    const dispatch = useDispatch()
 
-
-    const fetchStockData = () => {
-        fetch("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AAPL&apikey=JCQDATAA7R7K8EBJ")
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                setData(data)
-                console.log(data)
-            })
-    }
 
     useEffect(() => {
-        fetchStockData()
-      }, [])
+        dispatch(fetchStockData(ticker))
+    }, [dispatch, ticker])
+
 
     return (
         <div id='stock-details-container'>
-            <div id='stock-ticker'>{data["Meta Data"]['2. Symbol']}</div>
+            {/* <div id='stock-ticker'>{data["Meta Data"]['2. Symbol']}</div> */}
+            <Link to='/stocks/AAPL'>AAPL</Link>
+            <Link to='/stocks/SPY'>SPY</Link>
+            <Link to='/stocks/DIS'>DIS</Link>
+            <Link to='/stocks/UBER'>UBER</Link>
         </div>
     );
 }
