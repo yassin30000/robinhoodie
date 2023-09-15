@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
+import StockDetails from "./components/StockDetails/StockDetails";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage/LandingPage"
@@ -25,6 +26,9 @@ function App() {
 					</Route>
 					<Route path="/signup">
 						<SignupFormPage />
+					</Route>
+					<Route path="/stocks/:ticker">
+						<StockDetails  />
 					</Route>
 					<Route exact path="/">
 						<LandingPage />
