@@ -1,0 +1,27 @@
+#stock-details-container {
+    padding: 50px;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+#temp-nav-bar {
+    padding: 30px 0px;
+}
+
+.temp-nav-link {
+    padding: 0px 20px;
+}
+
+#ticker-header, #ticker-price {
+    font-size: 32px;
+}
+
+#price-as-of {
+    font-size: 12px;
+}
+
+#positive-price-changes {
+    color: rgb(35, 205, 35);
+    font-size: 14px;
+    font-weight: bold;
+    display: inline;
+}
