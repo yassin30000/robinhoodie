@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
     # define relationship with watchlist
     watchlists = relationship('Watchlist', back_populates='user')
     opinions = relationship('Opinion', back_populates='user', cascade='all, delete-orphan')
+    portfolios = relationship('Portfolio', back_populates='user', cascade='all, delete-orphan')
 
     @property
     def password(self):
