@@ -5,4 +5,4 @@ from .watchlist import Watchlist
 from .opinion import Opinion
 from .stock import Stock
 from .portfolio import Portfolio
-from .portfolio_stocks import Portfolio_Stocks
+from .portfolio_stocks import Portfolio_Stock

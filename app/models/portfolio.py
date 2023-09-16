@@ -9,7 +9,8 @@ class Portfolio(db.Model):
     cash = db.Column(db.Float, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    user = relationship('User', back_populates='portfolio', cascade='all, delete-orphan')
+    user = relationship('User', back_populates='portfolio')
+    portfolio_stock = relationship('Portfolio_Stock', back_populates='portfolio')
 
     def to_dict(self):
         return {
