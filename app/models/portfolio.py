@@ -10,7 +10,7 @@ class Portfolio(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     user = relationship('User', back_populates='portfolio')
-    portfolio_stock = relationship('Portfolio_Stock', back_populates='portfolio')
+    portfolio_stocks = relationship('Portfolio_Stock', back_populates='portfolio')
 
     def to_dict(self):
         return {

@@ -10,8 +10,8 @@ class Portfolio_Stock(db.Model):
     portfolio_id = db.Column(db.Integer, db.ForeignKey('portfolio.id'), nullable=False)
     stock_id = db.Column(db.Integer, db.ForeignKey('stocks.id'), nullable=False)
 
-    portfolio = relationship('Portfolio', back_populates='portfolio_stock')
-    stock = relationship('Stock', back_populates='portfolio_stock')
+    portfolio = relationship('Portfolio', back_populates='portfolio_stocks')
+    stocks = relationship('Stock', back_populates='portfolio_stocks')
 
     def to_dict(self):
         return {
