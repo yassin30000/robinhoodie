@@ -5,7 +5,7 @@ from app.models import Stock
 stock_routes = Blueprint('stocks', __name__)
 
 
-@stock_routes('/')
+@stock_routes.route('/')
 @login_required
 def stocks():
     """
