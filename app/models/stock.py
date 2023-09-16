@@ -9,6 +9,14 @@ class Stock(db.Model):
     ticker = db.Column(db.String(10), nullable=False)
     details = db.Column(db.Text, nullable=False)
 
-    watch_stocks = db.relationship("WatchStock", back_populates='stocks', cascade="all, delete-orphan")
-    portfrolio_stocks = db.relationship("PortfolioStock", back_populates='stocks', cascade='all, delete-orphan')
-    opinions = db.relationship('Opinion', back_populates='stocks', cascade='all, delete-orphan')
+    # watch_stocks = db.relationship("WatchStock", back_populates='stocks', cascade="all, delete-orphan")
+    # portfrolio_stocks = db.relationship("PortfolioStock", back_populates='stocks', cascade='all, delete-orphan')
+    opinions = db.relationship('Opinion', back_populates='stock', cascade='all, delete-orphan')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'ticker': self.ticker,
+            'details': self.details
+        }
