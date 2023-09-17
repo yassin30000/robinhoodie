@@ -30,7 +30,7 @@ def opinions_user_id(user_id):
 
 
 
-@opinion_routes.route('/stock/<int:stock_id>', methods = ["POST"])
+@opinion_routes.route('/<int:stock_id>', methods = ["POST"])
 @login_required
 def create_new_opinion(stock_id):
     """
@@ -52,7 +52,7 @@ def create_new_opinion(stock_id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@opinion_routes.route('/delete/<int:opinion_id>', methods=['DELETE'])
+@opinion_routes.route('/<int:opinion_id>', methods=['DELETE'])
 @login_required
 def delete_opinion(opinion_id):
     """
@@ -65,6 +65,31 @@ def delete_opinion(opinion_id):
         return {'message': 'Successfuly deleted'}
     else:
         return {'message': 'Opinion not found'}
+
+
+@opinion_routes.route('/<int:opinion_id>', methods=['PUT', 'PATCH'])
+@login_required
+def edit_opinion(opinion_id):
+    """
+    Delete an opinion by opinion id
+    """
+    form = OpinionForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+
+    if form.validate_on_submit():
+        opinion = Opinion.query.get(opinion_id)
+        if not opinion:
+            return {'message': 'Opinion not found'}
+
+        opinion.content = form.data['content']
+
+        db.session.commit()
+        return opinion.to_dict()
+        
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 
 
