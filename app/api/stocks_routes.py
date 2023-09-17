@@ -14,6 +14,7 @@ def get_stocks():
     stocks = Stock.query.all()
     return {'stocks': {stock.ticker: stock.to_dict() for stock in stocks}}
 
+
 @stock_routes.route('/<string:filter>')
 @login_required
 def get_filtered_stocks(filter):
@@ -30,6 +31,5 @@ def get_filtered_stocks(filter):
 
     for stock in stocks_by_name:
         stocks[stock.ticker] = stock.to_dict()
-     
-    return {'stocks': stocks}
 
+    return {'stocks': stocks}
