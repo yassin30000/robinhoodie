@@ -25,3 +25,14 @@
     font-weight: bold;
     display: inline;
 }
+
+#negative-price-changes {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline;
+}
+
+#line-chart-container {
+    padding: 20px 0px;
+}
