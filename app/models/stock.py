@@ -9,7 +9,7 @@ class Stock(db.Model):
     ticker = db.Column(db.String(10), nullable=False)
     details = db.Column(db.Text, nullable=False)
 
-    # watch_stocks = db.relationship("WatchStock", back_populates='stocks', cascade="all, delete-orphan")
+    watchlist_stock = db.relationship("Watchlist_Stock", back_populates='stock', cascade="all, delete-orphan")
     portfolio_stocks = db.relationship("Portfolio_Stock", back_populates='stocks', cascade='all, delete-orphan')
     opinions = db.relationship('Opinion', back_populates='stock', cascade='all, delete-orphan')
 

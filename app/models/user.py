@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     # define relationship with watchlist
-    watchlists = relationship('Watchlist', back_populates='user')
+    watchlists = relationship('Watchlist', back_populates='user', cascade='all, delete-orphan')
     opinions = relationship('Opinion', back_populates='user', cascade='all, delete-orphan')
     portfolio = relationship('Portfolio', back_populates='user', cascade='all, delete-orphan')
 
