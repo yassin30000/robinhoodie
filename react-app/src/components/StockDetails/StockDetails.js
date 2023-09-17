@@ -51,6 +51,8 @@ function StockDetails() {
             datasets: [{
                 label: '$',
                 data: prices_array,
+                borderColor: price_change > 0 ? 'rgb(0, 200, 5)' : 'rgb(255, 0, 0)',
+                pointStyle: false
             }]
         }
 
@@ -69,10 +71,12 @@ function StockDetails() {
             <p id='ticker-header'>{ticker}</p>
             <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
 
-            {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}</span>) </p><span>Past month</span></div>}
-            {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${price_change}</span> (<span>{percent_change}</span>) </p><span>Past month</span></div>}
+            {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}%</span>) </p><span>Past month</span></div>}
+            {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
 
-            {stock && <LineChart data={chartData} />}
+            <div id='line-chart-container'>
+                {stock && <LineChart data={chartData} />}
+            </div>
 
 
             <div id='temp-nav-bar'>

@@ -13,12 +13,8 @@ function LineChart(data) {
         scales: {
             x: { display: false },
             y: { display: false }
-        },
-        datasets: {
-            line: {
-                backgroundColor: "#008000",
-            }
         }
+
     }
     return <Line data={data.data} options={options} />
 }
