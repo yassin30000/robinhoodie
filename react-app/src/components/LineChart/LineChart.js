@@ -7,13 +7,17 @@ ChartJS.register(CategoryScale, LineElement, LinearScale, PointElement)
 
 function LineChart(data) {
     const options = {
-        plugins: {
-            legend: false
+        hover: {
+            mode: 'x'
         },
         scales: {
             x: { display: false },
             y: { display: false }
-        }
+        },
+        // interaction: {
+        //     mode: 'x'
+        // },
+
 
     }
     return <Line data={data.data} options={options} />

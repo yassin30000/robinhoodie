@@ -4,6 +4,7 @@ import { fetchStockData } from "../../store/stocks";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LineChart from "../LineChart/LineChart";
+import Watchlist from "../Watchlist/Watchlist";
 
 
 
@@ -44,6 +45,8 @@ function StockDetails() {
         price_change = (latestPrice - price_30_days_before).toFixed(2)
         percent_change = ((price_change / latestPrice) * 100).toFixed(2)
 
+ 
+
         const dates_array = Object.keys(stock_prices_at_close).slice(0,30).reverse()
         const prices_array = Object.values(stock_prices_at_close).slice(0, 30).reverse()
         chartData = {
@@ -52,7 +55,8 @@ function StockDetails() {
                 label: '$',
                 data: prices_array,
                 borderColor: price_change > 0 ? 'rgb(0, 200, 5)' : 'rgb(255, 0, 0)',
-                pointStyle: false
+                borderWidth: 2,
+                pointStyle: false,
             }]
         }
 
@@ -86,6 +90,7 @@ function StockDetails() {
                 <Link className='temp-nav-link' to='/stocks/DIS'>DIS</Link>
                 <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
             </div>
+
         </div>
     );
 }
