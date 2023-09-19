@@ -37,7 +37,7 @@ function Navigation({ isLoaded }) {
 
 	}, [isDropdownOpen, sessionUser]);
 
-	if (location.pathname === "/login" || location.pathname === "/signup") return null // dont show navbar on login page
+	if (location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/404") return null // dont show navbar on login page
 
 	return (
 		<div id='nav-container'>
