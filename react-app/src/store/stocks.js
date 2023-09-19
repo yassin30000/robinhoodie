@@ -8,11 +8,14 @@ const setStock = (stock) => ({
 });
 
 export const fetchStockData = (ticker) => async (dispatch) => {
-    const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=JCQDATAA7R7K8EBJ`)
+    const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=JCQDATAA7R7K8EBJ`
+    const res = await fetch(url)    
 
     if (res.ok) {
         const data = await res.json();
-        dispatch(setStock(data))
+        if (!data["Error Message"]) {
+            dispatch(setStock(data))
+        }
         return data
     } else {
         const errors = await res.json();
@@ -27,7 +30,6 @@ export default function stocksReducer(state = initialState, action) {
 	switch (action.type) {
 		case GET_STOCK:
             const stock_data = action.payload
-            // console.log(stock_data)
             const ticker = stock_data["Meta Data"]["2. Symbol"]
             newState[ticker] = stock_data
             return newState

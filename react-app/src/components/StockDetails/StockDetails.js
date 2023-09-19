@@ -56,13 +56,14 @@ function StockDetails() {
                 data: prices_array,
                 borderColor: price_change > 0 ? 'rgb(0, 200, 5)' : 'rgb(255, 0, 0)',
                 borderWidth: 2,
-                pointStyle: false,
+                pointRadius: 0,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: price_change > 0 ? 'rgb(0, 200, 5)' : 'rgb(255, 0, 0)',
             }]
         }
 
     }
     //
-    console.log(chartData)
 
 
     useEffect(() => {
@@ -72,25 +73,28 @@ function StockDetails() {
 
     return (
         <div id='stock-details-container'>
-            <p id='ticker-header'>{ticker}</p>
-            <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
+            { stock ? (
+            <> 
+                <p id='ticker-header'>{ticker}</p>
+                <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
 
-            {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}%</span>) </p><span>Past month</span></div>}
-            {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
+                {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}%</span>) </p><span>Past month</span></div>}
+                {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
 
-            <div id='line-chart-container'>
-                {stock && <LineChart data={chartData} />}
-            </div>
+                <div id='line-chart-container'>
+                    {stock && <LineChart data={chartData} />}
+                </div>
 
 
-            <div id='temp-nav-bar'>
-                <span>Temporary Nav</span>
-                <Link className='temp-nav-link' to='/stocks/AAPL'>AAPL</Link>
-                <Link className='temp-nav-link' to='/stocks/SPY'>SPY</Link>
-                <Link className='temp-nav-link' to='/stocks/DIS'>DIS</Link>
-                <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
-            </div>
-
+                <div id='temp-nav-bar'>
+                    <span>Temporary Nav</span>
+                    <Link className='temp-nav-link' to='/stocks/AAPL'>AAPL</Link>
+                    <Link className='temp-nav-link' to='/stocks/SPY'>SPY</Link>
+                    <Link className='temp-nav-link' to='/stocks/DIS'>DIS</Link>
+                    <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
+                </div> 
+            </>
+            ) : (<> Route to error page because stock not found </>)}
         </div>
     );
 }
