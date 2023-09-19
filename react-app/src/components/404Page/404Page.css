@@ -1,0 +1,52 @@
+#page-container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#left-div {
+    margin-left: 100px;
+}
+
+#title {
+    font-size: 50px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+#subtitle {
+    font-size: 20px;
+    margin-bottom: 25px;
+    font-weight: 300;
+}
+
+#home-btn {
+    border: 1px solid rgb(0, 200, 5);
+    border-radius: 25px;
+    padding: 12px 25px 12px 25px;
+    background-color: rgb(0, 200, 5);
+    width: max-content;
+    font-size: 20px;
+    font-weight: 500;
+    transition: all .3s;
+}
+
+#home-btn:hover {   
+    cursor: pointer;
+    background-color: black;
+    color: rgb(0, 200, 5);
+    border-color: black;
+}
+
+#right-div {
+    margin-right: 100px;
+
+}
+
+#right-div img {
+    image-rendering: crisp-edges;
+    width: 700px;
+} 

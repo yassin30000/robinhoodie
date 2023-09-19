@@ -6,7 +6,8 @@ import LoginFormPage from "./components/LoginFormPage";
 import StockDetails from "./components/StockDetails/StockDetails";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import LandingPage from "./components/LandingPage/LandingPage"
+import LandingPage from "./components/LandingPage/LandingPage";
+import Page404 from './components/404Page/index'
 
 function App() {
 	const dispatch = useDispatch();
@@ -28,7 +29,10 @@ function App() {
 						<SignupFormPage />
 					</Route>
 					<Route path="/stocks/:ticker">
-						<StockDetails  />
+						<StockDetails />
+					</Route>
+					<Route path="/404">
+						<Page404 />
 					</Route>
 					<Route exact path="/">
 						<LandingPage />
