@@ -4,6 +4,7 @@ from .opinions import seed_opinions, undo_opinions
 from .stocks import seed_stocks, undo_stocks
 from .portfolio import seed_portfolios, undo_portfolios
 from .portfolio_stocks import seed_portfolio_stocks, undo_portfolio_stocks
+from .watchlists import seed_watchlists, undo_watchlists
 
 from app.models.db import db, environment, SCHEMA
 
@@ -26,6 +27,7 @@ def seed():
     seed_opinions()
     seed_portfolios()
     seed_portfolio_stocks()
+    seed_watchlists()
     # Add other seed functions here
 
 
@@ -37,4 +39,5 @@ def undo():
     undo_opinions()
     undo_portfolios()
     undo_portfolio_stocks()
+    undo_watchlists()
     # Add other undo functions here
