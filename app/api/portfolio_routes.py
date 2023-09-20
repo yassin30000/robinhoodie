@@ -142,46 +142,47 @@ def buy_stock_post(stock_id, price):
 
 
 # Selling a stock
-@portfolio_routes.route('/sell-stocks/<int:stock_id>/<int:price>', methods=['POST', 'PUT'])
+@portfolio_routes.route('/sell-stocks/<int:stock_id>/<int:price>', methods=['POST'])
 @login_required
 def sell_stock_post(stock_id, price):
     form = SellForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     portfolio_update = Portfolio.query.filter_by(user_id=current_user.id).first()
-    total_cost = price * (form.data['shares'])
-    stock_portfolio = Portfolio_Stock.query.filter_by(stock_id=stock_id).first()
+    if not portfolio_update:
+        return {"message": "You do own this stock"}
+
+    stock_portfolio = Portfolio_Stock.query.filter_by(stock_id=stock_id).all()
+    
+    portfolio_stocks_data = [stock.to_dict() for stock in stock_portfolio]
+
+    total_number_of_shares = 0
+    for stock in portfolio_stocks_data:
+        total_number_of_shares += stock['shares']
+   
 
     #updates the current shares when selling a stock
     if form.validate_on_submit():
-        new_share = form.data['shares']
+        sold_shares = form.data['shares']
+
         #check to see if they have enough shares to sell
-        if stock_portfolio.shares < new_share:
+        if total_number_of_shares < sold_shares:
             return {'message': "Sorry you don't have enough shares to sell"}
-        if stock_portfolio.shares == 0:
-            return {'message': "Sorry you don't have any shares to sell"}
-        stock_portfolio.shares = stock_portfolio.shares - float(new_share)
+
+        total_gain = price * float((form.data['shares']))
+
+        sold_shares = Portfolio_Stock(
+                shares = -float(form.data['shares']),
+                portfolio_id = portfolio_update.id,
+                stock_id = stock_id,
+                price = price
+            )
+
         #updates the cash amount after selling shares
-        portfolio_update.cash = portfolio_update.cash + float(total_cost)
+        db.session.add(sold_shares)
+        portfolio_update.cash = portfolio_update.cash + float(total_gain)
         db.session.commit()
         return portfolio_update.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-
-#Delete stock
-@portfolio_routes.route('/<int:stock_id>', methods=['DELETE'])
-@login_required
-def delete_stock(stock_id):
-    #Check if there are shares of stock in portfolio
-    portfolio_stock = Portfolio_Stock.query.get(stock_id)
-
-    if not portfolio_stock:
-        return {'message': "Stock not found in portfolio"}
-    elif portfolio_stock.shares > 1:
-        return {'message': "You have more than one share"}
-
-    db.session.delete(portfolio_stock)
-    db.session.commit()
-
-    return {'message': 'Stock deleted successfully from portfolio'}

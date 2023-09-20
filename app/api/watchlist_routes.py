@@ -49,11 +49,11 @@ def update_watchlist(watchlist_id):
     form['csrf_token'].data = request.cookies['csrf_token']
     watchlist = Watchlist.query.get(watchlist_id)
 
-    if watchlist.user_id != current_user.id:
-        return {'message': 'Unauthorized'}, 401
-
     if not watchlist:
         return {'message': 'Watchlist not found'}, 404
+
+    if watchlist.user_id != current_user.id:
+        return {'message': 'Unauthorized'}, 401
 
     if form.validate_on_submit():
         watchlist.name = form.data['name']
