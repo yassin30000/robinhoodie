@@ -22,3 +22,5 @@ class Portfolio(db.Model):
             'user_id': self.user_id,
             'portfolio_stocks': portfolio_stocks_data
         }
+
+
