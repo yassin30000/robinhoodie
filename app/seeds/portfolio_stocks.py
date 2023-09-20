@@ -5,17 +5,17 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_portfolio_stocks():
     stock1 = Portfolio_Stock(
-        shares=3, portfolio_id=1, stock_id=3)
+        shares=3, portfolio_id=1, stock_id=3, price=200)
     stock2 = Portfolio_Stock(
-        shares=5, portfolio_id=2, stock_id=2)
+        shares=5, portfolio_id=2, stock_id=2, price=100)
     stock3 = Portfolio_Stock(
-        shares=3, portfolio_id=1, stock_id=4)
+        shares=3, portfolio_id=1, stock_id=4, price=50)
     stock4 = Portfolio_Stock(
-        shares=5, portfolio_id=2, stock_id=6)
+        shares=5, portfolio_id=2, stock_id=6, price=100)
     stock5 = Portfolio_Stock(
-        shares=3, portfolio_id=1, stock_id=10)
+        shares=3, portfolio_id=1, stock_id=10, price=200)
     stock6 = Portfolio_Stock(
-        shares=5, portfolio_id=2, stock_id=5)
+        shares=5, portfolio_id=2, stock_id=5, price=500)
 
 
     db.session.add(stock1)
