@@ -4,7 +4,7 @@ import { fetchStockData } from "../../store/stocks";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LineChart from "../LineChart/LineChart";
-import Watchlist from "../Watchlist/Watchlist";
+import Page404 from '../404Page/index';
 
 
 
@@ -94,7 +94,7 @@ function StockDetails() {
                     <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
                 </div> 
             </>
-            ) : (<> Route to error page because stock not found </>)}
+            ) : (<Page404 />)}
         </div>
     );
 }

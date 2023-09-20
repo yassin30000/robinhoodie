@@ -6,20 +6,15 @@ import { Chart as ChartJS, CategoryScale, LineElement, LinearScale, Tooltip, Poi
 ChartJS.register(CategoryScale, LineElement, LinearScale, PointElement, Tooltip)
 
 function LineChart(data) {
+
+
     const options = {
-        hover: {
-            mode: 'y'
-        },
+
         scales: {
             x: { display: false },
             y: { display: false }
         },
         responsive: true,
-        plugins: {
-            tooltip: {
-                yAlign: 'bottom',
-            }
-        }
     }
 
     return <Line data={data.data} options={options} />
