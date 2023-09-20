@@ -5,7 +5,7 @@ from ..forms.buy_stock_form import BuyForm
 from ..forms.sell_stock_form import SellForm
 from ..models import Portfolio, db, Portfolio_Stock, Stock
 from .auth_routes import validation_errors_to_error_messages
-import requests
+
 
 portfolio_routes = Blueprint('portfolio', __name__)
 
