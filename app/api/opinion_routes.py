@@ -68,12 +68,15 @@ def delete_opinion(opinion_id):
     Delete an opinion by opinion id
     """
     opinion = Opinion.query.get(opinion_id)
-    if opinion:
+    if not opinion:
+        return {'message': 'Opinion not found'}
+    elif opinion.user_id != current_user.id:
+        return {"message": "You cannot delete an opinion that is not yours"}
+    elif opinion:
         db.session.delete(opinion)
         db.session.commit()
         return {'message': 'Successfuly deleted'}
-    else:
-        return {'message': 'Opinion not found'}
+
 
 
 @opinion_routes.route('/<int:opinion_id>', methods=['PUT', 'PATCH'])
@@ -89,11 +92,12 @@ def edit_opinion(opinion_id):
         opinion = Opinion.query.get(opinion_id)
         if not opinion:
             return {'message': 'Opinion not found'}
-
-        opinion.content = form.data['content']
-
-        db.session.commit()
-        return opinion.to_dict()
+        elif opinion.user_id != current_user.id:
+            return {"message": "You cannot edit an opinion that is not yours"}
+        else:
+            opinion.content = form.data['content']
+            db.session.commit()
+            return opinion.to_dict()
 
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401

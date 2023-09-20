@@ -4,7 +4,7 @@ from sqlalchemy.sql import text
 
 def seed_opinions():
 
-    for x in range(10):
+    for x in range(1, 10):
         opinion1 = Opinion(
             user_id = 1, 
             stock_id= x, 

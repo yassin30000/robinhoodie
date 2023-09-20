@@ -22,11 +22,13 @@ def index():
     current_portfolio = Portfolio.query.filter_by(user_id=current_user.id).first()
     if current_portfolio:
         return current_portfolio.to_dict()
+    elif not current_portfolio:
+        return {"message": "User does not have a portfolio"}
     else:
         return {'error': 'error'}
 
 # Get and Post funds
-@portfolio_routes.route('/deposit-funds', methods=['GET', 'POST', 'PUT'])
+@portfolio_routes.route('/deposit-funds', methods=['POST', 'PUT'])
 @login_required
 def deposit_funds_post():
     '''
@@ -44,6 +46,9 @@ def deposit_funds_post():
         PUT if there is money then you update your account with additional funds
         '''
         if request.method == 'POST':
+          if portfolio_update:
+            return {"message": "User already has a portfolio"}
+        
           new_funds = Portfolio(
               cash = form.data['cash'],
               user_id = current_user.id
@@ -62,7 +67,7 @@ def deposit_funds_post():
 
 
 # widthraw funds
-@portfolio_routes.route('/withdraw-funds', methods=['GET', 'PUT'])
+@portfolio_routes.route('/withdraw-funds', methods=['PUT'])
 @login_required
 def withdraw_funds_post():
     form = TransferForm()
@@ -73,55 +78,64 @@ def withdraw_funds_post():
     PUT if there is no fund give an error message else withdraw the money from the account
     '''
     if form.validate_on_submit():
-        if request.method == 'PUT':
-            if portfolio_update.cash == 0:
-                return {'message': "Error no funds to withdraw"}
 
-            cash = form.data['cash']
-            #checks to see if they have enough funds to withdraw money
-            if portfolio_update.cash < cash:
-                return {'message': "Error you don't have enough funds to withdraw"}, 401
-            portfolio_update.cash = portfolio_update.cash - int(cash)
-            db.session.commit()
-            return portfolio_update.to_dict()
+        if portfolio_update.cash == 0:
+            return {'message': "Error no funds to withdraw"}
+
+        cash = form.data['cash']
+        #checks to see if they have enough funds to withdraw money
+        if portfolio_update.cash < cash:
+            return {'message': "Error you don't have enough funds to withdraw"}, 401
+
+        portfolio_update.cash = portfolio_update.cash - int(cash)
+        db.session.commit()
+        return portfolio_update.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 
 # Buying a stock
-@portfolio_routes.route('/buy-stocks/<int:stock_id>/<int:price>', methods=['GET', 'POST', 'PUT'])
+@portfolio_routes.route('/buy-stocks/<int:stock_id>/<int:price>', methods=['POST'])
 @login_required
 def buy_stock_post(stock_id, price):
     form = BuyForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     portfolio_update = Portfolio.query.filter_by(user_id=current_user.id).first()
+
+    if not portfolio_update:
+        return {"message": "You do not have any money in your portfolio"}
+    elif current_user.id != portfolio_update.user_id:
+        return {"message": "You do not own this portfolio"}
+
     total_cost = price * (form.data['shares'])
-    stock_portfolio = Portfolio_Stock.query.filter_by(stock_id=stock_id).first()
+    
     if form.validate_on_submit():
         if request.method == 'POST':
             if total_cost > portfolio_update.cash:
                 return {'message': 'Not enough funds to buy'}
-            if stock_portfolio.shares > 0:
-                return {'message': 'You already own shares of this stock'}, 404
-
+    
             new_shares = Portfolio_Stock(
                 shares = form.data['shares'],
                 portfolio_id = portfolio_update.id,
-                stock_id = stock_id
+                stock_id = stock_id,
+                price = price
             )
             db.session.add(new_shares)
             portfolio_update.cash = portfolio_update.cash - float(total_cost)
             db.session.commit()
             return portfolio_update.to_dict()
-        elif request.method == "PUT":
-            #updates the current shares when buying a stock
-            new_share = form.data['shares']
-            stock_portfolio.shares = stock_portfolio.shares + float(new_share)
-            #updates the cash amount after buyin shares
-            portfolio_update.cash = portfolio_update.cash - float(total_cost)
-            db.session.commit()
-            return portfolio_update.to_dict()
+
+
+        # elif request.method == "PUT":
+        #     #updates the current shares when buying a stock
+        #     new_share = form.data['shares']
+        #     stock_portfolio.shares = stock_portfolio.shares + float(new_share)
+        #     #updates the cash amount after buyin shares
+        #     portfolio_update.cash = portfolio_update.cash - float(total_cost)
+        #     db.session.commit()
+        #     return portfolio_update.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
