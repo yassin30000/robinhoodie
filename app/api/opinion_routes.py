@@ -9,6 +9,16 @@ from .auth_routes import validation_errors_to_error_messages
 opinion_routes = Blueprint('opinions', __name__)
 
 
+@opinion_routes.route('/')
+@login_required
+def get_all_opinions():
+    """
+    Get all opinions
+    """
+    opinions = Opinion.query.all()
+    return {'opinions': {opinion.id: opinion.to_dict() for opinion in opinions}}, 200
+
+
 @opinion_routes.route('/stock/<int:stock_id>')
 @login_required
 def opinions_stock_id(stock_id):
@@ -16,7 +26,7 @@ def opinions_stock_id(stock_id):
     Query for all opinions by stock_id
     """
     opinions = Opinion.query.filter_by(stock_id=stock_id).all()
-    return {'opinions': [opinion.to_dict() for opinion in opinions]} 
+    return {'opinions': [opinion.to_dict() for opinion in opinions]}
 
 
 @opinion_routes.route('/user/<int:user_id>')
@@ -26,11 +36,10 @@ def opinions_user_id(user_id):
     Query for all opinions by user_id
     """
     opinions = Opinion.query.filter_by(user_id=user_id).all()
-    return {'opinions': [opinion.to_dict() for opinion in opinions]} 
+    return {'opinions': [opinion.to_dict() for opinion in opinions]}
 
 
-
-@opinion_routes.route('/<int:stock_id>', methods = ["POST"])
+@opinion_routes.route('/<int:stock_id>', methods=["POST"])
 @login_required
 def create_new_opinion(stock_id):
     """
@@ -41,9 +50,9 @@ def create_new_opinion(stock_id):
 
     if form.validate_on_submit():
         opinion = Opinion(
-            content = form.data['content'],
-            user_id = current_user.id,
-            stock_id = stock_id
+            content=form.data['content'],
+            user_id=current_user.id,
+            stock_id=stock_id
         )
         db.session.add(opinion)
         db.session.commit()
@@ -76,7 +85,6 @@ def edit_opinion(opinion_id):
     form = OpinionForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-
     if form.validate_on_submit():
         opinion = Opinion.query.get(opinion_id)
         if not opinion:
@@ -86,16 +94,6 @@ def edit_opinion(opinion_id):
 
         db.session.commit()
         return opinion.to_dict()
-        
+
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
-
-
-
-
-
-
-    
-
-

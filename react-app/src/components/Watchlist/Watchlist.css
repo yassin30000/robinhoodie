@@ -2,14 +2,16 @@
 
 
 #list-container {
+	position: fixed;
+    right: 20px;
+    top: 50px;
     width: 330px;
 	height: 85vh;
 	border: 1px solid #cccccc98;
 	border-radius: 5px;
-	float: right;
+
 	margin: 25px;
     margin-top: 40px;
-	position: sticky;
     z-index: -1;
 }
 
