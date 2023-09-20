@@ -9,6 +9,7 @@ import logo_green from '../images/logo_green.png'
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
+
 function Navigation({ isLoaded }) {
 	const dispatch = useDispatch();
 	const sessionUser = useSelector(state => state.session.user);
@@ -37,7 +38,7 @@ function Navigation({ isLoaded }) {
 
 	}, [isDropdownOpen, sessionUser]);
 
-	if (location.pathname === "/login" || location.pathname === "/signup") return null // dont show navbar on login page
+	if (location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/404") return null // dont show navbar on login page
 
 	return (
 		<div id='nav-container'>
@@ -71,7 +72,6 @@ function Navigation({ isLoaded }) {
 				</span>
 				{isDropdownOpen && (
 					<div className="dropdown-menu" ref={dropdownRef}>
-						{/* TODO: add real links */}
 
 						{sessionUser && (<p className='user-name'>{sessionUser.username}</p>)} {/* if logged in, show username */}
 
