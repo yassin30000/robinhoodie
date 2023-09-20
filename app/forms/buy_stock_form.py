@@ -5,4 +5,4 @@ from wtforms.validators import DataRequired
 
 class BuyForm(FlaskForm):
     shares = DecimalField('Shares', validators=[DataRequired()])
-    buy = SubmitField('Buy')
+    # buy = SubmitField('Buy')

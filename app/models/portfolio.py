@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 
 
 class Portfolio(db.Model):
-    __tablename__ = 'portfolio'
+    __tablename__ = 'portfolios'
 
     id = db.Column(db.Integer, primary_key=True)
     cash = db.Column(db.Float, nullable=False)
@@ -13,8 +13,12 @@ class Portfolio(db.Model):
     portfolio_stocks = relationship('Portfolio_Stock', back_populates='portfolio')
 
     def to_dict(self):
+        portfolio_stocks_data = []
+        for portfolio_stock in self.portfolio_stocks:
+            portfolio_stocks_data.append(portfolio_stock.to_dict())
         return {
             'id': self.id,
             'cash': self.cash,
-            'user_id': self.user_id
+            'user_id': self.user_id,
+            'portfolio_stocks': portfolio_stocks_data
         }
