@@ -1,4 +1,4 @@
-from .db import db
+from .db import db, add_prefix_for_prod
 from sqlalchemy.orm import relationship
 
 
@@ -7,7 +7,7 @@ class Portfolio(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     cash = db.Column(db.Float, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
     user = relationship('User', back_populates='portfolio')
     portfolio_stocks = relationship('Portfolio_Stock', back_populates='portfolio')
