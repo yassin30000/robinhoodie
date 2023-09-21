@@ -2,6 +2,7 @@
 
 const GET_STOCK = "stocks/SET_STOCK";
 const GET_ALL_STOCKS = 'stocks/GET_ALL_STOCKS'
+const SEARCH_STOCKS = "stocks/SEARCH_STOCKS"
 
 const getAllStocks = (allStocks) => ({
     type: GET_ALL_STOCKS,
@@ -12,6 +13,11 @@ const setStock = (stock) => ({
     type: GET_STOCK,
     payload: stock,
 });
+
+const searchStocks = (stocks) => ({
+    type: SEARCH_STOCKS,
+    payload: stocks
+})
 
 export const fetchAllStocks = () => async (dispatch) => {
     const res = await fetch('/api/stocks/');
@@ -42,22 +48,38 @@ export const fetchStockData = (ticker) => async (dispatch) => {
     }
 }
 
+export const search = (search_stocks) => async (dispatch) => {
+    const res = await fetch(`api/stocks/${search}`)
+
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(searchStocks(data));
+        return data
+    } else {
+        const errors = await res.json();
+        return errors
+    }
+}
+
 const initialState = {};
 
 export default function stocksReducer(state = initialState, action) {
     let newState = { ...state }
     switch (action.type) {
         case GET_STOCK:
-            const stock_data = action.payload
-            const ticker = stock_data["Meta Data"]["2. Symbol"]
-            newState[ticker] = stock_data
+            const stock_data = action.payload;
+            const ticker = stock_data["Meta Data"]["2. Symbol"];
+            newState[ticker] = stock_data;
             return newState
 
         case GET_ALL_STOCKS:
-            const allStocks = action.payload
-            newState.allStocks = allStocks
+            const allStocks = action.payload;
+            newState.allStocks = allStocks;
             return newState
-
+        case SEARCH_STOCKS:
+            const searchedStocks = action.payload;
+            newState["search"] = searchedStocks
+            return newState
         default:
             return state;
     }
