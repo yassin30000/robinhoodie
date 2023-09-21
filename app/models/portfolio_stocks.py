@@ -1,4 +1,4 @@
-from .db import db
+from .db import db, add_prefix_for_prod
 from sqlalchemy.orm import relationship
 
 
@@ -7,8 +7,8 @@ class Portfolio_Stock(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     shares = db.Column(db.Float, nullable=False)
-    portfolio_id = db.Column(db.Integer, db.ForeignKey('portfolios.id'), nullable=False)
-    stock_id = db.Column(db.Integer, db.ForeignKey('stocks.id'), nullable=False)
+    portfolio_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('portfolios.id')), nullable=False)
+    stock_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('stocks.id')), nullable=False)
     price = db.Column(db.Float, nullable=False)
 
     portfolio = relationship('Portfolio', back_populates='portfolio_stocks')
