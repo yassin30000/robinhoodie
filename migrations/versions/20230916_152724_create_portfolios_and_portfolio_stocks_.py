@@ -1,4 +1,4 @@
-"""create_portfolio_and_portfolio_stock_tables
+"""create_portfolios_and_portfolio_stocks_tables
 
 Revision ID: f5f2d2e311c2
 Revises: d45c59322fef
@@ -31,7 +31,7 @@ def upgrade():
     sa.Column('portfolio_id', sa.Integer(), nullable=False),
     sa.Column('stock_id', sa.Integer(), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
-    sa.ForeignKeyConstraint(['portfolio_id'], ['portfolio.id'], ),
+    sa.ForeignKeyConstraint(['portfolio_id'], ['portfolios.id'], ),
     sa.ForeignKeyConstraint(['stock_id'], ['stocks.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
