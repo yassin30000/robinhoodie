@@ -4,24 +4,22 @@ import { fetchUserWatchlists } from "../../store/watchlists";
 import "../Watchlist/Watchlist.css";
 import { useState } from "react";
 
-
 function Watchlist() {
     const dispatch = useDispatch();
     const userWatchlistsData = useSelector((state) => state.watchlists.userWatchlists);
     const userWatchlists = userWatchlistsData ? Object.values(userWatchlistsData.watchlists) : []
-    const [rotatedItems, setRotatedItems] = useState({}); // Maintain state for rotated items
-
-    useEffect(() => {
-        // Fetch the user's watchlists when the component mounts
-        dispatch(fetchUserWatchlists()); // Replace 'userId' with the actual user's ID
-    }, [dispatch]);
+    const [rotatedItems, setRotatedItems] = useState({});
 
     const toggleRotate = (id) => {
         setRotatedItems((prevState) => ({
             ...prevState,
-            [id]: !prevState[id], // Toggle the rotation status for the item
+            [id]: !prevState[id],
         }));
     };
+
+    useEffect(() => {
+        dispatch(fetchUserWatchlists());
+    }, [dispatch]);
 
     return (
         <>
@@ -34,22 +32,44 @@ function Watchlist() {
                 <div id="list-content">
                     {userWatchlists &&
                         userWatchlists.map((watchlist) => (
-                            <div id="list-item"
-                                key={watchlist.id}
-                                onClick={() => toggleRotate(watchlist.id)}
-                            >
+
+                            <div id="list-item-container">
+                                <div id="list-item"
+                                    key={watchlist.id}
+                                    onClick={() => toggleRotate(watchlist.id)}
+                                >
+                                    <div id="left-side">
+                                        <span class="material-icons eye-16">visibility</span>
+                                        <span id="list-name">{watchlist.name}</span>
+                                    </div>
+
+                                    <div id="right-side">
+                                        <span class="material-icons dots-16">more_horiz</span>
+                                        <span
+                                            class={rotatedItems[watchlist.id] ? "material-icons arrow rotate-180" : "material-icons arrow rotate-0"}>expand_more</span>
+                                    </div>
 
 
-
-                                <div id="left-side">
-                                    <span class="material-icons eye-16">visibility</span>
-                                    <span id="list-name">{watchlist.name}</span>
                                 </div>
-                                <div id="right-side">
-                                    <span class="material-icons dots-16">more_horiz</span>
-                                    <span
-                                        class={rotatedItems[watchlist.id] ? "material-icons arrow rotate-180" : "material-icons arrow rotate-0"}>expand_more</span>
-                                </div>
+                                {rotatedItems[watchlist.id] && (
+                                    <div id="watchlist-stocks-container"
+                                        className={
+                                            watchlist.stocks.length > 0
+                                                ? "with-border-bottom"
+                                                : ""
+                                        }>
+                                        {watchlist.stocks.map((stock) => (
+                                            <div key={stock.id}>
+                                                <span id="list-ticker">{stock.ticker}</span>
+                                                <span id="list-graph">graph</span>
+                                                <span id="list-numbers-container">
+                                                    <p id="list-price">$174.96</p>
+                                                    <p id="list-percent">+0.56%</p>
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
 
                             </div>
                         ))}

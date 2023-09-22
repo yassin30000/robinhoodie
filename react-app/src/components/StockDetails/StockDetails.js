@@ -13,7 +13,7 @@ function StockDetails() {
     const { ticker } = useParams()
     const dispatch = useDispatch()
     const stock = useSelector(state => state.stocks[ticker])
-
+    console.log('STOCK::::', stock)
     // 
     let latestPrice;
     let latestDate;

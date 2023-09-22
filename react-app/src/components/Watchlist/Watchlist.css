@@ -53,6 +53,46 @@
 	justify-content: space-between;
 }
 
+#watchlist-stocks-container.with-border-bottom{
+	border-bottom: 1px solid #cccccc98;
+}
+
+#watchlist-stocks-container div {
+	padding-left: 25px;
+	/* padding-top: 10px;
+	padding-bottom: 10px; */
+	height: 60px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 13px;
+}
+
+#list-ticker {
+	font-weight: 600;
+}
+
+#list-numbers-container {
+	display: flex;
+	justify-content: space-evenly;
+	flex-direction: column;
+	height: 60px;
+}
+
+#list-numbers-container{
+	padding-right: 25px;
+}
+
+#list-graph {
+	color: rgb(255, 80, 0);
+}
+
+#list-percent {
+	color: rgb(0, 200, 5);
+}
+
+
+#watchlist-stocks-container div:hover,
 #list-item:hover {
 	background-color: rgba(233, 236, 237, 1);
 	cursor: pointer;
