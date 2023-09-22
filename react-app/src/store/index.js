@@ -3,11 +3,17 @@ import thunk from 'redux-thunk';
 import session from './session'
 import stocksReducer from './stocks'
 import opinionsReducer from './opinions'
+import watchlistsReducer from './watchlists'
+import portfolioReducer from './portfolio';
+import portfolioStockReducer from './portfolio_stock';
 
 const rootReducer = combineReducers({
   session,
   stocks: stocksReducer,
-  opinions: opinionsReducer
+  opinions: opinionsReducer,
+  watchlists: watchlistsReducer
+  // portfolio: portfolioReducer,
+  // portfolioStock: portfolioStockReducer
 });
 
 

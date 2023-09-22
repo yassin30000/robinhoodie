@@ -51,6 +51,14 @@
 	min-width: max-content;
 }
 
+#links-container button {
+	font-size: 14px;
+	background: none;
+	border: none;
+	font-weight: 500;
+	transition: all 0.2s;
+}
+
 #links-container span {
 	transition: all 0.2s;
 	font-size: 14px;
@@ -58,6 +66,7 @@
 	padding-top: 10px;
 }
 
+#links-container button:hover,
 #links-container span:hover {
 	cursor: pointer;
 	color: rgb(0, 200, 5);
@@ -98,19 +107,19 @@
 /* dropdown */
 
 .dropdown-menu {
-	position: absolute;
-	z-index: 1;
+	/* position: absolute;
 	top: 100%;
-	right: 50px;
+	right: 50px; */
 	border: 1px solid #ccc;
 	width: 290px;
 	height: max-content;
 	border-radius: 5px;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-	z-index: 1;
+	z-index: 0;
+
+	background-color: white;
 	display: flex;
 	flex-direction: column;
-	background-color: white;
 }
 
 .user-name {
@@ -125,6 +134,7 @@
 .dropdown-menu button {
 	background: none;
 	border: none;
+	border-top: 1px solid #ccc;
 }
 
 .dropdown-menu a,
