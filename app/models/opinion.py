@@ -1,12 +1,13 @@
 from .db import db
+from .db import add_prefix_for_prod
 
 
 class Opinion(db.Model):
     __tablename__ = 'opinions'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    stock_id = db.Column(db.Integer, db.ForeignKey('stocks.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    stock_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('stocks.id')), nullable=False)
     content = db.Column(db.Text, nullable=False)
 
     stock = db.relationship("Stock", back_populates='opinions')

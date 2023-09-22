@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
+// import ProfileButton from './ProfileButton';
+import SearchBar from '../SearchBar/SearchBar';
 import './Navigation.css';
 import { logout } from '../../store/session';
 import logo_black from '../images/logo_black.png'
@@ -10,13 +11,21 @@ import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
+
 function Navigation({ isLoaded }) {
 	const dispatch = useDispatch();
 	const sessionUser = useSelector(state => state.session.user);
+	const stocksData = useSelector(state => state.stocks.allStocks);
+
 	const location = useLocation();
 	const history = useHistory();
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const dropdownRef = useRef(null);
+
+	// const [search, setSearch] = useState('')
+	// const [searchModal, setSearchModal] = useState(false)
+	// const searchRef = useRef(null);
+
 
 	const closeDropdown = () => setIsDropdownOpen(false);
 
@@ -27,16 +36,30 @@ function Navigation({ isLoaded }) {
 		});
 	};
 
+
 	useEffect(() => {
 
-		// closes dropdown when clicking outside
 		const handleClickOutside = (event) => {
 			if (dropdownRef.current && !dropdownRef.current.contains(event.target)) closeDropdown();
 		};
 		if (isDropdownOpen) window.addEventListener('click', handleClickOutside);
-		return () => window.removeEventListener('click', handleClickOutside);
 
-	}, [isDropdownOpen, sessionUser]);
+		// const closeSearch = (event) => {
+		// 	if (searchRef.current && !searchRef.current.contains(event.target)) setSearchModal(false);
+
+		// }
+		// if (searchModal) window.addEventListener('click', closeSearch);
+
+		return () => {
+			window.removeEventListener('click', handleClickOutside)
+			// window.removeEventListener('click', closeSearch)
+		};
+
+
+	}, [isDropdownOpen,
+		// searchModal,
+		sessionUser]);
+
 
 	if (location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/404") return null // dont show navbar on login page
 
@@ -53,9 +76,15 @@ function Navigation({ isLoaded }) {
 
 			</div>
 
-			<div id="search-bar-container">
-				<input type="search" placeholder="Search"></input>
-			</div>
+			{/* <div id="search-bar-container"  ref={searchRef} onClick={() => setSearchModal(true)}>
+				<input type="search" 
+					placeholder="Search" 
+					onChange={(e) => setSearch(e.target.value)}
+				/>
+				{searchModal && <SearchBar placeholder="search" data={stocksData}/>} 
+			</div> */}
+
+			<SearchBar placeholder="search" data={stocksData} />
 
 			<div id="links-container">
 				<span>Rewards</span>
