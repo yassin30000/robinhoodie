@@ -35,4 +35,10 @@
 
 #line-chart-container {
     padding: 20px 0px;
+    width: 70vw;
+}
+
+#line-chart2-container {
+    padding: 20px 0px;
+    width: 70vw;
 }

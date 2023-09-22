@@ -14,8 +14,11 @@ function Navigation() {
 	const location = useLocation();
 
 
+
+
 	// add link to list where you dont want navbar
 	if (location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/404") return null
+
 
 	return (
 		<div id='nav-container'>
@@ -28,6 +31,8 @@ function Navigation() {
 					</NavLink>
 				</div>
 			</div>
+
+
 
 			<SearchBar placeholder="search" data={stocksData} />
 
