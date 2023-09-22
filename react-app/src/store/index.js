@@ -3,23 +3,17 @@ import thunk from 'redux-thunk';
 import session from './session'
 import stocksReducer from './stocks'
 import opinionsReducer from './opinions'
-<<<<<<< HEAD
 import watchlistsReducer from './watchlists'
-=======
 import portfolioReducer from './portfolio';
 import portfolioStockReducer from './portfolio_stock';
->>>>>>> staging
 
 const rootReducer = combineReducers({
   session,
   stocks: stocksReducer,
   opinions: opinionsReducer,
-<<<<<<< HEAD
   watchlists: watchlistsReducer
-=======
   // portfolio: portfolioReducer,
   // portfolioStock: portfolioStockReducer
->>>>>>> staging
 });
 
 

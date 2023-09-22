@@ -26,7 +26,7 @@
 #search-bar-container > input {
 	border: 1px solid #d3d3d3;
 	background: url("https://static.thenounproject.com/png/101791-200.png")
-		no-repeat left; 
+		no-repeat left;
 	background-size: 20px;
 	background-position: 10px;
 	width: 90%;
@@ -51,6 +51,14 @@
 	min-width: max-content;
 }
 
+#links-container button {
+	font-size: 14px;
+	background: none;
+	border: none;
+	font-weight: 500;
+	transition: all 0.2s;
+}
+
 #links-container span {
 	transition: all 0.2s;
 	font-size: 14px;
@@ -58,6 +66,7 @@
 	padding-top: 10px;
 }
 
+#links-container button:hover,
 #links-container span:hover {
 	cursor: pointer;
 	color: rgb(0, 200, 5);
@@ -98,16 +107,16 @@
 /* dropdown */
 
 .dropdown-menu {
-	position: absolute;
+	/* position: absolute;
 	top: 100%;
-	right: 50px;
+	right: 50px; */
 	border: 1px solid #ccc;
 	width: 290px;
 	height: max-content;
 	border-radius: 5px;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    z-index: 999;
-	
+	z-index: 0;
+
 	background-color: white;
 	display: flex;
 	flex-direction: column;
@@ -120,12 +129,12 @@
 	color: #333;
 	text-align: left;
 	font-size: 16 px;
-	
 }
 
 .dropdown-menu button {
 	background: none;
 	border: none;
+	border-top: 1px solid #ccc;
 }
 
 .dropdown-menu a,
@@ -142,7 +151,6 @@
 .dropdown-menu button:hover {
 	background-color: #f0f0f0;
 	cursor: pointer;
-	
 }
 
 .active-account-link {
