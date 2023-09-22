@@ -17,7 +17,8 @@
 }
 
 .searchInputs {
-    display: flex
+    display: flex;
+    width: 100%;
 }
 
 .searchInputs > input {
@@ -35,16 +36,31 @@
 	transition: all 0.3s;
 }
 
+
+.searchInputs > input:hover {
+	border: 1px solid white;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
 .dataResult {
+    /* border: 1px solid black; */
     position: absolute;
     margin-top: 5px;
-    width: 300px;
-    height: 200px;
+    width: 90%;
+    height: max-content;
+    border-radius: 5px;
+
     background-color: white;
     box-shadow: rgba(0,0,0,0.35) 0px, 5px, 15px;
     overflow: hidden;
     overflow-y: auto;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
 }   
+
+.hidden {
+    display: none
+}
 
 .dataResult::-webkit-scrollbar {
     display: none
@@ -69,3 +85,15 @@ a {
 #clearBtn {
     cursor: pointer;
 }
+
+.dataResults-container {
+    display: grid;
+    grid-template-columns: 50px 300px;
+    justify-content: center;
+    gap: 20px;
+
+}
+
+/* .dataResults-container > p {
+    padding: 0px 10px;
+} */

@@ -22,11 +22,6 @@ function Navigation({ isLoaded }) {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const dropdownRef = useRef(null);
 
-	// const [search, setSearch] = useState('')
-	// const [searchModal, setSearchModal] = useState(false)
-	// const searchRef = useRef(null);
-
-
 	const closeDropdown = () => setIsDropdownOpen(false);
 
 	const handleLogout = () => {
@@ -44,20 +39,13 @@ function Navigation({ isLoaded }) {
 		};
 		if (isDropdownOpen) window.addEventListener('click', handleClickOutside);
 
-		// const closeSearch = (event) => {
-		// 	if (searchRef.current && !searchRef.current.contains(event.target)) setSearchModal(false);
 
-		// }
-		// if (searchModal) window.addEventListener('click', closeSearch);
-
-		return () => {
+	return () => {
 			window.removeEventListener('click', handleClickOutside)
-			// window.removeEventListener('click', closeSearch)
 		};
 
 
 	}, [isDropdownOpen,
-		// searchModal,
 		sessionUser]);
 
 
@@ -81,7 +69,6 @@ function Navigation({ isLoaded }) {
 					placeholder="Search" 
 					onChange={(e) => setSearch(e.target.value)}
 				/>
-				{searchModal && <SearchBar placeholder="search" data={stocksData}/>} 
 			</div> */}
 
 			<SearchBar placeholder="search" data={stocksData} />
