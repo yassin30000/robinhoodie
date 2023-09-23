@@ -67,3 +67,31 @@
 	font-weight: 500;
 	font-size: 14px;
 }
+
+#buying-power-container{
+	width: 60vw;
+	margin-left: 70px;
+	margin-top: 50px;
+
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-radius: 10px;
+
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.buying-dropdown-menu.active{
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+	transition: var(--speed) ease;
+}
+
+.buying-dropdown-menu.inactive{
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-20px);
+	transition: var(--speed) ease;
+}

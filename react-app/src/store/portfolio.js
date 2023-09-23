@@ -19,7 +19,7 @@ const myPortfolio = (portfolio) => ({
 
 export const fetchPortfolio = () => async (dispatch) => {
     const res = await fetch(`/api/portfolio/`);
-    
+
     if (res.ok) {
         const details = await res.json();
         dispatch(myPortfolio(details));
@@ -59,7 +59,7 @@ export const addFunds = (cash) => async (dispatch) => {
 
 export const withdrawFunds = (cash) => async (dispatch) => {
     const res = await fetch('/api/portfolio/withdraw-funds', {
-        methods: "PUT",
+        method: "PUT",
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(cash)
     })
