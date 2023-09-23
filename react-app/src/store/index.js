@@ -10,8 +10,8 @@ const rootReducer = combineReducers({
   session,
   stocks: stocksReducer,
   opinions: opinionsReducer,
-  // portfolio: portfolioReducer,
-  // portfolioStock: portfolioStockReducer
+  portfolio: portfolioReducer,
+  portfolioStock: portfolioStockReducer
 });
 
 
