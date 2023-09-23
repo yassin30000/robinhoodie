@@ -17,8 +17,8 @@ const myPortfolio = (portfolio) => ({
 
 //Thunk
 
-export const fetchPortfolio = (user_id) => async (dispatch) => {
-    const res = await fetch(`/api/portfolio/${user_id}`);
+export const fetchPortfolio = () => async (dispatch) => {
+    const res = await fetch(`/api/portfolio/`);
     
     if (res.ok) {
         const details = await res.json();

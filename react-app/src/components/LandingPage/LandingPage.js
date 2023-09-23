@@ -51,8 +51,8 @@ function LandingPage() {
         dispatch(fetchOpinions());
         dispatch(fetchAllUsers());
         dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'LUCID', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER']));
-        dispatch(fetchPortfolio(sessionUser.id))
-    }, [dispatch, sessionUser]);
+        dispatch(fetchPortfolio())
+    }, [dispatch]);
 
 
     return (
