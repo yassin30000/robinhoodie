@@ -64,7 +64,6 @@ export const fetchAllStocks = () => async (dispatch) => {
 
 export const fetchStockData = (ticker) => async (dispatch) => {
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=JCQDATAA7R7K8EBJ`
-    console.log("URL:   " + url)
     const res = await fetch(url)
 
     if (res.ok) {
