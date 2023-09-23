@@ -21,15 +21,17 @@
 	padding: 12px 25px 12px 25px;
 }
 
-#new-list-btn {
+#new-list-btn button{
 	color: #8c8989;
 	font-size: 22px;
 	transition: all 0.3s;
 	padding: 0 5px 0 5px;
 	border-radius: 5px;
+	background: none;
+	border: none;
 }
 
-#new-list-btn:hover {
+#new-list-btn button:hover {
 	background-color: rgba(216, 221, 225, 1);
 	cursor: pointer;
 }
