@@ -3,6 +3,7 @@
 const GET_STOCK = "stocks/SET_STOCK";
 const GET_ALL_STOCKS = 'stocks/GET_ALL_STOCKS'
 const SEARCH_STOCKS = "stocks/SEARCH_STOCKS"
+const ALPACA_STOCKS = 'stocks/ALPACA_STOCKS'
 
 const getAllStocks = (allStocks) => ({
     type: GET_ALL_STOCKS,
@@ -19,6 +20,35 @@ const searchStocks = (stocks) => ({
     payload: stocks
 })
 
+const alpacaStocks = (stocks) => ({
+    type: ALPACA_STOCKS,
+    payload: stocks
+})
+
+export const fetchAlpacaStocks = (tickers, end = '2023-09-21T0:00:00Z', start = '2023-09-01T0:00:00Z') => async dispatch => {
+    //AAPL,TSLA
+    //2020-04-01T0:00:00Z
+    //2021-08-26T11:00:00Z
+    const url = `https://data.alpaca.markets/v2/stocks/bars?symbols=${tickers}&start=${start}&end=${end}&timeframe=1D`
+    console.log(url)
+    const res = await fetch(url, {
+        headers: {
+            "Apca-Api-Key-Id": "PKLT4FTNVNQRX5EJ5ZCW",
+            "Apca-Api-Secret-Key": "EHrQxsSLWfqzfH5CP54WRk0Re1PZ42i2LITptDLh"
+        }
+    })
+
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(alpacaStocks(data));
+        return data
+    } else {
+        const errors = await res.json();
+        return errors
+    }
+}
+
+
 export const fetchAllStocks = () => async (dispatch) => {
     const res = await fetch('/api/stocks/');
 
@@ -34,7 +64,8 @@ export const fetchAllStocks = () => async (dispatch) => {
 
 export const fetchStockData = (ticker) => async (dispatch) => {
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=JCQDATAA7R7K8EBJ`
-    const res = await fetch(url)    
+    console.log("URL:   " + url)
+    const res = await fetch(url)
 
     if (res.ok) {
         const data = await res.json();
@@ -79,6 +110,10 @@ export default function stocksReducer(state = initialState, action) {
         case SEARCH_STOCKS:
             const searchedStocks = action.payload;
             newState["search"] = searchedStocks
+            return newState
+        case ALPACA_STOCKS:
+            const alpacaStocks = action.payload;
+            newState['alpacaData'] = alpacaStocks;
             return newState
         default:
             return state;
