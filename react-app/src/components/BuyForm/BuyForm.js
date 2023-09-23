@@ -15,6 +15,7 @@ function BuyForm() {
     const [errors, setErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const stock = useSelector(state => state.stocks[ticker])
+    const portfolio = useSelector(state => state.portfolios)
 
 
 
