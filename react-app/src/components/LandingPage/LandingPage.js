@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { fetchAllUsers } from '../../store/session.js';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
 import { fetchAllStocks, fetchAlpacaStocks } from '../../store/stocks.js';
-
+import { fetchPortfolio } from '../../store/portfolio.js';
 
 // api key: JCQDATAA7R7K8EBJ [alphavantage]
 function LandingPage() {
@@ -51,8 +51,8 @@ function LandingPage() {
         dispatch(fetchOpinions());
         dispatch(fetchAllUsers());
         dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'LUCID', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER']));
-
-    }, [dispatch]);
+        dispatch(fetchPortfolio(sessionUser.id))
+    }, [dispatch, sessionUser]);
 
 
     return (

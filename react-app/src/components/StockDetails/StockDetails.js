@@ -3,10 +3,8 @@ import { useEffect } from 'react';
 import { fetchStockData } from "../../store/stocks";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import LineChart from "../LineChart/LineChart";
-import Page404 from '../404Page/index';
 import LineChart2 from "../LineChart2/LineChart2";
-
+import StockPosition from "./StockPosition/StockPosition";
 
 
 function StockDetails() {
@@ -23,9 +21,9 @@ function StockDetails() {
 
     let price_30_days_before;
     let date_30_days_before;
-    let chartData;
     let dates_array;
     let prices_array;
+
     if (stock) {
         let stock_prices_at_close = {}
 
@@ -55,20 +53,6 @@ function StockDetails() {
         
         // console.log(dates_array)
         prices_array = Object.values(stock_prices_at_close).slice(0, 30).reverse()
-        chartData = {
-            labels: dates_array,
-            datasets: [{
-                label: '$',
-                data: prices_array,
-                borderColor: price_change > 0 ? 'rgb(0, 200, 5)' : 'rgb(255, 0, 0)',
-                borderWidth: 2,
-                pointRadius: 0,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: price_change > 0 ? 'rgb(0, 200, 5)' : 'rgb(255, 0, 0)',
-            }]
-        }
-
-
 
     }
     //
@@ -88,14 +72,11 @@ function StockDetails() {
                 {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}%</span>) </p><span>Past month</span></div>}
                 {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
 
-                {/* <div id='line-chart-container'>
-                    {stock && <LineChart data={chartData} />}
-                </div> */}
-
                 <div id='line-chart2-container'>
                     {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change}/>}
                 </div>
 
+                <StockPosition stock={stock}/>
 
                 <div id='temp-nav-bar'>
                     <span>Temporary Nav</span>
