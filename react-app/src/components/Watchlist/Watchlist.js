@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserWatchlists } from "../../store/watchlists";
 import "../Watchlist/Watchlist.css";
 import { useState } from "react";
+import OpenModalButton from "../OpenModalButton";
+import WatchlistFormModal from "../WatchlistFormModal/index.js";
 
 function Watchlist() {
     const dispatch = useDispatch();
@@ -26,7 +28,12 @@ function Watchlist() {
             <div id="list-container">
                 <div id="list-heading-container">
                     <p id="list-heading">Lists</p>
-                    <p id="new-list-btn">+</p>
+                    <p id="new-list-btn">
+                        <OpenModalButton
+                            buttonText={"+"}
+                            modalComponent={<WatchlistFormModal />}
+                        />
+                    </p>
                 </div>
 
                 <div id="list-content">
