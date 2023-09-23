@@ -22,9 +22,9 @@ function LandingPage() {
     const allUsers = usersData ? Object.values(usersData.users) : [];
     const allStocks = stocksData ? Object.values(stocksData.stocks) : [];
 
-    console.log('!!!!!!!!!ALL OPINIONS: ', allStocks)
+    // console.log('!!!!!!!!!ALL OPINIONS: ', allStocks)
 
-    // if (!sessionUser) history.push('/login')
+    if (!sessionUser) history.push('/login')
 
     function getStockTicker(stock_id) {
         if (stock_id == 0) return "APPL"

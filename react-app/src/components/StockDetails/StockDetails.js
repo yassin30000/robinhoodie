@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LineChart from "../LineChart/LineChart";
 import Page404 from '../404Page/index';
+import LineChart2 from "../LineChart2/LineChart2";
 
 
 
@@ -12,7 +13,7 @@ function StockDetails() {
     const { ticker } = useParams()
     const dispatch = useDispatch()
     const stock = useSelector(state => state.stocks[ticker])
-
+    console.log('STOCK::::', stock)
     // 
     let latestPrice;
     let latestDate;
@@ -23,7 +24,8 @@ function StockDetails() {
     let price_30_days_before;
     let date_30_days_before;
     let chartData;
-
+    let dates_array;
+    let prices_array;
     if (stock) {
         let stock_prices_at_close = {}
 
@@ -47,8 +49,12 @@ function StockDetails() {
 
  
 
-        const dates_array = Object.keys(stock_prices_at_close).slice(0,30).reverse()
-        const prices_array = Object.values(stock_prices_at_close).slice(0, 30).reverse()
+        dates_array = Object.keys(stock_prices_at_close).slice(0,30).reverse().map( date => {
+            return date.slice(4, 10)
+        })
+        
+        // console.log(dates_array)
+        prices_array = Object.values(stock_prices_at_close).slice(0, 30).reverse()
         chartData = {
             labels: dates_array,
             datasets: [{
@@ -62,10 +68,11 @@ function StockDetails() {
             }]
         }
 
+
+
     }
     //
-
-
+    
     useEffect(() => {
         if (!stock) dispatch(fetchStockData(ticker))
     }, [dispatch, ticker, stock])
@@ -73,7 +80,7 @@ function StockDetails() {
 
     return (
         <div id='stock-details-container'>
-            { stock ? (
+
             <> 
                 <p id='ticker-header'>{ticker}</p>
                 <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
@@ -81,8 +88,12 @@ function StockDetails() {
                 {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}%</span>) </p><span>Past month</span></div>}
                 {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
 
-                <div id='line-chart-container'>
+                {/* <div id='line-chart-container'>
                     {stock && <LineChart data={chartData} />}
+                </div> */}
+
+                <div id='line-chart2-container'>
+                    {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change}/>}
                 </div>
 
 
@@ -94,7 +105,7 @@ function StockDetails() {
                     <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
                 </div> 
             </>
-            ) : (<Page404 />)}
+
         </div>
     );
 }
