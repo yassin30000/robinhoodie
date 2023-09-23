@@ -15,12 +15,13 @@ portfolio_routes = Blueprint('portfolio', __name__)
 # data = r.json()
 
 
-@portfolio_routes.route('/<int:user_id>')
+@portfolio_routes.route('/')
 @login_required
-def index(user_id):
+def index():
     # current_portfolio = Portfolio.query.get(user_id)
-    current_portfolio = Portfolio.query.filter_by(user_id=user_id).first()
+    current_portfolio = Portfolio.query.filter_by(user_id=current_user.id).first()
     print(current_portfolio)
+
     if current_portfolio:
         return current_portfolio.to_dict()
     elif not current_portfolio:
@@ -29,15 +30,15 @@ def index(user_id):
         return {'error': 'error'}
 
 # Get and Post funds
-@portfolio_routes.route('/<int:user_id>/deposit-funds', methods=['POST', 'PUT'])
+@portfolio_routes.route('/deposit-funds', methods=['POST', 'PUT'])
 @login_required
-def deposit_funds_post(user_id):
+def deposit_funds_post():
     '''
     Depositing funds into an account
     '''
     form = TransferForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    portfolio_update = Portfolio.query.filter_by(user_id=user_id).first()
+    portfolio_update = Portfolio.query.filter_by(user_id=current_user.id).first()
 
     if form.validate_on_submit():
         '''
@@ -52,7 +53,7 @@ def deposit_funds_post(user_id):
 
           new_funds = Portfolio(
               cash = form.data['cash'],
-              user_id = user_id
+              user_id = current_user.id
           )
           db.session.add(new_funds)
           db.session.commit()
@@ -68,12 +69,12 @@ def deposit_funds_post(user_id):
 
 
 # widthraw funds
-@portfolio_routes.route('/<int:user_id>/withdraw-funds', methods=['PUT'])
+@portfolio_routes.route('/withdraw-funds', methods=['PUT'])
 @login_required
-def withdraw_funds_post(user_id):
+def withdraw_funds_post():
     form = TransferForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    portfolio_update = Portfolio.query.filter_by(user_id=user_id).first()
+    portfolio_update = Portfolio.query.filter_by(user_id=current_user.id).first()
     # current_cash = int(portfolio_update.cash)
     '''
     PUT if there is no fund give an error message else withdraw the money from the account
@@ -97,17 +98,17 @@ def withdraw_funds_post(user_id):
 
 
 # Buying a stock
-@portfolio_routes.route('/buy-stocks/<int:user_id>/<int:stock_id>/<int:price>', methods=['POST'])
+@portfolio_routes.route('/buy-stocks/<int:stock_id>/<int:price>', methods=['POST'])
 @login_required
-def buy_stock_post(user_id, stock_id, price):
+def buy_stock_post(stock_id, price):
     form = BuyForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    portfolio_update = Portfolio.query.filter_by(user_id=user_id).first()
+    portfolio_update = Portfolio.query.filter_by(user_id=current_user.id).first()
 
     if not portfolio_update:
         return {"message": "You do not have any money in your portfolio"}
-    elif user_id != portfolio_update.user_id:
+    elif current_user.id != portfolio_update.user_id:
         return {"message": "You do not own this portfolio"}
 
     total_cost = price * (form.data['shares'])
@@ -143,12 +144,12 @@ def buy_stock_post(user_id, stock_id, price):
 
 
 # Selling a stock
-@portfolio_routes.route('/sell-stocks/<int:user_id>/<int:stock_id>/<int:price>', methods=['POST'])
+@portfolio_routes.route('/sell-stocks/<int:stock_id>/<int:price>', methods=['POST'])
 @login_required
-def sell_stock_post(user_id, stock_id, price):
+def sell_stock_post(stock_id, price):
     form = SellForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    portfolio_update = Portfolio.query.filter_by(user_id=user_id).first()
+    portfolio_update = Portfolio.query.filter_by(user_id=current_user.id).first()
     if not portfolio_update:
         return {"message": "You do own this stock"}
 
