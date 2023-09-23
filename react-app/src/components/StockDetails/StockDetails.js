@@ -5,13 +5,19 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LineChart2 from "../LineChart2/LineChart2";
 import StockPosition from "./StockPosition/StockPosition";
+import { fetchStockOpinions } from "../../store/opinions";
 
 
 function StockDetails() {
     const { ticker } = useParams()
     const dispatch = useDispatch()
+    const sessionUser = useSelector(state => state.session.user);
     const stock = useSelector(state => state.stocks[ticker])
-    console.log('STOCK::::', stock)
+    const stock_info = useSelector(state => state.stocks.allStocks.stocks[`${ticker}`])
+    const portfolio = useSelector (state => state.portfolio.portfolio.portfolio_stocks)
+    const stocks_owned_by_user = portfolio.filter(stock => Number(stock.stock_id) === Number(stock_info.id))
+
+    // console.log('STOCK::::', stock)
     // 
     let latestPrice;
     let latestDate;
@@ -56,7 +62,8 @@ function StockDetails() {
 
     }
     //
-    
+
+
     useEffect(() => {
         if (!stock) dispatch(fetchStockData(ticker))
     }, [dispatch, ticker, stock])
@@ -76,14 +83,14 @@ function StockDetails() {
                     {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change}/>}
                 </div>
 
-                <StockPosition stock={stock}/>
+                {stocks_owned_by_user.length > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
 
                 <div id='temp-nav-bar'>
                     <span>Temporary Nav</span>
                     <Link className='temp-nav-link' to='/stocks/AAPL'>AAPL</Link>
-                    <Link className='temp-nav-link' to='/stocks/SPY'>SPY</Link>
                     <Link className='temp-nav-link' to='/stocks/DIS'>DIS</Link>
                     <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
+                    <Link className='temp-nav-link' to='/stocks/PYPL'>PYPL</Link>
                 </div> 
             </>
 
