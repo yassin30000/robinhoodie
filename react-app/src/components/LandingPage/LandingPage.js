@@ -2,14 +2,16 @@ import Watchlist from '../Watchlist/Watchlist.js'
 import './LandingPage.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOpinions } from '../../store/opinions.js';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchAllUsers } from '../../store/session.js';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
-import { fetchAllStocks } from '../../store/stocks.js';
+import { fetchAllStocks, fetchAlpacaStocks } from '../../store/stocks.js';
 
 
-// api key: JCQDATAA7R7K8EBJ
+// api key: JCQDATAA7R7K8EBJ [alphavantage]
 function LandingPage() {
+
+
     const sessionUser = useSelector(state => state.session.user);
     const history = useHistory();
 
@@ -41,11 +43,17 @@ function LandingPage() {
         }
     }
 
-    useEffect(() => {
+    useEffect( () => {
+        let end = new Date().toISOString()
+        console.log(end)
+
         dispatch(fetchAllStocks());
         dispatch(fetchOpinions());
         dispatch(fetchAllUsers());
+        dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'LUCID', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER']));
+
     }, [dispatch]);
+
 
     return (
         <>
