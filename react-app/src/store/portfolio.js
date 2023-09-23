@@ -17,13 +17,17 @@ const myPortfolio = (portfolio) => ({
 
 //Thunk
 
-export const fetchPortfolio = () => async (dispatch) => {
-    const res = await fetch('/api/portfolio');
-
+export const fetchPortfolio = (user_id) => async (dispatch) => {
+    const res = await fetch(`/api/portfolio/${user_id}`);
+    
     if (res.ok) {
         const details = await res.json();
         dispatch(myPortfolio(details));
         return details;
+    } else {
+        const errors = await res.json()
+        console.log(errors)
+        return errors
     }
 }
 
