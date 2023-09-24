@@ -14,15 +14,10 @@
 	color: rgb(0, 200, 5);
 }
 
-#opinions-container {
-	/* padding-left: 30px; */
-	width: 70vw;
-	/* background-color: red; */
-}
+
 
 #opinions-title {
-	/* border-top: 1px solid #ccc; */
-	border-bottom: 1px solid rgb(239, 242, 243);
+	border-bottom: 1px solid rgba(239, 242, 243, 1);
 	width: 68vw;
 	padding-bottom: 15px;
 	padding-top: 60px;
@@ -32,13 +27,13 @@
 }
 
 #opinion-container {
-	width: 70vw;
-	padding-left: 30px;
+	width: 73vw;
+	padding: 0 30px 0 30px;
 	/* background-color: red; */
 }
 
 #opinion {
-	border-bottom: 1px solid rgb(239, 242, 243);
+	border-bottom: 1px solid rgba(239, 242, 243, 1);
 	font-size: 15px;
 	font-weight: 300;
 	height: 156px;
@@ -49,7 +44,7 @@
 }
 
 #opinion-container:hover {
-	background-color: rgb(239, 242, 243);
+	background-color: rgba(239, 242, 243, 1);
 	cursor: pointer;
 }
 

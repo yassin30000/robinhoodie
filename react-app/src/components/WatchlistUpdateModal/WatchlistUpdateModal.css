@@ -7,3 +7,20 @@
 	background-color: rgb(0, 200, 5);
 	color: white;
 }
+
+#list-save-btn:hover {
+	border: 1px solid rgb(1, 162, 7);
+
+	background-color: rgb(1, 162, 7);
+	cursor: pointer;
+}
+
+#close-list-form {
+	padding: 5px;
+	border-radius: 5px;
+}
+
+#close-list-form:hover {
+	background-color: rgba(225, 224, 224, 0.444);
+	cursor: pointer;
+}

@@ -33,7 +33,7 @@
 }
 
 #list-name-inpt:hover {
-    background-color: white;
+	background-color: white;
 }
 
 #list-name-inpt:focus {
@@ -49,6 +49,11 @@
 	gap: 10px;
 }
 
+#cancel-btn:hover {
+	background-color: rgb(0, 200, 5, 0.1);
+	cursor: pointer;
+}
+
 #cancel-btn,
 #list-submit-btn {
 	padding: 0 24px 0 24px;
@@ -57,6 +62,12 @@
 	background: none;
 	border: 1px solid rgb(0, 200, 5);
 	font-weight: 500;
+}
+
+#list-submit-btn:hover {
+	border: 1px solid rgb(1, 162, 7);
+	background-color: rgb(1, 162, 7);
+	cursor: pointer;
 }
 
 #list-submit-btn {

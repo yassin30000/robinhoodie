@@ -7,8 +7,11 @@ import WatchlistFormModal from "../WatchlistFormModal/index.js";
 import OpenCustomModalButton from "../OpenModalButton/OpenModalButton2";
 import ConfirmDeleteModal from "../ConfirmDeleteModal";
 import WatchlistUpdateModal from "../WatchlistUpdateModal";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+
 
 function Watchlist() {
+    const history = useHistory();
     const dispatch = useDispatch();
     const userWatchlistsData = useSelector((state) => state.watchlists.userWatchlists);
     const userWatchlists = userWatchlistsData ? Object.values(userWatchlistsData.watchlists) : []
@@ -24,6 +27,10 @@ function Watchlist() {
             }));
         }
     };
+
+    const goToStockPage = (stockId) => {
+        
+    }
 
     useEffect(() => {
         dispatch(fetchUserWatchlists());
@@ -68,7 +75,7 @@ function Watchlist() {
 
                                     {activeDropdown === watchlist.id && (
                                         <div id="dots-drowpdown-menu">
-    
+
                                             <OpenCustomModalButton
                                                 id="edit-option"
                                                 buttonText={"Edit list"}
@@ -92,7 +99,7 @@ function Watchlist() {
                                                 : ""
                                         }>
                                         {watchlist.stocks.map((stock) => (
-                                            <div key={stock.id}>
+                                            <div key={stock.id} onClick={() => history.push(`/stocks/${stock.ticker}`)}>
                                                 <span id="list-ticker">{stock.ticker}</span>
                                                 <span id="list-graph">graph</span>
                                                 <span id="list-numbers-container">
@@ -107,7 +114,7 @@ function Watchlist() {
                             </div>
                         ))}
                 </div>
-            </div>
+            </div >
         </>
     );
 }

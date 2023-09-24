@@ -35,7 +35,12 @@ function WatchlistUpdateModal({ prevListName, listId }) {
                 <div id="list-form-heading-container">
 
                     <div id="list-form-heading">Edit list</div>
-                    <div id="close-list-form" onClick={closeModal}>X</div>
+                    <div id="close-list-form" onClick={closeModal}>
+
+                    </div>
+                    <span id="close-list-form"
+                        className='material-icons close-btn'
+                        onClick={closeModal}>close</span>
                 </div>
 
                 <form id='actual-form-container' onSubmit={handleSubmit}>

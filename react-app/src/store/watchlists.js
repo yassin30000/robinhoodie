@@ -3,6 +3,7 @@ const SET_USER_WATCHLISTS = "watchlists/SET_USER_WATCHLISTS";
 const CREATE_WATCHLIST = "watchlists/CREATE_WATCHLIST";
 const DELETE_WATCHLIST = "watchlists/DELETE_WATCHLIST";
 const UPDATE_WATCHLIST = "watchlists/UPDATE_WATCHLIST";
+const ADD_STOCK_TO_WATCHLIST = 'ADD_STOCK_TO_WATCHLIST';
 
 
 // Action Creator
@@ -24,6 +25,11 @@ const deleteWatchlist = (watchlistId) => ({
 const updateWatchlist = (updatedWatchlist) => ({
     type: UPDATE_WATCHLIST,
     payload: updatedWatchlist,
+});
+
+const addStockToWatchlist = (watchlistId, stockId) => ({
+    type: ADD_STOCK_TO_WATCHLIST,
+    payload: { watchlistId, stockId },
 });
 
 
@@ -101,6 +107,24 @@ export const updateExistingWatchlist = (watchlistId, updatedWatchlistData) => as
     }
 };
 
+export const addStockToUserWatchlist = (watchlistId, stockId) => async (dispatch) => {
+    try {
+        const res = await fetch(`/api/watchlists/${watchlistId}/${stockId}`, {
+            method: "POST",
+        });
+
+        if (res.ok) {
+            // Dispatch the action to add the stock to the watchlist
+            dispatch(addStockToWatchlist(watchlistId, stockId));
+        } else {
+            // Handle errors if necessary
+            console.error("Error adding stock to watchlist:");
+        }
+    } catch (error) {
+        console.error("Error adding stock to watchlist:", error);
+    }
+};
+
 
 // Reducer
 const initialState = {
@@ -129,6 +153,7 @@ export default function watchlistsReducer(state = initialState, action) {
                 ...state,
                 userWatchlists: [...state.userWatchlists, action.payload],
             };
+
         default:
             return state;
     }

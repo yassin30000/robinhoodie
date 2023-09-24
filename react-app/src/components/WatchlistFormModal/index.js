@@ -36,7 +36,9 @@ function WatchlistFormModal() {
                 <div id="list-form-heading-container">
 
                     <div id="list-form-heading">Create list</div>
-                    <div id="close-list-form" onClick={closeModal}>X</div>
+                    <span id="close-list-form"
+                        className='material-icons close-btn'
+                        onClick={closeModal}>close</span>
                 </div>
 
                 <form id='actual-form-container' onSubmit={handleCreateWatchlist}>
