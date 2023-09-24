@@ -3,25 +3,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserWatchlists } from "../../store/watchlists";
 import "../Watchlist/Watchlist.css";
 import { useState } from "react";
-import OpenModalButton from "../OpenModalButton";
 import WatchlistFormModal from "../WatchlistFormModal/index.js";
+import OpenCustomModalButton from "../OpenModalButton/OpenModalButton2";
+import ConfirmDeleteModal from "../ConfirmDeleteModal";
+import WatchlistUpdateModal from "../WatchlistUpdateModal";
 
 function Watchlist() {
     const dispatch = useDispatch();
     const userWatchlistsData = useSelector((state) => state.watchlists.userWatchlists);
     const userWatchlists = userWatchlistsData ? Object.values(userWatchlistsData.watchlists) : []
     const [rotatedItems, setRotatedItems] = useState({});
+    const [activeDropdown, setActiveDropdown] = useState(null);
 
-    const toggleRotate = (id) => {
-        setRotatedItems((prevState) => ({
-            ...prevState,
-            [id]: !prevState[id],
-        }));
+    const toggleRotate = (id, event) => {
+        // Check if the click target is the list item itself
+        if (event.target.id === "list-item") {
+            setRotatedItems((prevState) => ({
+                ...prevState,
+                [id]: !prevState[id],
+            }));
+        }
     };
 
     useEffect(() => {
         dispatch(fetchUserWatchlists());
     }, [dispatch]);
+
+    const handleMoreHorizClick = (id) => {
+        setActiveDropdown((prevActive) => (prevActive === id ? null : id));
+    };
 
     return (
         <>
@@ -29,7 +39,7 @@ function Watchlist() {
                 <div id="list-heading-container">
                     <p id="list-heading">Lists</p>
                     <p id="new-list-btn">
-                        <OpenModalButton
+                        <OpenCustomModalButton
                             buttonText={"+"}
                             modalComponent={<WatchlistFormModal />}
                         />
@@ -40,10 +50,10 @@ function Watchlist() {
                     {userWatchlists &&
                         userWatchlists.map((watchlist) => (
 
-                            <div id="list-item-container">
+                            <div id="list-item-container" key={watchlist.id}>
                                 <div id="list-item"
                                     key={watchlist.id}
-                                    onClick={() => toggleRotate(watchlist.id)}
+                                    onClick={(event) => toggleRotate(watchlist.id, event)}
                                 >
                                     <div id="left-side">
                                         <span class="material-icons eye-16">visibility</span>
@@ -51,11 +61,27 @@ function Watchlist() {
                                     </div>
 
                                     <div id="right-side">
-                                        <span class="material-icons dots-16">more_horiz</span>
+                                        <span class="material-icons dots-16" onClick={() => handleMoreHorizClick(watchlist.id)}>more_horiz</span>
                                         <span
                                             class={rotatedItems[watchlist.id] ? "material-icons arrow rotate-180" : "material-icons arrow rotate-0"}>expand_more</span>
                                     </div>
 
+                                    {activeDropdown === watchlist.id && (
+                                        <div id="dots-drowpdown-menu">
+    
+                                            <OpenCustomModalButton
+                                                id="edit-option"
+                                                buttonText={"Edit list"}
+                                                modalComponent={<WatchlistUpdateModal prevListName={watchlist.name} listId={watchlist.id} />}
+                                            />
+
+                                            <OpenCustomModalButton
+                                                id="delete-option"
+                                                buttonText={"Delete list"}
+                                                modalComponent={<ConfirmDeleteModal listName={watchlist.name} listTotal={watchlist.stocks.length} listId={watchlist.id} />}
+                                            />
+                                        </div>
+                                    )}
 
                                 </div>
                                 {rotatedItems[watchlist.id] && (

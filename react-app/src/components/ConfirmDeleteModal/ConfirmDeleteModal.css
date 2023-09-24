@@ -1,0 +1,32 @@
+#confirm-delete-container {
+	padding: 24px 24px 24px 24px;
+	width: 408px;
+	height: 195px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+#confirm-delete-heading-container {
+	display: flex;
+	justify-content: space-between;
+}
+#confirm-delete-heading {
+	font-size: 18px;
+	font-weight: 500;
+}
+/* #confirm-delete-close {
+}
+#confirm-delete-subheading-container {
+} */
+#confirm-delete-subheading {
+	font-size: 13px;
+}
+#confirm-delete-btn {
+	width: 100%;
+	background: none;
+	border-radius: 44px;
+	height: 44px;
+	border: 1px solid rgb(255, 80, 0);
+	background-color: rgb(255, 80, 0);
+	color: white;
+}
