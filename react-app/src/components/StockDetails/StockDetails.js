@@ -3,18 +3,26 @@ import { useEffect } from 'react';
 import { fetchStockData } from "../../store/stocks";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import LineChart from "../LineChart/LineChart";
-import Page404 from '../404Page/index';
 import LineChart2 from "../LineChart2/LineChart2";
+
 import OpenCustomModalButton from "../OpenModalButton/OpenModalButton2";
 import AddToListsModal from "../AddToListsModal";
+
+import StockPosition from "./StockPosition/StockPosition";
+import { fetchStockOpinions } from "../../store/opinions";
+
 
 
 function StockDetails() {
     const { ticker } = useParams()
     const dispatch = useDispatch()
+    const sessionUser = useSelector(state => state.session.user);
     const stock = useSelector(state => state.stocks[ticker])
-    console.log('STOCK::::', stock)
+    const stock_info = useSelector(state => state.stocks.allStocks.stocks[`${ticker}`])
+    const portfolio = useSelector (state => state.portfolio.portfolio.portfolio_stocks)
+    const stocks_owned_by_user = portfolio.filter(stock => Number(stock.stock_id) === Number(stock_info.id))
+
+    // console.log('STOCK::::', stock)
     // 
     let latestPrice;
     let latestDate;
@@ -24,9 +32,9 @@ function StockDetails() {
 
     let price_30_days_before;
     let date_30_days_before;
-    let chartData;
     let dates_array;
     let prices_array;
+
     if (stock) {
         let stock_prices_at_close = {}
 
@@ -56,20 +64,6 @@ function StockDetails() {
 
         // console.log(dates_array)
         prices_array = Object.values(stock_prices_at_close).slice(0, 30).reverse()
-        chartData = {
-            labels: dates_array,
-            datasets: [{
-                label: '$',
-                data: prices_array,
-                borderColor: price_change > 0 ? 'rgb(0, 200, 5)' : 'rgb(255, 0, 0)',
-                borderWidth: 2,
-                pointRadius: 0,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: price_change > 0 ? 'rgb(0, 200, 5)' : 'rgb(255, 0, 0)',
-            }]
-        }
-
-
 
     }
 
@@ -89,22 +83,23 @@ function StockDetails() {
                 {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}%</span>) </p><span>Past month</span></div>}
                 {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
 
-                {/* <div id='line-chart-container'>
-                    {stock && <LineChart data={chartData} />}
-                </div> */}
-
                 <div id='line-chart2-container'>
                     {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} />}
                 </div>
 
+                {stocks_owned_by_user.length > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
 
                 <div id='temp-nav-bar'>
                     <span>Temporary Nav</span>
                     <Link className='temp-nav-link' to='/stocks/AAPL'>AAPL</Link>
-                    <Link className='temp-nav-link' to='/stocks/SPY'>SPY</Link>
                     <Link className='temp-nav-link' to='/stocks/DIS'>DIS</Link>
                     <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
+
                 </div>
+
+                    <Link className='temp-nav-link' to='/stocks/PYPL'>PYPL</Link>
+                </div> 
+
             </>
 
             <div id="right-side-stock-details">

@@ -20,6 +20,8 @@ portfolio_routes = Blueprint('portfolio', __name__)
 def index():
     # current_portfolio = Portfolio.query.get(user_id)
     current_portfolio = Portfolio.query.filter_by(user_id=current_user.id).first()
+    print(current_portfolio)
+
     if current_portfolio:
         return current_portfolio.to_dict()
     elif not current_portfolio:

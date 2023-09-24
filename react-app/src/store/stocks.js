@@ -30,7 +30,7 @@ export const fetchAlpacaStocks = (tickers, end = '2023-09-21T0:00:00Z', start = 
     //2020-04-01T0:00:00Z
     //2021-08-26T11:00:00Z
     const url = `https://data.alpaca.markets/v2/stocks/bars?symbols=${tickers}&start=${start}&end=${end}&timeframe=1D`
-    console.log(url)
+    //console.log(url)
     const res = await fetch(url, {
         headers: {
             "Apca-Api-Key-Id": "PKLT4FTNVNQRX5EJ5ZCW",
@@ -64,7 +64,6 @@ export const fetchAllStocks = () => async (dispatch) => {
 
 export const fetchStockData = (ticker) => async (dispatch) => {
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=JCQDATAA7R7K8EBJ`
-    console.log("URL:   " + url)
     const res = await fetch(url)
 
     if (res.ok) {
