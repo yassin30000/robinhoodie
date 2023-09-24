@@ -19,7 +19,7 @@ function StockDetails() {
     const sessionUser = useSelector(state => state.session.user);
     const stock = useSelector(state => state.stocks[ticker])
     const stock_info = useSelector(state => state.stocks.allStocks.stocks[`${ticker}`])
-    const portfolio = useSelector (state => state.portfolio.portfolio.portfolio_stocks)
+    const portfolio = useSelector(state => state.portfolio.portfolio.portfolio_stocks)
     const stocks_owned_by_user = portfolio.filter(stock => Number(stock.stock_id) === Number(stock_info.id))
 
     // console.log('STOCK::::', stock)
@@ -76,31 +76,32 @@ function StockDetails() {
     return (
         <div id='stock-details-container'>
 
-            <>
-                <p id='ticker-header'>{ticker}</p>
-                <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
 
-                {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}%</span>) </p><span>Past month</span></div>}
-                {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
+            <p id='ticker-header'>{ticker}</p>
+            <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
 
-                <div id='line-chart2-container'>
-                    {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} />}
-                </div>
+            {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}%</span>) </p><span>Past month</span></div>}
+            {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
 
-                {stocks_owned_by_user.length > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
+            <div id='line-chart2-container'>
+                {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} />}
+            </div>
 
-                <div id='temp-nav-bar'>
-                    <span>Temporary Nav</span>
-                    <Link className='temp-nav-link' to='/stocks/AAPL'>AAPL</Link>
-                    <Link className='temp-nav-link' to='/stocks/DIS'>DIS</Link>
-                    <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
+            {stocks_owned_by_user.length > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
 
-                </div>
+            <div id='temp-nav-bar'>
+                <span>Temporary Nav</span>
+                <Link className='temp-nav-link' to='/stocks/AAPL'>AAPL</Link>
+                <Link className='temp-nav-link' to='/stocks/DIS'>DIS</Link>
+                <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
 
-                    <Link className='temp-nav-link' to='/stocks/PYPL'>PYPL</Link>
-                </div> 
+            </div>
 
-            </>
+            <div>
+                <Link className='temp-nav-link' to='/stocks/PYPL'>PYPL</Link>
+            </div>
+
+
 
             <div id="right-side-stock-details">
 
