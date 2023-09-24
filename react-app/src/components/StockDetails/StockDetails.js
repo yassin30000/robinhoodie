@@ -4,8 +4,13 @@ import { fetchStockData } from "../../store/stocks";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LineChart2 from "../LineChart2/LineChart2";
+
+import OpenCustomModalButton from "../OpenModalButton/OpenModalButton2";
+import AddToListsModal from "../AddToListsModal";
+
 import StockPosition from "./StockPosition/StockPosition";
 import { fetchStockOpinions } from "../../store/opinions";
+
 
 
 function StockDetails() {
@@ -51,17 +56,16 @@ function StockDetails() {
         price_change = (latestPrice - price_30_days_before).toFixed(2)
         percent_change = ((price_change / latestPrice) * 100).toFixed(2)
 
- 
 
-        dates_array = Object.keys(stock_prices_at_close).slice(0,30).reverse().map( date => {
+
+        dates_array = Object.keys(stock_prices_at_close).slice(0, 30).reverse().map(date => {
             return date.slice(4, 10)
         })
-        
+
         // console.log(dates_array)
         prices_array = Object.values(stock_prices_at_close).slice(0, 30).reverse()
 
     }
-    //
 
 
     useEffect(() => {
@@ -72,7 +76,7 @@ function StockDetails() {
     return (
         <div id='stock-details-container'>
 
-            <> 
+            <>
                 <p id='ticker-header'>{ticker}</p>
                 <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
 
@@ -80,7 +84,7 @@ function StockDetails() {
                 {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
 
                 <div id='line-chart2-container'>
-                    {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change}/>}
+                    {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} />}
                 </div>
 
                 {stocks_owned_by_user.length > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
@@ -90,9 +94,32 @@ function StockDetails() {
                     <Link className='temp-nav-link' to='/stocks/AAPL'>AAPL</Link>
                     <Link className='temp-nav-link' to='/stocks/DIS'>DIS</Link>
                     <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
+
+                </div>
+
                     <Link className='temp-nav-link' to='/stocks/PYPL'>PYPL</Link>
                 </div> 
+
             </>
+
+            <div id="right-side-stock-details">
+
+
+                <div id="order-stock-container">
+
+                </div>
+
+                <div id="add-to-lists-container">
+                    <button onClick={() => alert('Feature Coming Soon...')}>Trade {ticker} options</button>
+
+                    <OpenCustomModalButton
+                        buttonText={"Add to Lists"}
+                        modalComponent={<AddToListsModal ticker={ticker} />}
+                    />
+
+
+                </div>
+            </div>
 
         </div>
     );

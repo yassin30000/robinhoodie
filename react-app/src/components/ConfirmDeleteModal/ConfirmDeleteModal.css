@@ -9,6 +9,7 @@
 #confirm-delete-heading-container {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 #confirm-delete-heading {
 	font-size: 18px;
@@ -18,9 +19,23 @@
 }
 #confirm-delete-subheading-container {
 } */
+
+#confirm-delete-close {
+	padding: 5px;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+}
+
+#confirm-delete-close:hover {
+	background-color: rgba(225, 224, 224, 0.444);
+	cursor: pointer;
+}
+
 #confirm-delete-subheading {
 	font-size: 13px;
 }
+
 #confirm-delete-btn {
 	width: 100%;
 	background: none;
@@ -29,4 +44,11 @@
 	border: 1px solid rgb(255, 80, 0);
 	background-color: rgb(255, 80, 0);
 	color: white;
+	font-weight: 500;
+	font-size: 15px;
+}
+
+#confirm-delete-btn:hover {
+	cursor: pointer;
+	background-color: rgb(225, 71, 0);
 }

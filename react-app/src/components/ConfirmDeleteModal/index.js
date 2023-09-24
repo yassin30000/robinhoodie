@@ -22,7 +22,10 @@ function ConfirmDeleteModal({ listName, listTotal, listId }) {
                 <div id="confirm-delete-heading-container">
 
                     <div id="confirm-delete-heading">Are you sure you want to delete <br />"{listName}"?</div>
-                    <div id="confirm-delete-close" onClick={closeModal}>X</div>
+                    {/* <div id="confirm-delete-close" onClick={closeModal}>X</div> */}
+                    <span id="confirm-delete-close"
+                        className='material-icons close-btn'
+                        onClick={closeModal}>close</span>
                 </div>
 
                 <div id="confirm-delete-subheading-container">
