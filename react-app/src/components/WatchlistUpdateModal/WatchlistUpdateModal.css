@@ -1,0 +1,9 @@
+#list-save-btn {
+	width: 100%;
+	background: none;
+	border-radius: 44px;
+	height: 44px;
+	border: 1px solid rgb(0, 200, 5);
+	background-color: rgb(0, 200, 5);
+	color: white;
+}
