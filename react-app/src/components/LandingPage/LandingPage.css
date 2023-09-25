@@ -64,29 +64,127 @@
 }
 
 #buying-power-container{
-	width: 60vw;
-	margin-left: 70px;
-	margin-top: 50px;
-
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
+	position: relative;
+	height: auto;
+	padding: auto;
+	width: 70%;
+	/* padding-bottom: 15px; */
+	margin-top: 60px;
+	font-size: 24px;
+	margin-left: 30px;
 	border-radius: 10px;
-
+	margin-right: 50px;
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;
+	background-clip: content-box;
+}
+
+#buying-power-label:hover {
+	background-color: rgb(239, 242, 243);
+	cursor: pointer;
+}
+
+.buying-menu-trigger.inactive{
+	display: block;
+	border-bottom: 1px solid rgb(239, 242, 243);
+	width: 68vw;
+	font-size: 24px;
+	margin-left: 30px;
+}
+
+.buying-menu-trigger.active{
+	display: block;
+	border-bottom: 1px solid rgb(239, 242, 243);
+	width: 68vw;
+	font-size: 24px;
+	margin-left: 30px;
+	background-color: white;
+	border-radius: .25rem;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
+}
+
+#buying-power-label{
+	margin-bottom: 20px;
+	padding: 20px;
+	font-size: 17px;
+	font-weight: bold;
+}
+
+#buying-power{
+	float: right;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.buying-dropdown-menu{
+	display: block;
+}
+
+.buying-dropdown-menu.inactive{
+	opacity: 0;
+	visibility: hidden;
+	display: none;
+	transform: translateY(-20px);
+	transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
 }
 
 .buying-dropdown-menu.active{
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(2, max-content);
+	width: 68vw;
+	gap: 3rem;
+	padding-bottom: 15px;
+	font-size: 15px;
+	margin-left: 20px;
+	top: calc(100% + .5rem);
 	opacity: 1;
 	visibility: visible;
 	transform: translateY(0);
 	transition: var(--speed) ease;
 }
 
-.buying-dropdown-menu.inactive{
-	opacity: 0;
-	visibility: hidden;
-	transform: translateY(-20px);
-	transition: var(--speed) ease;
+.brokerage-grid{
+	display: grid;
+	grid-template-columns: repeat(2, max-content);
+	gap: 10rem;
+	padding: .5rem;
+	border-bottom: 1px solid rgb(239, 242, 243);
+}
+
+.dep-div{
+	margin-top: 30px;
+	margin-left: 50px;
+}
+
+.deposit-btn{
+	color: white;
+	background-color: rgb(61, 196, 61);
+	border-radius: 30px;
+	padding: 10px 100px 10px;
+}
+
+
+.buying-information{
+	display: flex;
+	flex-direction: column;
+	overflow-wrap: break-word;
+}
+
+
+@media only screen and (max-width:1600px) {
+	.buying-information{
+		display: flex;
+		width: 70%;
+		padding-left: 30px;
+		flex-direction: column;
+		overflow-wrap: break-word;
+	}
+}
+
+
+.learn-more{
+	font-weight: bold;
+	color: green;
 }
