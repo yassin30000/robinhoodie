@@ -10,7 +10,7 @@ class Stock(db.Model):
     details = db.Column(db.Text, nullable=False)
 
     watchlist_stock = db.relationship("Watchlist_Stock", back_populates='stock', cascade="all, delete-orphan")
-    portfolio_stocks = db.relationship("Portfolio_Stock", back_populates='stocks', cascade='all, delete-orphan')
+    portfolio_stocks = db.relationship("Portfolio_Stock", back_populates='stock', cascade='all, delete-orphan')
     opinions = db.relationship('Opinion', back_populates='stock', cascade='all, delete-orphan')
 
     def to_dict(self):

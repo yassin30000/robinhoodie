@@ -20,10 +20,22 @@ function StockDetails() {
     const stock = useSelector(state => state.stocks[ticker])
     const stock_info = useSelector(state => state.stocks.allStocks.stocks[`${ticker}`])
     const portfolio = useSelector(state => state.portfolio.portfolio.portfolio_stocks)
+    const usersData = useSelector((state) => state.session.allUsers)
     const stocks_owned_by_user = portfolio.filter(stock => Number(stock.stock_id) === Number(stock_info.id))
-
+    const opinions_data = useSelector(state => state.opinions[stock_info.id])
     // console.log('STOCK::::', stock)
     // 
+    const stock_opinions = opinions_data ? opinions_data : [];
+    const allUsers = usersData ? Object.values(usersData.users) : [];
+    console.log(allUsers)
+
+    function getUserName(user_id) {
+        if (allUsers) {
+            let oneUser = allUsers.find(user => user.id == user_id)
+            if (oneUser) return oneUser.username
+        }
+    }
+
     let latestPrice;
     let latestDate;
     let price_change;
@@ -69,8 +81,11 @@ function StockDetails() {
 
 
     useEffect(() => {
-        if (!stock) dispatch(fetchStockData(ticker))
-    }, [dispatch, ticker, stock])
+        if (!stock) {
+            dispatch(fetchStockData(ticker))
+        }
+        dispatch(fetchStockOpinions(stock_info.id))
+    }, [dispatch, ticker, stock, stock_info])
 
 
     return (
@@ -89,17 +104,31 @@ function StockDetails() {
 
             {stocks_owned_by_user.length > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
 
+            <div id="stock-opinions-container">
+
+                <div id='opinions-title'>Opinions</div>
+
+                {stock_opinions.length > 0 && stock_opinions.map((opinion, index) => {
+                    return (<div key={index} id='opinion-container'>
+                        <div id="opinion">
+                            <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
+                            <div id='opinion-content'>{opinion.content}</div>
+                        </div>
+                    </div>)
+                })}
+
+            </div>
+
             <div id='temp-nav-bar'>
                 <span>Temporary Nav</span>
                 <Link className='temp-nav-link' to='/stocks/AAPL'>AAPL</Link>
                 <Link className='temp-nav-link' to='/stocks/DIS'>DIS</Link>
                 <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
-
-            </div>
-
-            <div>
                 <Link className='temp-nav-link' to='/stocks/PYPL'>PYPL</Link>
+
             </div>
+
+
 
 
 
@@ -117,8 +146,6 @@ function StockDetails() {
                         buttonText={"Add to Lists"}
                         modalComponent={<AddToListsModal ticker={ticker} />}
                     />
-
-
                 </div>
             </div>
 
