@@ -28,10 +28,6 @@ function Watchlist() {
         }
     };
 
-    const goToStockPage = (stockId) => {
-        
-    }
-
     useEffect(() => {
         dispatch(fetchUserWatchlists());
     }, [dispatch]);
@@ -79,12 +75,15 @@ function Watchlist() {
                                             <OpenCustomModalButton
                                                 id="edit-option"
                                                 buttonText={"Edit list"}
+                                                buttonHTML={<span className='material-icons edit'>edit</span>}
                                                 modalComponent={<WatchlistUpdateModal prevListName={watchlist.name} listId={watchlist.id} />}
                                             />
 
                                             <OpenCustomModalButton
                                                 id="delete-option"
                                                 buttonText={"Delete list"}
+                                                buttonHTML={<span className='material-icons delete'>delete</span>}
+
                                                 modalComponent={<ConfirmDeleteModal listName={watchlist.name} listTotal={watchlist.stocks.length} listId={watchlist.id} />}
                                             />
                                         </div>
