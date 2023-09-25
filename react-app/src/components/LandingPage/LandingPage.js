@@ -10,8 +10,6 @@ import { fetchPortfolio } from '../../store/portfolio.js';
 import { Link } from 'react-router-dom';
 import LineChart2 from '../LineChart2/LineChart2.js';
 
-
-
 // api key: JCQDATAA7R7K8EBJ [alphavantage]
 function LandingPage() {
     const dispatch = useDispatch();
@@ -28,6 +26,8 @@ function LandingPage() {
     const portfolio = useSelector(state => state.portfolio.portfolio)
     const alpacaState = useSelector(state => state.stocks.alpacaData)
     const options = { month: 'short', day: 'numeric', timeZone: "UTC" }
+
+    const [viewAllOpinions, setViewAllOpinions] = useState(true);
 
     let portfolio_value = {}
     if (alpacaState) {
@@ -62,7 +62,6 @@ function LandingPage() {
     });
     const price_change = chartValues.pop() - chartValues.shift()
 
-
     const [open, setOpen] = useState(false);
 
     //grabbing the total amount of money they got from shares
@@ -77,7 +76,6 @@ function LandingPage() {
     //adding the total amount of money from shares with total cash
 
     let total_money = Number(total) + Number(portfolio?.cash.toFixed(2))
-
 
     // console.log('!!!!!!!!!ALL OPINIONS: ', allStocks)
 
@@ -99,7 +97,6 @@ function LandingPage() {
     }
 
     useEffect(() => {
-
         dispatch(fetchAllStocks());
         dispatch(fetchOpinions());
         dispatch(fetchAllUsers());
@@ -107,20 +104,22 @@ function LandingPage() {
         dispatch(fetchPortfolio())
     }, [dispatch]);
 
-
     return (
         <>
             <div id='graph'>
                 chart goes here
-            {/* <LineChart2 dates={chartDates} prices={chartValues} price_change={price_change} /> */}
+                {/* <LineChart2 dates={chartDates} prices={chartValues} price_change={price_change} /> */}
             </div>
 
-            <div id='buying-power-container' onClick={() =>{setOpen(!open)}}>
+            <div id='buying-power-container' onClick={() => { setOpen(!open) }}>
                 <div className={`buying-menu-trigger ${open ? 'active' : 'inactive'}`}>
                     <div id='buying-power-label'>Buying Power
-                    {
-                        !open?<span id={`buying-power`}>${portfolio?.cash.toFixed(2)}</span>:null
-                    }
+                        {
+                            !open ? <span id={`buying-power`}>${portfolio?.cash.toFixed(2)}
+                                <span className='material-icons cash-arrow'>expand_more</span>
+
+                            </span> : null
+                        }
                     </div>
                     <div className={`buying-dropdown-menu ${open ? 'active' : 'inactive'}`}>
                         <div className='buying-info-grid'>
@@ -149,7 +148,20 @@ function LandingPage() {
 
                 <div id='opinions-title'>Opinions</div>
 
-                {allUsers && Array.isArray(allOpinions) && allOpinions?.map((opinion, index) => (
+                <div id="opinons-filter-container">
+                    <div id="all-opinions"
+                        className={!viewAllOpinions ? 'unselected' : 'selected'}
+                        onClick={() => setViewAllOpinions(true)}
+                    >All Opinions</div>
+                    <div id="my-opinons"
+                        onClick={() => setViewAllOpinions(false)}
+                        className={viewAllOpinions ? 'unselected' : 'selected'}
+                    >My Opinions
+                    </div>
+
+                </div>
+
+                {viewAllOpinions ? allUsers && Array.isArray(allOpinions) && allOpinions?.map((opinion, index) => (
                     <div key={index} id='opinion-container'>
                         <div id="opinion">
                             <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
@@ -157,9 +169,16 @@ function LandingPage() {
                             <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
                         </div>
                     </div>
-                ))}
-
-
+                )) :
+                    allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser.id).map((opinion, index) => (
+                        <div key={index} id='opinion-container'>
+                            <div id="opinion">
+                                <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
+                                <div id='opinion-content'>{opinion.content}</div>
+                                <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
+                            </div>
+                        </div>
+                    ))}
             </div>
         </>
     );

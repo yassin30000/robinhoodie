@@ -14,7 +14,7 @@
 	color: rgb(0, 200, 5);
 }
 
-
+/* OPINONS STUFF */
 
 #opinions-title {
 	border-bottom: 1px solid rgba(239, 242, 243, 1);
@@ -31,6 +31,12 @@
 	padding: 0 30px 0 30px;
 	/* background-color: red; */
 }
+
+.selected {
+	color: rgb(0, 200, 5);
+	text-decoration: underline;
+}
+
 
 #opinion {
 	border-bottom: 1px solid rgba(239, 242, 243, 1);
@@ -63,7 +69,28 @@
 	font-size: 14px;
 }
 
-#buying-power-container{
+#opinons-filter-container {
+	margin: 15px 0 15px 30px;
+	width: 210px;
+	display: flex;
+	justify-content: space-between;
+	font-weight: 500;
+}
+
+#my-opinons,
+#all-opinions {
+	transition: all 0.3s;
+}
+
+#my-opinons:hover,
+#all-opinions:hover {
+	cursor: pointer;
+	color: rgb(0, 200, 5);
+}
+
+/* BUYING POWER STUFF */
+
+#buying-power-container {
 	position: relative;
 	height: auto;
 	padding: auto;
@@ -85,7 +112,7 @@
 	cursor: pointer;
 }
 
-.buying-menu-trigger.inactive{
+.buying-menu-trigger.inactive {
 	display: block;
 	border-bottom: 1px solid rgb(239, 242, 243);
 	width: 68vw;
@@ -93,35 +120,37 @@
 	margin-left: 30px;
 }
 
-.buying-menu-trigger.active{
+.buying-menu-trigger.active {
 	display: block;
 	border-bottom: 1px solid rgb(239, 242, 243);
 	width: 68vw;
 	font-size: 24px;
 	margin-left: 30px;
 	background-color: white;
-	border-radius: .25rem;
-	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
+	border-radius: 0.25rem;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
-#buying-power-label{
+#buying-power-label {
 	margin-bottom: 20px;
 	padding: 20px;
 	font-size: 17px;
 	font-weight: bold;
 }
 
-#buying-power{
+#buying-power {
 	float: right;
 	font-size: 15px;
 	font-weight: bold;
+	display: flex;
+	align-items: center;
 }
 
-.buying-dropdown-menu{
+.buying-dropdown-menu {
 	display: block;
 }
 
-.buying-dropdown-menu.inactive{
+.buying-dropdown-menu.inactive {
 	opacity: 0;
 	visibility: hidden;
 	display: none;
@@ -129,7 +158,7 @@
 	transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
 }
 
-.buying-dropdown-menu.active{
+.buying-dropdown-menu.active {
 	position: relative;
 	display: grid;
 	grid-template-columns: repeat(2, max-content);
@@ -138,43 +167,41 @@
 	padding-bottom: 15px;
 	font-size: 15px;
 	margin-left: 20px;
-	top: calc(100% + .5rem);
+	top: calc(100% + 0.5rem);
 	opacity: 1;
 	visibility: visible;
 	transform: translateY(0);
 	transition: var(--speed) ease;
 }
 
-.brokerage-grid{
+.brokerage-grid {
 	display: grid;
 	grid-template-columns: repeat(2, max-content);
 	gap: 10rem;
-	padding: .5rem;
+	padding: 0.5rem;
 	border-bottom: 1px solid rgb(239, 242, 243);
 }
 
-.dep-div{
+.dep-div {
 	margin-top: 30px;
 	margin-left: 50px;
 }
 
-.deposit-btn{
+.deposit-btn {
 	color: white;
 	background-color: rgb(61, 196, 61);
 	border-radius: 30px;
 	padding: 10px 100px 10px;
 }
 
-
-.buying-information{
+.buying-information {
 	display: flex;
 	flex-direction: column;
 	overflow-wrap: break-word;
 }
 
-
-@media only screen and (max-width:1600px) {
-	.buying-information{
+@media only screen and (max-width: 1600px) {
+	.buying-information {
 		display: flex;
 		width: 70%;
 		padding-left: 30px;
@@ -183,8 +210,7 @@
 	}
 }
 
-
-.learn-more{
+.learn-more {
 	font-weight: bold;
 	color: green;
 }

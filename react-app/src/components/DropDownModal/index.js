@@ -34,7 +34,9 @@ function DropDownModal() {
             <NavLink to="/">History</NavLink>
             <NavLink to="/">Settings</NavLink>
             <NavLink to="/">Help</NavLink>
-            <button onClick={handleLogout}>Log Out</button>
+            <button onClick={handleLogout}>
+                <span className="material-icons logout">logout</span>
+                Log Out</button>
         </div>
     )
 }
