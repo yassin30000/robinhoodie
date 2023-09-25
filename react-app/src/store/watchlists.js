@@ -4,6 +4,7 @@ const CREATE_WATCHLIST = "watchlists/CREATE_WATCHLIST";
 const DELETE_WATCHLIST = "watchlists/DELETE_WATCHLIST";
 const UPDATE_WATCHLIST = "watchlists/UPDATE_WATCHLIST";
 const ADD_STOCK_TO_WATCHLIST = 'ADD_STOCK_TO_WATCHLIST';
+const DELETE_WATCHLIST_STOCK = "watchlists/DELETE_WATCHLIST_STOCK";
 
 
 // Action Creator
@@ -32,6 +33,10 @@ const addStockToWatchlist = (watchlistId, stockId) => ({
     payload: { watchlistId, stockId },
 });
 
+const deleteWatchlistStock = (watchlistId, stockId) => ({
+    type: DELETE_WATCHLIST_STOCK,
+    payload: { watchlistId, stockId },
+});
 
 // Redux Thunk Function
 export const fetchUserWatchlists = () => async (dispatch) => {
@@ -125,6 +130,23 @@ export const addStockToUserWatchlist = (watchlistId, stockId) => async (dispatch
     }
 };
 
+export const deleteWatchlistStockThunk = (watchlistId, stockId) => async (dispatch) => {
+    try {
+        const res = await fetch(`/api/watchlists/${watchlistId}/${stockId}`, {
+            method: "DELETE",
+        });
+
+        if (res.ok) {
+            dispatch(deleteWatchlistStock(watchlistId, stockId));
+        } else {
+            // Handle errors if necessary
+            console.error("Error deleting watchlist_stock:", res);
+        }
+    } catch (error) {
+        console.error("Error deleting watchlist_stock:", error);
+    }
+};
+
 
 // Reducer
 const initialState = {
@@ -149,6 +171,11 @@ export default function watchlistsReducer(state = initialState, action) {
                 userWatchlists: [...state.userWatchlists, action.payload],
             };
         case UPDATE_WATCHLIST:
+            return {
+                ...state,
+                userWatchlists: [...state.userWatchlists, action.payload],
+            };
+        case DELETE_WATCHLIST_STOCK:
             return {
                 ...state,
                 userWatchlists: [...state.userWatchlists, action.payload],
