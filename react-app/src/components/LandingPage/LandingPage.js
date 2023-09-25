@@ -1,5 +1,4 @@
 import Watchlist from '../Watchlist/Watchlist.js'
-import TransferForm from '../TransferFundForm/TransferForm.js'
 import './LandingPage.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOpinions } from '../../store/opinions.js';
@@ -28,6 +27,19 @@ function LandingPage() {
     const portfolio = useSelector(state => state.portfolio.portfolio)
 
     const [open, setOpen] = useState(false);
+
+    //grabbing the total amount of money they got from shares
+    let total = 0
+
+    for (let i = 0; i < portfolio?.portfolio_stocks.length; i++) {
+        let number = portfolio?.portfolio_stocks[i]
+        let amount = number?.shares * number?.price;
+        total += amount
+    }
+
+    //adding the total amount of money from shares with total cash
+
+    let total_money = Number(total) + Number(portfolio?.cash.toFixed(2))
 
 
     // console.log('!!!!!!!!!ALL OPINIONS: ', allStocks)
@@ -66,17 +78,31 @@ function LandingPage() {
             <div id='graph'> graph goes here...</div>
 
             <div id='buying-power-container' onClick={() =>{setOpen(!open)}}>
-                <div className='buying-menu-trigger'>
-                    <div id='buying-power-label'>Buying Power</div>
+                <div className={`buying-menu-trigger ${open ? 'active' : 'inactive'}`}>
+                    <div id='buying-power-label'>Buying Power
                     {
-                        !open?<div id={`buying-power`}>${portfolio?.cash.toFixed(2)}</div>:null
+                        !open?<span id={`buying-power`}>${portfolio?.cash.toFixed(2)}</span>:null
                     }
+                    </div>
+                    <div className={`buying-dropdown-menu ${open ? 'active' : 'inactive'}`}>
+                        <div className='buying-info-grid'>
+                            <div className='brokerage-grid'>
+                                <div>Brokerage cash</div>
+                                <div>${total_money}</div>
+                            </div>
+                            <div className='brokerage-grid'>
+                                <div>Buying power</div>
+                                <div>${portfolio?.cash}</div>
+                            </div>
+                            <div className='dep-div'>
+                                <Link to='/portfolio/deposit-funds' className="deposit-btn">Deposit funds</Link>
+                            </div>
+                        </div>
+                        <div className='buying-information'>
+                            Buying power represents the total value of assets you can purchase. <span className='learn-more'>Learn more</span>
+                        </div>
+                    </div>
                 </div>
-               <div className={`buying-dropdown-menu ${open ? 'active' : 'inactive'}`}>
-                    <div>Brokerage cash</div>
-                    <div>Buying power {portfolio?.cash}</div>
-                    <Link to='/portfolio/deposit-funds'>Deposit funds</Link>
-               </div>
             </div>
 
             <Watchlist />
