@@ -9,7 +9,7 @@ from .auth_routes import validation_errors_to_error_messages
 
 portfolio_routes = Blueprint('portfolio', __name__)
 
-api_key = 'XCXDHAYPEBIVHJIN'
+# api_key = 'XCXDHAYPEBIVHJIN'
 # url = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey={api_key}'
 # r = request.get(url)
 # data = r.json()
@@ -20,6 +20,8 @@ api_key = 'XCXDHAYPEBIVHJIN'
 def index():
     # current_portfolio = Portfolio.query.get(user_id)
     current_portfolio = Portfolio.query.filter_by(user_id=current_user.id).first()
+    print(current_portfolio)
+
     if current_portfolio:
         return current_portfolio.to_dict()
     elif not current_portfolio:
@@ -48,7 +50,7 @@ def deposit_funds_post():
         if request.method == 'POST':
           if portfolio_update:
             return {"message": "User already has a portfolio"}
-        
+
           new_funds = Portfolio(
               cash = form.data['cash'],
               user_id = current_user.id
@@ -110,12 +112,12 @@ def buy_stock_post(stock_id, price):
         return {"message": "You do not own this portfolio"}
 
     total_cost = price * (form.data['shares'])
-    
+
     if form.validate_on_submit():
         if request.method == 'POST':
             if total_cost > portfolio_update.cash:
                 return {'message': 'Not enough funds to buy'}
-    
+
             new_shares = Portfolio_Stock(
                 shares = form.data['shares'],
                 portfolio_id = portfolio_update.id,
@@ -152,13 +154,13 @@ def sell_stock_post(stock_id, price):
         return {"message": "You do own this stock"}
 
     stock_portfolio = Portfolio_Stock.query.filter_by(stock_id=stock_id).all()
-    
+
     portfolio_stocks_data = [stock.to_dict() for stock in stock_portfolio]
 
     total_number_of_shares = 0
     for stock in portfolio_stocks_data:
         total_number_of_shares += stock['shares']
-   
+
 
     #updates the current shares when selling a stock
     if form.validate_on_submit():
@@ -184,5 +186,3 @@ def sell_stock_post(stock_id, price):
         return portfolio_update.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
-

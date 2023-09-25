@@ -6,6 +6,7 @@
 	top: 60px;
 	width: 330px;
 	height: 85vh;
+	overflow-y: auto;
 	border: 1px solid #cccccc98;
 	border-radius: 5px;
 	margin: 25px;
@@ -21,15 +22,17 @@
 	padding: 12px 25px 12px 25px;
 }
 
-#new-list-btn {
+#new-list-btn button {
 	color: #8c8989;
 	font-size: 22px;
 	transition: all 0.3s;
 	padding: 0 5px 0 5px;
 	border-radius: 5px;
+	background: none;
+	border: none;
 }
 
-#new-list-btn:hover {
+#new-list-btn button:hover {
 	background-color: rgba(216, 221, 225, 1);
 	cursor: pointer;
 }
@@ -53,6 +56,45 @@
 	justify-content: space-between;
 }
 
+#watchlist-stocks-container.with-border-bottom {
+	border-bottom: 1px solid #cccccc98;
+}
+
+#watchlist-stocks-container div {
+	padding-left: 25px;
+	/* padding-top: 10px;
+	padding-bottom: 10px; */
+	height: 60px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 13px;
+}
+
+#list-ticker {
+	font-weight: 600;
+}
+
+#list-numbers-container {
+	display: flex;
+	justify-content: space-evenly;
+	flex-direction: column;
+	height: 60px;
+}
+
+#list-numbers-container {
+	padding-right: 25px;
+}
+
+#list-graph {
+	color: rgb(255, 80, 0);
+}
+
+#list-percent {
+	color: rgb(0, 200, 5);
+}
+
+#watchlist-stocks-container div:hover,
 #list-item:hover {
 	background-color: rgba(233, 236, 237, 1);
 	cursor: pointer;
@@ -119,4 +161,45 @@
 
 #list-name {
 	font-size: 13px;
+}
+
+/* click on three dots dropdown */
+#dots-drowpdown-menu {
+	position: fixed;
+	/* Adjust the 10px value as needed to position it correctly */
+	right: 90px; /* Adjust this value as needed to align with the three dots */
+	background-color: white;
+	margin-top: 120px;
+	border: 1px solid #ccc;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	width: 200px;
+	z-index: 1;
+}
+
+#list-item:hover #dots-drowpdown-menu {
+	display: block; /* Show the dropdown when the list item is hovered */
+}
+
+button#delete-option {
+	background: none;
+}
+
+#dots-drowpdown-menu button {
+	background: none;
+	border: none;
+	width: 100%;
+	text-align: left;
+}
+
+#edit-option,
+#dots-drowpdown-menu button {
+	padding: 10px;
+	cursor: pointer;
+	font-size: 13px;
+}
+
+#edit-option:hover,
+#dots-drowpdown-menu button:hover {
+	background-color: #f0f0f0; /* Change background color on hover */
 }

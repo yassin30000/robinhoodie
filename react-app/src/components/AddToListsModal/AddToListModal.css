@@ -1,0 +1,95 @@
+#add-to-lists-form-container {
+	width: 408px;
+	height: 525px;
+	padding: 24px;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	/* padding-bottom: 30px; */
+}
+
+#add-to-lists-form {
+	overflow-y: auto;
+	max-height: 80%;
+}
+
+#add-lists-heading {
+	font-size: 18px;
+	font-weight: 500;
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.material-icons.close-lists {
+	/* padding: 10px;
+	border-radius: 5px; */
+	border-radius: 5px;
+	padding: 8px;
+}
+
+.material-icons.close-lists:hover {
+	cursor: pointer;
+	background-color: rgba(225, 224, 224, 0.444);
+}
+
+#saved-lists {
+	width: 360px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+}
+
+#add-to-lists-form input {
+	height: 18px;
+	width: 18px;
+}
+
+#add-to-lists-form input:hover {
+	cursor: pointer;
+}
+
+#pic-container {
+	height: 64px;
+	width: 48px;
+	background-color: rgb(240, 241, 242);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+.material-icons.big-eye {
+	font-size: 20px;
+}
+
+#add-lists-btn-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 70px;
+	width: 100%;
+	/* background-color: rebeccapurple; */
+	/* padding: 40px 0 40px 0; */
+    padding-top: 24px;
+}
+
+#add-lists-btn-container button {
+	width: 360px;
+	height: 44px;
+	border: none;
+	border-radius: 25px;
+	background: none;
+	font-weight: 500;
+
+	background-color: rgb(0, 200, 5);
+	color: white;
+}
+
+#add-lists-btn-container button:hover {
+	background-color: rgb(3, 169, 9);
+	cursor: pointer;
+}

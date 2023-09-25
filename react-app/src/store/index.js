@@ -11,9 +11,9 @@ const rootReducer = combineReducers({
   session,
   stocks: stocksReducer,
   opinions: opinionsReducer,
-  watchlists: watchlistsReducer
-  // portfolio: portfolioReducer,
-  // portfolioStock: portfolioStockReducer
+  watchlists: watchlistsReducer,
+  portfolio: portfolioReducer,
+  portfolioStock: portfolioStockReducer
 });
 
 

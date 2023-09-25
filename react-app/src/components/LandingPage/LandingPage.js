@@ -1,15 +1,19 @@
 import Watchlist from '../Watchlist/Watchlist.js'
+import TransferForm from '../TransferFundForm/TransferForm.js'
 import './LandingPage.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOpinions } from '../../store/opinions.js';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchAllUsers } from '../../store/session.js';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
-import { fetchAllStocks } from '../../store/stocks.js';
+import { fetchAllStocks, fetchAlpacaStocks } from '../../store/stocks.js';
+import { fetchPortfolio } from '../../store/portfolio.js';
+import { Link } from 'react-router-dom';
 
-
-// api key: JCQDATAA7R7K8EBJ
+// api key: JCQDATAA7R7K8EBJ [alphavantage]
 function LandingPage() {
+
+
     const sessionUser = useSelector(state => state.session.user);
     const history = useHistory();
 
@@ -21,10 +25,14 @@ function LandingPage() {
     const allOpinions = opinionsData ? Object.values(opinionsData.opinions) : [];
     const allUsers = usersData ? Object.values(usersData.users) : [];
     const allStocks = stocksData ? Object.values(stocksData.stocks) : [];
+    const portfolio = useSelector(state => state.portfolio.portfolio)
 
-    console.log('!!!!!!!!!ALL OPINIONS: ', allStocks)
+    const [open, setOpen] = useState(false);
 
-    // if (!sessionUser) history.push('/login')
+
+    // console.log('!!!!!!!!!ALL OPINIONS: ', allStocks)
+
+    if (!sessionUser) history.push('/login')
 
     function getStockTicker(stock_id) {
         if (stock_id == 0) return "APPL"
@@ -41,15 +49,35 @@ function LandingPage() {
         }
     }
 
-    useEffect(() => {
+    useEffect( () => {
+        let end = new Date().toISOString()
+        console.log(end)
+
         dispatch(fetchAllStocks());
         dispatch(fetchOpinions());
         dispatch(fetchAllUsers());
+        dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'LUCID', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER']));
+        dispatch(fetchPortfolio())
     }, [dispatch]);
+
 
     return (
         <>
             <div id='graph'> graph goes here...</div>
+
+            <div id='buying-power-container' onClick={() =>{setOpen(!open)}}>
+                <div className='buying-menu-trigger'>
+                    <div id='buying-power-label'>Buying Power</div>
+                    {
+                        !open?<div id={`buying-power`}>${portfolio?.cash.toFixed(2)}</div>:null
+                    }
+                </div>
+               <div className={`buying-dropdown-menu ${open ? 'active' : 'inactive'}`}>
+                    <div>Brokerage cash</div>
+                    <div>Buying power {portfolio?.cash}</div>
+                    <Link to='/portfolio/deposit-funds'>Deposit funds</Link>
+               </div>
+            </div>
 
             <Watchlist />
 

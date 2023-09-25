@@ -1,11 +1,16 @@
 // Action Type
 const SET_ALL_OPINIONS = "opinions/SET_ALL_OPINIONS";
-
+const SET_STOCK_OPINIONS = 'opinions/SET_STOCK_OPINIONS'
 // Action Creator
 const setAllOpinions = (opinions) => ({
     type: SET_ALL_OPINIONS,
     payload: opinions,
 });
+
+const setStockOpinions = (opinions) => ({
+    type: SET_STOCK_OPINIONS,
+    payload: opinions
+})
 
 // Redux Thunk Function
 export const fetchOpinions = () => async (dispatch) => {
@@ -25,6 +30,7 @@ export const fetchOpinions = () => async (dispatch) => {
         return error;
     }
 };
+
 
 // Reducer
 const initialState = {};
