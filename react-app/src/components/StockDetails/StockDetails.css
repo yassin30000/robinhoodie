@@ -1,44 +1,93 @@
 #stock-details-container {
-    padding: 50px;
-    font-family: Arial, Helvetica, sans-serif
+	padding: 50px;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 #temp-nav-bar {
-    padding: 30px 0px;
+	padding: 30px 0px;
 }
 
 .temp-nav-link {
-    padding: 0px 20px;
+	padding: 0px 20px;
 }
 
-#ticker-header, #ticker-price {
-    font-size: 32px;
+#ticker-header,
+#ticker-price {
+	font-size: 32px;
 }
 
 #price-as-of {
-    font-size: 12px;
+	font-size: 12px;
 }
 
 #positive-price-changes {
-    color: rgb(35, 205, 35);
-    font-size: 14px;
-    font-weight: bold;
-    display: inline;
+	color: rgb(35, 205, 35);
+	font-size: 14px;
+	font-weight: bold;
+	display: inline;
 }
 
 #negative-price-changes {
-    color: red;
-    font-size: 14px;
-    font-weight: bold;
-    display: inline;
+	color: red;
+	font-size: 14px;
+	font-weight: bold;
+	display: inline;
 }
 
 #line-chart-container {
-    padding: 20px 0px;
-    width: 70vw;
+	padding: 20px 0px;
+	width: 70vw;
 }
 
 #line-chart2-container {
-    padding: 20px 0px;
-    width: 70vw;
+	padding: 20px 0px;
+	width: 70vw;
+}
+
+/* right side area */
+
+#right-side-stock-details {
+	position: fixed;
+	top: 0;
+	right: 0;
+	/* background-color: red; */
+	width: 330px;
+	height: 100vh;
+	margin-top: 100px;
+	margin-right: 22px;
+	border-radius: 5px;
+}
+
+#order-stock-container {
+	border: 1px solid #ccccc8;
+	height: 447px;
+	border-radius: 5px;
+}
+
+#add-to-lists-container {
+	/* background-color: red; */
+	height: 210px;
+	display: flex;
+	justify-content: flex-start;
+	gap: 12px;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 25px;
+}
+
+#add-to-lists-container button {
+	width: 282px;
+	height: 44px;
+	border-radius: 25px;
+	border-radius: 25px;
+	background: none;
+	font-weight: 500;
+
+	border: 1px solid rgb(0, 200, 5);
+	color: rgb(0, 200, 5);
+}
+
+#add-to-lists-container button:hover {
+	background-color: rgba(0, 180, 6, 0.1);
+	cursor: pointer;
 }

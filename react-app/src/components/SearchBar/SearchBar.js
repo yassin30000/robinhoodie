@@ -59,7 +59,7 @@ function SearchBar({ placeholder, data }) {
                 <div className={searchResults ? "dataResult" : "dataResult hidden"}>
                     {filteredData?.map((stock, key) => {
                         return (
-                            <Link className='stockName' to={`/stocks/${stock?.ticker}`}>
+                            <Link key={key} className='stockName' to={`/stocks/${stock?.ticker}`}>
                                 <div className="dataResults-container">
                                     <p>{stock?.ticker}</p> <p>{stock?.name}</p>
 
