@@ -1,32 +1,31 @@
 import React, { useState } from 'react'
-import './WatchlistFormModal.css'
+import './WatchlistUpdateModal.css'
 import { useDispatch } from 'react-redux'
 import { createNewWatchlist } from '../../store/watchlists';
 import { useCustomModal } from '../../context/Modal2';
+import { updateExistingWatchlist } from '../../store/watchlists';
 
-function WatchlistFormModal() {
+function WatchlistUpdateModal({ prevListName, listId }) {
     const { closeModal } = useCustomModal();
     const dispatch = useDispatch();
     const [listName, setListName] = useState('');
     const [errors, setErrors] = useState([]);
 
-
-    const handleCreateWatchlist = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validate input data if needed
+        if (listName) {
 
-        const watchlistData = {
-            name: listName, // Add other properties as needed
-        };
-
-        // Dispatch the action to create a new watchlist
-        const data = await dispatch(createNewWatchlist(watchlistData));
-        if (data) setErrors(data)
-        // Close the modal after creating the watchlist
-        closeModal();
-        window.location.reload();
+            console.log('LIST NAME: ', listName)
+            const data = {
+                "name": listName
+            }
+            await dispatch(updateExistingWatchlist(listId, data));
+            closeModal(); // Close the modal after updating
+            window.location.reload();
+        }
     };
+
 
     return (
         <>
@@ -35,13 +34,16 @@ function WatchlistFormModal() {
 
                 <div id="list-form-heading-container">
 
-                    <div id="list-form-heading">Create list</div>
+                    <div id="list-form-heading">Edit list</div>
+                    <div id="close-list-form" onClick={closeModal}>
+
+                    </div>
                     <span id="close-list-form"
                         className='material-icons close-btn'
                         onClick={closeModal}>close</span>
                 </div>
 
-                <form id='actual-form-container' onSubmit={handleCreateWatchlist}>
+                <form id='actual-form-container' onSubmit={handleSubmit}>
                     <div id="list-errors-div">
                         {errors.map((error, idx) => <p id="list-error" key={idx}>{error}</p>)}
                     </div>
@@ -49,15 +51,14 @@ function WatchlistFormModal() {
                     <input
                         id="list-name-inpt"
                         type="text"
-                        value={listName}
+                        // value={prevListName}
                         onChange={(e) => setListName(e.target.value)}
-                        placeholder="List Name"
+                        placeholder={prevListName}
                         required
                     />
 
                     <div id="list-buttons-container">
-                        <button id="cancel-btn" onClick={closeModal}>Cancel</button>
-                        <button id="list-submit-btn" type="submit">Create List</button>
+                        <button id="list-save-btn" type="submit">Save</button>
                     </div>
                 </form>
             </div>
@@ -65,4 +66,4 @@ function WatchlistFormModal() {
     );
 }
 
-export default WatchlistFormModal;
+export default WatchlistUpdateModal;
