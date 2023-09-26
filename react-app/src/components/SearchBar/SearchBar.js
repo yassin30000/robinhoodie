@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import OpenCustomModalButton from "../OpenModalButton/OpenModalButton2";
+import SearchResultModal from "./SearchResultModal/SearchResultModal";
 import './SearchBar.css'
 
 
@@ -47,19 +49,19 @@ function SearchBar({ placeholder, data }) {
     // console.log(filteredData)
 
 
-
-
     return (
         <div className="search">
             <div className='searchInputs'>
                 <input ref={searchRef} type="text" placeholder={placeholder} onChange={handleFilter} onClick={() => { setSearchResults(true) }} />
                 <div></div>
             </div>
+
+
             {filteredData.length > 0 &&
-                <div className={searchResults ? "dataResult" : "dataResult hidden"}>
+                <div className={searchResults ? "dataResult" : "hidden"}>
                     {filteredData?.map((stock, key) => {
                         return (
-                            <Link className='stockName' to={`/stocks/${stock?.ticker}`}>
+                            <Link key={key} className='stockName' to={`/stocks/${stock?.ticker}`}>
                                 <div className="dataResults-container">
                                     <p>{stock?.ticker}</p> <p>{stock?.name}</p>
 

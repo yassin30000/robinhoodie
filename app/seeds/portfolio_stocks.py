@@ -4,18 +4,36 @@ from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
 def seed_portfolio_stocks():
+
+    for x in range(1, 14):
+        stock = Portfolio_Stock(
+            shares=x, portfolio_id=1, stock_id=x, price=94
+        )
+
+        stock1 = Portfolio_Stock(
+            shares=x+1.4, portfolio_id=2, stock_id=x+1, price=125
+        )
+        stock2 = Portfolio_Stock(
+            shares=x+1.2, portfolio_id=3, stock_id=x+2, price=233
+        )
+        db.session.add(stock)
+        db.session.add(stock1)
+        db.session.add(stock2)
+
+
+
     stock1 = Portfolio_Stock(
-        shares=3, portfolio_id=1, stock_id=3, price=200)
+        shares=-1, portfolio_id=1, stock_id=1, price=100)
     stock2 = Portfolio_Stock(
-        shares=5, portfolio_id=2, stock_id=2, price=100)
+        shares=-2, portfolio_id=2, stock_id=2, price=100)
     stock3 = Portfolio_Stock(
-        shares=3, portfolio_id=1, stock_id=4, price=50)
+        shares=-2, portfolio_id=1, stock_id=4, price=150)
     stock4 = Portfolio_Stock(
-        shares=5, portfolio_id=2, stock_id=6, price=100)
+        shares=-5, portfolio_id=3, stock_id=10, price=100)
     stock5 = Portfolio_Stock(
-        shares=3, portfolio_id=1, stock_id=10, price=200)
+        shares=-3, portfolio_id=1, stock_id=7, price=200)
     stock6 = Portfolio_Stock(
-        shares=5, portfolio_id=2, stock_id=5, price=500)
+        shares=-5, portfolio_id=3, stock_id=7, price=200)
 
 
     db.session.add(stock1)

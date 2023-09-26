@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import SearchBar from '../SearchBar/SearchBar';
@@ -12,17 +12,14 @@ import DropDownModal from '../DropDownModal';
 function Navigation() {
 	const stocksData = useSelector(state => state.stocks.allStocks);
 	const location = useLocation();
-
-
-
+	const [dropDownOpen, setDropDownOpen] = useState(false);
 
 	// add link to list where you dont want navbar
 	if (location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/404") return null
 
-
 	return (
 		<div id='nav-container'>
-			
+
 			<div id="logo-container">
 				<div id="logo-div">
 					<NavLink exact to="/">
@@ -31,7 +28,6 @@ function Navigation() {
 					</NavLink>
 				</div>
 			</div>
-
 
 
 			<SearchBar placeholder="search" data={stocksData} />

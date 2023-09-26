@@ -16,6 +16,7 @@
 	top: 0;
 	height: 64px;
 	background-color: white;
+	z-index: 1;
 }
 
 #search-bar-container {
@@ -46,7 +47,7 @@
 #links-container {
 	display: flex;
 	justify-content: space-evenly;
-	text-align: right;
+	align-items: center;
 	font-weight: 500;
 	min-width: max-content;
 }
@@ -63,7 +64,6 @@
 	transition: all 0.2s;
 	font-size: 14px;
 	margin-left: 25px;
-	padding-top: 10px;
 }
 
 #links-container button:hover,
@@ -135,7 +135,10 @@
 .dropdown-menu button {
 	background: none;
 	border: none;
-	border-top: 1px solid #ccc;
+	border-top: 2px solid #f0f0f0;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
 .dropdown-menu a,

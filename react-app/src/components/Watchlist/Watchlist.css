@@ -90,8 +90,11 @@
 	color: rgb(255, 80, 0);
 }
 
-#list-percent {
+#list-percent-positive {
 	color: rgb(0, 200, 5);
+}
+#list-percent-negative {
+	color: rgb(255, 80, 0);
 }
 
 #watchlist-stocks-container div:hover,
@@ -136,6 +139,8 @@
 	color: #8c8989;
 	font-size: 25px;
 }
+
+
 
 .rotate-180 {
 	transform: rotate(180deg);
@@ -190,6 +195,14 @@ button#delete-option {
 	border: none;
 	width: 100%;
 	text-align: left;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.material-icons.delete,
+.material-icons.edit{
+	font-size: 14px;
 }
 
 #edit-option,

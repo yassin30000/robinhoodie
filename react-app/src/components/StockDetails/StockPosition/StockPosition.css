@@ -1,0 +1,33 @@
+#stock-position-container {
+    display: flex;
+    /* border: 1px solid black; */
+    padding: 10px 0px
+
+}
+#market-value-container, #average-cost-container {
+    border: 1.5px solid grey;
+    margin: 10px;
+    width: 50%;
+    padding: 20px;
+    border-radius: 5px;
+    
+}
+
+#stock-position-container h3 {
+    font-size: 15px;
+    padding: 3px 0;
+}
+
+#stock-position-container p {
+    padding: 5px 0;
+    display: flex;
+}
+
+.first-line {
+    border-bottom: 1px solid grey;
+}
+
+.stock-position-lastspan {
+ 
+    margin-left: auto;
+}
