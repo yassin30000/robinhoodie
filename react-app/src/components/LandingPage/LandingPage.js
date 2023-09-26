@@ -31,8 +31,6 @@ function LandingPage() {
     const options = { month: 'short', day: 'numeric', timeZone: "UTC" }
 
 
-    const [viewAllOpinions, setViewAllOpinions] = useState(false);
-
 
     const [viewAllOpinions, setViewAllOpinions] = useState(true);
     
