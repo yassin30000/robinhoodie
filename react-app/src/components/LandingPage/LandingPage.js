@@ -9,6 +9,9 @@ import { fetchAllStocks, fetchAlpacaStocks } from '../../store/stocks.js';
 import { fetchPortfolio } from '../../store/portfolio.js';
 import { Link } from 'react-router-dom';
 import LineChart2 from '../LineChart2/LineChart2.js';
+import ConfirmDeleteOpinion from '../ConfirmDeleteOpinion/index.js';
+import OpenCustomModalButton from '../OpenModalButton/OpenModalButton2.js';
+import OpinionUpdateModal from '../OpinionUpdateModal/index.js';
 
 // api key: JCQDATAA7R7K8EBJ [alphavantage]
 function LandingPage() {
@@ -27,7 +30,7 @@ function LandingPage() {
     const alpacaState = useSelector(state => state.stocks.alpacaData)
     const options = { month: 'short', day: 'numeric', timeZone: "UTC" }
 
-    const [viewAllOpinions, setViewAllOpinions] = useState(true);
+    const [viewAllOpinions, setViewAllOpinions] = useState(false);
 
     let portfolio_value = {}
     if (alpacaState && portfolio) {
@@ -183,7 +186,26 @@ function LandingPage() {
                     allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser.id).map((opinion, index) => (
                         <div key={index} id='opinion-container'>
                             <div id="opinion">
-                                <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
+                                <div id='opinion-author'>{getUserName(opinion.user_id)}
+                                    <div id="edit-delete-opinion-container">
+                                        <OpenCustomModalButton
+                                            id="edit-opinion"
+                                            buttonText={""}
+                                            buttonHTML={<span class="material-symbols-outlined edit">edit</span>}
+
+                                            modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content } />}
+                                        />
+                                        <OpenCustomModalButton
+                                            id="delete-opinion"
+                                            buttonText={""}
+                                            buttonHTML={<span className='material-icons delete-opinion'>close</span>}
+
+                                            modalComponent={<ConfirmDeleteOpinion opinionId={opinion.id} />}
+                                        />
+
+                                    </div>
+
+                                </div>
                                 <div id='opinion-content'>{opinion.content}</div>
                                 <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
                             </div>
