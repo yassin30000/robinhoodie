@@ -30,17 +30,20 @@ function LandingPage() {
     const [viewAllOpinions, setViewAllOpinions] = useState(true);
 
     let portfolio_value = {}
-    if (alpacaState && portfolio?.portfolio_stocks) {
+    if (alpacaState && portfolio) {
         const alpacaData = alpacaState.bars
         let portfolio_data = {} // {ticker: # of shares owned}
-        portfolio.portfolio_stocks.forEach(stock => {
-            let ticker = stock.stock.ticker;
-            if (portfolio_data[ticker] == undefined) {
-                portfolio_data[ticker] = stock.shares
-            } else {
-                portfolio_data[ticker] += stock.shares
-            }
-        })
+
+        if (portfolio?.portfolio_stocks) {
+            portfolio.portfolio_stocks.forEach(stock => {
+                let ticker = stock.stock.ticker;
+                if (portfolio_data[ticker] == undefined) {
+                    portfolio_data[ticker] = stock.shares
+                } else {
+                    portfolio_data[ticker] += stock.shares
+                }
+            })
+        }
         // console.log(portfolio_data)
         Object.values(alpacaData)[0].forEach(dataPoint => {
             let date = new Date(dataPoint.t)
@@ -113,7 +116,8 @@ function LandingPage() {
             <div id='graph'>
 
                 {portfolio?.portfolio_stocks && <LineChart2 dates={chartDates} prices={chartValues} price_change={price_change} />}
-                
+                {portfolio?.message && <LineChart2 dates={chartDates} prices={new Array(15).fill(0)} price_change={price_change} />}
+
             </div>
 
 

@@ -22,7 +22,7 @@ function StockDetails() {
     const stock_info = useSelector(state => state.stocks.allStocks.stocks[`${ticker}`])
     const portfolio = useSelector(state => state.portfolio.portfolio.portfolio_stocks)
     const usersData = useSelector((state) => state.session.allUsers)
-    const stocks_owned_by_user = portfolio.filter(stock => Number(stock.stock_id) === Number(stock_info.id))
+    const stocks_owned_by_user = portfolio?.filter(stock => Number(stock.stock_id) === Number(stock_info.id))
     const opinions_data = useSelector(state => state.opinions[stock_info.id])
     // console.log('STOCK::::', stock)
     //
@@ -90,7 +90,7 @@ function StockDetails() {
 
 
     let total_shares = 0;
-    stocks_owned_by_user.forEach(stock => {
+    stocks_owned_by_user?.forEach(stock => {
         total_shares += stock.shares
     })
 
