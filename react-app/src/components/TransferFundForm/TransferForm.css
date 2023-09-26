@@ -1,0 +1,86 @@
+.fund-container {
+    display: flex;
+    font-family: sans-serif;
+}
+
+.fund-form-container {
+    position: fixed;
+    left: 30%;
+}
+
+.fund-form-wrapper {
+    width: max-content;
+    margin-top: 20%;
+}
+
+.fund-form-wrapper h2 {
+    font-size: 22px;
+    margin-bottom: 50px;
+}
+
+.section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.input-tag-one {
+    margin-left: 250px;
+    padding: .5em 0em;
+    border: solid 1px #999;
+    border-radius: 5px;
+    text-align: right;
+    width: 350px;
+}
+
+.input-tag-two{
+    margin-left: 150px;
+    padding: .5em 0em;
+    width: 350px;
+    border: solid 1px #999;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.input-tag-one:hover {
+    border: solid 1px rgb(43, 42, 42);
+}
+
+.input-tag-two:hover {
+    border: solid 1px rgb(43, 42, 42);
+}
+
+.input-tag-one:focus {
+    outline: none;
+    border: solid 1px rgb(47, 184, 32);
+}
+
+.input-tag-two:focus {
+    outline: none;
+    border: solid 1px rgb(47, 184, 32);
+}
+
+.submit-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-txt{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text{
+    margin: 1.5em;
+    color: #8d8b8b;
+    font-size: 15px;
+}
+
+.transfer-btn {
+	color: white;
+	background-color: black;
+	border-radius: 30px;
+	padding: 15px 200px 15px;
+}
