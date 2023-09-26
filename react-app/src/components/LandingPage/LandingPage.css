@@ -1,17 +1,23 @@
 #graph {
-	width: 60vw;
-	height: 500px;
+	padding: 20px 0px;
+	width: 60%;
+
+	
 
 	margin-left: 70px;
 	margin-top: 50px;
 
-	border: 1px solid #ccc;
-	border-radius: 10px;
+	/* border: 1px solid #ccc; */
+	/* border-radius: 10px; */
 
-	display: flex;
+	/* display: flex;
 	justify-content: center;
 	align-items: center;
-	color: rgb(0, 200, 5);
+	color: rgb(0, 200, 5); */
+}
+
+#landing-page-container {
+	display: flex;
 }
 
 /* OPINONS STUFF */

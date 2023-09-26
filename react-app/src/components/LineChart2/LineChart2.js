@@ -4,13 +4,13 @@ import './LineChart2.css'
 
 function LineChart2({ dates, prices, price_change }) {
 
-
-    const options = {
+    let options = {
         chart: {
             id: 'line-chart',
             animations: {
                 enabled: false
-            }
+            },
+            height: "400px"
         },
         xaxis: {
             categories: dates,
@@ -31,7 +31,7 @@ function LineChart2({ dates, prices, price_change }) {
             },
             axisBorder: {
                 show: false
-            }
+            },
         },
         colors: price_change > 0 ? ['rgb(0, 200, 5)'] : ['rgb(255, 0, 0)'],
         stroke: {
@@ -60,6 +60,12 @@ function LineChart2({ dates, prices, price_change }) {
             }
 
         }
+    }
+
+    if (prices[0] === 0 && prices[prices.length -1] === 0) {
+        options.yaxis.max = 6
+        options.yaxis.min = -6
+
     }
 
     const series = [

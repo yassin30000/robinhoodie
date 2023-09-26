@@ -30,7 +30,6 @@ function Navigation() {
 			</div>
 
 
-
 			<SearchBar placeholder="search" data={stocksData} />
 
 			<div id="links-container">

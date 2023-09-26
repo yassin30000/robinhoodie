@@ -33,18 +33,21 @@ function LandingPage() {
     const [viewAllOpinions, setViewAllOpinions] = useState(false);
 
     let portfolio_value = {}
-    if (alpacaState) {
+    if (alpacaState && portfolio) {
         const alpacaData = alpacaState.bars
         let portfolio_data = {} // {ticker: # of shares owned}
-        portfolio.portfolio_stocks.forEach(stock => {
-            let ticker = stock.stock.ticker;
-            if (portfolio_data[ticker] == undefined) {
-                portfolio_data[ticker] = stock.shares
-            } else {
-                portfolio_data[ticker] += stock.shares
-            }
-        })
-        console.log(portfolio_data)
+
+        if (portfolio?.portfolio_stocks) {
+            portfolio.portfolio_stocks.forEach(stock => {
+                let ticker = stock.stock.ticker;
+                if (portfolio_data[ticker] == undefined) {
+                    portfolio_data[ticker] = stock.shares
+                } else {
+                    portfolio_data[ticker] += stock.shares
+                }
+            })
+        }
+        // console.log(portfolio_data)
         Object.values(alpacaData)[0].forEach(dataPoint => {
             let date = new Date(dataPoint.t)
             portfolio_value[date.toLocaleDateString('en-us', options)] = 0;
@@ -54,9 +57,8 @@ function LandingPage() {
                     portfolio_value[date.toLocaleDateString('en-us', options)] += result.c * portfolio_data[ticker]
                 }
             }
-
         })
-        console.log(portfolio_value)
+
     }
     const chartDates = Object.keys(portfolio_value);
     const chartValues = Object.values(portfolio_value).map(value => {
@@ -69,16 +71,20 @@ function LandingPage() {
 
     //grabbing the total amount of money they got from shares
     let total = 0
+    let total_money
 
-    for (let i = 0; i < portfolio?.portfolio_stocks.length; i++) {
-        let number = portfolio?.portfolio_stocks[i]
-        let amount = number?.shares * number?.price;
-        total += amount
+    if (portfolio?.portfolio_stocks) {
+        for (let i = 0; i < portfolio?.portfolio_stocks.length; i++) {
+            let number = portfolio?.portfolio_stocks[i]
+            let amount = number?.shares * number?.price;
+            total += amount
+        }
+        total_money = Number(total) + Number(portfolio?.cash.toFixed(2))
     }
+
 
     //adding the total amount of money from shares with total cash
 
-    let total_money = Number(total) + Number(portfolio?.cash.toFixed(2))
 
     // console.log('!!!!!!!!!ALL OPINIONS: ', allStocks)
 
@@ -107,18 +113,22 @@ function LandingPage() {
         dispatch(fetchPortfolio())
     }, [dispatch]);
 
+    console.log(new Array(5).fill(0))
     return (
         <>
             <div id='graph'>
-                chart goes here
-                {/* <LineChart2 dates={chartDates} prices={chartValues} price_change={price_change} /> */}
+
+                {portfolio?.portfolio_stocks && <LineChart2 dates={chartDates} prices={chartValues} price_change={price_change} />}
+                {portfolio?.message && <LineChart2 dates={chartDates} prices={new Array(15).fill(0)} price_change={price_change} />}
+
             </div>
+
 
             <div id='buying-power-container' onClick={() => { setOpen(!open) }}>
                 <div className={`buying-menu-trigger ${open ? 'active' : 'inactive'}`}>
                     <div id='buying-power-label'>Buying Power
                         {
-                            !open ? <span id={`buying-power`}>${portfolio?.cash.toFixed(2)}
+                            !open ? <span id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toFixed(2) : 0}
                                 <span className='material-icons cash-arrow'>expand_more</span>
 
                             </span> : null

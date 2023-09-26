@@ -8,6 +8,7 @@ import { ModalProvider, Modal } from "./context/Modal";
 import configureStore from "./store";
 import * as sessionActions from "./store/session";
 import App from "./App";
+import { PersistGate } from 'redux-persist/integration/react'
 
 import "./index.css";
 
@@ -26,13 +27,17 @@ function Root() {
 		<CustomModalProvider>
 
 			<ModalProvider>
-				<Provider store={store}>
+				<Provider store={store.store}>
+				<PersistGate loading={null} persistor={store.persistor}>
+
 					<BrowserRouter>
 						<App />
 						<Modal />
 						<CustomModal />
 					</BrowserRouter>
+				</PersistGate>
 				</Provider>
+
 			</ModalProvider>
 		</CustomModalProvider>
 	);
