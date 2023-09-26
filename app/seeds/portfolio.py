@@ -8,10 +8,12 @@ def seed_portfolios():
         cash=500, user_id=1)
     marnie = Portfolio(
         cash=500, user_id=2)
-
+    haru = Portfolio(
+        cash=1000, user_id=3)
 
     db.session.add(demo)
     db.session.add(marnie)
+    db.session.add(haru)
     db.session.commit()
 
 
@@ -23,7 +25,7 @@ def seed_portfolios():
 # it will reset the primary keys for you as well.
 def undo_portfolios():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.portfolios RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM portfolios"))
 
