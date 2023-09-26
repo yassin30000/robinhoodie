@@ -3,6 +3,7 @@ from sqlalchemy.sql import text
 
 
 def seed_opinions():
+    
 
     for x in range(1, 10):
         opinion1 = Opinion(

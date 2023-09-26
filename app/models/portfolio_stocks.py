@@ -1,9 +1,11 @@
 from .db import db, add_prefix_for_prod
 from sqlalchemy.orm import relationship
-from .stock import Stock
 
 class Portfolio_Stock(db.Model):
     __tablename__ = 'portfolio_stocks'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     shares = db.Column(db.Float, nullable=False)
