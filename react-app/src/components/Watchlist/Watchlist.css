@@ -137,6 +137,8 @@
 	font-size: 25px;
 }
 
+
+
 .rotate-180 {
 	transform: rotate(180deg);
 	transition: transform 0.3s ease; /* Add a transition for smooth animation */
@@ -190,6 +192,14 @@ button#delete-option {
 	border: none;
 	width: 100%;
 	text-align: left;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.material-icons.delete,
+.material-icons.edit{
+	font-size: 14px;
 }
 
 #edit-option,

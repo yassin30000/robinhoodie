@@ -14,6 +14,13 @@ function TransferForm() {
     const [errors, setErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const portfolio = useSelector(state => state.portfolio.portfolio)
+    let total = 0
+
+    for (let i = 0; i < portfolio?.portfolio_stocks.length; i++) {
+        let number = portfolio?.portfolio_stocks[i]
+        let amount = number?.shares * number?.price;
+        total += amount
+    }
 
 
 
