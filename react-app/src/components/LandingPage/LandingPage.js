@@ -67,11 +67,14 @@ function LandingPage() {
     //grabbing the total amount of money they got from shares
     let total = 0
 
-    for (let i = 0; i < portfolio?.portfolio_stocks.length; i++) {
-        let number = portfolio?.portfolio_stocks[i]
-        let amount = number?.shares * number?.price;
-        total += amount
+    if(portfolio) {
+           for (let i = 0; i < portfolio?.portfolio_stocks.length; i++) {
+            let number = portfolio?.portfolio_stocks[i]
+            let amount = number?.shares * number?.price;
+            total += amount
+        }
     }
+
 
     //adding the total amount of money from shares with total cash
 
