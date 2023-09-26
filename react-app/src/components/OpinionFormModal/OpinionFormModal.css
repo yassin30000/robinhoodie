@@ -1,0 +1,83 @@
+#opinion-form-container {
+	padding: 24px 24px 24px 24px;
+	width: 468px;
+	height: 250px;
+}
+
+#opinion-form-heading-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+#opinion-form-heading {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+#opinion-form {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#opinion-content-inpt {
+    display: flex;
+    align-items:flex-start;
+	width: 330px;
+	height: 100px;
+	border-radius: 5px;
+
+	border: none;
+	padding: 10px;
+	background-color: rgb(245, 248, 250);
+	border: 1px solid rgb(245, 248, 250);
+}
+
+#opinion-content:hover {
+	background-color: white;
+}
+
+#opinion-content:focus {
+	outline: none;
+	border: 1px solid rgb(0, 200, 5);
+}
+
+#opinion-buttons-container {
+	margin-top: 15px;
+	display: flex;
+	justify-content: end;
+	width: 330px;
+	gap: 10px;
+}
+
+#opinion-cancel-btn:hover {
+	background-color: rgb(0, 200, 5, 0.1);
+	cursor: pointer;
+}
+
+#opinion-cancel-btn,
+#opinion-submit-btn {
+	padding: 0 24px 0 24px;
+	border-radius: 25px;
+	height: 36px;
+	background: none;
+	border: 1px solid rgb(0, 200, 5);
+	font-weight: 500;
+}
+
+#opinion-submit-btn:hover {
+	border: 1px solid rgb(1, 162, 7);
+	background-color: rgb(1, 162, 7);
+	cursor: pointer;
+}
+
+#opinion-submit-btn {
+	color: white;
+	background-color: rgb(0, 200, 5);
+}
+
+#opinion-cancel-btn {
+	color: rgb(0, 200, 5);
+}
