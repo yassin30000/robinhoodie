@@ -1,6 +1,12 @@
+#stock-details-wholepage {
+	display: flex
+}
+
 #stock-details-container {
 	padding: 50px;
 	font-family: Arial, Helvetica, sans-serif;
+	border: 1px solid black;
+	width: 75%
 }
 
 #temp-nav-bar {
@@ -36,7 +42,7 @@
 
 #line-chart-container {
 	padding: 20px 0px;
-	width: 70vw;
+	width: 100%;
 }
 
 #line-chart2-container {
@@ -51,7 +57,7 @@
 	top: 0;
 	right: 0;
 	/* background-color: red; */
-	width: 330px;
+	/* width: 330px; */
 	height: 100vh;
 	margin-top: 100px;
 	margin-right: 22px;
@@ -60,7 +66,7 @@
 
 #order-stock-container {
 	border: 1px solid #ccccc8;
-	height: 447px;
+	height: 400px;
 	border-radius: 5px;
 }
 

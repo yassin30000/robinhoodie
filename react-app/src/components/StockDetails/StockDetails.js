@@ -27,7 +27,7 @@ function StockDetails() {
     // 
     const stock_opinions = opinions_data ? opinions_data : [];
     const allUsers = usersData ? Object.values(usersData.users) : [];
-    console.log(allUsers)
+    //console.log(allUsers)
 
     function getUserName(user_id) {
         if (allUsers) {
@@ -88,49 +88,59 @@ function StockDetails() {
     }, [dispatch, ticker, stock, stock_info])
 
 
+    let total_shares = 0;
+    stocks_owned_by_user.forEach(stock => {
+        total_shares += stock.shares
+    })
+
+
+
     return (
-        <div id='stock-details-container'>
+        <div id='stock-details-wholepage'>
+
+            <div id='stock-details-container'>
 
 
-            <p id='ticker-header'>{ticker}</p>
-            <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
+                <p id='ticker-header'>{ticker}</p>
+                <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
 
-            {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}%</span>) </p><span>Past month</span></div>}
-            {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
+                {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}%</span>) </p><span>Past month</span></div>}
+                {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
 
-            <div id='line-chart2-container'>
-                {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} />}
+                <div id='line-chart2-container'>
+                    {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} />}
+                </div>
+
+                {total_shares > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
+
+                <div id="stock-opinions-container">
+
+                    <div id='opinions-title'>Opinions</div>
+
+                    {stock_opinions.length > 0 && stock_opinions.map((opinion, index) => {
+                        return (<div key={index} id='opinion-container'>
+                            <div id="opinion">
+                                <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
+                                <div id='opinion-content'>{opinion.content}</div>
+                            </div>
+                        </div>)
+                    })}
+
+                </div>
+
+                <div id='temp-nav-bar'>
+                    <span>Temporary Nav</span>
+                    <Link className='temp-nav-link' to='/stocks/AAPL'>AAPL</Link>
+                    <Link className='temp-nav-link' to='/stocks/DIS'>DIS</Link>
+                    <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
+                    <Link className='temp-nav-link' to='/stocks/PYPL'>PYPL</Link>
+
+                </div>
+
+
+
+
             </div>
-
-            {stocks_owned_by_user.length > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
-
-            <div id="stock-opinions-container">
-
-                <div id='opinions-title'>Opinions</div>
-
-                {stock_opinions.length > 0 && stock_opinions.map((opinion, index) => {
-                    return (<div key={index} id='opinion-container'>
-                        <div id="opinion">
-                            <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
-                            <div id='opinion-content'>{opinion.content}</div>
-                        </div>
-                    </div>)
-                })}
-
-            </div>
-
-            <div id='temp-nav-bar'>
-                <span>Temporary Nav</span>
-                <Link className='temp-nav-link' to='/stocks/AAPL'>AAPL</Link>
-                <Link className='temp-nav-link' to='/stocks/DIS'>DIS</Link>
-                <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
-                <Link className='temp-nav-link' to='/stocks/PYPL'>PYPL</Link>
-
-            </div>
-
-
-
-
 
             <div id="right-side-stock-details">
 
