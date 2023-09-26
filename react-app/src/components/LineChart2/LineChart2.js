@@ -10,7 +10,10 @@ function LineChart2({ dates, prices, price_change }) {
             animations: {
                 enabled: false
             },
-            height: "400px"
+            height: "400px",
+            toolbar: {
+                show: false
+            }
         },
         xaxis: {
             categories: dates,

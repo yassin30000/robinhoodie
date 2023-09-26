@@ -126,15 +126,6 @@ function StockDetails() {
 
                 </div>
 
-                <div id='temp-nav-bar'>
-                    <span>Temporary Nav</span>
-                    <Link className='temp-nav-link' to='/stocks/AAPL'>AAPL</Link>
-                    <Link className='temp-nav-link' to='/stocks/DIS'>DIS</Link>
-                    <Link className='temp-nav-link' to='/stocks/UBER'>UBER</Link>
-                    <Link className='temp-nav-link' to='/stocks/PYPL'>PYPL</Link>
-
-                </div>
-
 
 
 
