@@ -8,6 +8,7 @@ import BuyForm from "../BuyForm/BuyForm";
 
 import OpenCustomModalButton from "../OpenModalButton/OpenModalButton2";
 import AddToListsModal from "../AddToListsModal";
+import OpinionFormModal from "../OpinionFormModal";
 
 import StockPosition from "./StockPosition/StockPosition";
 import { fetchStockOpinions } from "../../store/opinions";
@@ -139,11 +140,16 @@ function StockDetails() {
                 </div>
 
                 <div id="add-to-lists-container">
-                    <button onClick={() => alert('Feature Coming Soon...')}>Trade {ticker} options</button>
+                    {/* <button onClick={() => alert('Feature Coming Soon...')}>Trade {ticker} options</button> */}
 
                     <OpenCustomModalButton
                         buttonText={"Add to Lists"}
                         modalComponent={<AddToListsModal ticker={ticker} />}
+                    />
+
+                    <OpenCustomModalButton
+                        buttonText={"Share your Opinion"}
+                        modalComponent={<OpinionFormModal ticker={ticker} />}
                     />
                 </div>
             </div>

@@ -78,14 +78,43 @@
 
 #opinion-container:hover {
 	background-color: rgba(239, 242, 243, 1);
-	cursor: pointer;
+	/* cursor: pointer; */
 }
 
 #opinion-author {
 	margin-top: 20px;
 	font-weight: 500;
 	font-size: 14px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
+
+#edit-delete-opinion-container {
+	display: flex;
+	margin-right: 30px;
+	gap: 10px;
+}
+
+#opinion-author button{
+	font-size: 24px;
+	border: none;
+	background: none;
+	display: flex;
+	align-items: center;
+	border-radius: 50px;
+	padding: 5px;
+
+	transition: all .3s;
+}
+
+
+#opinion-author button:hover {
+	color: rgb(255, 80, 0);
+	cursor: pointer;
+	background-color: white;
+}
+
 #opinion-content {
 	display: flex;
 	align-items: center;
@@ -114,6 +143,8 @@
 	cursor: pointer;
 	color: rgb(0, 200, 5);
 }
+
+
 
 /* BUYING POWER STUFF */
 

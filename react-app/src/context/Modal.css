@@ -12,10 +12,12 @@
 	height: 100vh;
 	top: 0;
 	left: 0;
+	z-index: 2;
 }
 
 #modal-content {
 	position: fixed;
-	top: 60px;
+	top: 70px;
 	right: 50px;
+	z-index: 2;
 }
