@@ -9,12 +9,10 @@ function LineChart(data) {
 
 
     const options = {
-
         scales: {
             x: { display: false },
             y: { display: false }
-        },
-        responsive: true,
+        }
     }
 
     return <Line data={data.data} options={options} />

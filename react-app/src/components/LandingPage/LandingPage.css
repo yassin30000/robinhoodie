@@ -1,3 +1,24 @@
+#currentPortfolioValue {
+	/* padding: 50px; */
+	font-size: 40px;
+}
+
+#portfolio-value-container {
+	display: flex;
+	flex-direction: column;
+	padding: 50px;
+}
+
+#portfolio-change-positive {
+	color: rgb(0, 200, 5);
+}
+
+#portfolio-change-negative {
+	color: red
+}
+.fa-caret-down {
+	padding: 0 5px;
+}
 #graph {
 	padding: 20px 0px;
 	width: 60%;

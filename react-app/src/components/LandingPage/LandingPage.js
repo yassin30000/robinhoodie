@@ -30,14 +30,21 @@ function LandingPage() {
     const alpacaState = useSelector(state => state.stocks.alpacaData)
     const options = { month: 'short', day: 'numeric', timeZone: "UTC" }
 
+
     const [viewAllOpinions, setViewAllOpinions] = useState(false);
+
+
+    const [viewAllOpinions, setViewAllOpinions] = useState(true);
+    
+    
+    //calculate how many shares of each stock in portfolio
 
     let portfolio_value = {}
     if (alpacaState && portfolio) {
         const alpacaData = alpacaState.bars
         let portfolio_data = {} // {ticker: # of shares owned}
 
-        if (portfolio?.portfolio_stocks) {
+        if (portfolio.portfolio_stocks) {
             portfolio.portfolio_stocks.forEach(stock => {
                 let ticker = stock.stock.ticker;
                 if (portfolio_data[ticker] == undefined) {
@@ -60,12 +67,29 @@ function LandingPage() {
         })
 
     }
+
+    //Chart Data
     const chartDates = Object.keys(portfolio_value);
     const chartValues = Object.values(portfolio_value).map(value => {
         value += portfolio.cash
         return value.toFixed(2)
     });
-    const price_change = chartValues.pop() - chartValues.shift()
+    const price_change = chartValues[chartValues.length - 1] - chartValues[0]
+
+    //stock latest prices and stock chart data
+    let latestPrices = {}
+    let graphData = {}
+        if (alpacaState) {
+            const alpacaData = alpacaState.bars
+            for (let ticker in alpacaData) {
+                latestPrices[ticker] = {}
+                latestPrices[ticker].price = alpacaData[ticker][ticker.length-1].c;
+                latestPrices[ticker].percentChange = ((alpacaData[ticker][ticker.length-1].c - alpacaData[ticker][0].c) / alpacaData[ticker][0].c) * 100;
+                graphData[ticker] = alpacaData[ticker].map( dataPoint => dataPoint.c)
+            }
+        }
+        console.log(latestPrices)
+
 
     const [open, setOpen] = useState(false);
 
@@ -106,16 +130,29 @@ function LandingPage() {
     }
 
     useEffect(() => {
+        let today = new Date().toISOString()
+        const seconds = "0:00:00Z"
+        let end = today.slice(0,11) + seconds
+       
         dispatch(fetchAllStocks());
         dispatch(fetchOpinions());
         dispatch(fetchAllUsers());
-        dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER']));
+        dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER'], end));
         dispatch(fetchPortfolio())
     }, [dispatch]);
 
-    console.log(new Array(5).fill(0))
+  
+    const currentPortfolioValue = chartValues[chartValues.length - 1]
+
     return (
         <>
+            <div id='portfolio-value-container'>
+
+                <p id='currentPortfolioValue'>${Number(currentPortfolioValue).toLocaleString()}</p>
+                <p id={price_change > 0 ? 'portfolio-change-positive' : 'portfolio-change-negative'}>
+                    {price_change > 0 ? <i className="fa-solid fa-caret-down fa-rotate-180"></i> : <i className="fa-solid fa-caret-down"></i>}
+                     ${Math.abs(price_change.toFixed(2))} ({Math.abs(((price_change / chartValues[0]) * 100).toFixed(2))}%) <span>Past Month</span></p>
+            </div>
             <div id='graph'>
 
                 {portfolio?.portfolio_stocks && <LineChart2 dates={chartDates} prices={chartValues} price_change={price_change} />}
@@ -155,7 +192,7 @@ function LandingPage() {
                 </div>
             </div>
 
-            <Watchlist />
+            <Watchlist latestPrices={latestPrices} chartDates={chartDates} graphData={graphData}/>
 
             <div id='opinions-container'>
 
