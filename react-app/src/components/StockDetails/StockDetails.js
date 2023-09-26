@@ -97,10 +97,7 @@ function StockDetails() {
 
     return (
         <div id='stock-details-wholepage'>
-
             <div id='stock-details-container'>
-
-
                 <p id='ticker-header'>{ticker}</p>
                 <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
 

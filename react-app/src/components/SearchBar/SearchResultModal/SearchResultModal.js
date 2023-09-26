@@ -1,6 +1,10 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
-function SearchResultModal() {
+function SearchResultModal(filteredData, searchResults) {
+
+
+
     return (
         <>
             {filteredData.length > 0 &&
