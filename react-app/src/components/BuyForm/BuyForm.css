@@ -1,0 +1,67 @@
+.buy-container {
+    display: flex;
+    font-family: sans-serif;
+}
+
+.buy-form-wrapper {
+    width: max-content;
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.buy-form-wrapper h2 {
+    border-bottom: 1px solid #999;
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+
+.section {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#line {
+    border-bottom: solid 1px #999;
+}
+
+.centered-one {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: solid 1px #999;
+}
+
+.centered-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-btn {
+    color: white;
+    background-image: linear-gradient(to right, rgb(89, 225, 89), rgb(38, 130, 212));
+    border-radius: 30px;
+    padding: 10px 100px 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.buying-power {
+    color: rgb(61, 167, 61);
+    margin: 10px;
+}
+
+.brokerage {
+    margin: 10px;
+    font-weight: lighter;
+}
+
+.market-price-label {
+    color: rgb(61, 167, 61);
+    margin-bottom: 10px;
+}
+
+.estimated-cost{
+    font-weight: bold;
+}
