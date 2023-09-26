@@ -5,17 +5,40 @@ import { Chart as ChartJS, CategoryScale, LineElement, LinearScale, Tooltip, Poi
 
 ChartJS.register(CategoryScale, LineElement, LinearScale, PointElement, Tooltip)
 
-function LineChart(data) {
+function LineChart({dates, prices, price_change}) {
 
+    const data = {
+        labels: dates,
+        datasets: [{
+            label: '$',
+            data: prices,
+            borderColor: price_change > 0 ? 'rgb(0, 200, 5)' : 'rgb(255, 0, 0)',
+            pointRadius: 0,
+            borderWidth: 1
+        }]
 
-    const options = {
-        scales: {
-            x: { display: false },
-            y: { display: false }
-        }
     }
+  
 
-    return <Line data={data.data} options={options} />
+    // chartData = {
+
+    //     label: '$',
+    //     data: prices_array,
+    //     borderColor: price_change > 0 ? 'rgb(0, 200, 5)' : 'rgb(255, 0, 0)',
+    //     pointStyle: false,
+    //     borderWidth: 2,
+    //     pointStyle: false,
+    // }]
+
+
+const options = {
+    scales: {
+        x: { display: false },
+        y: { display: false }
+    }
+}
+
+return <Line data={data} options={options} />
 }
 
 export default LineChart

@@ -10,7 +10,7 @@ function LineChart2({ dates, prices, price_change }) {
             animations: {
                 enabled: false
             },
-            height: "400px",
+            height: '100%',
             toolbar: {
                 show: false
             }
@@ -40,7 +40,7 @@ function LineChart2({ dates, prices, price_change }) {
         stroke: {
             show: true,
             curve: 'straight',
-            width: 2,
+            width: 1.5,
         },
         grid: {
             show: false
@@ -54,7 +54,7 @@ function LineChart2({ dates, prices, price_change }) {
                 return (
                     '<div class="arrow_box">' +
                     "<span>" +
-                    
+
                     "$" +
                     series[seriesIndex][dataPointIndex] +
                     "</span>" +
@@ -65,7 +65,7 @@ function LineChart2({ dates, prices, price_change }) {
         }
     }
 
-    if (prices[0] === 0 && prices[prices.length -1] === 0) {
+    if (prices[0] === 0 && prices[prices.length - 1] === 0) {
         options.yaxis.max = 6
         options.yaxis.min = -6
 
@@ -81,12 +81,14 @@ function LineChart2({ dates, prices, price_change }) {
 
 
     return (
-        <Chart
-            options={options}
-            series={series}
-            type="line"
-            width="100%"
-        />
+            <Chart
+                options={options}
+                series={series}
+                type="line"
+                width="100%"
+                height='400px'
+            />
+
     )
 }
 

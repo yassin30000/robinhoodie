@@ -106,9 +106,9 @@ function StockDetails() {
                 {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}%</span>) </p><span>Past month</span></div>}
                 {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
 
-                <div id='line-chart2-container'>
+                
                     {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} />}
-                </div>
+               
 
                 {total_shares > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
 

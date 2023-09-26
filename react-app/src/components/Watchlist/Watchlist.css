@@ -87,7 +87,10 @@
 }
 
 #list-graph {
+	position: relative;
 	color: rgb(255, 80, 0);
+	height: 40px;
+	width: 80px;
 }
 
 #list-percent-positive {

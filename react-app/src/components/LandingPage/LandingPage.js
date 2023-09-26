@@ -33,8 +33,8 @@ function LandingPage() {
 
 
     const [viewAllOpinions, setViewAllOpinions] = useState(true);
-    
-    
+
+
     //calculate how many shares of each stock in portfolio
 
     let portfolio_value = {}
@@ -77,16 +77,15 @@ function LandingPage() {
     //stock latest prices and stock chart data
     let latestPrices = {}
     let graphData = {}
-        if (alpacaState) {
-            const alpacaData = alpacaState.bars
-            for (let ticker in alpacaData) {
-                latestPrices[ticker] = {}
-                latestPrices[ticker].price = alpacaData[ticker][ticker.length-1].c;
-                latestPrices[ticker].percentChange = ((alpacaData[ticker][ticker.length-1].c - alpacaData[ticker][0].c) / alpacaData[ticker][0].c) * 100;
-                graphData[ticker] = alpacaData[ticker].map( dataPoint => dataPoint.c)
-            }
+    if (alpacaState) {
+        const alpacaData = alpacaState.bars
+        for (let ticker in alpacaData) {
+            latestPrices[ticker] = {}
+            latestPrices[ticker].price = alpacaData[ticker][alpacaData[ticker].length - 1].c;
+            latestPrices[ticker].percentChange = ((alpacaData[ticker][alpacaData[ticker].length - 1].c - alpacaData[ticker][0].c) / alpacaData[ticker][0].c) * 100;
+            graphData[ticker] = alpacaData[ticker].map(dataPoint => dataPoint.c)
         }
-        console.log(latestPrices)
+    }
 
 
     const [open, setOpen] = useState(false);
@@ -130,8 +129,8 @@ function LandingPage() {
     useEffect(() => {
         let today = new Date().toISOString()
         const seconds = "0:00:00Z"
-        let end = today.slice(0,11) + seconds
-       
+        let end = today.slice(0, 11) + seconds
+
         dispatch(fetchAllStocks());
         dispatch(fetchOpinions());
         dispatch(fetchAllUsers());
@@ -139,7 +138,7 @@ function LandingPage() {
         dispatch(fetchPortfolio())
     }, [dispatch]);
 
-  
+
     const currentPortfolioValue = chartValues[chartValues.length - 1]
 
     return (
@@ -149,14 +148,11 @@ function LandingPage() {
                 <p id='currentPortfolioValue'>${Number(currentPortfolioValue).toLocaleString()}</p>
                 <p id={price_change > 0 ? 'portfolio-change-positive' : 'portfolio-change-negative'}>
                     {price_change > 0 ? <i className="fa-solid fa-caret-down fa-rotate-180"></i> : <i className="fa-solid fa-caret-down"></i>}
-                     ${Math.abs(price_change.toFixed(2))} ({Math.abs(((price_change / chartValues[0]) * 100).toFixed(2))}%) <span>Past Month</span></p>
+                    ${Math.abs(price_change.toFixed(2))} ({Math.abs(((price_change / chartValues[0]) * 100).toFixed(2))}%) <span>Past Month</span></p>
             </div>
-            <div id='graph'>
 
                 {portfolio?.portfolio_stocks && <LineChart2 dates={chartDates} prices={chartValues} price_change={price_change} />}
                 {portfolio?.message && <LineChart2 dates={chartDates} prices={new Array(15).fill(0)} price_change={price_change} />}
-
-            </div>
 
 
             <div id='buying-power-container' onClick={() => { setOpen(!open) }}>
@@ -190,7 +186,7 @@ function LandingPage() {
                 </div>
             </div>
 
-            <Watchlist latestPrices={latestPrices} chartDates={chartDates} graphData={graphData}/>
+            <Watchlist latestPrices={latestPrices} chartDates={chartDates} graphData={graphData} />
 
             <div id='opinions-container'>
 
@@ -228,7 +224,7 @@ function LandingPage() {
                                             buttonText={""}
                                             buttonHTML={<span class="material-symbols-outlined edit">edit</span>}
 
-                                            modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content } />}
+                                            modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content} />}
                                         />
                                         <OpenCustomModalButton
                                             id="delete-opinion"
