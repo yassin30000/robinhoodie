@@ -5,7 +5,7 @@
 #stock-details-container {
 	padding: 50px;
 	font-family: Arial, Helvetica, sans-serif;
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	width: 75%
 }
 
@@ -47,7 +47,8 @@
 
 #line-chart2-container {
 	padding: 20px 0px;
-	width: 70vw;
+	/* width: 70vw; */
+	width: 100%
 }
 
 /* right side area */
