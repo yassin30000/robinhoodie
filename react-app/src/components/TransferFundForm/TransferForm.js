@@ -14,13 +14,7 @@ function TransferForm() {
     const [errors, setErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const portfolio = useSelector(state => state.portfolio.portfolio)
-    let total = 0
 
-    for (let i = 0; i < portfolio?.portfolio_stocks.length; i++) {
-        let number = portfolio?.portfolio_stocks[i]
-        let amount = number?.shares * number?.price;
-        total += amount
-    }
 
 
 
@@ -66,42 +60,55 @@ function TransferForm() {
                     <div className='fund-form-wrapper'>
                         <h2>Transfer money</h2>
                         <form onSubmit={handleSubmit}>
-                            <div className='amount-label'>Amount</div>
-                            <input className='amount-input'
-                                type='number'
-                                value={cash}
-                                onChange={(e) => setCash(e.target.value)}
-                                required
-                            />
-                            <div className='from-label'>From</div>
-                            <select className='from-input'
-                                value={from}
-                                onChange={(e) => setFrom(e.target.value)}>
-                                    {options.map((value) => (
-                                        <option value={value} key={value}>
-                                            {value}
-                                        </option>
-                                ))}
-                            </select>
-                            <div className='to-label'>To</div>
-                            <select className='to-input'
-                                value={to}
-                                onChange={(e) => setTo(e.target.value)}>
-                                    {options.map((value) => (
-                                        <option value={value} key={value}>
-                                            {value}
-                                        </option>
-                                ))}
-                            </select>
-                            <div className='frequency-label'>Frequency</div>
-                            <select className='frequency-label' value="Just Once">
-                                <option value='Just Once'>Just Once</option>
-                                <option value='Weekly'>Weekly</option>
-                                <option value='Twice a month'>Twice a month</option>
-                                <option value='Monthly'>Monthly</option>
-                                <option value='Quarterly'>Quarterly</option>
-                            </select>
-                            <div>
+                            <div className='section'>
+                                <label className='label-tag'>Amount</label>
+                                <input className='input-tag-one'
+                                    type='number'
+                                    placeholder='$0.00'
+                                    onChange={(e) => setCash(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className='section'>
+                                <label className='label-tag'>From</label>
+                                <select className='input-tag-two'
+                                    value={from}
+                                    onChange={(e) => setFrom(e.target.value)}>
+                                        {options.map((value) => (
+                                            <option value={value} key={value}>
+                                                {value}
+                                            </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className='section'>
+                                <label className='label-tag'>To</label>
+                                <select className='input-tag-two'
+                                    value={to}
+                                    onChange={(e) => setTo(e.target.value)}>
+                                        {options.map((value) => (
+                                            <option value={value} key={value}>
+                                                {value}
+                                            </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className='section'>
+                                 <label className='label-tag'>Frequency</label>
+                                <select className='input-tag-two' value="Just Once">
+                                    <option value='Just Once'>Just Once</option>
+                                    <option value='Weekly'>Weekly</option>
+                                    <option value='Twice a month'>Twice a month</option>
+                                    <option value='Monthly'>Monthly</option>
+                                    <option value='Quarterly'>Quarterly</option>
+                                </select>
+                            </div>
+                            <div className='small-txt'>
+                                <div className='text'>
+                                    Daily deposit limit: $50,000
+                                </div>
+                            </div>
+                            <div className='submit-btn'>
                                 <button className='transfer-btn' type='submit'>Transfer</button>
                             </div>
                         </form>
