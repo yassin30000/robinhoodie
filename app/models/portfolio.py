@@ -5,6 +5,9 @@ from sqlalchemy.orm import relationship
 class Portfolio(db.Model):
     __tablename__ = 'portfolios'
 
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+        
     id = db.Column(db.Integer, primary_key=True)
     cash = db.Column(db.Float, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
