@@ -8,9 +8,10 @@ import OpenCustomModalButton from "../OpenModalButton/OpenModalButton2";
 import ConfirmDeleteModal from "../ConfirmDeleteModal";
 import WatchlistUpdateModal from "../WatchlistUpdateModal";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import BabyLineChart from "../BabyLineChart/BabyLineChart";
 
-
-function Watchlist() {
+function Watchlist({latestPrices, chartDates, graphData}) {
+    console.log(latestPrices)
     const history = useHistory();
     const dispatch = useDispatch();
     const userWatchlistsData = useSelector((state) => state.watchlists.userWatchlists);
@@ -100,10 +101,11 @@ function Watchlist() {
                                         {watchlist.stocks.map((stock) => (
                                             <div key={stock.id} onClick={() => history.push(`/stocks/${stock.ticker}`)}>
                                                 <span id="list-ticker">{stock.ticker}</span>
-                                                <span id="list-graph">graph</span>
+                                                <span id="list-graph"><BabyLineChart dates={chartDates} prices={graphData[stock.ticker]} price_change={latestPrices[stock.ticker].percentChange}/></span>
                                                 <span id="list-numbers-container">
-                                                    <p id="list-price">$174.96</p>
-                                                    <p id="list-percent">+0.56%</p>
+                                                    <p id="list-price">${latestPrices[stock.ticker].price}</p>
+                                                    <p id={latestPrices[stock.ticker].percentChange > 0 ? "list-percent-positive" : "list-percent-negative"}>{latestPrices[stock.ticker].percentChange > 0 ? '+' : '-'}{(Math.abs(latestPrices[stock.ticker].percentChange)).toFixed(2)}%</p>
+                                                    
                                                 </span>
                                             </div>
                                         ))}

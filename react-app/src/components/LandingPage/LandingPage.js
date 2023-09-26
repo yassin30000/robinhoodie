@@ -74,11 +74,13 @@ function LandingPage() {
         if (alpacaState) {
             const alpacaData = alpacaState.bars
             for (let ticker in alpacaData) {
-                latestPrices[ticker] = alpacaData[ticker][ticker.length-1].c
-    
+                latestPrices[ticker] = {}
+                latestPrices[ticker].price = alpacaData[ticker][ticker.length-1].c;
+                latestPrices[ticker].percentChange = ((alpacaData[ticker][ticker.length-1].c - alpacaData[ticker][0].c) / alpacaData[ticker][0].c) * 100;
                 graphData[ticker] = alpacaData[ticker].map( dataPoint => dataPoint.c)
             }
         }
+        console.log(latestPrices)
 
 
     const [open, setOpen] = useState(false);
@@ -182,7 +184,7 @@ function LandingPage() {
                 </div>
             </div>
 
-            <Watchlist />
+            <Watchlist latestPrices={latestPrices} chartDates={chartDates} graphData={graphData}/>
 
             <div id='opinions-container'>
 
