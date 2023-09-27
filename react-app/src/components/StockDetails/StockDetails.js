@@ -89,7 +89,7 @@ function StockDetails() {
         total_shares += stock.shares
     })
 
-
+    console.log(stock_opinions)
     return (
         <div id='stock-details-wholepage'>
             <div id='stock-details-container'>
