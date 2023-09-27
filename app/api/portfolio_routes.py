@@ -98,7 +98,7 @@ def withdraw_funds_post():
 
 
 # Buying a stock
-@portfolio_routes.route('/buy-stocks/<int:stock_id>/<int:price>', methods=['POST'])
+@portfolio_routes.route('/buy-stocks/<int:stock_id>/<price>', methods=['POST'])
 @login_required
 def buy_stock_post(stock_id, price):
     form = BuyForm()
@@ -111,7 +111,7 @@ def buy_stock_post(stock_id, price):
     elif current_user.id != portfolio_update.user_id:
         return {"message": "You do not own this portfolio"}
 
-    total_cost = price * (form.data['shares'])
+    total_cost = float(price) * float(form.data['shares'])
 
     if form.validate_on_submit():
         if request.method == 'POST':
@@ -122,7 +122,7 @@ def buy_stock_post(stock_id, price):
                 shares = form.data['shares'],
                 portfolio_id = portfolio_update.id,
                 stock_id = stock_id,
-                price = price
+                price = float(price)
             )
             db.session.add(new_shares)
             portfolio_update.cash = portfolio_update.cash - float(total_cost)
@@ -144,7 +144,7 @@ def buy_stock_post(stock_id, price):
 
 
 # Selling a stock
-@portfolio_routes.route('/sell-stocks/<int:stock_id>/<int:price>', methods=['POST'])
+@portfolio_routes.route('/sell-stocks/<int:stock_id>/<price>', methods=['POST'])
 @login_required
 def sell_stock_post(stock_id, price):
     form = SellForm()
@@ -159,29 +159,29 @@ def sell_stock_post(stock_id, price):
 
     total_number_of_shares = 0
     for stock in portfolio_stocks_data:
-        total_number_of_shares += stock['shares']
+        total_number_of_shares += float(stock['shares'])
 
 
     #updates the current shares when selling a stock
     if form.validate_on_submit():
-        sold_shares = form.data['shares']
+        sold_shares = float(form.data['shares'])
 
         #check to see if they have enough shares to sell
         if total_number_of_shares < sold_shares:
             return {'message': "Sorry you don't have enough shares to sell"}
 
-        total_gain = price * float((form.data['shares']))
+        total_gain = float(price) * float((form.data['shares']))
 
         sold_shares = Portfolio_Stock(
                 shares = -float(form.data['shares']),
                 portfolio_id = portfolio_update.id,
                 stock_id = stock_id,
-                price = price
+                price = float(price)
             )
 
         #updates the cash amount after selling shares
         db.session.add(sold_shares)
-        portfolio_update.cash = portfolio_update.cash + float(total_gain)
+        portfolio_update.cash = float(portfolio_update.cash) + float(total_gain)
         db.session.commit()
         return portfolio_update.to_dict()
 
