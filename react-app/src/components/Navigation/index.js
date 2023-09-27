@@ -33,12 +33,7 @@ function Navigation() {
 			<SearchBar placeholder="search" data={stocksData} />
 
 			<div id="links-container">
-				<span>Rewards</span>
-				<span>Investing</span>
-				<span>Crypto</span>
-				<span>Spending</span>
-				<span>Retirement</span>
-				<span>Notifications</span>
+			
 				<span>
 					<OpenModalButton
 						buttonText={"Account"}

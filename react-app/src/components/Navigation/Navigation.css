@@ -21,7 +21,6 @@
 
 #search-bar-container {
 	width: 100%;
-	margin-right: 20px;
 }
 
 #search-bar-container > input {
@@ -45,11 +44,11 @@
 }
 
 #links-container {
+	width: 30%;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: right;
 	align-items: center;
 	font-weight: 500;
-	min-width: max-content;
 }
 
 #links-container button {

@@ -32,10 +32,6 @@
 
 #portfolio-stock-list-heading {
 	border-bottom: 1px solid #cccccc98;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
 	padding: 12px 25px 12px 25px;
 }
 
@@ -146,13 +142,13 @@
 	align-items: center;
 }
 
-#left-side:hover {
+/* #left-side:hover {
 	background-color: rgba(216, 221, 225, 1);
-}
+} */
 
 .stock-shares-container:hover {
 	background-color: rgba(216, 221, 225, 1);
-
+	cursor: pointer;
 }
 
 #right-side {
