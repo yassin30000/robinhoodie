@@ -1,11 +1,16 @@
 //Action Type
 const NEW_PORTFOLIO_SHARES = "portfolio_stocks/NEW_PORTFOLIO_SHARES";
+const REMOVE_PORTFOLIO = 'portfolio/REMOVE_PORTFOLIO'
 
 //Action Creator
 const newPortfolioShares = (portfolioShares) => ({
     type: NEW_PORTFOLIO_SHARES,
     portfolioShares
 });
+
+const removePortfolio = () => ({
+    type: REMOVE_PORTFOLIO
+})
 
 //Thunk
 
@@ -35,6 +40,10 @@ export const sellShares = (sharesId, price, portfolioShares) => async (dispatch)
     }
 }
 
+export const logoutPortfolioStock = () => async dispatch => {
+    await dispatch(removePortfolio())
+}
+
 //Reducer
 const initialState = {
 }
@@ -45,6 +54,8 @@ export default function portfolioStockReducer(state = initialState, action) {
         case NEW_PORTFOLIO_SHARES:
             newState[action.portfolioShares.id] = action.portfolioShares;
             return newState
+        case REMOVE_PORTFOLIO:
+            return {portfolioStock: null}
         default:
             return state
     }
