@@ -151,7 +151,7 @@ function LandingPage() {
                     <p id='currentPortfolioValue'>${Number(currentPortfolioValue) ? Number(currentPortfolioValue).toLocaleString() : 0}</p>
                     {Number(price_change) ? (<p id={price_change > 0 ? 'portfolio-change-positive' : 'portfolio-change-negative'}>
                         {price_change > 0 ? <i className="fa-solid fa-caret-down fa-rotate-180"></i> : <i className="fa-solid fa-caret-down"></i>}
-                        ${Math.abs(price_change.toFixed(2))} ({Math.abs(((price_change / chartValues[0]) * 100).toFixed(2))}%) <span>Past Month</span></p>): <></>}
+                        ${Math.abs(price_change.toFixed(2))} ({Math.abs(((price_change / chartValues[0]) * 100).toFixed(2))}%) <span>Past Month</span></p>) : <></>}
                 </div>
 
                 <div id='graph'>
@@ -249,7 +249,8 @@ function LandingPage() {
                                         {opinion.content.length > 400
                                             ? opinion.content.slice(0, 400) + '...'
                                             : opinion.content}
-                                    </div>                                    <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
+                                    </div>
+                                    <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
                                 </div>
                             </div>
                         ))}
