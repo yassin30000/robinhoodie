@@ -22,7 +22,7 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
 
     const toggleRotate = (id, event) => {
         // Check if the click target is the list item itself
-        if (event.target.id === "list-item") {
+        if (event.target.id === "list-item" || event.target.id === "left-side" || event.target.id === "watchlist-arrow") {
             setRotatedItems((prevState) => ({
                 ...prevState,
                 [id]: !prevState[id],
@@ -40,8 +40,8 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
 
     //does the user own any share?
     const hasShares = Object.values(portfolio_data).reduce((accum, shares) => {
-        return accum += shares
-    })
+        return accum += shares 
+    }, [])
 
     //make shares array for mapping
     let sharesArray = []
@@ -115,7 +115,7 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
 
                                     <div id="right-side">
                                         <span class="material-icons dots-16" onClick={() => handleMoreHorizClick(watchlist.id)}>more_horiz</span>
-                                        <span
+                                        <span id="watchlist-arrow"
                                             class={rotatedItems[watchlist.id] ? "material-icons arrow rotate-180" : "material-icons arrow rotate-0"}>expand_more</span>
                                     </div>
 

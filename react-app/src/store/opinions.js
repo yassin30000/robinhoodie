@@ -157,7 +157,10 @@ export default function opinionsReducer(state = initialState, action) {
         
         case SET_STOCK_OPINIONS:
             const stockOpinions = action.payload.opinions;
-            newState[stockOpinions[0]["stock_id"]] = stockOpinions
+            if (stockOpinions.length) {
+
+                newState[stockOpinions[0]["stock_id"]] = stockOpinions
+            }
             return newState
         
         case CREATE_OPINION:

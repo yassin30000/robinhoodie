@@ -1,26 +1,47 @@
 import './TransferForm.css'
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { createFunds, addFunds, withdrawFunds, fetchPortfolio } from '../../store/portfolio'
 
 
 function TransferForm() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const options = ['Personal Bank', 'Brokerage']
     const [cash, setCash] = useState(0);
     const [from, setFrom] = useState((options[0]));
     const [to, setTo] = useState(options[1]);
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const portfolio = useSelector(state => state.portfolio.portfolio)
 
 
+    useEffect(() => {
+        const errors  = {};
 
+        if(!cash) {
+            errors.cash = "Cash amount is required";
+        };
+
+        if(cash < 0) {
+            errors.cash = "Cash amount can not be negative";
+        };
+
+        if(from === to) {
+            errors.from = "Can't transfer money into the same location"
+        }
+
+        setErrors(errors)
+    }, [cash, from, to])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true);
+
+        if(Object.values(errors).length) {
+            return alert("Error please fix the underlying problems")
+        };
 
         const cashData = {
             cash
@@ -38,15 +59,10 @@ function TransferForm() {
             setErrors("Error")
         }
 
-        if(Object.values(errors).length) {
-            return alert('Errors been found')
-        };
-
         // console.log("PORTFOLIOS", portfolio.cash)
-
+        history.push('/')
         setErrors({})
         setHasSubmitted(false);
-        <Redirect to="/" />
     }
 
     useEffect(() => {
@@ -69,6 +85,9 @@ function TransferForm() {
                                     required
                                 />
                             </div>
+                            <div className='error-blocks'>
+                                {errors.cash && (<p className="error">*{errors.cash}</p>) }
+                            </div>
                             <div className='section'>
                                 <label className='label-tag'>From</label>
                                 <select className='input-tag-two'
@@ -80,6 +99,9 @@ function TransferForm() {
                                             </option>
                                     ))}
                                 </select>
+                            </div>
+                            <div className='error-blocks'>
+                                {errors.from && (<p className="error">*{errors.from}</p>) }
                             </div>
                             <div className='section'>
                                 <label className='label-tag'>To</label>
@@ -93,7 +115,10 @@ function TransferForm() {
                                     ))}
                                 </select>
                             </div>
-                            <div className='section'>
+                            <div className='error-blocks'>
+                                {errors.from && (<p className="error">*{errors.from}</p>) }
+                            </div>
+                            {/* <div className='section'>
                                  <label className='label-tag'>Frequency</label>
                                 <select className='input-tag-two' value="Just Once">
                                     <option value='Just Once'>Just Once</option>
@@ -102,7 +127,7 @@ function TransferForm() {
                                     <option value='Monthly'>Monthly</option>
                                     <option value='Quarterly'>Quarterly</option>
                                 </select>
-                            </div>
+                            </div> */}
                             <div className='small-txt'>
                                 <div className='text'>
                                     Daily deposit limit: $50,000
