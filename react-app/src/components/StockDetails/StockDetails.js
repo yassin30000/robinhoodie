@@ -1,5 +1,5 @@
 import "./StockDetails.css";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchStockData } from "../../store/stocks";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +12,8 @@ import OpinionFormModal from "../OpinionFormModal";
 
 import StockPosition from "./StockPosition/StockPosition";
 import { fetchStockOpinions } from "../../store/opinions";
-
+import OpinionUpdateModal from "../OpinionUpdateModal";
+import ConfirmDeleteOpinion from "../ConfirmDeleteOpinion";
 
 
 function StockDetails() {
@@ -27,9 +28,10 @@ function StockDetails() {
     const opinions_data = useSelector(state => state.opinions[stock_info.id])
     // console.log('STOCK::::', stock)
     //
-    const stock_opinions = opinions_data ? opinions_data : [];
+    const allOpinions = opinions_data ? opinions_data : [];
     const allUsers = usersData ? Object.values(usersData.users) : [];
     //console.log(allUsers)
+    const [viewAllOpinions, setViewAllOpinions] = useState(false);
 
     function getUserName(user_id) {
         if (allUsers) {
@@ -53,9 +55,9 @@ function StockDetails() {
         const stock_prices = stock['Time Series (Daily)']
         latestDate = Object.keys(stock_prices)[0]
         latestPrice = Number(stock_prices[latestDate]['4. close']).toFixed(2)
-        
-        const oldestDate = Object.keys(stock_prices)[Object.keys(stock_prices).length-1]
-        
+
+        const oldestDate = Object.keys(stock_prices)[Object.keys(stock_prices).length - 1]
+
         for (let key in stock_prices) {
             let newKey = new Date(key)
             stock_prices_at_close[newKey] = Number(stock_prices[key]['4. close'])
@@ -64,13 +66,13 @@ function StockDetails() {
         price_change = (latestPrice - stock_prices[oldestDate]['4. close'])
         percent_change = ((price_change / latestPrice) * 100)
 
-        
+
         dates_array = Object.keys(stock_prices_at_close).slice(0, 30).reverse().map(date => {
             return date.slice(4, 10)
         })
-        
+
         prices_array = Object.values(stock_prices_at_close).slice(0, 30).reverse()
-        
+
     }
     //console.log(price_30_days_before)
     // console.log(dates_array)
@@ -100,12 +102,12 @@ function StockDetails() {
                 {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change.toFixed(2))}</span> (<span>-{Math.abs(percent_change).toFixed(2)}%</span>) </p><span>Past month</span></div>}
 
 
-                {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} width= {"100%"}/>}
+                {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} width={"100%"} />}
 
 
                 {total_shares > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
 
-                <div id="stock-opinions-container">
+                {/* <div id="stock-opinions-container">
 
                     <div id='opinions-title'>Opinions</div>
 
@@ -118,6 +120,68 @@ function StockDetails() {
                         </div>)
                     })}
 
+                </div> */}
+
+                <div id='opinions-container'>
+
+                    <div id='opinions-title'>Opinions</div>
+
+                    <div id="opinons-filter-container">
+                        <div id="all-opinions"
+                            className={!viewAllOpinions ? 'unselected' : 'selected'}
+                            onClick={() => setViewAllOpinions(true)}
+                        >All Opinions</div>
+                        <div id="my-opinons"
+                            onClick={() => setViewAllOpinions(false)}
+                            className={viewAllOpinions ? 'unselected' : 'selected'}
+                        >My Opinions
+                        </div>
+
+                    </div>
+
+                    {viewAllOpinions ? allUsers && Array.isArray(allOpinions) && allOpinions?.map((opinion, index) => (
+                        <div key={index} id='opinion-container'>
+                            <div id="opinion">
+                                <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
+                                <div id='opinion-content'>
+                                    {opinion.content.length > 400
+                                        ? opinion.content.slice(0, 400) + '...'
+                                        : opinion.content}
+                                </div>                                <div id='opinion-ticker'>{ticker}</div>
+                            </div>
+                        </div>
+                    )) :
+                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser.id).map((opinion, index) => (
+                            <div key={index} id='opinion-container'>
+                                <div id="opinion">
+                                    <div id='opinion-author'>{getUserName(opinion.user_id)}
+                                        <div id="edit-delete-opinion-container">
+                                            <OpenCustomModalButton
+                                                id="edit-opinion"
+                                                buttonText={""}
+                                                buttonHTML={<span class="material-symbols-outlined edit">edit</span>}
+
+                                                modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content} />}
+                                            />
+                                            <OpenCustomModalButton
+                                                id="delete-opinion"
+                                                buttonText={""}
+                                                buttonHTML={<span className='material-icons delete-opinion'>close</span>}
+
+                                                modalComponent={<ConfirmDeleteOpinion opinionId={opinion.id} />}
+                                            />
+
+                                        </div>
+
+                                    </div>
+                                    <div id='opinion-content'>
+                                        {opinion.content.length > 400
+                                            ? opinion.content.slice(0, 400) + '...'
+                                            : opinion.content}
+                                    </div>                                    <div id='opinion-ticker'>{ticker}</div>
+                                </div>
+                            </div>
+                        ))}
                 </div>
 
 

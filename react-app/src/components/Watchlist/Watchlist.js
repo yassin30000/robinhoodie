@@ -22,7 +22,7 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
 
     const toggleRotate = (id, event) => {
         // Check if the click target is the list item itself
-        if (event.target.id === "list-item" || event.target.id === "left-side" || event.target.id === "watchlist-arrow") {
+        if (event.target.id !== "watchlist-dots") {
             setRotatedItems((prevState) => ({
                 ...prevState,
                 [id]: !prevState[id],
@@ -114,7 +114,7 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
                                     </div>
 
                                     <div id="right-side">
-                                        <span class="material-icons dots-16" onClick={() => handleMoreHorizClick(watchlist.id)}>more_horiz</span>
+                                        <span id='watchlist-dots'class="material-icons dots-16" onClick={() => handleMoreHorizClick(watchlist.id)}>more_horiz</span>
                                         <span id="watchlist-arrow"
                                             class={rotatedItems[watchlist.id] ? "material-icons arrow rotate-180" : "material-icons arrow rotate-0"}>expand_more</span>
                                     </div>
