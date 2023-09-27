@@ -164,7 +164,6 @@ function LandingPage() {
                         {
                             <span id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toFixed(2) : 0}
                                 <span className='material-icons cash-arrow'>expand_more</span>
-
                             </span>
                         }
                     </div>
