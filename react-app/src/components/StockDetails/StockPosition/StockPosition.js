@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import "./StockPosition.css";
-import { useSelector } from 'react-redux';
 
 
 function StockPosition({ latestPrice, stocks_owned_by_user }) {
