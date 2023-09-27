@@ -67,7 +67,7 @@
     width: max-content;
 }
 
-.toggle-btn{
+.toggle-btn-one{
     padding: 10px 30px;
     cursor: pointer;
     background: transparent;
@@ -76,7 +76,24 @@
     position: relative;
 }
 
-#btn{
+.toggle-btn-two{
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+}
+
+.toggle-btn-one.active {
+    font-weight: bolder;
+}
+
+.toggle-btn-two.inactive {
+    font-weight: bolder;
+}
+
+/* #btn{
     top: 0;
     left: 0;
     position: absolute;
@@ -84,7 +101,7 @@
     height: 100%;
     background: linear-gradient(to right, rgb(89, 225, 89), rgb(38, 130, 212));
     transition: .5s;
-}
+} */
 
 .shares-input {
     text-align: right;
