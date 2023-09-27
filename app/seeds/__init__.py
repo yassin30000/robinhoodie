@@ -36,14 +36,14 @@ def seed():
     seed_portfolios()
     seed_portfolio_stocks()
     seed_watchlists()
-    seed_watchlist_stocks
+    seed_watchlist_stocks()
     # Add other seed functions here
 
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
-    undo_watchlist_stocks
+    undo_watchlist_stocks()
     undo_watchlists()
     undo_portfolio_stocks()
     undo_portfolios()

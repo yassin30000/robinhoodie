@@ -5,9 +5,6 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_watchlist_stocks():
 
-
-
-
     stock1 = Watchlist_Stock(
        watchlist_id=1, stock_id=1)
     stock2 = Watchlist_Stock(
