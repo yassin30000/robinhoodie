@@ -17,9 +17,11 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
     const userWatchlistsData = useSelector((state) => state.watchlists.userWatchlists);
     const userWatchlists = userWatchlistsData ? Object.values(userWatchlistsData.watchlists) : []
     const stocksData = useSelector(state => state.stocks.allStocks)
-    const stocks = stocksData.stocks ? stocksData.stocks : [];
+    const stocks = stocksData ? stocksData.stocks : [];
     const [rotatedItems, setRotatedItems] = useState({});
     const [activeDropdown, setActiveDropdown] = useState(null);
+
+    console.log('STOCKS!!!!!: ', stocksData.stocks)
 
     const toggleRotate = (id, event) => {
         // Check if the click target is the list item itself
@@ -46,6 +48,7 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
 
     //make shares array for mapping
     let sharesArray = []
+    
     for (let key in portfolio_data) {
         if (portfolio_data[key] === 0) {
             delete portfolio_data[key]
