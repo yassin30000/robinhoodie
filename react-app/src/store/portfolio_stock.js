@@ -23,7 +23,7 @@ export const addShares = (sharesId, price, portfolioShares) => async (dispatch) 
 }
 
 export const sellShares = (sharesId, price, portfolioShares) => async (dispatch) => {
-    const res = await fetch(`/api/portfolio/buy-stocks/${sharesId}/${price}`, {
+    const res = await fetch(`/api/portfolio/sell-stocks/${sharesId}/${price}`, {
         method: "POST",
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(portfolioShares)
@@ -36,7 +36,8 @@ export const sellShares = (sharesId, price, portfolioShares) => async (dispatch)
 }
 
 //Reducer
-const initialState = {}
+const initialState = {
+}
 
 export default function portfolioStockReducer(state = initialState, action) {
     let newState = {...state}
