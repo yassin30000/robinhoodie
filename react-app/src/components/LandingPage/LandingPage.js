@@ -148,10 +148,10 @@ function LandingPage() {
 
                 <div id='portfolio-value-container'>
 
-                    <p id='currentPortfolioValue'>${Number(currentPortfolioValue).toLocaleString()}</p>
-                    <p id={price_change > 0 ? 'portfolio-change-positive' : 'portfolio-change-negative'}>
+                    <p id='currentPortfolioValue'>${Number(currentPortfolioValue) ? Number(currentPortfolioValue).toLocaleString() : 0}</p>
+                    {Number(price_change) ? (<p id={price_change > 0 ? 'portfolio-change-positive' : 'portfolio-change-negative'}>
                         {price_change > 0 ? <i className="fa-solid fa-caret-down fa-rotate-180"></i> : <i className="fa-solid fa-caret-down"></i>}
-                        ${Math.abs(price_change.toFixed(2))} ({Math.abs(((price_change / chartValues[0]) * 100).toFixed(2))}%) <span>Past Month</span></p>
+                        ${Math.abs(price_change.toFixed(2))} ({Math.abs(((price_change / chartValues[0]) * 100).toFixed(2))}%) <span>Past Month</span></p>): <></>}
                 </div>
 
                 <div id='graph'>
@@ -178,7 +178,7 @@ function LandingPage() {
                                 </div> */}
                                 <div className='brokerage-grid'>
                                     <div>Buying power</div>
-                                    <div>${portfolio?.cash.toLocaleString()}</div>
+                                    <div>${portfolio?.cash?.toLocaleString()}</div>
                                 </div>
                                 <div className='dep-div'>
                                     <Link to='/portfolio/deposit-funds' className="deposit-btn">Transfer funds</Link>
@@ -222,7 +222,7 @@ function LandingPage() {
                             </div>
                         </div>
                     )) :
-                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser.id).map((opinion, index) => (
+                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser?.id).map((opinion, index) => (
                             <div key={index} id='opinion-container'>
                                 <div id="opinion">
                                     <div id='opinion-author'>{getUserName(opinion.user_id)}
