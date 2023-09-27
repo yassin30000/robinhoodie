@@ -1,7 +1,7 @@
 import "./StockDetails.css";
 import { useEffect, useState } from 'react';
 import { fetchStockData } from "../../store/stocks";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LineChart2 from "../LineChart2/LineChart2";
 import BuyForm from "../BuyForm/BuyForm";
@@ -28,14 +28,14 @@ function StockDetails() {
     const opinions_data = useSelector(state => state.opinions[stock_info.id])
     // console.log('STOCK::::', stock)
     //
-    const allOpinions = opinions_data ? opinions_data : [];
+    const allOpinions = opinions_data ? [...opinions_data].reverse() : [];
     const allUsers = usersData ? Object.values(usersData.users) : [];
     //console.log(allUsers)
     const [viewAllOpinions, setViewAllOpinions] = useState(false);
 
     function getUserName(user_id) {
         if (allUsers) {
-            let oneUser = allUsers.find(user => user.id == user_id)
+            let oneUser = allUsers.find(user => user.id === user_id)
             if (oneUser) return oneUser.username
         }
     }
@@ -147,7 +147,7 @@ function StockDetails() {
                                     {opinion.content.length > 400
                                         ? opinion.content.slice(0, 400) + '...'
                                         : opinion.content}
-                                </div>                                
+                                </div>
                                 <div id='opinion-ticker'>{ticker}</div>
                             </div>
                         </div>
@@ -179,7 +179,7 @@ function StockDetails() {
                                         {opinion.content.length > 400
                                             ? opinion.content.slice(0, 400) + '...'
                                             : opinion.content}
-                                    </div>                                    
+                                    </div>
                                     <div id='opinion-ticker'>{ticker}</div>
                                 </div>
                             </div>
