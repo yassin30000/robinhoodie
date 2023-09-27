@@ -47,7 +47,7 @@
 #opinion-buttons-container {
 	margin-top: 15px;
 	display: flex;
-	justify-content: end;
+	justify-content: flex-end;
 	width: 330px;
 	gap: 10px;
 }

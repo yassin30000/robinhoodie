@@ -23,7 +23,7 @@ function LandingPage() {
     const usersData = useSelector((state) => state.session.allUsers)
     const stocksData = useSelector(state => state.stocks.allStocks)
 
-    const allOpinions = opinionsData ? Object.values(opinionsData.opinions) : [];
+    const allOpinions = opinionsData ? Object.values(opinionsData.opinions).reverse() : [];
     const allUsers = usersData ? Object.values(usersData.users) : [];
     const allStocks = stocksData ? Object.values(stocksData.stocks) : [];
     const portfolio = useSelector(state => state.portfolio.portfolio)
@@ -32,7 +32,7 @@ function LandingPage() {
 
 
 
-    const [viewAllOpinions, setViewAllOpinions] = useState(true);
+    const [viewAllOpinions, setViewAllOpinions] = useState(false);
 
 
     //calculate how many shares of each stock in portfolio
@@ -143,107 +143,115 @@ function LandingPage() {
 
     return (
         <div>
-            <div id='portfolio-value-container'>
 
-                <p id='currentPortfolioValue'>${Number(currentPortfolioValue).toLocaleString()}</p>
-                <p id={price_change > 0 ? 'portfolio-change-positive' : 'portfolio-change-negative'}>
-                    {price_change > 0 ? <i className="fa-solid fa-caret-down fa-rotate-180"></i> : <i className="fa-solid fa-caret-down"></i>}
-                    ${Math.abs(price_change.toFixed(2))} ({Math.abs(((price_change / chartValues[0]) * 100).toFixed(2))}%) <span>Past Month</span></p>
-            </div>
+            <div id="landingpage-left-container">
 
-            <div id='graph'>
+                <div id='portfolio-value-container'>
 
-                {portfolio?.portfolio_stocks && <LineChart2 dates={chartDates} prices={chartValues} price_change={price_change} width= {"100%"}/>}
-                {portfolio?.message && <LineChart2 dates={chartDates} prices={new Array(15).fill(0)} price_change={price_change} width= {"100%"}/>}
-
-            </div>
-
-            <div id='buying-power-container' onClick={() => { setOpen(!open) }}>
-                <div className={`buying-menu-trigger ${open ? 'active' : 'inactive'}`}>
-                    <div id='buying-power-label'>Buying Power
-                        {
-                            <span id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toFixed(2) : 0}
-                                <span className='material-icons cash-arrow'>expand_more</span>
-                            </span>
-                        }
-                    </div>
-                    <div className={`buying-dropdown-menu ${open ? 'active' : 'inactive'}`}>
-                        <div className='buying-info-grid'>
-                            <div className='brokerage-grid'>
-                                <div>Brokerage cash</div>
-                                <div>${total_money}</div>
-                            </div>
-                            <div className='brokerage-grid'>
-                                <div>Buying power</div>
-                                <div>${portfolio?.cash}</div>
-                            </div>
-                            <div className='dep-div'>
-                                <Link to='/portfolio/deposit-funds' className="deposit-btn">Deposit funds</Link>
-                            </div>
-                        </div>
-                        <div className='buying-information'>
-                            Buying power represents the total value of assets you can purchase. <span className='learn-more'>Learn more</span>
-                        </div>
-                    </div>
+                    <p id='currentPortfolioValue'>${Number(currentPortfolioValue).toLocaleString()}</p>
+                    <p id={price_change > 0 ? 'portfolio-change-positive' : 'portfolio-change-negative'}>
+                        {price_change > 0 ? <i className="fa-solid fa-caret-down fa-rotate-180"></i> : <i className="fa-solid fa-caret-down"></i>}
+                        ${Math.abs(price_change.toFixed(2))} ({Math.abs(((price_change / chartValues[0]) * 100).toFixed(2))}%) <span>Past Month</span></p>
                 </div>
-            </div>
 
-            <Watchlist portfolio_data={portfolio_data} latestPrices={latestPrices} chartDates={chartDates} graphData={graphData} />
+                <div id='graph'>
 
-            <div id='opinions-container'>
-
-                <div id='opinions-title'>Opinions</div>
-
-                <div id="opinons-filter-container">
-                    <div id="all-opinions"
-                        className={!viewAllOpinions ? 'unselected' : 'selected'}
-                        onClick={() => setViewAllOpinions(true)}
-                    >All Opinions</div>
-                    <div id="my-opinons"
-                        onClick={() => setViewAllOpinions(false)}
-                        className={viewAllOpinions ? 'unselected' : 'selected'}
-                    >My Opinions
-                    </div>
+                    {portfolio?.portfolio_stocks && <LineChart2 dates={chartDates} prices={chartValues} price_change={price_change} width={"100%"} />}
+                    {portfolio?.message && <LineChart2 dates={chartDates} prices={new Array(15).fill(0)} price_change={price_change} width={"100%"} />}
 
                 </div>
 
-                {viewAllOpinions ? allUsers && Array.isArray(allOpinions) && allOpinions?.map((opinion, index) => (
-                    <div key={index} id='opinion-container'>
-                        <div id="opinion">
-                            <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
-                            <div id='opinion-content'>{opinion.content}</div>
-                            <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
+                <div id='buying-power-container' onClick={() => { setOpen(!open) }}>
+                    <div className={`buying-menu-trigger ${open ? 'active' : 'inactive'}`}>
+                        <div id='buying-power-label'>Buying Power
+                            {
+                                <span id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toFixed(2) : 0}
+                                    <span className='material-icons cash-arrow'>expand_more</span>
+                                </span>
+                            }
+                        </div>
+                        <div className={`buying-dropdown-menu ${open ? 'active' : 'inactive'}`}>
+                            <div className='buying-info-grid'>
+                                <div className='brokerage-grid'>
+                                    <div>Brokerage cash</div>
+                                    <div>${total_money}</div>
+                                </div>
+                                <div className='brokerage-grid'>
+                                    <div>Buying power</div>
+                                    <div>${portfolio?.cash}</div>
+                                </div>
+                                <div className='dep-div'>
+                                    <Link to='/portfolio/deposit-funds' className="deposit-btn">Deposit funds</Link>
+                                </div>
+                            </div>
+                            <div className='buying-information'>
+                                Buying power represents the total value of assets you can purchase. <span className='learn-more'>Learn more</span>
+                            </div>
                         </div>
                     </div>
-                )) :
-                    allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser.id).map((opinion, index) => (
+                </div>
+
+
+                <div id='opinions-container'>
+
+                    <div id='opinions-title'>Opinions</div>
+
+                    <div id="opinons-filter-container">
+                        <div id="all-opinions"
+                            className={!viewAllOpinions ? 'unselected' : 'selected'}
+                            onClick={() => setViewAllOpinions(true)}
+                        >All Opinions</div>
+                        <div id="my-opinons"
+                            onClick={() => setViewAllOpinions(false)}
+                            className={viewAllOpinions ? 'unselected' : 'selected'}
+                        >My Opinions
+                        </div>
+
+                    </div>
+
+                    {viewAllOpinions ? allUsers && Array.isArray(allOpinions) && allOpinions?.map((opinion, index) => (
                         <div key={index} id='opinion-container'>
                             <div id="opinion">
-                                <div id='opinion-author'>{getUserName(opinion.user_id)}
-                                    <div id="edit-delete-opinion-container">
-                                        <OpenCustomModalButton
-                                            id="edit-opinion"
-                                            buttonText={""}
-                                            buttonHTML={<span class="material-symbols-outlined edit">edit</span>}
-
-                                            modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content} />}
-                                        />
-                                        <OpenCustomModalButton
-                                            id="delete-opinion"
-                                            buttonText={""}
-                                            buttonHTML={<span className='material-icons delete-opinion'>close</span>}
-
-                                            modalComponent={<ConfirmDeleteOpinion opinionId={opinion.id} />}
-                                        />
-
-                                    </div>
-
-                                </div>
+                                <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
                                 <div id='opinion-content'>{opinion.content}</div>
                                 <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
                             </div>
                         </div>
-                    ))}
+                    )) :
+                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser.id).map((opinion, index) => (
+                            <div key={index} id='opinion-container'>
+                                <div id="opinion">
+                                    <div id='opinion-author'>{getUserName(opinion.user_id)}
+                                        <div id="edit-delete-opinion-container">
+                                            <OpenCustomModalButton
+                                                id="edit-opinion"
+                                                buttonText={""}
+                                                buttonHTML={<span class="material-symbols-outlined edit">edit</span>}
+
+                                                modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content} />}
+                                            />
+                                            <OpenCustomModalButton
+                                                id="delete-opinion"
+                                                buttonText={""}
+                                                buttonHTML={<span className='material-icons delete-opinion'>close</span>}
+
+                                                modalComponent={<ConfirmDeleteOpinion opinionId={opinion.id} />}
+                                            />
+
+                                        </div>
+
+                                    </div>
+                                    <div id='opinion-content'>{opinion.content}</div>
+                                    <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
+                                </div>
+                            </div>
+                        ))}
+                </div>
+            </div>
+
+            <div id="landingpage-right-container">
+                <Watchlist portfolio_data={portfolio_data} latestPrices={latestPrices} chartDates={chartDates} graphData={graphData} />
+
             </div>
         </div>
     );
