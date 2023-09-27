@@ -63,10 +63,10 @@ function BuyForm() {
             shares
         }
 
-        if(order = orderOption[0]) {
+        if(order === orderOption[0]) {
             dispatch(addShares(stockId, latestPrice, sharesData));
         }
-        if(order = orderOption[1]) {
+        if(order === orderOption[1]) {
             dispatch(sellShares(stockId, latestPrice, sharesData))
         }
 
@@ -85,8 +85,8 @@ function BuyForm() {
                     <div className='buy-form-wrapper'>
                         <div className='button-box'>
                             <div id={`btn`}></div>
-                            <button type='button' className={`toggle-btn`} onClick={buy}>Buy {ticker}</button>
-                            <button type='button' className={`toggle-btn`} onClick={sell}>Sell {ticker}</button>
+                            <button type='button' className={`toggle-btn-one ${style ? 'active' : 'inactive'}`} onClick={buy}>Buy {ticker}</button>
+                            <button type='button' className={`toggle-btn-two ${style ? 'active' : 'inactive'}`} onClick={sell}>Sell {ticker}</button>
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className='section'>

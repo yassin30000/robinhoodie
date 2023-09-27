@@ -162,10 +162,10 @@ function LandingPage() {
                 <div className={`buying-menu-trigger ${open ? 'active' : 'inactive'}`}>
                     <div id='buying-power-label'>Buying Power
                         {
-                            !open ? <span id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toFixed(2) : 0}
+                            <span id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toFixed(2) : 0}
                                 <span className='material-icons cash-arrow'>expand_more</span>
 
-                            </span> : null
+                            </span>
                         }
                     </div>
                     <div className={`buying-dropdown-menu ${open ? 'active' : 'inactive'}`}>
