@@ -2,7 +2,7 @@ import React from 'react'
 import Chart from "react-apexcharts";
 import './LineChart2.css'
 
-function LineChart2({ dates, prices, price_change }) {
+function LineChart2({ dates, prices, price_change, width }) {
 
     let options = {
         chart: {
@@ -85,7 +85,7 @@ function LineChart2({ dates, prices, price_change }) {
                 options={options}
                 series={series}
                 type="line"
-                width="100%"
+                width={width}
                 height='400px'
             />
 

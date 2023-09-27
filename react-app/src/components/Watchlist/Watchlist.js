@@ -7,13 +7,16 @@ import WatchlistFormModal from "../WatchlistFormModal/index.js";
 import OpenCustomModalButton from "../OpenModalButton/OpenModalButton2";
 import ConfirmDeleteModal from "../ConfirmDeleteModal";
 import WatchlistUpdateModal from "../WatchlistUpdateModal";
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory, Link } from 'react-router-dom/cjs/react-router-dom.min';
 import LineChart from "../LineChart/LineChart";
-function Watchlist({latestPrices, chartDates, graphData}) {
+
+
+function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const userWatchlistsData = useSelector((state) => state.watchlists.userWatchlists);
     const userWatchlists = userWatchlistsData ? Object.values(userWatchlistsData.watchlists) : []
+    const stocks = useSelector(state => state.stocks.allStocks.stocks)
     const [rotatedItems, setRotatedItems] = useState({});
     const [activeDropdown, setActiveDropdown] = useState(null);
 
@@ -35,9 +38,57 @@ function Watchlist({latestPrices, chartDates, graphData}) {
         setActiveDropdown((prevActive) => (prevActive === id ? null : id));
     };
 
+    //does the user own any share?
+    const hasShares = Object.values(portfolio_data).reduce((accum, shares) => {
+        return accum += shares
+    })
+
+    //make shares array for mapping
+    let sharesArray = []
+    for (let key in portfolio_data) {
+        if (portfolio_data[key] === 0) {
+            delete portfolio_data[key]
+        }
+        const o = new Object()
+        o['shares'] = portfolio_data[key]
+        o['ticker'] = key
+        o['stock_id'] = stocks[key].id
+
+        sharesArray.push(o)
+    }
+    // console.log(sharesArray)
+    //console.log(latestPrices)
     return (
         <>
             <div id="list-container">
+                {hasShares &&
+                    <div id='portfolio-stock-heading-container'>
+                        <p id="portfolio-stock-list-heading">Stocks</p>
+                        <div id="portfolio-stocks-container"
+                            className={
+                                sharesArray.length > 0
+                                    ? "with-border-bottom"
+                                    : ""
+                            }>
+                            {sharesArray.map((stock, index) => (
+                                <div className='stock-shares-container' key={stock.id} onClick={() => history.push(`/stocks/${stock.ticker}`)}>
+                                    <p id='list-shares-container'>
+                                        <p id="list-ticker">{stock.ticker}</p>
+                                        <p id="list-shares">{stock.shares} Shares</p>
+                                    </p>
+                                    <span id="list-graph"><LineChart dates={chartDates} prices={graphData[stock.ticker]} price_change={latestPrices[stock.ticker].percentChange} /></span>
+                                    <span id="list-numbers-container">
+                                        <p id="list-price">${latestPrices[stock.ticker].price.toFixed(2)}</p>
+                                        <p id={latestPrices[stock.ticker].percentChange > 0 ? "list-percent-positive" : "list-percent-negative"}>{latestPrices[stock.ticker].percentChange > 0 ? '+' : '-'}{(Math.abs(latestPrices[stock.ticker].percentChange)).toFixed(2)}%</p>
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+
+                    </div>
+
+                }
+
                 <div id="list-heading-container">
                     <p id="list-heading">Lists</p>
                     <p id="new-list-btn">
@@ -99,11 +150,11 @@ function Watchlist({latestPrices, chartDates, graphData}) {
                                         {watchlist.stocks.map((stock) => (
                                             <div key={stock.id} onClick={() => history.push(`/stocks/${stock.ticker}`)}>
                                                 <span id="list-ticker">{stock.ticker}</span>
-                                                <span id="list-graph"><LineChart dates={chartDates} prices={graphData[stock.ticker]} price_change={latestPrices[stock.ticker].percentChange}/></span>
+                                                <span id="list-graph"><LineChart dates={chartDates} prices={graphData[stock.ticker]} price_change={latestPrices[stock.ticker].percentChange} /></span>
                                                 <span id="list-numbers-container">
-                                                    <p id="list-price">${latestPrices[stock.ticker].price}</p>
+                                                    <p id="list-price">${latestPrices[stock.ticker].price.toFixed(2)}</p>
                                                     <p id={latestPrices[stock.ticker].percentChange > 0 ? "list-percent-positive" : "list-percent-negative"}>{latestPrices[stock.ticker].percentChange > 0 ? '+' : '-'}{(Math.abs(latestPrices[stock.ticker].percentChange)).toFixed(2)}%</p>
-                                                    
+
                                                 </span>
                                             </div>
                                         ))}
@@ -113,7 +164,7 @@ function Watchlist({latestPrices, chartDates, graphData}) {
                             </div>
                         ))}
                 </div>
-            </div >
+            </div>
         </>
     );
 }

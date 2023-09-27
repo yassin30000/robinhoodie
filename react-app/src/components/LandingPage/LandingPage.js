@@ -38,9 +38,9 @@ function LandingPage() {
     //calculate how many shares of each stock in portfolio
 
     let portfolio_value = {}
+    let portfolio_data = {} // {ticker: # of shares owned}
     if (alpacaState && portfolio) {
         const alpacaData = alpacaState.bars
-        let portfolio_data = {} // {ticker: # of shares owned}
 
         if (portfolio.portfolio_stocks) {
             portfolio.portfolio_stocks.forEach(stock => {
@@ -142,7 +142,7 @@ function LandingPage() {
     const currentPortfolioValue = chartValues[chartValues.length - 1]
 
     return (
-        <>
+        <div>
             <div id='portfolio-value-container'>
 
                 <p id='currentPortfolioValue'>${Number(currentPortfolioValue).toLocaleString()}</p>
@@ -151,9 +151,12 @@ function LandingPage() {
                     ${Math.abs(price_change.toFixed(2))} ({Math.abs(((price_change / chartValues[0]) * 100).toFixed(2))}%) <span>Past Month</span></p>
             </div>
 
-                {portfolio?.portfolio_stocks && <LineChart2 dates={chartDates} prices={chartValues} price_change={price_change} />}
-                {portfolio?.message && <LineChart2 dates={chartDates} prices={new Array(15).fill(0)} price_change={price_change} />}
+            <div id='graph'>
 
+                {portfolio?.portfolio_stocks && <LineChart2 dates={chartDates} prices={chartValues} price_change={price_change} width= {"100%"}/>}
+                {portfolio?.message && <LineChart2 dates={chartDates} prices={new Array(15).fill(0)} price_change={price_change} width= {"100%"}/>}
+
+            </div>
 
             <div id='buying-power-container' onClick={() => { setOpen(!open) }}>
                 <div className={`buying-menu-trigger ${open ? 'active' : 'inactive'}`}>
@@ -186,7 +189,7 @@ function LandingPage() {
                 </div>
             </div>
 
-            <Watchlist latestPrices={latestPrices} chartDates={chartDates} graphData={graphData} />
+            <Watchlist portfolio_data={portfolio_data} latestPrices={latestPrices} chartDates={chartDates} graphData={graphData} />
 
             <div id='opinions-container'>
 
@@ -243,7 +246,7 @@ function LandingPage() {
                         </div>
                     ))}
             </div>
-        </>
+        </div>
     );
 }
 
