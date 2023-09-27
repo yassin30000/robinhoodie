@@ -1,12 +1,13 @@
 #list-form-container {
 	padding: 24px 24px 24px 24px;
 	width: 468px;
-	height: 192px;
+	height: 200px;
 }
 
 #list-form-heading-container {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 #list-form-heading {
@@ -28,8 +29,8 @@
 	border-radius: 5px;
 	border: none;
 	padding: 10px;
-	background-color: rgb(245, 248, 250);
-	border: 1px solid rgb(245, 248, 250);
+	/* background-color: rgb(245, 248, 250); */
+	border: 1px solid rgb(0, 200, 5);
 }
 
 #list-name-inpt:hover {
@@ -38,7 +39,7 @@
 
 #list-name-inpt:focus {
 	outline: none;
-	border: 1px solid rgb(0, 200, 5);
+	border: 2px solid rgb(0, 200, 5);
 }
 
 #list-buttons-container {
