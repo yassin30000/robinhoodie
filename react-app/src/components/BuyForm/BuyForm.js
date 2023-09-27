@@ -12,7 +12,7 @@ function BuyForm() {
     const orderOption = ["Cost", "Gain"]
     const { ticker } = useParams()
     const [shares, setShares] = useState(0);
-    const [style, setStyle] = useState(true);
+    const [style, setStyle] = useState(false);
     const [errors, setErrors] = useState([]);
     const [order, setOrder] = useState(orderOption[0])
     const [hasSubmitted, setHasSubmitted] = useState(false)
@@ -65,10 +65,14 @@ function BuyForm() {
 
         if(order === orderOption[0]) {
             dispatch(addShares(stockId, latestPrice, sharesData));
+            await dispatch(fetchPortfolio())
         }
         if(order === orderOption[1]) {
             dispatch(sellShares(stockId, latestPrice, sharesData))
+            await dispatch(fetchPortfolio())
         }
+
+        // window.location.reload(false);
 
     }
 
@@ -118,7 +122,7 @@ function BuyForm() {
                                 <button className='order-btn' type='submit'>Order</button>
                             </div>
                             <div className='centered-one'>
-                                <div className='buying-power'>${portfolio?.cash} buying power available</div>
+                                <div className='buying-power'>${portfolio?.cash.toFixed(2)} buying power available</div>
                             </div>
                             <div className='centered-one'>
                                 <div className='brokerage'>Brokerage</div>
