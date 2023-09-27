@@ -85,12 +85,14 @@
     position: relative;
 }
 
-.toggle-btn-one.active {
+.toggle-btn-one.inactive {
     font-weight: bolder;
+    background: linear-gradient(to right, rgb(89, 225, 89), rgb(38, 130, 212));
 }
 
-.toggle-btn-two.inactive {
+.toggle-btn-two.active {
     font-weight: bolder;
+    background: linear-gradient(to right, rgb(89, 225, 89), rgb(38, 130, 212));
 }
 
 /* #btn{
