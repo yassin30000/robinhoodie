@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useModal } from "../../context/Modal";
+import { logoutPortfolio } from "../../store/portfolio";
 
 function DropDownModal() {
     const sessionUser = useSelector(state => state.session.user);
@@ -13,6 +14,7 @@ function DropDownModal() {
     const { closeModal } = useModal();
 
     const handleLogout = () => {
+        dispatch(logoutPortfolio())
         dispatch(logout()).then(() => {
             history.push('/login'); // go to login page when you log out
             closeModal();

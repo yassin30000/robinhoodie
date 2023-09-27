@@ -4,7 +4,7 @@ import "./StockPosition.css";
 
 
 function StockPosition({ latestPrice, stocks_owned_by_user }) {
-
+    const portfolio_total = useSelector(state => state.portfolio.totalValue)
     // Stock owned by user and average cost per share
     const shares_owned = stocks_owned_by_user.reduce((accum, currentValue) => {
         return accum + currentValue.shares
@@ -39,7 +39,7 @@ function StockPosition({ latestPrice, stocks_owned_by_user }) {
                 <h3>Your Average Cost</h3>  ${averagePrice.toFixed(2)}
 
                 <p className='first-line'><span>Current Shares </span><span className='stock-position-lastspan'>{shares_owned} </span></p>
-                <p><span>Portfolio Diversity </span> <span className='stock-position-lastspan'> 6% </span ></p>
+                <p><span>Portfolio Diversity </span> <span className='stock-position-lastspan'> {((marketValue / Number(portfolio_total))*100).toFixed(2)}% </span ></p>
             </div>
 
 
