@@ -67,10 +67,10 @@ function StockDetails() {
 
         price_30_days_before = stock_prices_at_close[date_30_days_before]
 
-        price_change = (latestPrice - price_30_days_before).toFixed(2)
-        percent_change = ((price_change / latestPrice) * 100).toFixed(2)
+        price_change = (latestPrice - price_30_days_before)
+        percent_change = ((price_change / latestPrice) * 100)
 
-
+        console.log(price_30_days_before)
 
         dates_array = Object.keys(stock_prices_at_close).slice(0, 30).reverse().map(date => {
             return date.slice(4, 10)
@@ -96,19 +96,18 @@ function StockDetails() {
     })
 
 
-
     return (
         <div id='stock-details-wholepage'>
             <div id='stock-details-container'>
-                <p id='ticker-header'>{ticker}</p>
+                <p id='ticker-header'>{stock_info?.name}</p>
                 <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
 
                 {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}%</span>) </p><span>Past month</span></div>}
                 {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
 
-                <div id='line-chart2-container'>
-                    {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} />}
-                </div>
+
+                {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} width= {"100%"}/>}
+
 
                 {total_shares > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
 

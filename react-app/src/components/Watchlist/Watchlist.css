@@ -15,8 +15,25 @@
 }
 
 #list-heading-container {
+	border-top: 1px solid #cccccc98;
+
 	border-bottom: 1px solid #cccccc98;
 	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 25px 12px 25px;
+}
+
+#list-shares-container {
+	display:flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+#portfolio-stock-list-heading {
+	border-bottom: 1px solid #cccccc98;
+	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
 	padding: 12px 25px 12px 25px;
@@ -37,7 +54,7 @@
 	cursor: pointer;
 }
 
-#list-heading {
+#list-heading, #portfolio-stock-list-heading {
 	font-size: 15px;
 	font-weight: 500;
 }
@@ -71,6 +88,17 @@
 	font-size: 13px;
 }
 
+#portfolio-stocks-container div {
+	padding-left: 25px;
+	/* padding-top: 10px;
+	padding-bottom: 10px; */
+	height: 60px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 13px;
+}
+
 #list-ticker {
 	font-weight: 600;
 }
@@ -87,7 +115,10 @@
 }
 
 #list-graph {
+	position: relative;
 	color: rgb(255, 80, 0);
+	height: 40px;
+	width: 80px;
 }
 
 #list-percent-positive {
@@ -117,6 +148,11 @@
 
 #left-side:hover {
 	background-color: rgba(216, 221, 225, 1);
+}
+
+.stock-shares-container:hover {
+	background-color: rgba(216, 221, 225, 1);
+
 }
 
 #right-side {
