@@ -66,7 +66,7 @@ function StockDetails() {
         date_30_days_before.setDate((newDate.getDate() - 30))
 
         price_30_days_before = stock_prices_at_close[date_30_days_before]
-
+        console.log(stock_prices_at_close)
         price_change = (latestPrice - price_30_days_before)
         percent_change = ((price_change / latestPrice) * 100)
 
@@ -80,7 +80,7 @@ function StockDetails() {
         prices_array = Object.values(stock_prices_at_close).slice(0, 30).reverse()
 
     }
-
+    console.log(price_change)
 
     useEffect(() => {
         if (!stock) {
