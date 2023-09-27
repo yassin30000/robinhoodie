@@ -17,14 +17,14 @@ function TransferForm() {
     const portfolio = useSelector(state => state.portfolio.portfolio)
     
     const hasPorfolio = () => {
-        if (portfolio.message = 'User does not have a portfolio') {
+        if (portfolio.message === 'User does not have a portfolio') {
             return false
         } else {
             return true
         }
     }
 
-    console.log('PORFOLIO', hasPorfolio())
+    console.log('PORFOLIO', portfolio)
 
     useEffect(() => {
         const errors  = {};
@@ -74,7 +74,7 @@ function TransferForm() {
     }
 
     useEffect(() => {
-        if (!portfolio) dispatch(fetchPortfolio());
+        if (!hasPorfolio) dispatch(fetchPortfolio());
     }, [dispatch, portfolio])
 
     return (
