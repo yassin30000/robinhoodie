@@ -53,7 +53,7 @@ function LineChart2({ dates, prices, price_change, width }) {
             custom: function ({ series, seriesIndex, dataPointIndex, w }) {
                 return (
                     '<div class="arrow_box">' +
-                    "<span>" +
+                    "<span style='margin: 7px 7px'>" +
 
                     "$" +
                     series[seriesIndex][dataPointIndex] +
