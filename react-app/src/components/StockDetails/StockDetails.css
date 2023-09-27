@@ -1,12 +1,11 @@
 #stock-details-wholepage {
-	display: flex
+	display: flex;
 }
 
 #stock-details-container {
 	padding: 50px;
-	font-family: Arial, Helvetica, sans-serif;
 	/* border: 1px solid black; */
-	width: 75%
+	width: 75%;
 }
 
 #temp-nav-bar {
@@ -66,9 +65,13 @@
 }
 
 #order-stock-container {
-	border: 1px solid #ccccc8;
-	height: 450px;
+	border: 1px solid rgb(227, 233, 237);
+	/* height: 450px; */
 	border-radius: 5px;
+	width: 330px;
+	height: 447px;
+	padding: 0 25px 0 20px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 #add-to-lists-container {

@@ -1,98 +1,131 @@
-.buy-container {
-    display: flex;
-    font-family: sans-serif;
-}
-
-.buy-form-wrapper {
-    width: fit-content;
-    margin-top: 10%;
-    margin-left: 10%;
-    margin-right: 10%;
-}
 
 .section {
-    margin-top: 20px;
-    margin-bottom: 20px;
+	/* margin-top: 20px;
+	margin-bottom: 20px; */
+	font-size: 14px;
+
+	height: 48px;
+	display: flex;
+	align-items: center;
+}
+
+#top-section {
+	margin-top: 15px;
 }
 
 #line {
-    border-bottom: solid 1px #999;
+	border-bottom: solid 1px rgb(227, 233, 237);
 }
 
 .centered-one {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-top: solid 1px #999;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	font-weight: 300;
+	height: 100%;
+
+	border-top: solid 1px rgb(227, 233, 237);
 }
 
 .centered-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.order-btn:hover {
+    cursor: pointer;
 }
 
 .order-btn {
-    color: white;
-    background-image: linear-gradient(to right, rgb(89, 225, 89), rgb(38, 130, 212));
-    border-radius: 30px;
-    padding: 10px 100px 10px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+	color: white;
+	background-image: linear-gradient(
+		90deg,
+		rgb(248, 185, 43),
+		rgb(219, 71, 104) 75%,
+		rgb(218, 65, 107)
+	);
+	border-radius: 30px;
+	border: none;
+	height: 44px;
+	font-weight: 500;
+	padding: 10px 100px 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+
+#market-price {
+	font-weight: 500;
 }
 
 .buying-power {
-    color: rgb(61, 167, 61);
-    margin: 10px;
-}
-
-.brokerage {
-    margin: 10px;
-    font-weight: lighter;
+	/* margin: 10px; */
+	font-size: 14px;
+	height: 48px;
+    display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .market-price-label {
-    color: rgb(61, 167, 61);
-    margin-bottom: 10px;
+	color: rgb(0, 200, 5);
+	margin-bottom: 5px;
+	display: flex;
+	align-items: center;
 }
 
-.estimated-cost{
-    font-weight: bold;
+.estimated-cost {
+	font-weight: bold;
 }
 
 .button-box {
-    position: relative;
-    box-shadow: 0 0 20px 9px rgb(89, 225, 89);
-    border-bottom: 1px solid rgb(38, 130, 212);
-    width: max-content;
+	position: relative;
+	/* box-shadow: 0 0 20px 9px rgb(89, 225, 89); */
+	border-bottom: 1px solid rgb(227, 233, 237);
+	display: flex;
+	height: 52px;
 }
 
-.toggle-btn-one{
-    padding: 10px 30px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    outline: none;
-    position: relative;
+.toggle-btn-one {
+	font-size: 15px;
+	width: 100%;
+	font-weight: 500;
+
+	padding: 10px 30px;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	outline: none;
+	position: relative;
 }
 
-.toggle-btn-two{
-    padding: 10px 30px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    outline: none;
-    position: relative;
+.toggle-btn-two {
+	width: 100%;
+	font-size: 15px;
+	font-weight: 500;
+
+	padding: 10px 30px;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	outline: none;
+	position: relative;
 }
 
 .toggle-btn-one.inactive {
-    font-weight: bolder;
-    background: linear-gradient(to right, rgb(89, 225, 89), rgb(38, 130, 212));
+	color: rgb(0, 200, 5);
+	border-bottom: 2px solid rgb(0, 200, 5);
+	/* background: linear-gradient(to right, rgb(89, 225, 89), rgb(38, 130, 212)); */
 }
 
 .toggle-btn-two.active {
-    font-weight: bolder;
-    background: linear-gradient(to right, rgb(89, 225, 89), rgb(38, 130, 212));
+	color: rgb(0, 200, 5);
+	border-bottom: 2px solid rgb(0, 200, 5);
+
+	/* background: linear-gradient(to right, rgb(89, 225, 89), rgb(38, 130, 212)); */
 }
 
 /* #btn{
@@ -106,5 +139,21 @@
 } */
 
 .shares-input {
-    text-align: right;
+	text-align: right;
+	height: 36px;
+	width: 136px;
+	outline: none;
+	border-radius: 5px;
+	border: 1px solid rgb(227, 233, 237);
+	padding-right: 15px;
+}
+
+.shares-input::placeholder {
+	color: rgb(180, 180, 180);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }

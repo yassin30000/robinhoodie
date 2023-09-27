@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
 import './WatchlistUpdateModal.css'
 import { useDispatch } from 'react-redux'
-import { createNewWatchlist } from '../../store/watchlists';
 import { useCustomModal } from '../../context/Modal2';
 import { updateExistingWatchlist } from '../../store/watchlists';
 
 function WatchlistUpdateModal({ prevListName, listId }) {
     const { closeModal } = useCustomModal();
     const dispatch = useDispatch();
-    const [listName, setListName] = useState('');
-    const [errors, setErrors] = useState([]);
+    const [listName, setListName] = useState(prevListName);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,9 +33,7 @@ function WatchlistUpdateModal({ prevListName, listId }) {
                 <div id="list-form-heading-container">
 
                     <div id="list-form-heading">Edit list</div>
-                    <div id="close-list-form" onClick={closeModal}>
 
-                    </div>
                     <span id="close-list-form"
                         className='material-icons close-btn'
                         onClick={closeModal}>close</span>
@@ -45,15 +41,14 @@ function WatchlistUpdateModal({ prevListName, listId }) {
 
                 <form id='actual-form-container' onSubmit={handleSubmit}>
                     <div id="list-errors-div">
-                        {errors.map((error, idx) => <p id="list-error" key={idx}>{error}</p>)}
                     </div>
 
                     <input
                         id="list-name-inpt"
                         type="text"
-                        // value={prevListName}
+                        value={listName}
                         onChange={(e) => setListName(e.target.value)}
-                        placeholder={prevListName}
+                        placeholder="List name..."
                         required
                     />
 

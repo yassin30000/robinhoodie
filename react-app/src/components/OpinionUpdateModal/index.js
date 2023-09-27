@@ -1,7 +1,7 @@
 import './OpinionUpdateModal.css'
 import { useCustomModal } from '../../context/Modal2';
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { updateOpinion } from '../../store/opinions';
 
 function OpinionUpdateModal({ opinionId, prevContent }) {
@@ -9,7 +9,6 @@ function OpinionUpdateModal({ opinionId, prevContent }) {
     const { closeModal } = useCustomModal();
     const [content, setContent] = useState(prevContent);
 
-    const [errors, setErrors] = useState([]);
 
     const handleUpdateOpinion = async () => {
         try {
@@ -26,18 +25,20 @@ function OpinionUpdateModal({ opinionId, prevContent }) {
             <div id="opinion-form-container">
                 <div id="opinion-form-heading-container">
                     <div id="opinion-form-heading">Change Your Opinion</div>
+                    <span id="close-list-form"
+                        className='material-icons close-btn'
+                        onClick={closeModal}>close</span>
                 </div>
 
                 <form id='opinion-form' onSubmit={handleUpdateOpinion}>
-                    <div id="opinion-errors-div">
-                        {errors.map((error, idx) => <p id="list-error" key={idx}>{error}</p>)}
-                    </div>
+                   
 
-                    <input
+                    <textarea
                         id="opinion-content-inpt"
                         type="textarea"
                         onChange={(e) => setContent(e.target.value)}
-                        placeholder={prevContent}
+                        value={content}
+                        placeholder='Change your opinion...'
                         required
                     />
 
