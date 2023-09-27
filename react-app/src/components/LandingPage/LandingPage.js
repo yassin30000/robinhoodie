@@ -165,27 +165,27 @@ function LandingPage() {
                     <div className={`buying-menu-trigger ${open ? 'active' : 'inactive'}`}>
                         <div id='buying-power-label'>Buying Power
                             {
-                                <span id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toFixed(2) : 0}
+                                <span id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toLocaleString() : 0}
                                     <span className='material-icons cash-arrow'>expand_more</span>
                                 </span>
                             }
                         </div>
                         <div className={`buying-dropdown-menu ${open ? 'active' : 'inactive'}`}>
                             <div className='buying-info-grid'>
-                                <div className='brokerage-grid'>
+                                {/* <div className='brokerage-grid'>
                                     <div>Brokerage cash</div>
                                     <div>${total_money}</div>
-                                </div>
+                                </div> */}
                                 <div className='brokerage-grid'>
                                     <div>Buying power</div>
-                                    <div>${portfolio?.cash}</div>
+                                    <div>${portfolio?.cash.toLocaleString()}</div>
                                 </div>
                                 <div className='dep-div'>
-                                    <Link to='/portfolio/deposit-funds' className="deposit-btn">Deposit funds</Link>
+                                    <Link to='/portfolio/deposit-funds' className="deposit-btn">Transfer funds</Link>
                                 </div>
                             </div>
                             <div className='buying-information'>
-                                Buying power represents the total value of assets you can purchase. <span className='learn-more'>Learn more</span>
+                                <p>Buying power represents the total value of assets you can purchase.</p>
                             </div>
                         </div>
                     </div>
@@ -213,7 +213,11 @@ function LandingPage() {
                         <div key={index} id='opinion-container'>
                             <div id="opinion">
                                 <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
-                                <div id='opinion-content'>{opinion.content}</div>
+                                <div id='opinion-content'>
+                                    {opinion.content.length > 400
+                                        ? opinion.content.slice(0, 400) + '...'
+                                        : opinion.content}
+                                </div>
                                 <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
                             </div>
                         </div>
@@ -241,8 +245,11 @@ function LandingPage() {
                                         </div>
 
                                     </div>
-                                    <div id='opinion-content'>{opinion.content}</div>
-                                    <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
+                                    <div id='opinion-content'>
+                                        {opinion.content.length > 400
+                                            ? opinion.content.slice(0, 400) + '...'
+                                            : opinion.content}
+                                    </div>                                    <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
                                 </div>
                             </div>
                         ))}
