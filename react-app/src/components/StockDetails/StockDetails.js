@@ -44,8 +44,6 @@ function StockDetails() {
     let percent_change;
     // [dollar amount, % change]
 
-    let price_30_days_before;
-    let date_30_days_before;
     let dates_array;
     let prices_array;
 
@@ -53,34 +51,30 @@ function StockDetails() {
         let stock_prices_at_close = {}
 
         const stock_prices = stock['Time Series (Daily)']
-        latestDate = Object.keys(stock_prices).shift()
+        latestDate = Object.keys(stock_prices)[0]
         latestPrice = Number(stock_prices[latestDate]['4. close']).toFixed(2)
-
-
+        
+        const oldestDate = Object.keys(stock_prices)[Object.keys(stock_prices).length-1]
+        
         for (let key in stock_prices) {
             let newKey = new Date(key)
             stock_prices_at_close[newKey] = Number(stock_prices[key]['4. close'])
         }
-        let newDate = new Date(latestDate)
-        date_30_days_before = newDate
-        date_30_days_before.setDate((newDate.getDate() - 30))
 
-        price_30_days_before = stock_prices_at_close[date_30_days_before]
-        console.log(stock_prices_at_close)
-        price_change = (latestPrice - price_30_days_before)
+        price_change = (latestPrice - stock_prices[oldestDate]['4. close'])
         percent_change = ((price_change / latestPrice) * 100)
 
-        console.log(price_30_days_before)
-
+        
         dates_array = Object.keys(stock_prices_at_close).slice(0, 30).reverse().map(date => {
             return date.slice(4, 10)
         })
-
-        // console.log(dates_array)
+        
         prices_array = Object.values(stock_prices_at_close).slice(0, 30).reverse()
-
+        
     }
-    console.log(price_change)
+    //console.log(price_30_days_before)
+    // console.log(dates_array)
+    //console.log(price_change)
 
     useEffect(() => {
         if (!stock) {
@@ -102,8 +96,8 @@ function StockDetails() {
                 <p id='ticker-header'>{stock_info?.name}</p>
                 <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
 
-                {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change}</span> (+<span>{percent_change}%</span>) </p><span>Past month</span></div>}
-                {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change)}</span> (<span>{percent_change}%</span>) </p><span>Past month</span></div>}
+                {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change.toFixed(2)}</span> (<span>+{percent_change.toFixed(2)}%</span>) </p><span>Past month</span></div>}
+                {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change.toFixed(2))}</span> (<span>-{Math.abs(percent_change).toFixed(2)}%</span>) </p><span>Past month</span></div>}
 
 
                 {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} width= {"100%"}/>}
