@@ -123,7 +123,7 @@ function BuyForm() {
                                 <button className='order-btn' type='submit'>Order</button>
                             </div>
                             <div className='centered-one'>
-                                <div className='buying-power'>${portfolio?.cash.toLocaleString()} buying power available</div>
+                                <div className='buying-power'>${portfolio?.cash ? portfolio?.cash?.toLocaleString() : 0} buying power available</div>
                             </div>
                             <div className='centered-one'>
                                 <div className='brokerage'>Brokerage</div>
