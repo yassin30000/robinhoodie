@@ -1,5 +1,6 @@
 import React from 'react'
 import "./StockPosition.css";
+import { useSelector } from 'react-redux';
 
 
 function StockPosition({ latestPrice, stocks_owned_by_user }) {
@@ -22,7 +23,7 @@ function StockPosition({ latestPrice, stocks_owned_by_user }) {
     const totalPercentReturn = (totalReturn / totalPrice) * 100
 
     const todaysReturn = marketValue - totalPrice
-    const todaysPercentReturn = (todaysReturn/totalPrice) * 100
+    const todaysPercentReturn = (todaysReturn / totalPrice) * 100
 
 
     //console.log(stocks_owned_by_user)
@@ -38,7 +39,7 @@ function StockPosition({ latestPrice, stocks_owned_by_user }) {
                 <h3>Your Average Cost</h3>  ${averagePrice.toFixed(2)}
 
                 <p className='first-line'><span>Current Shares </span><span className='stock-position-lastspan'>{shares_owned} </span></p>
-                <p><span>Portfolio Diversity </span> <span className='stock-position-lastspan'> {((marketValue / Number(portfolio_total))*100).toFixed(2)}% </span ></p>
+                <p><span>Portfolio Diversity </span> <span className='stock-position-lastspan'> {((marketValue / Number(portfolio_total)) * 100).toFixed(2)}% </span ></p>
             </div>
 
 
