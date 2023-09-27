@@ -20,16 +20,20 @@ function StockPosition({ latestPrice, stocks_owned_by_user }) {
     //console.log(latestPrice)
     const marketValue = latestPrice * shares_owned
     const totalReturn = marketValue - totalPrice
-    const percentReturn = (totalReturn / totalPrice) * 100
+    const totalPercentReturn = (totalReturn / totalPrice) * 100
+
+    const todaysReturn = marketValue - totalPrice
+    const todaysPercentReturn = (todaysReturn/totalPrice) * 100
+
 
     //console.log(stocks_owned_by_user)
     return (
         <div id="stock-position-container">
             <div id="market-value-container">
                 <h3>Your Market value</h3> ${marketValue.toFixed(2)}
-                <p className='first-line'><span>Today's Return  </span><span className='stock-position-lastspan'>$12.06 (-1.25%) </span> </p>
+                <p className='first-line'><span>Today's Return  </span><span className='stock-position-lastspan'>${todaysReturn.toLocaleString()} ({todaysPercentReturn.toFixed(2)}%) </span> </p>
 
-                <p><span>Total Return  </span><span className='stock-position-lastspan'>${totalReturn.toFixed(2)} ({percentReturn.toFixed(2)})% </span> </p>
+                <p><span>Total Return  </span><span className='stock-position-lastspan'>${totalReturn.toFixed(2)} ({totalPercentReturn.toFixed(2)})% </span> </p>
             </div>
             <div id="average-cost-container">
                 <h3>Your Average Cost</h3>  ${averagePrice.toFixed(2)}
