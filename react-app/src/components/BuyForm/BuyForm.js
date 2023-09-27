@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addShares, sellShares } from '../../store/portfolio_stock';
 import { fetchStockData, fetchAllStocks } from '../../store/stocks';
 import { fetchPortfolio} from '../../store/portfolio'
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 
 function BuyForm() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const orderOption = ["Cost", "Gain"]
     const { ticker } = useParams()
     const [shares, setShares] = useState(0);
@@ -64,15 +65,15 @@ function BuyForm() {
         }
 
         if(order === orderOption[0]) {
-            dispatch(addShares(stockId, latestPrice, sharesData));
+            await dispatch(addShares(stockId, latestPrice, sharesData));
             await dispatch(fetchPortfolio())
         }
         if(order === orderOption[1]) {
-            dispatch(sellShares(stockId, latestPrice, sharesData))
+            await dispatch(sellShares(stockId, latestPrice, sharesData))
             await dispatch(fetchPortfolio())
         }
 
-        // window.location.reload(false);
+        history.push(`/stocks/${ticker}`)
 
     }
 
