@@ -45,7 +45,7 @@ function LandingPage() {
         if (portfolio.portfolio_stocks) {
             portfolio.portfolio_stocks.forEach(stock => {
                 let ticker = stock.stock.ticker;
-                if (portfolio_data[ticker] == undefined) {
+                if (portfolio_data[ticker] === undefined) {
                     portfolio_data[ticker] = stock.shares
                 } else {
                     portfolio_data[ticker] += stock.shares
@@ -91,17 +91,15 @@ function LandingPage() {
     const [open, setOpen] = useState(false);
 
     //grabbing the total amount of money they got from shares
-    let total = 0
-    let total_money
 
-    if (portfolio?.portfolio_stocks) {
-        for (let i = 0; i < portfolio?.portfolio_stocks.length; i++) {
-            let number = portfolio?.portfolio_stocks[i]
-            let amount = number?.shares * number?.price;
-            total += amount
-        }
-        total_money = Number(total) + Number(portfolio?.cash.toFixed(2))
-    }
+
+
+    // if (portfolio?.portfolio_stocks) {
+    //     for (let i = 0; i < portfolio?.portfolio_stocks.length; i++) {
+    //         let number = portfolio?.portfolio_stocks[i]
+    //         let amount = number?.shares * number?.price;
+    //     }
+    // }
 
 
     //adding the total amount of money from shares with total cash
@@ -112,16 +110,16 @@ function LandingPage() {
     if (!sessionUser) history.push('/login')
 
     function getStockTicker(stock_id) {
-        if (stock_id == 0) return "APPL"
+        if (stock_id === 0) return "APPL"
         if (allStocks) {
-            let oneStock = allStocks.find(stock => stock.id == stock_id)
+            let oneStock = allStocks.find(stock => stock.id === stock_id)
             if (oneStock) return oneStock.ticker
         }
     }
 
     function getUserName(user_id) {
         if (allUsers) {
-            let oneUser = allUsers.find(user => user.id == user_id)
+            let oneUser = allUsers.find(user => user.id === user_id)
             if (oneUser) return oneUser.username
         }
     }

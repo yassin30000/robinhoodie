@@ -33,6 +33,9 @@ function OpinionFormModal({ ticker }) {
             <div id="opinion-form-container">
                 <div id="opinion-form-heading-container">
                     <div id="opinion-form-heading">Share Your Opinion</div>
+                    <span id="close-list-form"
+                        className='material-icons close-btn'
+                        onClick={closeModal}>close</span>
                 </div>
 
                 <form id='opinion-form' onSubmit={handlePostOpinion}>
@@ -40,10 +43,9 @@ function OpinionFormModal({ ticker }) {
                         {errors.map((error, idx) => <p id="list-error" key={idx}>{error}</p>)}
                     </div>
 
-                    <input
+                    <textarea
                         id="opinion-content-inpt"
                         type="textarea"
-                        // value={opinion}
                         onChange={(e) => setContent(e.target.value)}
                         placeholder="What do you think?..."
                         required

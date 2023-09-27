@@ -1,5 +1,5 @@
 import './TransferForm.css'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import { createFunds, addFunds, withdrawFunds, fetchPortfolio } from '../../store/portfolio'
@@ -13,16 +13,15 @@ function TransferForm() {
     const [from, setFrom] = useState((options[0]));
     const [to, setTo] = useState(options[1]);
     const [errors, setErrors] = useState({});
-    const [hasSubmitted, setHasSubmitted] = useState(false)
     const portfolio = useSelector(state => state.portfolio.portfolio)
-    
-    const hasPorfolio = () => {
+
+    const hasPorfolio = useCallback(() => {
         if (portfolio.message === 'User does not have a portfolio') {
             return false
         } else {
             return true
         }
-    }
+    }, [portfolio])
 
     console.log('PORFOLIO', portfolio)
 
@@ -46,7 +45,6 @@ function TransferForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setHasSubmitted(true);
 
         if(Object.values(errors).length) {
             return alert("Error please fix the underlying problems")
@@ -70,12 +68,11 @@ function TransferForm() {
         // console.log("PORTFOLIOS", portfolio.cash)
         history.push('/')
         setErrors({})
-        setHasSubmitted(false);
     }
 
     useEffect(() => {
         if (!hasPorfolio) dispatch(fetchPortfolio());
-    }, [dispatch, portfolio])
+    }, [dispatch, portfolio, hasPorfolio])
 
     return (
         <>
