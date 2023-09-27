@@ -1,8 +1,8 @@
 //Action Type
 const NEW_PORTFOLIO_FUNDS = "portfolio/newPortfolioFunds";
 const PORTFOLIO_DETAILS = "portfolio/portfolioDetails";
-
-
+const TOTAL_PORTFOLIO_VALUE = 'portfolio/totalValue'
+const REMOVE_PORTFOLIO = 'portfolio/REMOVE_PORTFOLIO'
 
 //Action Creator
 const newPortfolioFunds = (portfolioFunds) => ({
@@ -15,6 +15,14 @@ const myPortfolio = (portfolio) => ({
     portfolio
 })
 
+const totalPortfolioValue = (total) => ({
+    type: TOTAL_PORTFOLIO_VALUE,
+    payload: total
+})
+
+const removePortfolio = () => ({
+    type: REMOVE_PORTFOLIO
+})
 //Thunk
 
 export const fetchPortfolio = () => async (dispatch) => {
@@ -29,6 +37,14 @@ export const fetchPortfolio = () => async (dispatch) => {
         console.log(errors)
         return errors
     }
+}
+
+export const getTotalPortfolioValue = (total) => async dispatch => {
+    await dispatch(totalPortfolioValue(total))
+}
+
+export const logoutPortfolio = () => async dispatch => {
+    await dispatch(removePortfolio())
 }
 
 export const createFunds = (cash) => async (dispatch) => {
@@ -84,6 +100,11 @@ export default function portfolioReducer(state = initialState, action) {
         case NEW_PORTFOLIO_FUNDS:
             newState[action.portfolioFunds.id] = action.portfolioFunds;
             return newState
+        case TOTAL_PORTFOLIO_VALUE:
+            newState['totalValue'] = action.payload;
+            return newState
+        case REMOVE_PORTFOLIO:
+            return {portfolio: null}
         default:
             return state;
     }

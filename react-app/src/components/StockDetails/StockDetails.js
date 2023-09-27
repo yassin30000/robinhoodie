@@ -147,11 +147,12 @@ function StockDetails() {
                                     {opinion.content.length > 400
                                         ? opinion.content.slice(0, 400) + '...'
                                         : opinion.content}
-                                </div>                                <div id='opinion-ticker'>{ticker}</div>
+                                </div>                                
+                                <div id='opinion-ticker'>{ticker}</div>
                             </div>
                         </div>
                     )) :
-                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser.id).map((opinion, index) => (
+                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser?.id).map((opinion, index) => (
                             <div key={index} id='opinion-container'>
                                 <div id="opinion">
                                     <div id='opinion-author'>{getUserName(opinion.user_id)}
@@ -178,7 +179,8 @@ function StockDetails() {
                                         {opinion.content.length > 400
                                             ? opinion.content.slice(0, 400) + '...'
                                             : opinion.content}
-                                    </div>                                    <div id='opinion-ticker'>{ticker}</div>
+                                    </div>                                    
+                                    <div id='opinion-ticker'>{ticker}</div>
                                 </div>
                             </div>
                         ))}

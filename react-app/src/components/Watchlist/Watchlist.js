@@ -21,7 +21,6 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
     const [rotatedItems, setRotatedItems] = useState({});
     const [activeDropdown, setActiveDropdown] = useState(null);
 
-    console.log('STOCKS!!!!!: ', stocksData.stocks)
 
     const toggleRotate = (id, event) => {
         // Check if the click target is the list item itself

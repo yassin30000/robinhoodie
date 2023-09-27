@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { fetchAllUsers } from '../../store/session.js';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
 import { fetchAllStocks, fetchAlpacaStocks } from '../../store/stocks.js';
-import { fetchPortfolio } from '../../store/portfolio.js';
+import { fetchPortfolio, getTotalPortfolioValue } from '../../store/portfolio.js';
 import { Link } from 'react-router-dom';
 import LineChart2 from '../LineChart2/LineChart2.js';
 import ConfirmDeleteOpinion from '../ConfirmDeleteOpinion/index.js';
@@ -125,7 +125,8 @@ function LandingPage() {
             if (oneUser) return oneUser.username
         }
     }
-
+    
+    const currentPortfolioValue = chartValues[chartValues.length - 1]
     useEffect(() => {
         let today = new Date().toISOString()
         const seconds = "0:00:00Z"
@@ -136,10 +137,10 @@ function LandingPage() {
         dispatch(fetchAllUsers());
         dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER'], end));
         dispatch(fetchPortfolio())
-    }, [dispatch]);
+        dispatch(getTotalPortfolioValue(currentPortfolioValue))
+    }, [dispatch, currentPortfolioValue]);
 
 
-    const currentPortfolioValue = chartValues[chartValues.length - 1]
 
     return (
         <div>
