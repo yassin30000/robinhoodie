@@ -213,7 +213,11 @@ function LandingPage() {
                         <div key={index} id='opinion-container'>
                             <div id="opinion">
                                 <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
-                                <div id='opinion-content'>{opinion.content}</div>
+                                <div id='opinion-content'>
+                                    {opinion.content.length > 400
+                                        ? opinion.content.slice(0, 400) + '...'
+                                        : opinion.content}
+                                </div>
                                 <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
                             </div>
                         </div>
@@ -241,8 +245,11 @@ function LandingPage() {
                                         </div>
 
                                     </div>
-                                    <div id='opinion-content'>{opinion.content}</div>
-                                    <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
+                                    <div id='opinion-content'>
+                                        {opinion.content.length > 400
+                                            ? opinion.content.slice(0, 400) + '...'
+                                            : opinion.content}
+                                    </div>                                    <div id='opinion-ticker'>{getStockTicker(opinion.stock_id)}</div>
                                 </div>
                             </div>
                         ))}
