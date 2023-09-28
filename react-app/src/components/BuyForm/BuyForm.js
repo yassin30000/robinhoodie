@@ -113,6 +113,8 @@ function BuyForm() {
         }
         setErrors({})
 
+        // e.target.reset()
+
         history.push(`/stocks/${ticker}`)
 
 
@@ -124,7 +126,7 @@ function BuyForm() {
         dispatch(fetchAllStocks())
     }, [dispatch, ticker, stock, portfolio])
 
-    document.getElementById('orderForm').reset();
+
 
     return (
 
