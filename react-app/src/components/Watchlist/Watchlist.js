@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserWatchlists } from "../../store/watchlists";
 import "../Watchlist/Watchlist.css";
@@ -20,6 +20,7 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
     const stocks = stocksData ? stocksData.stocks : [];
     const [rotatedItems, setRotatedItems] = useState({});
     const [activeDropdown, setActiveDropdown] = useState(null);
+    const dropdownRef = useRef(null); // Ref to the dropdown element
 
 
     const toggleRotate = (id, event) => {
@@ -34,10 +35,24 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
 
     useEffect(() => {
         dispatch(fetchUserWatchlists());
+
+        document.addEventListener("click", closeDropdown);
+        // Cleanup the event listener when the component unmounts
+        return () => {
+            document.removeEventListener("click", closeDropdown);
+        };
     }, [dispatch]);
 
-    const handleMoreHorizClick = (id) => {
+    const handleMoreHorizClick = (id, event) => {
+        event.stopPropagation();
+
         setActiveDropdown((prevActive) => (prevActive === id ? null : id));
+    };
+
+    const closeDropdown = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setActiveDropdown(null);
+        }
     };
 
     //does the user own any share?
@@ -47,7 +62,7 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
 
     //make shares array for mapping
     let sharesArray = []
-    
+
     for (let key in portfolio_data) {
         if (portfolio_data[key] === 0) {
             delete portfolio_data[key]
@@ -117,28 +132,32 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
                                     </div>
 
                                     <div id="right-side">
-                                        <span id='watchlist-dots' class="material-icons dots-16" onClick={() => handleMoreHorizClick(watchlist.id)}>more_horiz</span>
+                                        <span id='watchlist-dots' class="material-icons dots-16" onClick={(event) => handleMoreHorizClick(watchlist.id, event)}>more_horiz</span>
                                         <span id="watchlist-arrow"
                                             class={rotatedItems[watchlist.id] ? "material-icons arrow rotate-180" : "material-icons arrow rotate-0"}>expand_more</span>
                                     </div>
 
                                     {activeDropdown === watchlist.id && (
-                                        <div id="dots-drowpdown-menu">
+                                        <div id="dots-dropdown-container" ref={dropdownRef}>
 
-                                            <OpenCustomModalButton
-                                                id="edit-option"
-                                                buttonText={"Edit list"}
-                                                buttonHTML={<span className='material-icons edit'>edit</span>}
-                                                modalComponent={<WatchlistUpdateModal prevListName={watchlist.name} listId={watchlist.id} />}
-                                            />
 
-                                            <OpenCustomModalButton
-                                                id="delete-option"
-                                                buttonText={"Delete list"}
-                                                buttonHTML={<span className='material-icons delete'>delete</span>}
+                                            <div id="dots-drowpdown-menu">
 
-                                                modalComponent={<ConfirmDeleteModal listName={watchlist.name} listTotal={watchlist.stocks.length} listId={watchlist.id} />}
-                                            />
+                                                <OpenCustomModalButton
+                                                    id="edit-option"
+                                                    buttonText={"Edit list"}
+                                                    buttonHTML={<span className='material-icons edit'>edit</span>}
+                                                    modalComponent={<WatchlistUpdateModal prevListName={watchlist.name} listId={watchlist.id} />}
+                                                />
+
+                                                <OpenCustomModalButton
+                                                    id="delete-option"
+                                                    buttonText={"Delete list"}
+                                                    buttonHTML={<span className='material-icons delete'>delete</span>}
+
+                                                    modalComponent={<ConfirmDeleteModal listName={watchlist.name} listTotal={watchlist.stocks.length} listId={watchlist.id} />}
+                                                />
+                                            </div>
                                         </div>
                                     )}
 
