@@ -32,17 +32,14 @@ function BuyForm() {
 
     useEffect(() => {
         const errors = {};
-
-        if(shares < 0) {
-            errors.shares = "Shares can't be negative"
-        }
-
-        if(shares === "0") {
-            errors.shares = "Shares can't be zero"
-        }
-
-
+        if (shares < 0) errors.shares = "Shares can't be negative"
+        if (shares === "0") errors.shares = "Shares can't be zero"
         setErrors(errors)
+
+        // if a history.push happens, shares set to zero
+        return history.listen(() => {
+            setShares('');
+        });
     }, [shares])
 
     for (const [key, value] of Object.entries(obj)) {
@@ -92,23 +89,23 @@ function BuyForm() {
         if (order === orderOption[0]) {
             let successfully = await dispatch(addShares(stockId, latestPrice, sharesData));
             await dispatch(fetchPortfolio())
-            if(estimatedCost > portfolio?.cash) {
+            if (estimatedCost > portfolio?.cash) {
                 return alert("Sorry you don't have enough buying power")
             }
 
-            if(successfully) {
+            if (successfully) {
                 setShares('')
                 return alert("Shares bought successfully")
             }
         }
         if (order === orderOption[1]) {
-            if(shares > shares_owned) {
+            if (shares > shares_owned) {
                 return alert("Error you don't have enough shares to sell")
             }
             let successfully = await dispatch(sellShares(stockId, latestPrice, sharesData))
             await dispatch(fetchPortfolio())
 
-            if(successfully) {
+            if (successfully) {
                 setShares('')
                 return alert("Shares sold successfully")
             }
@@ -158,7 +155,7 @@ function BuyForm() {
                     />
                 </div>
                 <div className='error-blocks'>
-                    {errors.shares && (<p className="error">*{errors.shares}</p>) }
+                    {errors.shares && (<p className="error">*{errors.shares}</p>)}
                 </div>
                 <div id="line" className='section'>
                     <div className='market-price-label'>Market Price</div>
