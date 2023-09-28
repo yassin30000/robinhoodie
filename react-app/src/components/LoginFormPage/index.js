@@ -16,10 +16,13 @@ function LoginFormPage() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [errors, setErrors] = useState([]);
-	const [demoLogin, setDemoLogin] = useState(false);
 
 	if (sessionUser) return <Redirect to="/" />;
-	if (demoLogin) dispatch(login('demo@aa.io', 'password')); // log in as demo user
+
+	const demoUserLogin = (e) => {
+		setEmail('demo@aa.io')
+		setPassword('password')
+	  }
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -67,7 +70,7 @@ function LoginFormPage() {
 							<div>
 								<button class="login-submit-btn" type="submit">Log In</button>
 							</div>
-							<button type="submit" id="demo-user-login-btn" onClick={() => setDemoLogin(true)}>Log in as demo user</button>
+							<button type="submit" id="demo-user-login-btn" onClick={demoUserLogin}>Log in as demo user</button>
 
 						</form>
 
