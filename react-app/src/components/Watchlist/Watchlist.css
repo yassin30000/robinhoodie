@@ -69,6 +69,7 @@
 	padding-top: 10px;
 	padding-bottom: 10px;
 	height: 60px;
+
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -205,16 +206,21 @@
 
 /* click on three dots dropdown */
 #dots-drowpdown-menu {
-	position: fixed;
+	position: absolute;
 	/* Adjust the 10px value as needed to position it correctly */
-	right: 90px; /* Adjust this value as needed to align with the three dots */
+	right: 0px; /* Adjust this value as needed to align with the three dots */
 	background-color: white;
-	margin-top: 120px;
+	margin-top: 20px;
 	border: 1px solid #ccc;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
 	width: 200px;
 	z-index: 1;
+}
+
+#dots-dropdown-container {
+	position: relative;
+	height: auto;
 }
 
 #list-item:hover #dots-drowpdown-menu {
