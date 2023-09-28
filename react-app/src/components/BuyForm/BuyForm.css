@@ -157,3 +157,14 @@ input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
 }
+
+.error-blocks {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.error {
+    color: red;
+    font-size: small;
+}
