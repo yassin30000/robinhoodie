@@ -93,7 +93,7 @@ function StockDetails() {
     })
 
     console.log('stock name:::', stock_info)
-
+  
 
     return (
         <div id='stock-details-wholepage'>
