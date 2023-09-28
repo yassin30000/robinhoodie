@@ -1,7 +1,14 @@
 #opinion-form-container {
 	padding: 24px 24px 24px 24px;
 	width: 468px;
-	height: 250px;
+	height: 270px;
+}
+
+#opinion-errors-div {
+	/* background-color: blue; */
+	color: red;
+	font-size: 13px;
+	margin-bottom: 10px;
 }
 
 #opinion-form-heading-container {

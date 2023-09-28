@@ -1,7 +1,7 @@
 import "./StockDetails.css";
 import { useEffect, useState } from 'react';
 import { fetchStockData } from "../../store/stocks";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LineChart2 from "../LineChart2/LineChart2";
 import BuyForm from "../BuyForm/BuyForm";
@@ -28,14 +28,14 @@ function StockDetails() {
     const opinions_data = useSelector(state => state.opinions[stock_info.id])
     // console.log('STOCK::::', stock)
     //
-    const allOpinions = opinions_data ? opinions_data : [];
+    const allOpinions = opinions_data ? [...opinions_data].reverse() : [];
     const allUsers = usersData ? Object.values(usersData.users) : [];
     //console.log(allUsers)
     const [viewAllOpinions, setViewAllOpinions] = useState(false);
 
     function getUserName(user_id) {
         if (allUsers) {
-            let oneUser = allUsers.find(user => user.id == user_id)
+            let oneUser = allUsers.find(user => user.id === user_id)
             if (oneUser) return oneUser.username
         }
     }
@@ -91,6 +91,8 @@ function StockDetails() {
         total_shares += stock.shares
     })
 
+    console.log('stock name:::', stock_info)
+
 
     return (
         <div id='stock-details-wholepage'>
@@ -98,11 +100,23 @@ function StockDetails() {
                 <p id='ticker-header'>{stock_info?.name}</p>
                 <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
 
-                {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change.toFixed(2)}</span> (<span>+{percent_change.toFixed(2)}%</span>) </p><span>Past month</span></div>}
-                {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change.toFixed(2))}</span> (<span>-{Math.abs(percent_change).toFixed(2)}%</span>) </p><span>Past month</span></div>}
+                {price_change >= 0 && <div id='price-change-div'>
+                    <p id='positive-price-changes'>
+                        <span>+${price_change.toFixed(2)}</span>
+                        <span>(+{percent_change.toFixed(2)}%)</span>
+                    </p>
+                    <span>Past month</span></div>}
+                {price_change < 0 && <div id='price-change-div'>
+                    <p id='negative-price-changes'>
+                        <span>-${Math.abs(price_change.toFixed(2))}</span>
+                        <span>(-{Math.abs(percent_change).toFixed(2)}%)</span>
+                    </p>
+                    <span>Past month</span></div>}
 
+                <div id="graph-container">
 
-                {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} width={"100%"} />}
+                    {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} width={"100%"} />}
+                </div>
 
 
                 {total_shares > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
@@ -147,7 +161,7 @@ function StockDetails() {
                                     {opinion.content.length > 400
                                         ? opinion.content.slice(0, 400) + '...'
                                         : opinion.content}
-                                </div>                                
+                                </div>
                                 <div id='opinion-ticker'>{ticker}</div>
                             </div>
                         </div>
@@ -179,7 +193,7 @@ function StockDetails() {
                                         {opinion.content.length > 400
                                             ? opinion.content.slice(0, 400) + '...'
                                             : opinion.content}
-                                    </div>                                    
+                                    </div>
                                     <div id='opinion-ticker'>{ticker}</div>
                                 </div>
                             </div>
