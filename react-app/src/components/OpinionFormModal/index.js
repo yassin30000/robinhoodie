@@ -2,7 +2,7 @@ import './OpinionFormModal.css';
 import { useCustomModal } from '../../context/Modal2';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createOpinion } from '../../store/opinions';
+import { createOpinion, fetchOpinions } from '../../store/opinions';
 
 function OpinionFormModal({ ticker }) {
     const dispatch = useDispatch();
@@ -23,6 +23,7 @@ function OpinionFormModal({ ticker }) {
             setErrors(response.errors)
             return console.log("Error creating opinion:");
         } else {
+            await dispatch(fetchOpinions())
             console.log('Opinion Posted')
             closeModal();
             window.location.reload();
