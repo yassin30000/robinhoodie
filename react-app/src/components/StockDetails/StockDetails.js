@@ -39,7 +39,7 @@ function StockDetails() {
             if (oneUser) return oneUser.username
         }
     }
-
+    let openPrice;
     let latestPrice;
     let latestDate;
     let price_change;
@@ -55,7 +55,8 @@ function StockDetails() {
         const stock_prices = stock['Time Series (Daily)']
         latestDate = Object.keys(stock_prices)[0]
         latestPrice = Number(stock_prices[latestDate]['4. close']).toFixed(2)
-
+        // console.log(stock_prices[latestDate])
+        openPrice = Number(stock_prices[latestDate]['1. open']).toFixed(2)
         const oldestDate = Object.keys(stock_prices)[Object.keys(stock_prices).length - 1]
 
         for (let key in stock_prices) {
@@ -92,7 +93,7 @@ function StockDetails() {
     })
 
     console.log('stock name:::', stock_info)
-
+  
 
     return (
         <div id='stock-details-wholepage'>

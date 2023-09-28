@@ -30,6 +30,7 @@
 .fa-caret-down {
 	padding: 0 5px;
 }
+
 #graph {
 	padding: 10px 0px;
 	width: 100%;
@@ -58,8 +59,8 @@
 
 	/* width: 68vw; */
 	padding-bottom: 15px;
-	padding-top: 30px;
-	margin-top: 0;
+	/* padding-top: 30px; */
+	margin-top: 30px;
 	font-size: 24px;
 	/* margin-left: 30px; */
 }
@@ -67,6 +68,8 @@
 #opinion-container {
 	/* width: 73vw; */
 	padding: 0 30px 0 0px;
+		border-radius: 10px;
+
 	/* background-color: red; */
 }
 
@@ -77,6 +80,8 @@
 
 #opinion {
 	border-bottom: 1px solid rgba(239, 242, 243, 1);
+	border-radius: 10px;
+	padding-left: 20px;
 	font-size: 15px;
 	font-weight: 300;
 	height: 180px;
@@ -103,7 +108,7 @@
 
 #edit-delete-opinion-container {
 	display: flex;
-	margin-right: 30px;
+	/* margin-right: 30px; */
 	gap: 10px;
 }
 
@@ -189,6 +194,8 @@
 }
 
 .buying-menu-trigger.inactive {
+	border-bottom: 1px solid rgb(239, 242, 243);
+
 	display: block;
 	width: 100%;
 	/* width: 68vw; */
@@ -198,7 +205,7 @@
 
 .buying-menu-trigger.active {
 	display: block;
-	border-bottom: 1px solid rgb(239, 242, 243);
+
 	width: 100%;
 	font-size: 24px;
 	/* margin-left: 30px; */
