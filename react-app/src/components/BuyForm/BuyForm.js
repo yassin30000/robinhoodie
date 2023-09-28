@@ -1,20 +1,20 @@
 import './BuyForm.css'
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addShares, sellShares } from '../../store/portfolio_stock';
 import { fetchStockData, fetchAllStocks } from '../../store/stocks';
 import { fetchPortfolio } from '../../store/portfolio'
 import { useParams, useHistory } from "react-router-dom";
 
-
 function BuyForm() {
     const dispatch = useDispatch();
+    const ref = React.useRef(null)
     const history = useHistory();
     const orderOption = ["Cost", "Gain"]
     const orderName = ["Buy", "Sell"]
     const { ticker } = useParams()
     const [name, setName] = useState(orderName[0])
-    const [shares, setShares] = useState(0);
+    const [shares, setShares] = useState('');
     const [style, setStyle] = useState(false);
     const [errors, setErrors] = useState({});
     const [order, setOrder] = useState(orderOption[0])
@@ -97,6 +97,7 @@ function BuyForm() {
             }
 
             if(successfully) {
+                setShares('')
                 return alert("Shares bought successfully")
             }
         }
@@ -108,12 +109,12 @@ function BuyForm() {
             await dispatch(fetchPortfolio())
 
             if(successfully) {
+                setShares('')
                 return alert("Shares sold successfully")
             }
         }
         setErrors({})
 
-        // e.target.reset()
 
         history.push(`/stocks/${ticker}`)
 
@@ -125,6 +126,7 @@ function BuyForm() {
         if (!portfolio) dispatch(fetchPortfolio());
         dispatch(fetchAllStocks())
     }, [dispatch, ticker, stock, portfolio])
+
 
 
 
@@ -150,6 +152,7 @@ function BuyForm() {
                     <input className='shares-input'
                         type='number'
                         placeholder='0'
+                        value={shares}
                         onChange={(e) => setShares(e.target.value)}
                         required
                     />
