@@ -67,7 +67,7 @@
 
 #opinion-container {
 	/* width: 73vw; */
-	padding: 0 30px 0 0px;
+	padding: 0 20px 0 0px;
 		border-radius: 10px;
 
 	/* background-color: red; */
@@ -118,14 +118,15 @@
 	background: none;
 	display: flex;
 	align-items: center;
-	border-radius: 50px;
+	border-radius: 25px;
 	padding: 5px;
 
-	transition: all 0.3s;
+	transition: all 0.5s;
 }
 
 #opinion-author button:hover {
 	color: rgb(255, 80, 0);
+	border-radius: 5px;
 	cursor: pointer;
 	background-color: white;
 }

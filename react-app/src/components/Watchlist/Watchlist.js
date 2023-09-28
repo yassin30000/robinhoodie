@@ -9,6 +9,7 @@ import ConfirmDeleteModal from "../ConfirmDeleteModal";
 import WatchlistUpdateModal from "../WatchlistUpdateModal";
 import { useHistory, Link } from 'react-router-dom/cjs/react-router-dom.min';
 import LineChart from "../LineChart/LineChart";
+import RemoveFromWatchlist from "../RemoveFromWatchlist";
 
 
 function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
@@ -157,6 +158,17 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
 
                                                     modalComponent={<ConfirmDeleteModal listName={watchlist.name} listTotal={watchlist.stocks.length} listId={watchlist.id} />}
                                                 />
+                                                {
+                                                    watchlist.stocks.length ? (
+                                                        <OpenCustomModalButton
+                                                            id="remove-stocks-option"
+                                                            buttonText={"Remove Stocks"}
+                                                            buttonHTML={<span className='material-icons delete'>close</span>}
+                                                            modalComponent={<RemoveFromWatchlist listName={watchlist.name} listId={watchlist.id} latestPrices={latestPrices} />}
+                                                        />
+                                                    ) : (<></>)
+                                                }
+
                                             </div>
                                         </div>
                                     )}

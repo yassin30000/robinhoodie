@@ -1,20 +1,20 @@
 import './BuyForm.css'
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addShares, sellShares } from '../../store/portfolio_stock';
 import { fetchStockData, fetchAllStocks } from '../../store/stocks';
 import { fetchPortfolio } from '../../store/portfolio'
 import { useParams, useHistory } from "react-router-dom";
 
-
 function BuyForm() {
     const dispatch = useDispatch();
+    const ref = React.useRef(null)
     const history = useHistory();
     const orderOption = ["Cost", "Gain"]
     const orderName = ["Buy", "Sell"]
     const { ticker } = useParams()
     const [name, setName] = useState(orderName[0])
-    const [shares, setShares] = useState(0);
+    const [shares, setShares] = useState('');
     const [style, setStyle] = useState(false);
     const [errors, setErrors] = useState({});
     const [order, setOrder] = useState(orderOption[0])
@@ -32,17 +32,14 @@ function BuyForm() {
 
     useEffect(() => {
         const errors = {};
-
-        if(shares < 0) {
-            errors.shares = "Shares can't be negative"
-        }
-
-        if(shares === "0") {
-            errors.shares = "Shares can't be zero"
-        }
-
-
+        if (shares < 0) errors.shares = "Shares can't be negative"
+        if (shares === "0") errors.shares = "Shares can't be zero"
         setErrors(errors)
+
+        // if a history.push happens, shares set to zero
+        return history.listen(() => {
+            setShares('');
+        });
     }, [shares])
 
     for (const [key, value] of Object.entries(obj)) {
@@ -92,26 +89,29 @@ function BuyForm() {
         if (order === orderOption[0]) {
             let successfully = await dispatch(addShares(stockId, latestPrice, sharesData));
             await dispatch(fetchPortfolio())
-            if(estimatedCost > portfolio?.cash) {
+            if (estimatedCost > portfolio?.cash) {
                 return alert("Sorry you don't have enough buying power")
             }
 
-            if(successfully) {
+            if (successfully) {
+                setShares('')
                 return alert("Shares bought successfully")
             }
         }
         if (order === orderOption[1]) {
-            if(shares > shares_owned) {
+            if (shares > shares_owned) {
                 return alert("Error you don't have enough shares to sell")
             }
             let successfully = await dispatch(sellShares(stockId, latestPrice, sharesData))
             await dispatch(fetchPortfolio())
 
-            if(successfully) {
+            if (successfully) {
+                setShares('')
                 return alert("Shares sold successfully")
             }
         }
         setErrors({})
+
 
         history.push(`/stocks/${ticker}`)
 
@@ -124,6 +124,9 @@ function BuyForm() {
         dispatch(fetchAllStocks())
     }, [dispatch, ticker, stock, portfolio])
 
+
+
+
     return (
 
         <div className='buy-form-wrapper'>
@@ -132,7 +135,7 @@ function BuyForm() {
                 <button type='button' className={`toggle-btn-one ${style ? 'active' : 'inactive'}`} onClick={buy}>Buy {ticker}</button>
                 <button type='button' className={`toggle-btn-two ${style ? 'active' : 'inactive'}`} onClick={sell}>Sell {ticker}</button>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form id="orderForm" onSubmit={handleSubmit}>
                 <div className='section' id='top-section'>
                     <div className='order-type-label'>Order Type</div>
                     <div className='buy-order'>{name} Order</div>
@@ -146,12 +149,13 @@ function BuyForm() {
                     <input className='shares-input'
                         type='number'
                         placeholder='0'
+                        value={shares}
                         onChange={(e) => setShares(e.target.value)}
                         required
                     />
                 </div>
                 <div className='error-blocks'>
-                    {errors.shares && (<p className="error">*{errors.shares}</p>) }
+                    {errors.shares && (<p className="error">*{errors.shares}</p>)}
                 </div>
                 <div id="line" className='section'>
                     <div className='market-price-label'>Market Price</div>
