@@ -18,25 +18,18 @@ function LandingPage() {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
-
     const opinionsData = useSelector((state) => state.opinions.all_opinions);
     const usersData = useSelector((state) => state.session.allUsers)
     const stocksData = useSelector(state => state.stocks.allStocks)
-
     const allOpinions = opinionsData ? Object.values(opinionsData.opinions).reverse() : [];
     const allUsers = usersData ? Object.values(usersData.users) : [];
     const allStocks = stocksData ? Object.values(stocksData.stocks) : [];
     const portfolio = useSelector(state => state.portfolio.portfolio)
     const alpacaState = useSelector(state => state.stocks.alpacaData)
     const options = { month: 'short', day: 'numeric', timeZone: "UTC" }
-
-
-
     const [viewAllOpinions, setViewAllOpinions] = useState(false);
 
-
     //calculate how many shares of each stock in portfolio
-
     let portfolio_value = {}
     let portfolio_data = {} // {ticker: # of shares owned}
     if (alpacaState && portfolio) {
@@ -52,7 +45,7 @@ function LandingPage() {
                 }
             })
         }
-        // console.log(portfolio_data)
+        
         Object.values(alpacaData)[0].forEach(dataPoint => {
             let date = new Date(dataPoint.t)
             portfolio_value[date.toLocaleDateString('en-us', options)] = 0;
@@ -87,25 +80,7 @@ function LandingPage() {
         }
     }
 
-
     const [open, setOpen] = useState(false);
-
-    //grabbing the total amount of money they got from shares
-
-
-
-    // if (portfolio?.portfolio_stocks) {
-    //     for (let i = 0; i < portfolio?.portfolio_stocks.length; i++) {
-    //         let number = portfolio?.portfolio_stocks[i]
-    //         let amount = number?.shares * number?.price;
-    //     }
-    // }
-
-
-    //adding the total amount of money from shares with total cash
-
-
-    // console.log('!!!!!!!!!ALL OPINIONS: ', allStocks)
 
     if (!sessionUser) history.push('/login')
 
@@ -123,7 +98,7 @@ function LandingPage() {
             if (oneUser) return oneUser.username
         }
     }
-    
+
     const currentPortfolioValue = chartValues[chartValues.length - 1]
     useEffect(() => {
         let today = new Date().toISOString()
@@ -210,9 +185,9 @@ function LandingPage() {
 
                     {viewAllOpinions ? allUsers && Array.isArray(allOpinions) && allOpinions?.map((opinion, index) => (
                         <div key={index} id='opinion-container'>
-                            <div id="opinion">
+                            <div id="opinion" >
                                 <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
-                                <div id='opinion-content'>
+                                <div id='opinion-content' >
                                     {opinion.content.length > 400
                                         ? opinion.content.slice(0, 400) + '...'
                                         : opinion.content}
