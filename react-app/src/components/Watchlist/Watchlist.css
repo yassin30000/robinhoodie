@@ -210,17 +210,19 @@
 	/* Adjust the 10px value as needed to position it correctly */
 	right: 0px; /* Adjust this value as needed to align with the three dots */
 	background-color: white;
-	margin-top: 20px;
+	/* margin-top: 20px; */
 	border: 1px solid #ccc;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
-	width: 200px;
+	width: max-content;
 	z-index: 1;
 }
 
 #dots-dropdown-container {
-	position: relative;
-	height: auto;
+	position: absolute;
+	right: 0;
+	margin-top: 40px;
+	right: 65px;
 }
 
 #list-item:hover #dots-drowpdown-menu {
