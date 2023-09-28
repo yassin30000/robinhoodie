@@ -1,0 +1,98 @@
+/* RemoveFromWatchlist.css */
+
+#watchlist-details-container {
+	padding: 30px;
+	width: 600px;
+}
+
+#watchlist-details-heading-container {
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+#tr-stock-item {
+	height: 60px;
+	vertical-align: center;
+}
+
+#watchlist-details-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#td-close-btn {
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	height: 60px;
+}
+
+#td-close-btn-actual {
+	padding: 5px;
+	border-radius: 5px;
+}
+
+#td-close-btn-actual:hover {
+	background-color: rgba(225, 224, 224, 0.444);
+}
+
+#watchlist-details-table th,
+#watchlist-details-table td {
+	/* padding: 10px; */
+	padding: 10px 0 10px 0;
+	/* border: 1px solid #ccc; */
+	text-align: left;
+	font-size: 13px;
+}
+
+thead > tr {
+	border-bottom: 1px solid #cccccc98;
+}
+
+#th-name {
+	width: 200px;
+}
+
+#watchlist-details-table th {
+	color: rgb(106, 114, 120);
+	font-weight: 400;
+}
+
+#td-stock-name {
+	font-weight: 500;
+}
+
+#list-percent-positive {
+	color: green;
+}
+
+#list-percent-negative {
+	color: red;
+}
+
+.material-icons.delete {
+	cursor: pointer;
+}
+
+#table-save-changes-btn-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	height: max-content;
+	margin-top: 20px;
+}
+
+#table-save-changes-btn-container button {
+	height: 44px;
+	color: white;
+	border-radius: 30px;
+	font-weight: 500;
+	padding: 10px 100px 10px;
+	background-color: rgb(0, 200, 5);
+	border: none;
+}
+
+#table-save-changes-btn-container button:hover {
+	cursor: pointer;
+	background-color: rgb(3, 169, 9);
+}

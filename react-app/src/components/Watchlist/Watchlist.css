@@ -108,6 +108,7 @@
 #list-numbers-container {
 	display: flex;
 	justify-content: space-evenly;
+	align-items: flex-end;
 	flex-direction: column;
 	height: 60px;
 }
