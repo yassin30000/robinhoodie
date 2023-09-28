@@ -25,6 +25,7 @@ function OpinionFormModal({ ticker }) {
         } else {
             console.log('Opinion Posted')
             closeModal();
+            window.location.reload();
         }
     }
 

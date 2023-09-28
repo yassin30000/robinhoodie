@@ -5,7 +5,7 @@ function OpenCustomModalButton({
     buttonText, // Text of the button that opens the modal
     onButtonClick, // Optional: Callback function that will be called once the button that opens the modal is clicked
     onModalClose, // Optional: Callback function that will be called once the modal is closed
-    buttonHTML
+    buttonHTML,
 }) {
     const { setModalContent, setOnModalClose } = useCustomModal(); // Use your custom modal context
 
@@ -16,6 +16,7 @@ function OpenCustomModalButton({
     };
 
     return (
+        
         <button onClick={onClick}>{ buttonHTML }{buttonText}</button>
     );
 }
