@@ -124,6 +124,8 @@ function BuyForm() {
         dispatch(fetchAllStocks())
     }, [dispatch, ticker, stock, portfolio])
 
+    document.getElementById('orderForm').reset();
+
     return (
 
         <div className='buy-form-wrapper'>
@@ -132,7 +134,7 @@ function BuyForm() {
                 <button type='button' className={`toggle-btn-one ${style ? 'active' : 'inactive'}`} onClick={buy}>Buy {ticker}</button>
                 <button type='button' className={`toggle-btn-two ${style ? 'active' : 'inactive'}`} onClick={sell}>Sell {ticker}</button>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form id="orderForm" onSubmit={handleSubmit}>
                 <div className='section' id='top-section'>
                     <div className='order-type-label'>Order Type</div>
                     <div className='buy-order'>{name} Order</div>
