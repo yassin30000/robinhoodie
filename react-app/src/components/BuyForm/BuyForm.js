@@ -11,7 +11,9 @@ function BuyForm() {
     const dispatch = useDispatch();
     const history = useHistory();
     const orderOption = ["Cost", "Gain"]
+    const orderName = ["Buy", "Sell"]
     const { ticker } = useParams()
+    const [name, setName] = useState(orderName[0])
     const [shares, setShares] = useState(0);
     const [style, setStyle] = useState(false);
     const [errors, setErrors] = useState({});
@@ -31,16 +33,12 @@ function BuyForm() {
     useEffect(() => {
         const errors = {};
 
-        if(!shares) {
-            errors.shares = "Please input the amount of shares"
-        };
-
         if(shares < 0) {
             errors.shares = "Shares can't be negative"
         }
 
         if(shares === "0") {
-            errors.shares = "Please input the amount of shares"
+            errors.shares = "Shares can't be zero"
         }
 
 
@@ -60,11 +58,13 @@ function BuyForm() {
     function buy() {
         setOrder(orderOption[0])
         setStyle(false)
+        setName(orderName[0])
     }
 
     function sell() {
         setOrder(orderOption[1])
         setStyle(true)
+        setName(orderName[1])
     }
 
     if (stock) {
@@ -90,19 +90,31 @@ function BuyForm() {
         }
 
         if (order === orderOption[0]) {
-            await dispatch(addShares(stockId, latestPrice, sharesData));
+            let successfully = await dispatch(addShares(stockId, latestPrice, sharesData));
             await dispatch(fetchPortfolio())
+            if(estimatedCost > portfolio?.cash) {
+                return alert("Sorry you don't have enough buying power")
+            }
+
+            if(successfully) {
+                return alert("Shares bought successfully")
+            }
         }
         if (order === orderOption[1]) {
             if(shares > shares_owned) {
                 return alert("Error you don't have enough shares to sell")
             }
-            await dispatch(sellShares(stockId, latestPrice, sharesData))
+            let successfully = await dispatch(sellShares(stockId, latestPrice, sharesData))
             await dispatch(fetchPortfolio())
+
+            if(successfully) {
+                return alert("Shares sold successfully")
+            }
         }
+        setErrors({})
 
         history.push(`/stocks/${ticker}`)
-        setErrors({})
+
 
     }
 
@@ -123,19 +135,18 @@ function BuyForm() {
             <form onSubmit={handleSubmit}>
                 <div className='section' id='top-section'>
                     <div className='order-type-label'>Order Type</div>
-                    <div className='buy-order'>Buy Order</div>
+                    <div className='buy-order'>{name} Order</div>
                 </div>
                 <div className='section'>
-                    <div className='buy-in'>Buy In</div>
+                    <div className='buy-in'>{name}</div>
                     <div className='buy-in-option'>Shares</div>
                 </div>
                 <div className='section'>
                     <div className='shares-label'>Shares</div>
                     <input className='shares-input'
                         type='number'
-                        value={shares}
-                        onChange={(e) => setShares(e.target.value)}
                         placeholder='0'
+                        onChange={(e) => setShares(e.target.value)}
                         required
                     />
                 </div>

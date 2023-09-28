@@ -133,11 +133,11 @@ function TransferForm() {
                                     <option value='Quarterly'>Quarterly</option>
                                 </select>
                             </div> */}
-                            <div className='small-txt'>
+                            {/* <div className='small-txt'>
                                 <div className='text'>
                                     Daily deposit limit: $50,000
                                 </div>
-                            </div>
+                            </div> */}
                             <div className='submit-btn'>
                                 <button className='transfer-btn' type='submit'>Transfer</button>
                             </div>
