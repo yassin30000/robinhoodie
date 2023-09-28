@@ -28,10 +28,6 @@ function TransferForm() {
     useEffect(() => {
         const errors  = {};
 
-        if(!cash) {
-            errors.cash = "Cash amount is required";
-        };
-
         if(cash < 0) {
             errors.cash = "Cash amount can not be negative";
         };
@@ -55,11 +51,23 @@ function TransferForm() {
         }
         if (from === options[0] && to === options[1]) {
             if (!hasPorfolio()) {
+                if(cash === "0") {
+                    return alert("Cash amount is required");
+                };
                 await dispatch(createFunds(cashData))
             } else {
+                if(cash === "0") {
+                    return alert("Cash amount is required");
+                };
                 await dispatch(addFunds(cashData))
             }
         } else if (from === options[1] && to === options[0]) {
+            if(portfolio?.cash < cash) {
+                return alert("Sorry you don't have enough cash to withdraw")
+            }
+            if(cash === "0") {
+                return alert("Cash amount is required");
+            };
             await dispatch(withdrawFunds(cashData))
         } else {
             setErrors("Error")
@@ -133,11 +141,12 @@ function TransferForm() {
                                     <option value='Quarterly'>Quarterly</option>
                                 </select>
                             </div> */}
-                            {/* <div className='small-txt'>
+                            <div className='small-txt'>
                                 <div className='text'>
-                                    Daily deposit limit: $50,000
+                                Buying Power ${portfolio?.cash ? portfolio?.cash?.toLocaleString() : 0}
+                                    {/* Daily deposit limit: $50,000 */}
                                 </div>
-                            </div> */}
+                            </div>
                             <div className='submit-btn'>
                                 <button className='transfer-btn' type='submit'>Transfer</button>
                             </div>
