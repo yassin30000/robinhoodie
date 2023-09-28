@@ -91,6 +91,8 @@ function StockDetails() {
         total_shares += stock.shares
     })
 
+    console.log('stock name:::', stock_info)
+
 
     return (
         <div id='stock-details-wholepage'>
@@ -98,11 +100,23 @@ function StockDetails() {
                 <p id='ticker-header'>{stock_info?.name}</p>
                 <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
 
-                {price_change >= 0 && <div id='price-change-div'><p id='positive-price-changes'> <span>+${price_change.toFixed(2)}</span> (<span>+{percent_change.toFixed(2)}%</span>) </p><span>Past month</span></div>}
-                {price_change < 0 && <div id='price-change-div'><p id='negative-price-changes'> <span>-${Math.abs(price_change.toFixed(2))}</span> (<span>-{Math.abs(percent_change).toFixed(2)}%</span>) </p><span>Past month</span></div>}
+                {price_change >= 0 && <div id='price-change-div'>
+                    <p id='positive-price-changes'>
+                        <span>+${price_change.toFixed(2)}</span>
+                        <span>(+{percent_change.toFixed(2)}%)</span>
+                    </p>
+                    <span>Past month</span></div>}
+                {price_change < 0 && <div id='price-change-div'>
+                    <p id='negative-price-changes'>
+                        <span>-${Math.abs(price_change.toFixed(2))}</span>
+                        <span>(-{Math.abs(percent_change).toFixed(2)}%)</span>
+                    </p>
+                    <span>Past month</span></div>}
 
+                <div id="graph-container">
 
-                {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} width={"100%"} />}
+                    {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} width={"100%"} />}
+                </div>
 
 
                 {total_shares > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}

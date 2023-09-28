@@ -12,6 +12,7 @@
 	margin: 25px;
 	margin-top: 40px;
 	background-color: white;
+	/* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
 }
 
 #list-heading-container {
@@ -25,7 +26,7 @@
 }
 
 #list-shares-container {
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 }
@@ -53,7 +54,8 @@
 	cursor: pointer;
 }
 
-#list-heading, #portfolio-stock-list-heading {
+#list-heading,
+#portfolio-stock-list-heading {
 	font-size: 15px;
 	font-weight: 500;
 }
@@ -175,8 +177,6 @@
 	font-size: 25px;
 }
 
-
-
 .rotate-180 {
 	transform: rotate(180deg);
 	transition: transform 0.3s ease; /* Add a transition for smooth animation */
@@ -236,7 +236,7 @@ button#delete-option {
 }
 
 .material-icons.delete,
-.material-icons.edit{
+.material-icons.edit {
 	font-size: 14px;
 }
 

@@ -14,13 +14,38 @@ function BuyForm() {
     const { ticker } = useParams()
     const [shares, setShares] = useState(0);
     const [style, setStyle] = useState(false);
-    // const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({});
     const [order, setOrder] = useState(orderOption[0])
     // const [hasSubmitted, setHasSubmitted] = useState(false)
     const stock = useSelector(state => state.stocks[ticker])
     const portfolio = useSelector(state => state.portfolio.portfolio)
+    const stock_portfolio = useSelector(state => state.portfolio.portfolio.portfolio_stocks)
     const obj = useSelector(state => state.stocks.allStocks.stocks)
     let stockId;
+    const stock_info = useSelector(state => state.stocks.allStocks.stocks[`${ticker}`])
+    const stocks_owned_by_user = stock_portfolio?.filter(stock => Number(stock.stock_id) === Number(stock_info.id))
+    const shares_owned = stocks_owned_by_user.reduce((accum, currentValue) => {
+        return accum + currentValue.shares
+    }, 0)
+
+    useEffect(() => {
+        const errors = {};
+
+        if(!shares) {
+            errors.shares = "Please input the amount of shares"
+        };
+
+        if(shares < 0) {
+            errors.shares = "Shares can't be negative"
+        }
+
+        if(shares === "0") {
+            errors.shares = "Please input the amount of shares"
+        }
+
+
+        setErrors(errors)
+    }, [shares])
 
     for (const [key, value] of Object.entries(obj)) {
         if (key === ticker) {
@@ -56,9 +81,9 @@ function BuyForm() {
 
         // setHasSubmitted(true);
 
-        // if (Object.values(errors).length) {
-        //     return alert('Errors been found')
-        // };
+        if (Object.values(errors).length) {
+            return alert('Error please fix the underlying problems')
+        };
 
         const sharesData = {
             shares
@@ -69,11 +94,15 @@ function BuyForm() {
             await dispatch(fetchPortfolio())
         }
         if (order === orderOption[1]) {
+            if(shares > shares_owned) {
+                return alert("Error you don't have enough shares to sell")
+            }
             await dispatch(sellShares(stockId, latestPrice, sharesData))
             await dispatch(fetchPortfolio())
         }
 
         history.push(`/stocks/${ticker}`)
+        setErrors({})
 
     }
 
@@ -110,6 +139,9 @@ function BuyForm() {
                         required
                     />
                 </div>
+                <div className='error-blocks'>
+                    {errors.shares && (<p className="error">*{errors.shares}</p>) }
+                </div>
                 <div id="line" className='section'>
                     <div className='market-price-label'>Market Price</div>
                     <div id='market-price'>${latestPrice}</div>
@@ -124,7 +156,7 @@ function BuyForm() {
                 <div className='centered-one'>
                     <div className='buying-power'>${portfolio?.cash ? portfolio?.cash?.toLocaleString() : 0} buying power available</div>
                 </div>
-                
+
             </form>
         </div>
 
