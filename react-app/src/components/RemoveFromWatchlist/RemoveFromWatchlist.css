@@ -3,6 +3,9 @@
 #watchlist-details-container {
 	padding: 30px;
 	width: 600px;
+	overflow-y: auto;
+	height: max-content;
+	max-height: 60vw;
 }
 
 #watchlist-details-heading-container {
@@ -18,6 +21,8 @@
 #watchlist-details-table {
 	width: 100%;
 	border-collapse: collapse;
+	margin-top: 30px;
+	overflow-y: auto;
 }
 
 #td-close-btn {
@@ -38,9 +43,6 @@
 
 #watchlist-details-table th,
 #watchlist-details-table td {
-	/* padding: 10px; */
-	padding: 10px 0 10px 0;
-	/* border: 1px solid #ccc; */
 	text-align: left;
 	font-size: 13px;
 }
@@ -56,6 +58,8 @@ thead > tr {
 #watchlist-details-table th {
 	color: rgb(106, 114, 120);
 	font-weight: 400;
+	padding-bottom: 10px;
+	/* border-bottom: 1px solid #cccccc98; */
 }
 
 #td-stock-name {
@@ -75,11 +79,14 @@ thead > tr {
 }
 
 #table-save-changes-btn-container {
+	position: sticky;
+	background-color: white;
+	bottom: 0;
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	height: max-content;
-	margin-top: 20px;
+	padding-top: 30px;
 }
 
 #table-save-changes-btn-container button {
