@@ -114,7 +114,6 @@ function LandingPage() {
     }, [dispatch, currentPortfolioValue]);
 
 
-
     return (
         <div>
 
@@ -183,7 +182,7 @@ function LandingPage() {
 
                     </div>
 
-                    {viewAllOpinions ? allUsers && Array.isArray(allOpinions) && allOpinions?.map((opinion, index) => (
+                    {viewAllOpinions ? allUsers && Array.isArray(allOpinions) && allOpinions?.slice(0,10).map((opinion, index) => (
                         <div key={index} id='opinion-container'>
                             <div id="opinion" >
                                 <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
@@ -196,7 +195,7 @@ function LandingPage() {
                             </div>
                         </div>
                     )) :
-                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser?.id).map((opinion, index) => (
+                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser?.id).slice(0,10).map((opinion, index) => (
                             <div key={index} id='opinion-container'>
                                 <div id="opinion">
                                     <div id='opinion-author'>{getUserName(opinion.user_id)}

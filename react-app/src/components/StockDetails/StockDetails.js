@@ -92,8 +92,8 @@ function StockDetails() {
         total_shares += stock.shares
     })
 
-    console.log('stock name:::', stock_info)
-  
+    //console.log('stock name:::', stock_info)
+
 
     return (
         <div id='stock-details-wholepage'>
@@ -120,7 +120,7 @@ function StockDetails() {
                 </div>
 
 
-                {total_shares > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
+                {total_shares > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} openPrice={openPrice}/>}
 
                 {/* <div id="stock-opinions-container">
 
@@ -154,7 +154,7 @@ function StockDetails() {
 
                     </div>
 
-                    {viewAllOpinions ? allUsers && Array.isArray(allOpinions) && allOpinions?.map((opinion, index) => (
+                    {viewAllOpinions ? allUsers && Array.isArray(allOpinions) && allOpinions?.slice(0,10).map((opinion, index) => (
                         <div key={index} id='opinion-container'>
                             <div id="opinion">
                                 <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
@@ -167,7 +167,7 @@ function StockDetails() {
                             </div>
                         </div>
                     )) :
-                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser?.id).map((opinion, index) => (
+                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser?.id).slice(0,10).map((opinion, index) => (
                             <div key={index} id='opinion-container'>
                                 <div id="opinion">
                                     <div id='opinion-author'>{getUserName(opinion.user_id)}
@@ -175,7 +175,7 @@ function StockDetails() {
                                             <OpenCustomModalButton
                                                 id="edit-opinion"
                                                 buttonText={""}
-                                                buttonHTML={<span class="material-symbols-outlined edit">edit</span>}
+                                                buttonHTML={<span className="material-symbols-outlined edit">edit</span>}
 
                                                 modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content} />}
                                             />
