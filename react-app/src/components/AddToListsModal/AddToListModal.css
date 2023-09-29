@@ -39,6 +39,16 @@
 	height: 100px;
 	display: flex;
 	align-items: center;
+	border-radius: 10px;
+}
+
+.saved-lists:hover {
+	cursor: pointer;
+	/* background-color: rgb(240, 241, 242); */
+}
+
+.saved-lists label:hover {
+	cursor: pointer;
 }
 
 #add-to-lists-form input {
