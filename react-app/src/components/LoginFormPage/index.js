@@ -37,8 +37,8 @@ function LoginFormPage() {
 			<div id="login-container">
 				<img src={login_image} alt="" className="login-image" />
 
-				<div class="login-form-container">
-					<div class="login-form-wrapper">
+				<div className="login-form-container">
+					<div className="login-form-wrapper">
 
 						<p>Log in to Robinhoodie</p>
 
@@ -50,17 +50,17 @@ function LoginFormPage() {
 								))}
 							</div>
 
-							<div class="login-label">Email</div>
-							<input class="login-input"
+							<div className="login-label">Email</div>
+							<input className="login-input"
 								type="text"
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								required
 							/>
 
-							<div class="login-label">Password</div>
+							<div className="login-label">Password</div>
 							<input
-								class="login-input"
+								className="login-input"
 								type="password"
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
@@ -68,7 +68,7 @@ function LoginFormPage() {
 							/>
 
 							<div>
-								<button class="login-submit-btn" type="submit">Log In</button>
+								<button className="login-submit-btn" type="submit">Log In</button>
 							</div>
 							<button type="submit" id="demo-user-login-btn" onClick={demoUserLogin}>Log in as demo user</button>
 

@@ -26,12 +26,24 @@ function StockDetails() {
     const usersData = useSelector((state) => state.session.allUsers)
     const stocks_owned_by_user = portfolio?.filter(stock => Number(stock.stock_id) === Number(stock_info.id))
     const opinions_data = useSelector(state => state.opinions[stock_info.id])
-    // console.log('STOCK::::', stock)
-    //
+
     const allOpinions = opinions_data ? [...opinions_data].reverse() : [];
     const allUsers = usersData ? Object.values(usersData.users) : [];
-    //console.log(allUsers)
     const [viewAllOpinions, setViewAllOpinions] = useState(false);
+
+    const userWatchlistsData = useSelector((state) => state.watchlists.userWatchlists);
+    const userWatchlists = userWatchlistsData ? Object.values(userWatchlistsData.watchlists) : []
+
+    const stockAddedToList = () => {
+        for (let list of userWatchlists) {
+            for (let stock of list.stocks) {
+                if (stock.stock_id === stock_info.id) {
+                    return 'check'
+                }
+            }
+            return 'add'
+        }
+    }
 
     function getUserName(user_id) {
         if (allUsers) {
@@ -39,6 +51,7 @@ function StockDetails() {
             if (oneUser) return oneUser.username
         }
     }
+
     let openPrice;
     let latestPrice;
     let latestDate;
@@ -55,7 +68,6 @@ function StockDetails() {
         const stock_prices = stock['Time Series (Daily)']
         latestDate = Object.keys(stock_prices)[0]
         latestPrice = Number(stock_prices[latestDate]['4. close']).toFixed(2)
-        // console.log(stock_prices[latestDate])
         openPrice = Number(stock_prices[latestDate]['1. open']).toFixed(2)
         const oldestDate = Object.keys(stock_prices)[Object.keys(stock_prices).length - 1]
 
@@ -75,11 +87,9 @@ function StockDetails() {
         prices_array = Object.values(stock_prices_at_close).slice(0, 30).reverse()
 
     }
-    //console.log(price_30_days_before)
-    // console.log(dates_array)
-    //console.log(price_change)
 
     useEffect(() => {
+
         if (!stock) {
             dispatch(fetchStockData(ticker))
         }
@@ -92,8 +102,6 @@ function StockDetails() {
         total_shares += stock.shares
     })
 
-    console.log('stock name:::', stock_info)
-  
 
     return (
         <div id='stock-details-wholepage'>
@@ -120,22 +128,7 @@ function StockDetails() {
                 </div>
 
 
-                {total_shares > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} />}
-
-                {/* <div id="stock-opinions-container">
-
-                    <div id='opinions-title'>Opinions</div>
-
-                    {stock_opinions.length > 0 && stock_opinions.map((opinion, index) => {
-                        return (<div key={index} id='opinion-container'>
-                            <div id="opinion">
-                                <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
-                                <div id='opinion-content'>{opinion.content}</div>
-                            </div>
-                        </div>)
-                    })}
-
-                </div> */}
+                {total_shares > 0 && <StockPosition latestPrice={latestPrice} stocks_owned_by_user={stocks_owned_by_user} openPrice={openPrice}/>}
 
                 <div id='opinions-container'>
 
@@ -154,7 +147,7 @@ function StockDetails() {
 
                     </div>
 
-                    {viewAllOpinions ? allUsers && Array.isArray(allOpinions) && allOpinions?.map((opinion, index) => (
+                    {viewAllOpinions ? allUsers && Array.isArray(allOpinions) && allOpinions?.slice(0,10).map((opinion, index) => (
                         <div key={index} id='opinion-container'>
                             <div id="opinion">
                                 <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
@@ -167,7 +160,7 @@ function StockDetails() {
                             </div>
                         </div>
                     )) :
-                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser?.id).map((opinion, index) => (
+                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser?.id).slice(0,10).map((opinion, index) => (
                             <div key={index} id='opinion-container'>
                                 <div id="opinion">
                                     <div id='opinion-author'>{getUserName(opinion.user_id)}
@@ -175,7 +168,7 @@ function StockDetails() {
                                             <OpenCustomModalButton
                                                 id="edit-opinion"
                                                 buttonText={""}
-                                                buttonHTML={<span class="material-symbols-outlined edit">edit</span>}
+                                                buttonHTML={<span className="material-symbols-outlined edit">edit</span>}
 
                                                 modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content} />}
                                             />
@@ -214,10 +207,9 @@ function StockDetails() {
                 </div>
 
                 <div id="add-to-lists-container">
-                    {/* <button onClick={() => alert('Feature Coming Soon...')}>Trade {ticker} options</button> */}
-
                     <OpenCustomModalButton
                         buttonText={"Add to Lists"}
+                        buttonHTML={<span className="material-icons checkmark">{stockAddedToList()}</span>}
                         modalComponent={<AddToListsModal ticker={ticker} />}
                     />
 
@@ -228,7 +220,7 @@ function StockDetails() {
                 </div>
             </div>
 
-        </div>
+        </div >
     );
 }
 

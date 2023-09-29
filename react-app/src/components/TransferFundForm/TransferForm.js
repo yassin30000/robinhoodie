@@ -23,7 +23,7 @@ function TransferForm() {
         }
     }, [portfolio])
 
-    console.log('PORFOLIO', portfolio)
+    // console.log('PORFOLIO', portfolio)
 
     useEffect(() => {
         const errors  = {};
@@ -78,12 +78,23 @@ function TransferForm() {
         setErrors({})
     }
 
+    const closeFormBtn = () => {
+        history.push('/')
+    }
+
     useEffect(() => {
         if (!hasPorfolio) dispatch(fetchPortfolio());
     }, [dispatch, portfolio, hasPorfolio])
 
     return (
         <>
+            <div className='close-transfer-container'>
+                <span id="close-transfer-form"
+                    className='material-icons close-btn'
+                    onClick={closeFormBtn}
+                    >close
+                </span>
+            </div>
             <div className='fund-container'>
                 <div className='fund-form-container'>
                     <div className='fund-form-wrapper'>
@@ -143,7 +154,7 @@ function TransferForm() {
                             </div> */}
                             <div className='small-txt'>
                                 <div className='text'>
-                                Buying Power ${portfolio?.cash ? portfolio?.cash?.toLocaleString() : 0}
+                                Current Cash ${portfolio?.cash ? portfolio?.cash?.toLocaleString() : 0}
                                     {/* Daily deposit limit: $50,000 */}
                                 </div>
                             </div>
