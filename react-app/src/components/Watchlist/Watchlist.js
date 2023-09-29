@@ -128,14 +128,14 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
                                     onClick={(event) => toggleRotate(watchlist.id, event)}
                                 >
                                     <div id="left-side">
-                                        <span class="material-icons eye-16">visibility</span>
+                                        <span className="material-icons eye-16">visibility</span>
                                         <span id="list-name">{watchlist.name}</span>
                                     </div>
 
                                     <div id="right-side">
-                                        <span id='watchlist-dots' class="material-icons dots-16" onClick={(event) => handleMoreHorizClick(watchlist.id, event)}>more_horiz</span>
+                                        <span id='watchlist-dots' className="material-icons dots-16" onClick={(event) => handleMoreHorizClick(watchlist.id, event)}>more_horiz</span>
                                         <span id="watchlist-arrow"
-                                            class={rotatedItems[watchlist.id] ? "material-icons arrow rotate-180" : "material-icons arrow rotate-0"}>expand_more</span>
+                                            className={rotatedItems[watchlist.id] ? "material-icons arrow rotate-180" : "material-icons arrow rotate-0"}>expand_more</span>
                                     </div>
 
                                     {activeDropdown === watchlist.id && (

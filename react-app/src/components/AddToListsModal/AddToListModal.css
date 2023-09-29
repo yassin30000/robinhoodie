@@ -1,6 +1,6 @@
 #add-to-lists-form-container {
 	width: 408px;
-	height: 525px;
+	height: fit-content;
 	padding: 24px;
 	display: flex;
 	justify-content: space-between;
@@ -34,7 +34,7 @@
 	background-color: rgba(225, 224, 224, 0.444);
 }
 
-#saved-lists {
+.saved-lists {
 	width: 360px;
 	height: 100px;
 	display: flex;
@@ -74,7 +74,7 @@
 	width: 100%;
 	/* background-color: rebeccapurple; */
 	/* padding: 40px 0 40px 0; */
-    padding-top: 24px;
+	padding-top: 24px;
 }
 
 #add-lists-btn-container button {
@@ -93,3 +93,5 @@
 	background-color: rgb(3, 169, 9);
 	cursor: pointer;
 }
+
+

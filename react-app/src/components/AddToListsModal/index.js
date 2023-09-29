@@ -65,14 +65,15 @@ function AddToListsModal({ ticker }) {
                 </div>
                 <form id='add-to-lists-form'>
                     {userWatchlists &&
-                        userWatchlists.map((watchlist) => (
-                            <div key={watchlist.id} id='saved-lists'>
+                        userWatchlists.map((watchlist, index) => (
+                            <div key={watchlist.id} id={`saved-lists-${index}}`} className='saved-lists' onClick={(e) => {handleCheckboxChange(watchlist.id)}}>
                                 <input
                                     type="checkbox"
                                     id={`watchlist-${watchlist.id}`}
                                     checked={selectedWatchlists[watchlist.id] || false}
                                     onChange={() => handleCheckboxChange(watchlist.id)}
                                 />
+
                                 <div id="pic-container">
                                     <span className="material-icons big-eye">visibility</span>
                                 </div>

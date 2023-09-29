@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import "./StockPosition.css";
 
 
-function StockPosition({ latestPrice, stocks_owned_by_user }) {
+function StockPosition({ latestPrice, stocks_owned_by_user, openPrice }) {
     const portfolio_total = useSelector(state => state.portfolio.totalValue)
     // Stock owned by user and average cost per share
     const shares_owned = stocks_owned_by_user.reduce((accum, currentValue) => {
@@ -22,8 +22,8 @@ function StockPosition({ latestPrice, stocks_owned_by_user }) {
     const totalReturn = marketValue - totalPrice
     const totalPercentReturn = (totalReturn / totalPrice) * 100
 
-    const todaysReturn = marketValue - totalPrice
-    const todaysPercentReturn = (todaysReturn / totalPrice) * 100
+    const todaysReturn = marketValue - (openPrice * shares_owned)
+    const todaysPercentReturn = (todaysReturn / (openPrice * shares_owned)) * 100
 
 
     //console.log(stocks_owned_by_user)
@@ -31,7 +31,7 @@ function StockPosition({ latestPrice, stocks_owned_by_user }) {
         <div id="stock-position-container">
             <div id="market-value-container">
                 <h3>Your Market value</h3> ${marketValue.toFixed(2)}
-                <p className='first-line'><span>Today's Return  </span><span className='stock-position-lastspan'>${todaysReturn.toLocaleString()} ({todaysPercentReturn.toFixed(2)}%) </span> </p>
+                <p className='first-line'><span>Today's Return  </span><span className='stock-position-lastspan'>${todaysReturn.toFixed(2)} ({todaysPercentReturn.toFixed(2)}%) </span> </p>
 
                 <p><span>Total Return  </span><span className='stock-position-lastspan'>${totalReturn.toFixed(2)} ({totalPercentReturn.toFixed(2)})% </span> </p>
             </div>
