@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import SearchBar from '../SearchBar/SearchBar';
@@ -13,6 +13,20 @@ function Navigation() {
 	const stocksData = useSelector(state => state.stocks.allStocks);
 	const location = useLocation();
 	const [dropDownOpen, setDropDownOpen] = useState(false);
+
+	// DARK MODE
+	const [theme, setTheme] = useState('light');
+	const toggleTheme = () => {
+		if (theme === 'light') setTheme('dark');
+		else setTheme('light')
+	}
+
+	useEffect(() => {
+		// document.body.className = theme;
+		// document.getElementById('nav-container').className = 'nav-container-' + theme;
+		// document.body.className = theme;
+		// document.body.className = theme;
+	}, [theme]);
 
 	// add link to list where you dont want navbar
 	if (location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/404") return null
@@ -33,7 +47,11 @@ function Navigation() {
 			<SearchBar placeholder="search" data={stocksData} />
 
 			<div id="links-container">
-			
+
+				<span>
+					<button onClick={toggleTheme}>Toggle theme</button>
+				</span>
+				
 				<span>
 					<OpenModalButton
 						buttonText={"Account"}
