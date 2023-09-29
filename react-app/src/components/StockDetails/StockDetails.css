@@ -8,6 +8,8 @@
 	width: 75%;
 }
 
+
+
 #temp-nav-bar {
 	padding: 30px 0px;
 }
@@ -111,8 +113,18 @@
 	background: none;
 	font-weight: 500;
 
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	justify-content: center;
+
 	border: 1px solid rgb(0, 200, 5);
 	color: rgb(0, 200, 5);
+}
+
+.material-icons.checkmark {
+	font-size: 18px;
+	align-self: center;
 }
 
 #add-to-lists-container button:hover {
