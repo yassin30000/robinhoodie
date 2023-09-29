@@ -71,13 +71,13 @@ function AddToListsModal({ ticker }) {
                                     type="checkbox"
                                     id={`watchlist-${watchlist.id}`}
                                     checked={selectedWatchlists[watchlist.id] || false}
-                                    // onChange={() => handleCheckboxChange(watchlist.id)}
+
                                 />
 
                                 <div id="pic-container">
                                     <span className="material-icons big-eye">visibility</span>
                                 </div>
-                                <label htmlFor={`watchlist-${watchlist.id}`}>
+                                <label htmlFor={`watchlist-${watchlist.id}`} onClick={() => handleCheckboxChange(watchlist.id)}>
                                     {watchlist.name}
                                 </label>
                             </div>

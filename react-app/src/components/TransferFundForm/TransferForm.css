@@ -96,3 +96,22 @@
     color: red;
     font-size: small;
 }
+
+.close-transfer-container {
+    align-items: center;
+    display: flex;
+    position: fixed;
+    right: 50px;
+    top: 50px;
+    width: 52px;
+}
+
+#close-transfer-form {
+	padding: 5px;
+	border-radius: 5px;
+}
+
+#close-transfer-form:hover {
+	background-color: rgba(225, 224, 224, 0.444);
+	cursor: pointer;
+}
