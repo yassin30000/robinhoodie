@@ -52,11 +52,7 @@ function StockDetails() {
         }
     }
 
-    let openPrice;
-    let latestPrice;
-    let latestDate;
-    let price_change;
-    let percent_change;
+    let openPrice, latestPrice, latestDate, price_change, percent_change;
     // [dollar amount, % change]
 
     let dates_array;
