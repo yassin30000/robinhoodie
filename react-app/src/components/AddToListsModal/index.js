@@ -71,7 +71,7 @@ function AddToListsModal({ ticker }) {
                                     type="checkbox"
                                     id={`watchlist-${watchlist.id}`}
                                     checked={selectedWatchlists[watchlist.id] || false}
-                                    // onClick={() => handleCheckboxChange(watchlist.id)}
+
                                 />
 
                                 <div id="pic-container">
