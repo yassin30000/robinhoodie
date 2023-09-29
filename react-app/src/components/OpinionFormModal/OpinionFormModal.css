@@ -47,10 +47,6 @@
 	border: 2px solid rgb(0, 200, 5);
 }
 
-#opinion-content:hover {
-	background-color: white;
-}
-
 #opinion-content:focus {
 	outline: none;
 	border: 1px solid rgb(0, 200, 5);
