@@ -29,7 +29,7 @@ function Navigation() {
 	}, [theme]);
 
 	// add link to list where you dont want navbar
-	if (location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/404") return null
+	if (location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/404" || location.pathname === "/portfolio/deposit-funds") return null
 
 	return (
 		<div id='nav-container'>
@@ -51,7 +51,7 @@ function Navigation() {
 				<span>
 					<button onClick={toggleTheme}>Toggle theme</button>
 				</span>
-				
+
 				<span>
 					<OpenModalButton
 						buttonText={"Account"}

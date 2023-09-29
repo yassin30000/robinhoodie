@@ -34,6 +34,12 @@ function BuyForm() {
         const errors = {};
         if (shares < 0) errors.shares = "Shares can't be negative"
         if (shares === "0") errors.shares = "Shares can't be zero"
+        if (order === orderOption[1]) {
+            if(shares > shares_owned) {
+                errors.shares = "Not enough shares to sell"
+            }
+        }
+
         setErrors(errors)
 
         // if a history.push happens, shares set to zero
@@ -99,9 +105,6 @@ function BuyForm() {
             }
         }
         if (order === orderOption[1]) {
-            if (shares > shares_owned) {
-                return alert("Error you don't have enough shares to sell")
-            }
             let successfully = await dispatch(sellShares(stockId, latestPrice, sharesData))
             await dispatch(fetchPortfolio())
 
