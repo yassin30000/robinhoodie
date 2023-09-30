@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './WatchlistUpdateModal.css'
 import { useDispatch } from 'react-redux'
 import { useCustomModal } from '../../context/Modal2';
-import { updateExistingWatchlist } from '../../store/watchlists';
+import { updateExistingWatchlist, fetchUserWatchlists } from '../../store/watchlists';
 
 function WatchlistUpdateModal({ prevListName, listId }) {
     const { closeModal } = useCustomModal();
@@ -19,8 +19,10 @@ function WatchlistUpdateModal({ prevListName, listId }) {
                 "name": listName
             }
             await dispatch(updateExistingWatchlist(listId, data));
+            await dispatch(fetchUserWatchlists())
+
             closeModal(); // Close the modal after updating
-            window.location.reload();
+            // window.location.reload();
         }
     };
 

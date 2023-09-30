@@ -218,16 +218,16 @@ function LandingPage() {
                                             <OpenCustomModalButton
                                                 id="edit-opinion"
                                                 buttonText={""}
-                                                buttonHTML={<span class="material-symbols-outlined edit">edit</span>}
+                                                buttonHTML={<span className="material-symbols-outlined edit">edit</span>}
 
-                                                modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content} />}
+                                                modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content} location='landing-page'/>}
                                             />
                                             <OpenCustomModalButton
                                                 id="delete-opinion"
                                                 buttonText={""}
                                                 buttonHTML={<span className='material-icons delete-opinion'>close</span>}
 
-                                                modalComponent={<ConfirmDeleteOpinion opinionId={opinion.id} />}
+                                                modalComponent={<ConfirmDeleteOpinion opinionId={opinion.id} location='landing-page'/>}
                                             />
 
                                         </div>

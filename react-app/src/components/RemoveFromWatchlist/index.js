@@ -80,7 +80,7 @@ function RemoveFromWatchlist({ listName, listId, latestPrices }) {
 
     const listStocks = useSelector(state => state.watchlists.userWatchlists.watchlists[listId].stocks);
     const lists = useSelector(state => state.watchlists.userWatchlists);
-    console.log('LISTS: ', lists)
+    // console.log('LISTS: ', lists)
     const stocksData = useSelector(state => state.stocks.allStocks)
     const stocks = stocksData ? stocksData.stocks : [];
 
@@ -99,7 +99,7 @@ function RemoveFromWatchlist({ listName, listId, latestPrices }) {
     }
 
     const handleSaveChanges = () => {
-        window.location.reload();
+        dispatch(fetchUserWatchlists())
         closeModal();
     }
 

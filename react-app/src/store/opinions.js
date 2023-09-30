@@ -34,7 +34,7 @@ const updateOpinionAction = (opinion) => ({
 // Redux Thunk Function
 export const fetchOpinions = () => async (dispatch) => {
     try {
-        const res = await fetch("api/opinions/");
+        const res = await fetch("/api/opinions/");
 
         if (res.ok) {
             const data = await res.json();

@@ -166,14 +166,14 @@ function StockDetails() {
                                                 buttonText={""}
                                                 buttonHTML={<span className="material-symbols-outlined edit">edit</span>}
 
-                                                modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content} />}
+                                                modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content} location='stock-details' stockId={opinion.stock_id}/>}
                                             />
                                             <OpenCustomModalButton
                                                 id="delete-opinion"
                                                 buttonText={""}
                                                 buttonHTML={<span className='material-icons delete-opinion'>close</span>}
 
-                                                modalComponent={<ConfirmDeleteOpinion opinionId={opinion.id} />}
+                                                modalComponent={<ConfirmDeleteOpinion opinionId={opinion.id} location='stock-details' stockId={opinion.stock_id}/>}
                                             />
 
                                         </div>
