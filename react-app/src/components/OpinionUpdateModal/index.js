@@ -14,7 +14,7 @@ function OpinionUpdateModal({ opinionId, prevContent, location, stockId }) {
         e.preventDefault();
         // console.log('hello1')
         try {
-            const res = await dispatch(updateOpinion(opinionId, content));
+            await dispatch(updateOpinion(opinionId, content));
 
             if (location === 'stock-details') await dispatch(fetchStockOpinions(stockId))
             if (location === 'landing-page') await dispatch(fetchOpinions())
