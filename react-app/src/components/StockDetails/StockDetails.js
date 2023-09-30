@@ -42,8 +42,8 @@ function StockDetails() {
                     return 'check'
                 }
             }
-            return 'add'
         }
+        return 'add'
     }
 
     function getUserName(user_id) {
