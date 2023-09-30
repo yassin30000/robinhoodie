@@ -48,9 +48,9 @@ function Navigation() {
 
 			<div id="links-container">
 
-				<span>
+				{/* <span>
 					<button onClick={toggleTheme}>Toggle theme</button>
-				</span>
+				</span> */}
 
 				<span>
 					<OpenModalButton
