@@ -21,12 +21,12 @@ function BuyForm() {
     // const [hasSubmitted, setHasSubmitted] = useState(false)
     const stock = useSelector(state => state.stocks[ticker])
     const portfolio = useSelector(state => state.portfolio.portfolio)
-    const stock_portfolio = useSelector(state => state.portfolio.portfolio.portfolio_stocks)
+    const stock_portfolio = useSelector(state => state.portfolio.portfolio?.portfolio_stocks)
     const obj = useSelector(state => state.stocks.allStocks.stocks)
     let stockId;
     const stock_info = useSelector(state => state.stocks.allStocks.stocks[`${ticker}`])
     const stocks_owned_by_user = stock_portfolio?.filter(stock => Number(stock.stock_id) === Number(stock_info.id))
-    const shares_owned = stocks_owned_by_user.reduce((accum, currentValue) => {
+    const shares_owned = stocks_owned_by_user?.reduce((accum, currentValue) => {
         return accum + currentValue.shares
     }, 0)
 
