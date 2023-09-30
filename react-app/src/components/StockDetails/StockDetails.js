@@ -22,7 +22,7 @@ function StockDetails() {
     const sessionUser = useSelector(state => state.session.user);
     const stock = useSelector(state => state.stocks[ticker])
     const stock_info = useSelector(state => state.stocks.allStocks.stocks[`${ticker}`])
-    const portfolio = useSelector(state => state.portfolio.portfolio.portfolio_stocks)
+    const portfolio = useSelector(state => state.portfolio.portfolio?.portfolio_stocks)
     const usersData = useSelector((state) => state.session.allUsers)
     const stocks_owned_by_user = portfolio?.filter(stock => Number(stock.stock_id) === Number(stock_info.id))
     const opinions_data = useSelector(state => state.opinions[stock_info.id])
@@ -33,11 +33,12 @@ function StockDetails() {
 
     const userWatchlistsData = useSelector((state) => state.watchlists.userWatchlists);
     const userWatchlists = userWatchlistsData ? Object.values(userWatchlistsData.watchlists) : []
-
-    const stockAddedToList = () => {
+    
+    const stockAddedToList = () => {    
         for (let list of userWatchlists) {
             for (let stock of list.stocks) {
-                if (stock.stock_id === stock_info.id) {
+                console.log(stock)
+                if (Number(stock.stock_id) === Number(stock_info.id)) {
                     return 'check'
                 }
             }
@@ -166,14 +167,14 @@ function StockDetails() {
                                                 buttonText={""}
                                                 buttonHTML={<span className="material-symbols-outlined edit">edit</span>}
 
-                                                modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content} />}
+                                                modalComponent={<OpinionUpdateModal opinionId={opinion.id} prevContent={opinion.content} location='stock-details' stockId={opinion.stock_id}/>}
                                             />
                                             <OpenCustomModalButton
                                                 id="delete-opinion"
                                                 buttonText={""}
                                                 buttonHTML={<span className='material-icons delete-opinion'>close</span>}
 
-                                                modalComponent={<ConfirmDeleteOpinion opinionId={opinion.id} />}
+                                                modalComponent={<ConfirmDeleteOpinion opinionId={opinion.id} location='stock-details' stockId={opinion.stock_id}/>}
                                             />
 
                                         </div>

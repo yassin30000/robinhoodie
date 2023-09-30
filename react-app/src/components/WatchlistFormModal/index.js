@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './WatchlistFormModal.css'
 import { useDispatch } from 'react-redux'
-import { createNewWatchlist } from '../../store/watchlists';
+import { createNewWatchlist, fetchUserWatchlists } from '../../store/watchlists';
 import { useCustomModal } from '../../context/Modal2';
 
 function WatchlistFormModal() {
@@ -24,8 +24,9 @@ function WatchlistFormModal() {
         const data = await dispatch(createNewWatchlist(watchlistData));
         if (data) setErrors(data)
         // Close the modal after creating the watchlist
+        await dispatch(fetchUserWatchlists())
         closeModal();
-        window.location.reload();
+        // window.location.reload();
     };
 
     return (

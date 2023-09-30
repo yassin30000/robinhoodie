@@ -1,10 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import './AddToListModal.css';
 import { useEffect, useState } from 'react';
+//redux store
 import { addStockToUserWatchlist, fetchUserWatchlists } from '../../store/watchlists';
 import { fetchAllStocks } from '../../store/stocks';
-import { useCustomModal } from '../../context/Modal2';
 import { deleteWatchlistStockThunk } from '../../store/watchlists';
+//context
+import { useCustomModal } from '../../context/Modal2';
+//css
+import './AddToListModal.css';
 
 function AddToListsModal({ ticker }) {
 
@@ -26,24 +29,32 @@ function AddToListsModal({ ticker }) {
     }, {});
 
     const [selectedWatchlists, setSelectedWatchlists] = useState(initialSelectedWatchlists);
-
+    console.log(userWatchlists)
+    console.log(selectedWatchlists)
     const handleCheckboxChange = (watchlistId) => {
-        setSelectedWatchlists((prevSelected) => ({
-            ...prevSelected,
-            [watchlistId]: !prevSelected[watchlistId],
-        }));
+
+        setSelectedWatchlists((prevSelected) => {
+            let newSelected = { ...prevSelected }
+            console.log(prevSelected)
+            newSelected[watchlistId] = !prevSelected[watchlistId]
+            return newSelected
+        });
     };
 
-    const handleAddToLists = () => {
-        const selectedIds = Object.keys(selectedWatchlists).filter(
+    const handleAddToLists = async () => {
+        const selectedIds = Object.keys(selectedWatchlists).map(id => Number(id)).filter(
             (id) => selectedWatchlists[id]
         );
+        console.log(selectedIds)
         userWatchlists.forEach((watchlist) => {
-            if (!selectedIds.includes(watchlist.id)) dispatch(deleteWatchlistStockThunk(watchlist.id, stock.id));
+            if (!selectedIds.includes(watchlist.id)) {
+                dispatch(deleteWatchlistStockThunk(watchlist.id, stock.id))
+            };
         });
-        for (let id of selectedIds) dispatch(addStockToUserWatchlist(id, stock.id));
-        // dispatch(fetchUserWatchlists());
-        // dispatch(fetchAllStocks());
+        for (let id of selectedIds) {
+            await dispatch(addStockToUserWatchlist(id, stock.id))
+        };
+        await dispatch(fetchUserWatchlists());
         // window.location.reload();
 
         closeModal();
@@ -66,19 +77,19 @@ function AddToListsModal({ ticker }) {
                 <form id='add-to-lists-form'>
                     {userWatchlists &&
                         userWatchlists.map((watchlist, index) => (
-                            <div key={watchlist.id} id={`saved-lists-${index}`} className='saved-lists' onClick={(e) => {handleCheckboxChange(watchlist.id)}}>
+                            <div key={watchlist.id} id={`saved-lists-${index}`} className='saved-lists' onClick={(e) => { handleCheckboxChange(watchlist.id) }}>
                                 <input
                                     type="checkbox"
                                     id={`watchlist-${watchlist.id}`}
                                     checked={selectedWatchlists[watchlist.id] || false}
                                 />
-
                                 <div id="pic-container">
                                     <span className="material-icons big-eye">visibility</span>
                                 </div>
-                                <label htmlFor={`watchlist-${watchlist.id}`} onClick={() => handleCheckboxChange(watchlist.id)}>
+                                <p htmlFor={`watchlist-${watchlist.id}`}>
                                     {watchlist.name}
-                                </label>
+                                </p>
+
                             </div>
                         ))}
                 </form>

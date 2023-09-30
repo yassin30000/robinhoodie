@@ -99,7 +99,7 @@ export const updateExistingWatchlist = (watchlistId, updatedWatchlistData) => as
             body: JSON.stringify(updatedWatchlistData),
         });
 
-        console.log('STORE RES: ', res)
+        // console.log('STORE RES: ', res)
         if (res.ok) {
             const updatedData = await res.json();
             dispatch(updateWatchlist(updatedData));
@@ -154,6 +154,7 @@ const initialState = {
 };
 
 export default function watchlistsReducer(state = initialState, action) {
+    let newState = {...state}
     switch (action.type) {
         case SET_USER_WATCHLISTS:
             return {
@@ -161,26 +162,13 @@ export default function watchlistsReducer(state = initialState, action) {
                 userWatchlists: action.payload,
             };
         case CREATE_WATCHLIST:
-            return {
-                ...state,
-                userWatchlists: [...state.userWatchlists, action.payload],
-            };
+            return newState;
         case DELETE_WATCHLIST:
-            return {
-                ...state,
-                userWatchlists: [...state.userWatchlists, action.payload],
-            };
+            return newState;
         case UPDATE_WATCHLIST:
-            return {
-                ...state,
-                userWatchlists: [...state.userWatchlists, action.payload],
-            };
+            return newState;
         case DELETE_WATCHLIST_STOCK:
-            return {
-                ...state,
-                userWatchlists: [...state.userWatchlists, action.payload],
-            };
-
+            return newState;
         default:
             return state;
     }

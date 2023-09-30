@@ -7,7 +7,7 @@ import WatchlistFormModal from "../WatchlistFormModal/index.js";
 import OpenCustomModalButton from "../OpenModalButton/OpenModalButton2";
 import ConfirmDeleteModal from "../ConfirmDeleteModal";
 import WatchlistUpdateModal from "../WatchlistUpdateModal";
-import { useHistory, Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import LineChart from "../LineChart/LineChart";
 import RemoveFromWatchlist from "../RemoveFromWatchlist";
 
