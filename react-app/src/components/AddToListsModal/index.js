@@ -29,13 +29,11 @@ function AddToListsModal({ ticker }) {
     }, {});
 
     const [selectedWatchlists, setSelectedWatchlists] = useState(initialSelectedWatchlists);
-    console.log(userWatchlists)
-    console.log(selectedWatchlists)
+
     const handleCheckboxChange = (watchlistId) => {
 
         setSelectedWatchlists((prevSelected) => {
             let newSelected = { ...prevSelected }
-            console.log(prevSelected)
             newSelected[watchlistId] = !prevSelected[watchlistId]
             return newSelected
         });
