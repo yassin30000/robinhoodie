@@ -2,9 +2,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import './ConfirmDeleteOpinion.css'
 import { useCustomModal } from '../../context/Modal2';
-import { deleteOpinion } from "../../store/opinions";
+import { deleteOpinion, fetchOpinions, fetchStockOpinions } from "../../store/opinions";
 
-function ConfirmDeleteOpinion({ opinionId }) {
+function ConfirmDeleteOpinion({ opinionId, location, stockId }) {
     const { closeModal } = useCustomModal();
 
     const dispatch = useDispatch();
@@ -13,8 +13,10 @@ function ConfirmDeleteOpinion({ opinionId }) {
         try {
             // Dispatch the deleteOpinion action with the opinionId you want to delete
             await dispatch(deleteOpinion(opinionId));
+            if (location === 'stock-details') await dispatch(fetchStockOpinions(stockId))
+            if (location === 'landing-page') await dispatch(fetchOpinions())
             closeModal(); // Close the modal after successful deletion
-            window.location.reload();
+            // window.location.reload();
         } catch (error) {
             console.error("Error deleting opinion:", error);
         }

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteExistingWatchlist } from "../../store/watchlists";
+import { deleteExistingWatchlist, fetchUserWatchlists } from "../../store/watchlists";
 import './ConfirmDeleteModal.css'
 import { useCustomModal } from '../../context/Modal2';
 
@@ -12,7 +12,9 @@ function ConfirmDeleteModal({ listName, listTotal, listId }) {
 
     const handleDelete = async () => {
         await dispatch(deleteExistingWatchlist(listId))
-        return window.location.reload();
+        await dispatch(fetchUserWatchlists())
+        // return window.location.reload();
+        closeModal();
     }
 
     return (

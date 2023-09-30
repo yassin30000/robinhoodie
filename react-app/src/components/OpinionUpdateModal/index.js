@@ -2,23 +2,32 @@ import './OpinionUpdateModal.css'
 import { useCustomModal } from '../../context/Modal2';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { updateOpinion } from '../../store/opinions';
+import { updateOpinion, fetchOpinions, fetchStockOpinions } from '../../store/opinions';
 
-function OpinionUpdateModal({ opinionId, prevContent }) {
+function OpinionUpdateModal({ opinionId, prevContent, location, stockId }) {
     const dispatch = useDispatch();
     const { closeModal } = useCustomModal();
     const [content, setContent] = useState(prevContent);
 
 
-    const handleUpdateOpinion = async () => {
+    const handleUpdateOpinion = async (e) => {
+        e.preventDefault();
+        // console.log('hello1')
         try {
-            await dispatch(updateOpinion(opinionId, content));
+            const res = await dispatch(updateOpinion(opinionId, content));
+
+            if (location === 'stock-details') await dispatch(fetchStockOpinions(stockId))
+            if (location === 'landing-page') await dispatch(fetchOpinions())
             closeModal();
-            window.location.reload();
-        } catch (error) {
-            console.error("Error updating opinion:", error);
+            // console.log('hello2')
+
+        } catch {
+
+            console.error("Error updating opinion:");
         }
     }
+
+
 
     return (
         <>
@@ -31,7 +40,7 @@ function OpinionUpdateModal({ opinionId, prevContent }) {
                 </div>
 
                 <form id='opinion-form' onSubmit={handleUpdateOpinion}>
-                   
+
 
                     <textarea
                         id="opinion-content-inpt"

@@ -22,8 +22,7 @@ def seed_portfolio_stocks():
 
 
 
-    stock1 = Portfolio_Stock(
-        shares=-1, portfolio_id=1, stock_id=1, price=100)
+
     stock2 = Portfolio_Stock(
         shares=-2, portfolio_id=2, stock_id=2, price=100)
     stock3 = Portfolio_Stock(
