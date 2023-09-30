@@ -5,11 +5,27 @@
 }
 #market-value-container,
 #average-cost-container {
-	border: 1.5px solid grey;
+	border: 1px solid rgb(227, 233, 237);
 	margin: 10px;
 	width: 50%;
 	padding: 20px;
 	border-radius: 5px;
+}
+
+#average-cost-container span,
+#market-value-container span {
+	font-size: 13px;
+}
+
+#average-cost {
+	font-size: 21px;
+	font-weight: 500;
+}
+
+#average-cost-container h3,
+#market-value-container h3 {
+	font-weight: 400;
+	font-size: 13px;
 }
 
 #stock-position-container h3 {
@@ -23,7 +39,7 @@
 }
 
 .first-line {
-	border-bottom: 1px solid grey;
+	border-bottom: 1px solid rgb(227, 233, 237);
 }
 
 .stock-position-lastspan {

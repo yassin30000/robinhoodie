@@ -30,13 +30,21 @@ function StockPosition({ latestPrice, stocks_owned_by_user, openPrice }) {
     return (
         <div id="stock-position-container">
             <div id="market-value-container">
-                <h3>Your Market value</h3> ${marketValue.toFixed(2)}
+                <h3>Your Market value</h3>
+                <div id="average-cost">
+
+                    ${marketValue.toFixed(2)}
+                </div>
                 <p className='first-line'><span>Today's Return  </span><span className='stock-position-lastspan'>${todaysReturn.toFixed(2)} ({todaysPercentReturn.toFixed(2)}%) </span> </p>
 
                 <p><span>Total Return  </span><span className='stock-position-lastspan'>${totalReturn.toFixed(2)} ({totalPercentReturn.toFixed(2)})% </span> </p>
             </div>
             <div id="average-cost-container">
-                <h3>Your Average Cost</h3>  ${averagePrice.toFixed(2)}
+                <h3>Your Average Cost</h3>
+                <div id="average-cost">
+                    ${averagePrice.toFixed(2)}
+
+                </div>
 
                 <p className='first-line'><span>Current Shares </span><span className='stock-position-lastspan'>{shares_owned} </span></p>
                 <p><span>Portfolio Diversity </span> <span className='stock-position-lastspan'> {((marketValue / Number(portfolio_total)) * 100).toFixed(2)}% </span ></p>

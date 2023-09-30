@@ -45,7 +45,7 @@ function LandingPage() {
                 }
             })
         }
-        
+
         Object.values(alpacaData)[0].forEach(dataPoint => {
             let date = new Date(dataPoint.t)
             portfolio_value[date.toLocaleDateString('en-us', options)] = 0;
@@ -134,32 +134,47 @@ function LandingPage() {
 
                 </div>
 
-                <div id='buying-power-container' onClick={() => { setOpen(!open) }}>
+                <div id='buying-power-container'>
                     <div className={`buying-menu-trigger ${open ? 'active' : 'inactive'}`}>
-                        <div id='buying-power-label'>Buying Power
+                        <div id='buying-power-label' onClick={() => { setOpen(!open) }}>
                             {
-                                <span id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toLocaleString() : 0}
-                                    <span className='material-icons cash-arrow'>expand_more</span>
-                                </span>
+                                <>
+                                    <div>
+                                        <p>Buying Power</p>
+                                    </div>
+                                    <div id='buying-power-label-right'>
+                                        <p id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toLocaleString() : 0}</p>
+                                        <p id='buying-power-arrow' className={open ? "material-icons arrow rotate-180" : "material-icons arrow rotate-0"}>expand_more</p>
+                                    </div>
+                                </>
                             }
                         </div>
                         <div className={`buying-dropdown-menu ${open ? 'active' : 'inactive'}`}>
-                            <div className='buying-info-grid'>
+
+                            {/* <div className='buying-information'>
+                                <p>Buying power represents the total value of assets you can purchase.</p>
+                            </div> */}
+                            <div className='buying-power-content'>
                                 {/* <div className='brokerage-grid'>
                                     <div>Brokerage cash</div>
                                     <div>${total_money}</div>
                                 </div> */}
-                                <div className='brokerage-grid'>
-                                    <div>Buying power</div>
+                                <div className='buying-power-row-container-1'>
+                                    <div>Brokerage cash</div>
+                                    <div id='actual-cash'>${portfolio?.cash?.toLocaleString()}</div>
+                                </div>
+
+                                <div className='buying-power-row-container-2'>
+                                    <div>Total</div>
                                     <div>${portfolio?.cash?.toLocaleString()}</div>
                                 </div>
-                                <div className='dep-div'>
+
+                                <div className='transfer-button-container'>
                                     <Link to='/portfolio/deposit-funds' className="deposit-btn">Transfer funds</Link>
                                 </div>
+
                             </div>
-                            <div className='buying-information'>
-                                <p>Buying power represents the total value of assets you can purchase.</p>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -182,7 +197,7 @@ function LandingPage() {
 
                     </div>
 
-                    {viewAllOpinions ? allUsers && Array.isArray(allOpinions) && allOpinions?.slice(0,10).map((opinion, index) => (
+                    {viewAllOpinions ? allUsers && Array.isArray(allOpinions) && allOpinions?.slice(0, 10).map((opinion, index) => (
                         <div key={index} id='opinion-container'>
                             <div id="opinion" >
                                 <div id='opinion-author'>{getUserName(opinion.user_id)}</div>
@@ -195,7 +210,7 @@ function LandingPage() {
                             </div>
                         </div>
                     )) :
-                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser?.id).slice(0,10).map((opinion, index) => (
+                        allUsers && Array.isArray(allOpinions) && allOpinions?.filter(op => op.user_id === sessionUser?.id).slice(0, 10).map((opinion, index) => (
                             <div key={index} id='opinion-container'>
                                 <div id="opinion">
                                     <div id='opinion-author'>{getUserName(opinion.user_id)}
