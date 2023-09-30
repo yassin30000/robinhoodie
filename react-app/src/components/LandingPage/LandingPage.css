@@ -293,13 +293,22 @@
 	overflow-wrap: break-word;
 }
 
-@media only screen and (max-width: 1600px) {
+@media only screen and (max-width: 1300px) {
 	.buying-information {
 		display: flex;
 		width: 70%;
-		padding-left: 30px;
 		flex-direction: column;
 		overflow-wrap: break-word;
+	}
+
+	.buying-dropdown-menu.active {
+		width: 120%;
+		display: flex;
+		gap: 0;
+	}
+
+	.deposit-btn {
+		padding: 10px 50px 10px;
 	}
 }
 
