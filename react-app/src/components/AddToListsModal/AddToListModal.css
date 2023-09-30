@@ -1,6 +1,8 @@
 #add-to-lists-form-container {
 	width: 408px;
-	height: fit-content;
+	height: max-content;
+	max-height: 600px;
+	overflow-y: auto;
 	padding: 24px;
 	display: flex;
 	justify-content: space-between;
