@@ -55,7 +55,7 @@
 
 #opinions-title {
 	/* border-top: 1px solid rgba(239, 242, 243, 1); */
-	border-bottom: 1px solid rgba(239, 242, 243, 1);
+	border-bottom: 1px solid #cccccc98;
 
 	/* width: 68vw; */
 	padding-bottom: 15px;
@@ -79,7 +79,7 @@
 }
 
 #opinion {
-	border-bottom: 1px solid rgba(239, 242, 243, 1);
+	border-bottom: 1px solid #cccccc98;
 	border-radius: 10px;
 	padding-left: 20px;
 	font-size: 15px;
@@ -187,7 +187,6 @@
 }
 
 .buying-menu-trigger.inactive {
-	border-bottom: 1px solid rgb(239, 242, 243);
 	display: block;
 	width: 100%;
 	font-size: 24px;
@@ -203,8 +202,8 @@
 }
 
 #buying-power-label {
-	border-top: 1px solid rgb(239, 242, 243);
-	border-bottom: 1px solid rgb(239, 242, 243);
+	border-top: 1px solid #cccccc98;
+	border-bottom: 1px solid #cccccc98;
 	padding: 0 24px 0 24px;
 	font-size: 15px;
 	font-weight: 500;
@@ -291,6 +290,10 @@
 .buying-power-row-container-1 {
 	border-bottom: 1px solid #cccccc98;
 	color: rgb(106, 114, 120);
+}
+
+.transfer-button-container a:hover {
+	background-color: rgba(38, 38, 38, 1);
 }
 
 .transfer-button-container a {
