@@ -14,7 +14,7 @@ function WatchlistUpdateModal({ prevListName, listId }) {
 
         if (listName) {
 
-            console.log('LIST NAME: ', listName)
+            // console.log('LIST NAME: ', listName)
             const data = {
                 "name": listName
             }

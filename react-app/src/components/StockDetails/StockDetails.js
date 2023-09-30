@@ -33,11 +33,12 @@ function StockDetails() {
 
     const userWatchlistsData = useSelector((state) => state.watchlists.userWatchlists);
     const userWatchlists = userWatchlistsData ? Object.values(userWatchlistsData.watchlists) : []
-
+    
     const stockAddedToList = () => {    
         for (let list of userWatchlists) {
             for (let stock of list.stocks) {
-                if (stock.stock_id === stock_info.id) {
+                console.log(stock)
+                if (Number(stock.stock_id) === Number(stock_info.id)) {
                     return 'check'
                 }
             }
