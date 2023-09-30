@@ -22,7 +22,7 @@ function StockDetails() {
     const sessionUser = useSelector(state => state.session.user);
     const stock = useSelector(state => state.stocks[ticker])
     const stock_info = useSelector(state => state.stocks.allStocks.stocks[`${ticker}`])
-    const portfolio = useSelector(state => state.portfolio.portfolio.portfolio_stocks)
+    const portfolio = useSelector(state => state.portfolio.portfolio?.portfolio_stocks)
     const usersData = useSelector((state) => state.session.allUsers)
     const stocks_owned_by_user = portfolio?.filter(stock => Number(stock.stock_id) === Number(stock_info.id))
     const opinions_data = useSelector(state => state.opinions[stock_info.id])

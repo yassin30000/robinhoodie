@@ -39,9 +39,14 @@ function AddToListsModal({ ticker }) {
             (id) => selectedWatchlists[id]
         );
         userWatchlists.forEach((watchlist) => {
-            if (!selectedIds.includes(watchlist.id)) dispatch(deleteWatchlistStockThunk(watchlist.id, stock.id));
+            if (!selectedIds.includes(watchlist.id)) {
+                dispatch(deleteWatchlistStockThunk(watchlist.id, stock.id))
+            };
         });
-        for (let id of selectedIds) dispatch(addStockToUserWatchlist(id, stock.id));
+        for (let id of selectedIds) {
+            dispatch(addStockToUserWatchlist(id, stock.id))
+        };
+        dispatch(fetchUserWatchlists());
         // dispatch(fetchUserWatchlists());
         // dispatch(fetchAllStocks());
         // window.location.reload();
