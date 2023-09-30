@@ -55,7 +55,7 @@
 
 #opinions-title {
 	/* border-top: 1px solid rgba(239, 242, 243, 1); */
-	border-bottom: 1px solid rgba(239, 242, 243, 1);
+	border-bottom: 1px solid #cccccc98;
 
 	/* width: 68vw; */
 	padding-bottom: 15px;
@@ -68,7 +68,7 @@
 #opinion-container {
 	/* width: 73vw; */
 	padding: 0 20px 0 0px;
-		border-radius: 10px;
+	border-radius: 10px;
 
 	/* background-color: red; */
 }
@@ -79,7 +79,7 @@
 }
 
 #opinion {
-	border-bottom: 1px solid rgba(239, 242, 243, 1);
+	border-bottom: 1px solid #cccccc98;
 	border-radius: 10px;
 	padding-left: 20px;
 	font-size: 15px;
@@ -156,7 +156,6 @@
 	display: flex;
 	justify-content: space-between;
 	font-weight: 500;
-	/* border-bottom: 1px solid rgba(239, 242, 243, 1); */
 }
 
 #my-opinons,
@@ -174,15 +173,8 @@
 
 #buying-power-container {
 	position: relative;
-	/* height: auto; */
-	/* padding: auto; */
-	/* width: 70%; */
-	/* padding-bottom: 15px; */
-	/* margin-top: 60px; */
 	font-size: 24px;
-	/* margin-left: 30px; */
 	border-radius: 10px;
-	/* margin-right: 50px; */
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;
@@ -195,39 +187,42 @@
 }
 
 .buying-menu-trigger.inactive {
-	border-bottom: 1px solid rgb(239, 242, 243);
-
 	display: block;
 	width: 100%;
-	/* width: 68vw; */
 	font-size: 24px;
-	/* margin-left: 30px; */
 }
 
 .buying-menu-trigger.active {
 	display: block;
-
 	width: 100%;
 	font-size: 24px;
-	/* margin-left: 30px; */
 	background-color: white;
 	border-radius: 0.25rem;
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 #buying-power-label {
-	border-top: 1px solid rgb(239, 242, 243);
-	/* border-bottom: 1px solid rgb(239, 242, 243); */
-
-	/* margin-bottom: 20px; */
-	/* padding: 20px; */
-	padding: 0 20px 0 20px;
-	font-size: 17px;
-	font-weight: bold;
+	border-top: 1px solid #cccccc98;
+	border-bottom: 1px solid #cccccc98;
+	padding: 0 24px 0 24px;
+	font-size: 15px;
+	font-weight: 500;
 	height: 73px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+
+#buying-power-arrow {
+	color: black;
+	transition: all .3s;
+}
+
+#buying-power-label-right {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 8px;
 }
 
 #buying-power {
@@ -251,28 +246,68 @@
 }
 
 .buying-dropdown-menu.active {
-	position: relative;
-	display: grid;
-	grid-template-columns: repeat(2, max-content);
-	gap: 3rem;
-	justify-content: space-evenly;
-	padding-bottom: 15px;
-	font-size: 15px;
-	/* padding-left: 20px; */
-	/* margin-left: 20px; */
-	top: calc(100% + 0.5rem);
-	opacity: 1;
-	visibility: visible;
-	transform: translateY(0);
-	transition: var(--speed) ease;
+	height: 190px;
+	padding: 24px;
+	font-size: 13px;
 }
 
-.brokerage-grid {
-	display: grid;
-	grid-template-columns: repeat(2, max-content);
-	gap: 10rem;
-	padding: 0.5rem;
-	border-bottom: 1px solid rgb(239, 242, 243);
+
+.buying-power-content {
+	width: 50%;
+	height: 100%;
+	float: right;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.buying-power-row-container-1,
+.buying-power-row-container-2,
+.transfer-button-container {
+	height: 40px;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.buying-power-row-container-1,
+.buying-power-row-container-2 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#actual-cash {
+	font-size: 400;
+	color: black;
+}
+
+.buying-power-row-container-2 {
+	font-weight: 500;
+}
+
+.buying-power-row-container-1 {
+	border-bottom: 1px solid #cccccc98;
+	color: rgb(106, 114, 120);
+}
+
+.transfer-button-container a:hover {
+	background-color: rgba(38, 38, 38, 1);
+}
+
+.transfer-button-container a {
+	color: white;
+	background-color: black;
+	border-radius: 25px;
+	font-size: 13px;
+	font-weight: 500;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	height: 44px;
 }
 
 .dep-div {
@@ -280,12 +315,6 @@
 	margin-left: 50px;
 }
 
-.deposit-btn {
-	color: white;
-	background-color: rgb(61, 196, 61);
-	border-radius: 30px;
-	padding: 10px 100px 10px;
-}
 
 .buying-information {
 	display: flex;
