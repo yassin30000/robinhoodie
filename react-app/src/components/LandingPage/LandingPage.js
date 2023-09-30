@@ -45,7 +45,7 @@ function LandingPage() {
                 }
             })
         }
-        
+
         Object.values(alpacaData)[0].forEach(dataPoint => {
             let date = new Date(dataPoint.t)
             portfolio_value[date.toLocaleDateString('en-us', options)] = 0;
@@ -144,6 +144,9 @@ function LandingPage() {
                             }
                         </div>
                         <div className={`buying-dropdown-menu ${open ? 'active' : 'inactive'}`}>
+                            <div className='buying-information'>
+                                <p>Buying power represents the total value of assets you can purchase.</p>
+                            </div>
                             <div className='buying-info-grid'>
                                 {/* <div className='brokerage-grid'>
                                     <div>Brokerage cash</div>
@@ -156,9 +159,6 @@ function LandingPage() {
                                 <div className='dep-div'>
                                     <Link to='/portfolio/deposit-funds' className="deposit-btn">Transfer funds</Link>
                                 </div>
-                            </div>
-                            <div className='buying-information'>
-                                <p>Buying power represents the total value of assets you can purchase.</p>
                             </div>
                         </div>
                     </div>
