@@ -8,25 +8,24 @@ function OpinionUpdateModal({ opinionId, prevContent, location, stockId }) {
     const dispatch = useDispatch();
     const { closeModal } = useCustomModal();
     const [content, setContent] = useState(prevContent);
-
+    const [errors, setErrors] = useState([]);
 
     const handleUpdateOpinion = async (e) => {
         e.preventDefault();
         // console.log('hello1')
-        try {
-            await dispatch(updateOpinion(opinionId, content));
+        const response = await dispatch(updateOpinion(opinionId, content));
+
+        if (response.errors) {
+            setErrors(response.errors)
+            console.error("Error updating opinion:");
+        } else {
 
             if (location === 'stock-details') await dispatch(fetchStockOpinions(stockId))
             if (location === 'landing-page') await dispatch(fetchOpinions())
             closeModal();
-            // console.log('hello2')
-
-        } catch {
-
-            console.error("Error updating opinion:");
         }
-    }
 
+    }
 
 
     return (
@@ -40,7 +39,9 @@ function OpinionUpdateModal({ opinionId, prevContent, location, stockId }) {
                 </div>
 
                 <form id='opinion-form' onSubmit={handleUpdateOpinion}>
-
+                    <div id="opinion-errors-div">
+                        {errors.map((error, idx) => <p id="list-error" key={idx}>{error}</p>)}
+                    </div>
 
                     <textarea
                         id="opinion-content-inpt"
