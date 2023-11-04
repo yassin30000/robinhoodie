@@ -26,7 +26,7 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-# Tell flask about our seed commands
+# Add seed commands
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
@@ -44,11 +44,7 @@ Migrate(app, db)
 CORS(app)
 
 
-# Since we are deploying with Docker and Flask,
-# we won't be using a buildpack when we deploy to Heroku.
-# Therefore, we need to make sure that in production any
-# request made over http is redirected to https.
-# Well.........
+# Http is redirected to https.
 @app.before_request
 def https_redirect():
     if os.environ.get('FLASK_ENV') == 'production':
