@@ -26,8 +26,9 @@ function DropDownModal() {
 
             {sessionUser && (<p className='user-name'>{sessionUser.username}</p>)} {/* if logged in, show username */}
 
-            
-            {/* <NavLink to="/404" onClick={() => closeModal}>Transactions</NavLink> */}
+
+            <NavLink to='/portfolio'>Portfolio</NavLink>
+
             <button onClick={handleLogout}>
                 <span className="material-icons logout">logout</span>
                 Log Out</button>

@@ -9,6 +9,7 @@ import Navigation from "./components/Navigation";
 import TransferForm from "./components/TransferFundForm/TransferForm";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Page404 from './components/404Page/index'
+import Portfolio from "./components/Portfolio/Portfolio";
 
 function App() {
 	const dispatch = useDispatch();
@@ -28,18 +29,19 @@ function App() {
 					</Route>
 					<Route path="/signup">
 						<SignupFormPage />
-					</Route>
+					</Route>					
+
 					<Route path="/stocks/:ticker">
 						<StockDetails />
 					</Route>
 					<Route path="/portfolio/deposit-funds">
 						<TransferForm />
 					</Route>
-					<Route path="/404">
-						<Page404 />
-					</Route>
 					<Route exact path="/">
 						<LandingPage />
+					</Route>
+					<Route path="/">
+						<Page404 />
 					</Route>
 				</Switch>
 			)}
