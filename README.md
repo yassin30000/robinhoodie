@@ -15,8 +15,8 @@
 ![Screenshot 2023-11-04 at 3 02 48 PM](https://github.com/yassin30000/robinhoodie/assets/117422078/93afdb95-ddf1-4bdb-a9b0-167fe6aed6eb)
 
 <h3>Buy/Sell a Stock</h3>
-![Screen Recording 2023-11-04 at 3 09 44 PM](https://github.com/yassin30000/robinhoodie/assets/117422078/d402f060-6411-4e8a-8bfd-14cae192d3ca)
 
+![Screen Recording 2023-11-04 at 3 09 44 PM](https://github.com/yassin30000/robinhoodie/assets/117422078/d69db4b9-1e7f-4195-9506-c14c00cec916)
 
 <h3>Add Watchlists</h3>
 
