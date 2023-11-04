@@ -7,9 +7,16 @@
 
 <h3>Portfolio Home</h3>
 
+![Screenshot 2023-11-04 at 2 57 40 PM](https://github.com/yassin30000/robinhoodie/assets/117422078/132561f7-79a6-4821-bc7c-7c9497278c2b)
+
+
 <h3>Stock Details</h3>
 
+![Screenshot 2023-11-04 at 3 02 48 PM](https://github.com/yassin30000/robinhoodie/assets/117422078/93afdb95-ddf1-4bdb-a9b0-167fe6aed6eb)
+
 <h3>Buy/Sell a Stock</h3>
+![Screen Recording 2023-11-04 at 3 09 44 PM](https://github.com/yassin30000/robinhoodie/assets/117422078/d402f060-6411-4e8a-8bfd-14cae192d3ca)
+
 
 <h3>Add Watchlists</h3>
 
