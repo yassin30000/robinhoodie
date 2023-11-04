@@ -14,11 +14,11 @@ def seed_watchlist_stocks():
     stock4 = Watchlist_Stock(
        watchlist_id=2, stock_id=4)
     stock5 = Watchlist_Stock(
-       watchlist_id=2, stock_id=5)
+       watchlist_id=2, stock_id=14)
     stock6 = Watchlist_Stock(
-       watchlist_id=2, stock_id=6)
+       watchlist_id=3, stock_id=16)
     stock7 = Watchlist_Stock(
-       watchlist_id=2, stock_id=7)
+       watchlist_id=3, stock_id=3)
 
 
 

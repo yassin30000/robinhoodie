@@ -99,7 +99,6 @@ export const updateExistingWatchlist = (watchlistId, updatedWatchlistData) => as
             body: JSON.stringify(updatedWatchlistData),
         });
 
-        // console.log('STORE RES: ', res)
         if (res.ok) {
             const updatedData = await res.json();
             dispatch(updateWatchlist(updatedData));

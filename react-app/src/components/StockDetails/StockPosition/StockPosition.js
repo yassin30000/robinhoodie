@@ -17,7 +17,6 @@ function StockPosition({ latestPrice, stocks_owned_by_user, openPrice }) {
     const averagePrice = totalPrice / shares_owned
 
     //Market value
-    //console.log(latestPrice)
     const marketValue = latestPrice * shares_owned
     const totalReturn = marketValue - totalPrice
     const totalPercentReturn = (totalReturn / totalPrice) * 100
@@ -26,7 +25,6 @@ function StockPosition({ latestPrice, stocks_owned_by_user, openPrice }) {
     const todaysPercentReturn = (todaysReturn / (openPrice * shares_owned)) * 100
 
 
-    //console.log(stocks_owned_by_user)
     return (
         <div id="stock-position-container">
             <div id="market-value-container">

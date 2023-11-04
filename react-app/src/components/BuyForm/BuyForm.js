@@ -1,5 +1,5 @@
 import './BuyForm.css'
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addShares, sellShares } from '../../store/portfolio_stock';
 import { fetchStockData, fetchAllStocks } from '../../store/stocks';
@@ -8,7 +8,6 @@ import { useParams, useHistory } from "react-router-dom";
 
 function BuyForm() {
     const dispatch = useDispatch();
-    const ref = React.useRef(null)
     const history = useHistory();
     const orderOption = ["Cost", "Gain"]
     const orderName = ["Buy", "Sell"]
@@ -169,7 +168,7 @@ function BuyForm() {
                     <div className='estimated-cost'>${estimatedCost}</div>
                 </div>
                 <div className='centered-btn'>
-                    <button className='order-btn' type='submit'>Trade now</button>
+                    <button className='order-btn' type='submit'>Trade Now</button>
                 </div>
                 <div className='centered-one'>
                     <div className='buying-power'>${portfolio?.cash ? portfolio?.cash?.toLocaleString() : 0} buying power available</div>

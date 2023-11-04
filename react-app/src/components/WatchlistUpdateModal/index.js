@@ -14,7 +14,6 @@ function WatchlistUpdateModal({ prevListName, listId }) {
 
         if (listName) {
 
-            // console.log('LIST NAME: ', listName)
             const data = {
                 "name": listName
             }
@@ -22,7 +21,7 @@ function WatchlistUpdateModal({ prevListName, listId }) {
             await dispatch(fetchUserWatchlists())
 
             closeModal(); // Close the modal after updating
-            // window.location.reload();
+
         }
     };
 

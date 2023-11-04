@@ -5,31 +5,29 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_watchlists():
     list1 = Watchlist(
-        name='Demo', user_id=1)
+        name='Tech', user_id=1)
     list2 = Watchlist(
-        name='marnie', user_id=1)
+        name='Industrial', user_id=1)
     list3 = Watchlist(
-        name='bobbie', user_id=1)
+        name='Finance', user_id=1)
     list4 = Watchlist(
-        name='haru', user_id=1)
+        name='My Favorites', user_id=1)
 
     list5 = Watchlist(
-        name='Demo', user_id=2)
+        name='Tech', user_id=2)
     list6 = Watchlist(
-        name='marnie', user_id=2)
+        name='Industrial', user_id=2)
     list7 = Watchlist(
-        name='bobbie', user_id=2)
-    list8 = Watchlist(
-        name='haru', user_id=2)
+        name='Finance', user_id=2)
+
 
     list9 = Watchlist(
-        name='Demo', user_id=3)
+        name='Tech', user_id=3)
     list10 = Watchlist(
-        name='marnie', user_id=3)
+        name='Industrial', user_id=3)
     list11 = Watchlist(
-        name='bobbie', user_id=3)
-    list12 = Watchlist(
-        name='haru', user_id=3)
+        name='Finance', user_id=3)
+
 
     db.session.add(list1)
     db.session.add(list2)
@@ -38,11 +36,9 @@ def seed_watchlists():
     db.session.add(list5)
     db.session.add(list6)
     db.session.add(list7)
-    db.session.add(list8)
     db.session.add(list9)
     db.session.add(list10)
     db.session.add(list11)
-    db.session.add(list12)
 
     db.session.commit()
 
