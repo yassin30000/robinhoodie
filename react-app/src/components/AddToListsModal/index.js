@@ -43,7 +43,6 @@ function AddToListsModal({ ticker }) {
         const selectedIds = Object.keys(selectedWatchlists).map(id => Number(id)).filter(
             (id) => selectedWatchlists[id]
         );
-        console.log(selectedIds)
         userWatchlists.forEach((watchlist) => {
             if (!selectedIds.includes(watchlist.id)) {
                 dispatch(deleteWatchlistStockThunk(watchlist.id, stock.id))

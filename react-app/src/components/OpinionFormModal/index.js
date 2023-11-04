@@ -21,10 +21,8 @@ function OpinionFormModal({ ticker }) {
 
         if (response.errors) {
             setErrors(response.errors)
-            return console.log("Error creating opinion:");
         } else {
             await dispatch(fetchStockOpinions(stock.id))
-            console.log('Opinion Posted')
             closeModal();
             // window.location.reload();
         }

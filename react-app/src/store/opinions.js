@@ -88,7 +88,6 @@ export const createOpinion = (stockId, content) => async (dispatch) => {
             return errors;
         }
     } catch (error) {
-        console.log("Error creating opinion:", error);
         return error;
     }
 };
@@ -111,7 +110,6 @@ export const deleteOpinion = (opinionId) => async (dispatch) => {
             return errors;
         }
     } catch (error) {
-        console.log('Error deleting opinion:', error);
         return error;
     }
 };
@@ -136,7 +134,6 @@ export const updateOpinion = (opinionId, content) => async (dispatch) => {
             return errors;
         }
     } catch (error) {
-        console.log('Error updating opinion:', error);
         return error;
     }
 };

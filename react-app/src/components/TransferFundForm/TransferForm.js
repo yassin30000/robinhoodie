@@ -24,7 +24,6 @@ function TransferForm() {
         }
     }, [portfolio])
 
-    // console.log('PORFOLIO', portfolio)
 
     const handleOptionOne = (e) => {
         setFrom(e.target.value)
@@ -89,7 +88,6 @@ function TransferForm() {
             setErrors("Error")
         }
 
-        // console.log("PORTFOLIOS", portfolio.cash)
         history.push('/')
         setErrors({})
     }

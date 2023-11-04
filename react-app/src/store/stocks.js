@@ -26,12 +26,10 @@ const alpacaStocks = (stocks) => ({
 })
 
 export const fetchAlpacaStocks = (tickers, end = '2023-09-21T0:00:00Z', start = '2023-08-25T0:00:00Z') => async dispatch => {
-    // console.log(end)
     //AAPL,TSLA
     //2020-04-01T0:00:00Z
     //2021-08-26T11:00:00Z
     const url = `https://data.alpaca.markets/v2/stocks/bars?symbols=${tickers}&start=${start}&end=${end}&timeframe=1D`
-    //console.log(url)
     const res = await fetch(url, {
         headers: {
             "Apca-Api-Key-Id": "PKLT4FTNVNQRX5EJ5ZCW",
