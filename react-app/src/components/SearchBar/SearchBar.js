@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import OpenCustomModalButton from "../OpenModalButton/OpenModalButton2";
-import SearchResultModal from "./SearchResultModal/SearchResultModal";
 import './SearchBar.css'
 
 
@@ -11,12 +9,10 @@ function SearchBar({ placeholder, data }) {
     const searchRef = useRef(null);
 
 
-    // console.log(data.stocks) 
     const stocks = data ? Object.values(data.stocks) : []
 
     const closeSearch = () => setSearchResults(false);
 
-    // console.log(stocks)
     const handleFilter = (event) => {
         let searchWord = event.target.value;
         const newFilter = stocks.filter((value) => {

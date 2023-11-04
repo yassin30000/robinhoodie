@@ -12,7 +12,6 @@ function OpinionUpdateModal({ opinionId, prevContent, location, stockId }) {
 
     const handleUpdateOpinion = async (e) => {
         e.preventDefault();
-        // console.log('hello1')
         const response = await dispatch(updateOpinion(opinionId, content));
 
         if (response.errors) {

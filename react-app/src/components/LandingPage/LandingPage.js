@@ -27,7 +27,7 @@ function LandingPage() {
     const portfolio = useSelector(state => state.portfolio.portfolio)
     const alpacaState = useSelector(state => state.stocks.alpacaData)
     const options = { month: 'short', day: 'numeric', timeZone: "UTC" }
-    const [viewAllOpinions, setViewAllOpinions] = useState(false);
+    const [viewAllOpinions, setViewAllOpinions] = useState(true);
 
     //calculate how many shares of each stock in portfolio
     let portfolio_value = {}
@@ -115,7 +115,7 @@ function LandingPage() {
 
 
     return (
-        <div>
+        <div id='landingpage-whole-page-container'>
 
             <div id="landingpage-left-container">
 

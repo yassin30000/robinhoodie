@@ -13,6 +13,9 @@ function LineChart2({ dates, prices, price_change, width }) {
             height: '100%',
             toolbar: {
                 show: false
+            },
+            zoom: {
+                enabled: false
             }
         },
         xaxis: {

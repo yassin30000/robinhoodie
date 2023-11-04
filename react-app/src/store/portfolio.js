@@ -34,7 +34,6 @@ export const fetchPortfolio = () => async (dispatch) => {
         return details;
     } else {
         const errors = await res.json()
-        console.log(errors)
         return errors
     }
 }

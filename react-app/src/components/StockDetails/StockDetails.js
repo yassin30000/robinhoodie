@@ -37,7 +37,6 @@ function StockDetails() {
     const stockAddedToList = () => {    
         for (let list of userWatchlists) {
             for (let stock of list.stocks) {
-                console.log(stock)
                 if (Number(stock.stock_id) === Number(stock_info.id)) {
                     return 'check'
                 }

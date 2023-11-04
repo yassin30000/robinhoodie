@@ -74,7 +74,7 @@
 /* right side area */
 
 #right-side-stock-details {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	right: 0;
 	/* background-color: red; */
@@ -83,7 +83,6 @@
 	margin-top: 100px;
 	margin-right: 22px;
 	border-radius: 5px;
-	z-index: 99;
 	/* background-color: red; */
 }
 

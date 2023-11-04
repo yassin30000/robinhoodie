@@ -75,8 +75,7 @@ function Watchlist({ portfolio_data, latestPrices, chartDates, graphData }) {
 
         sharesArray.push(o)
     }
-    // console.log(sharesArray)
-    //console.log(latestPrices)
+
     return (
         <>
             <div id="list-container">
