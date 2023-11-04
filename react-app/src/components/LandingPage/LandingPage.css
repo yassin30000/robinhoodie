@@ -2,7 +2,6 @@
 	/* opacity: calc(50%); */
 	/* background-color: red; */
 	width: 70vw;
-
 	margin-top: 40px;
 	margin-left: 25px;
 	margin-right: 40px;
@@ -12,6 +11,8 @@
 	/* padding: 50px; */
 	font-size: 32px;
 }
+
+
 
 #portfolio-value-container {
 	display: flex;

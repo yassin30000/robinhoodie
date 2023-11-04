@@ -3,9 +3,11 @@
 }
 
 #stock-details-container {
-	padding: 40px 0 0 25px;
+	margin: 40px 0 0 25px;
 	/* border: 1px solid black; */
-	width: 75%;
+	width: 70%;
+	/* background-color: blue; */
+
 }
 
 
@@ -72,7 +74,7 @@
 /* right side area */
 
 #right-side-stock-details {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	right: 0;
 	/* background-color: red; */
@@ -81,6 +83,8 @@
 	margin-top: 100px;
 	margin-right: 22px;
 	border-radius: 5px;
+	z-index: 99;
+	/* background-color: red; */
 }
 
 
