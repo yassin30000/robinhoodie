@@ -1,5 +1,5 @@
 
-<h1 align='center'>robinhoodie</h1>
+<h1 align='center'> <img height="30" src='https://github.com/yassin30000/robinhoodie/assets/117422078/f89e499d-7e70-45b8-a5ef-799c08f7f231' />  robinhoodie</h1>
 
 <h3 align='center'>Commission-free investing platform for ordinary individuals to start investing easily and efficiently with little money.</h3>
 
