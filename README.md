@@ -49,5 +49,5 @@ npm start
 
 ### Application Architecture
 
-robinhoodie is built on React and Redux fonrt end with a Python Flask backend, using PostgresSQL as a database. 
+robinhoodie is built on React and Redux front end with a Python Flask backend, using PostgresSQL as a database. 
 
