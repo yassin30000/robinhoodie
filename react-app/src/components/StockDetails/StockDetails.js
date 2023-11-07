@@ -29,7 +29,7 @@ function StockDetails() {
 
     const allOpinions = opinions_data ? [...opinions_data].reverse() : [];
     const allUsers = usersData ? Object.values(usersData.users) : [];
-    const [viewAllOpinions, setViewAllOpinions] = useState(false);
+    const [viewAllOpinions, setViewAllOpinions] = useState(true);
 
     const userWatchlistsData = useSelector((state) => state.watchlists.userWatchlists);
     const userWatchlists = userWatchlistsData ? Object.values(userWatchlistsData.watchlists) : []
