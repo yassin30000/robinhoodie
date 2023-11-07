@@ -46,7 +46,7 @@ npm install
    pipenv shell
    flask db upgrade
    flask seed all
-   flask run
+   flask run -p 5001
 
 ```
 5. Start frontend server. In the react-app folder:
