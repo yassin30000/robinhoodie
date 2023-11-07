@@ -107,3 +107,12 @@ hr#line {
 	font-size: 13px;
 	margin-bottom: 5px;
 }
+
+.footer-container-signin-page{
+	margin-top: 25px;
+	height: 50vh;
+	width: 100vh;
+    border-top: 2px solid rgb(217, 212, 212);
+    font-family: 'Courier New', Courier, monospace;
+    background-color: whitesmoke;
+}
