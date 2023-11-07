@@ -1,3 +1,8 @@
 #apexcharts-toolbar {
     display: none
 }
+
+
+.arrow_box {
+    padding: 4px 6px;
+}

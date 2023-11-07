@@ -1,6 +1,6 @@
 import "./StockDetails.css";
 import { useEffect, useState } from 'react';
-import { fetchStockData } from "../../store/stocks";
+import { fetchAlpacaStocks } from "../../store/stocks";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LineChart2 from "../LineChart2/LineChart2";
@@ -15,21 +15,24 @@ import { fetchStockOpinions } from "../../store/opinions";
 import OpinionUpdateModal from "../OpinionUpdateModal";
 import ConfirmDeleteOpinion from "../ConfirmDeleteOpinion";
 
+import { format } from 'date-fns'
 
 function StockDetails() {
     const { ticker } = useParams()
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user);
-    const stock = useSelector(state => state.stocks[ticker])
     const stock_info = useSelector(state => state.stocks.allStocks.stocks[`${ticker}`])
     const portfolio = useSelector(state => state.portfolio.portfolio?.portfolio_stocks)
     const usersData = useSelector((state) => state.session.allUsers)
     const stocks_owned_by_user = portfolio?.filter(stock => Number(stock.stock_id) === Number(stock_info.id))
     const opinions_data = useSelector(state => state.opinions[stock_info.id])
 
+    const alpacaData = useSelector(state => state.stocks.alpacaData.bars[ticker].slice(-30))
+
+    
     const allOpinions = opinions_data ? [...opinions_data].reverse() : [];
     const allUsers = usersData ? Object.values(usersData.users) : [];
-    const [viewAllOpinions, setViewAllOpinions] = useState(false);
+    const [viewAllOpinions, setViewAllOpinions] = useState(true);
 
     const userWatchlistsData = useSelector((state) => state.watchlists.userWatchlists);
     const userWatchlists = userWatchlistsData ? Object.values(userWatchlistsData.watchlists) : []
@@ -52,45 +55,42 @@ function StockDetails() {
         }
     }
 
-    let openPrice, latestPrice, latestDate, price_change, percent_change;
-    // [dollar amount, % change]
+ 
+    let latestPrice, latestDate, price_change, percent_change, openPrice;
 
     let dates_array;
     let prices_array;
 
-    if (stock) {
-        let stock_prices_at_close = {}
+    if (alpacaData) {
+        latestDate = new Date(Date.parse(alpacaData[alpacaData.length - 1]['t']))
+        latestPrice = Number(alpacaData[alpacaData.length - 1]['c']).toFixed(2)
+        openPrice = Number(alpacaData[alpacaData.length - 1]['o']).toFixed(2)
 
-        const stock_prices = stock['Time Series (Daily)']
-        latestDate = Object.keys(stock_prices)[0]
-        latestPrice = Number(stock_prices[latestDate]['4. close']).toFixed(2)
-        openPrice = Number(stock_prices[latestDate]['1. open']).toFixed(2)
-        const oldestDate = Object.keys(stock_prices)[Object.keys(stock_prices).length - 1]
 
-        for (let key in stock_prices) {
-            let newKey = new Date(key)
-            stock_prices_at_close[newKey] = Number(stock_prices[key]['4. close'])
-        }
-
-        price_change = (latestPrice - stock_prices[oldestDate]['4. close'])
+        price_change = (latestPrice - alpacaData[0]['c'])
         percent_change = ((price_change / latestPrice) * 100)
 
 
-        dates_array = Object.keys(stock_prices_at_close).slice(0, 30).reverse().map(date => {
-            return date.slice(4, 10)
+        dates_array = alpacaData.map(date => {
+            let dateObj = new Date(Date.parse(date['t']))
+            return format(dateObj, "MMM d")
         })
-
-        prices_array = Object.values(stock_prices_at_close).slice(0, 30).reverse()
-
+        prices_array = alpacaData.map(date => {
+            return date.c
+        })
     }
 
-    useEffect(() => {
 
-        if (!stock) {
-            dispatch(fetchStockData(ticker))
-        }
+
+    useEffect(() => {
+        let today = new Date().toISOString()
+        const seconds = "0:00:00Z"
+        let end = today.slice(0, 11) + seconds
+
+        dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER'], end));
         dispatch(fetchStockOpinions(stock_info.id))
-    }, [dispatch, ticker, stock, stock_info])
+
+    }, [dispatch, ticker, stock_info])
 
 
     let total_shares = 0;
@@ -103,7 +103,7 @@ function StockDetails() {
         <div id='stock-details-wholepage'>
             <div id='stock-details-container'>
                 <p id='ticker-header'>{stock_info?.name}</p>
-                <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {latestDate}</span></p>
+                <p id='ticker-price'>${latestPrice} <span id='price-as-of'>Closing price on {format(latestDate, "PPP")}</span></p>
 
                 {price_change >= 0 && <div id='price-change-div'>
                     <p id='positive-price-changes'>
@@ -120,7 +120,7 @@ function StockDetails() {
 
                 <div id="graph-container">
 
-                    {stock && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} width={"100%"} />}
+                    {alpacaData && <LineChart2 dates={dates_array} prices={prices_array} price_change={price_change} width={"100%"} />}
                 </div>
 
 
