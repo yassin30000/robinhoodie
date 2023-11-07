@@ -1,0 +1,38 @@
+.footer-container{
+    margin-top: 130px;
+    height: 30vh;
+    border-top: 2px solid rgb(217, 212, 212);
+    font-family: 'Courier New', Courier, monospace;
+    background-color: whitesmoke;
+}
+
+.footer-title {
+    margin: 30px;
+}
+
+.developer-content{
+    margin: 30px;
+    display: flex;
+}
+
+.developers-name{
+    font-size: 17px;
+}
+
+.developers-github{
+    flex-basis: 50px;
+}
+
+.developers-github a {
+    color: black;
+    text-decoration: none;
+    transition: all .3s ease;
+}
+
+.developers-github a:visited{
+    color: black;
+}
+
+.developers-github a:hover{
+    font-size: large;
+}
