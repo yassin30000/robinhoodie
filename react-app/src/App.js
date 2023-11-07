@@ -9,6 +9,7 @@ import Navigation from "./components/Navigation";
 import TransferForm from "./components/TransferFundForm/TransferForm";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Page404 from './components/404Page/index'
+import Footer from "./components/Footer";
 
 function App() {
 	const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function App() {
 					</Route>
 				</Switch>
 			)}
+			<Footer isLoaded={isLoaded} />
 		</>
 	);
 }

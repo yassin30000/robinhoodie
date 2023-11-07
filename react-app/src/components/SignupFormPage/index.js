@@ -90,7 +90,41 @@ function SignupFormPage() {
 						<hr id="signup-line" color="#E3E9ED"></hr>
 						<div id="already-have-account">Already have an account? <span onClick={handleSignIn}>Log in</span></div>
 
+
 					</div>
+					<div className="footer-container-signin-page">
+           				 <div className="footer-wrapper">
+                			<div className="footer-content">
+                    			<h1 className="footer-title">Meet The Developers</h1>
+                   				 <div className="developers-container">
+									<div className="developer-content">
+										<div className="developers-github">
+											<a href='https://github.com/chauchau000' target='_blank'>
+											<i className="fa-brands fa-github fa-xl"></i>
+											</a>
+										</div>
+										<div className="developers-name">Adrienne Tran</div>
+									</div>
+									<div className="developer-content">
+										<div className="developers-github">
+											<a href='https://github.com/yassin30000' target='_blank'>
+												<i className="fa-brands fa-github fa-xl"></i>
+											</a>
+										</div>
+										<div className="developers-name">Yassin Tantawy</div>
+									</div>
+									<div className="developer-content">
+										<div className="developers-github">
+											<a href='https://github.com/Korozami' target='_blank'>
+												<i className="fa-brands fa-github fa-xl"></i>
+											</a>
+										</div>
+										<div className="developers-name">Kevin Sy</div>
+									</div>
+								</div>
+                			</div>
+            			</div>
+      				</div>
 				</div>
 			</div>
 		</>
