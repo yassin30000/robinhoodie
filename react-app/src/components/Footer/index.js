@@ -8,7 +8,7 @@ function Footer () {
 
     const location = useLocation();
 
-    if (location.pathname === "/404" || location.pathname === "/portfolio/deposit-funds") return null
+    if (location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/404" || location.pathname === "/portfolio/deposit-funds") return null
 
 
     return (
