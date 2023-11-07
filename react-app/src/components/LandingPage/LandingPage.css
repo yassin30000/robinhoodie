@@ -1,5 +1,3 @@
-
-
 #landingpage-left-container {
 	/* opacity: calc(50%); */
 	/* background-color: red; */
@@ -13,8 +11,6 @@
 	/* padding: 50px; */
 	font-size: 32px;
 }
-
-
 
 #portfolio-value-container {
 	display: flex;
@@ -76,14 +72,9 @@
 	/* background-color: red; */
 }
 
-.selected {
-	color: rgb(0, 200, 5);
-	text-decoration: underline;
-}
-
 #opinion {
 	border-bottom: 1px solid #cccccc98;
-	border-radius: 10px;
+	border-radius: 0 0 0 10px;
 	padding-left: 20px;
 	font-size: 15px;
 	font-weight: 300;
@@ -155,21 +146,41 @@
 
 #opinons-filter-container {
 	margin: 15px 0 15px 0;
-	width: 210px;
+	width: max-content;
 	display: flex;
+	gap: 10px;
 	justify-content: space-between;
 	font-weight: 500;
 }
 
 #my-opinons,
 #all-opinions {
+}
+
+.selected {
+	color: rgb(0, 200, 5);
+	/* transition: all 0.3s; */
+	border: 2px solid rgb(0, 200, 5);
+	border-radius: 5px;
+	padding: 10px;
+	width: max-content;
+
+	/* text-decoration: underline; */
+}
+
+.unselected {
 	transition: all 0.3s;
+	border: 2px solid black;
+	border-radius: 5px;
+	padding: 10px;
+	width: max-content;
 }
 
 #my-opinons:hover,
 #all-opinions:hover {
 	cursor: pointer;
 	color: rgb(0, 200, 5);
+	border-color: rgb(0, 200, 5);
 }
 
 /* BUYING POWER STUFF */
@@ -218,7 +229,7 @@
 
 #buying-power-arrow {
 	color: black;
-	transition: all .3s;
+	transition: all 0.3s;
 }
 
 #buying-power-label-right {
@@ -253,7 +264,6 @@
 	padding: 24px;
 	font-size: 13px;
 }
-
 
 .buying-power-content {
 	width: 50%;
@@ -317,7 +327,6 @@
 	margin-top: 30px;
 	margin-left: 50px;
 }
-
 
 .buying-information {
 	display: flex;
