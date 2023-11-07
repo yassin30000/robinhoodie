@@ -5,6 +5,11 @@ import { addShares, sellShares } from '../../store/portfolio_stock';
 import { fetchStockData, fetchAllStocks } from '../../store/stocks';
 import { fetchPortfolio } from '../../store/portfolio'
 import { useParams, useHistory } from "react-router-dom";
+import OpenModalButton from '../OpenModalButton';
+
+import BuyMessage from '../BuyMessage';
+import OpenCustomModalButton from '../OpenModalButton/OpenModalButton2';
+import SellMessage from '../SellMessage';
 
 function BuyForm() {
     const dispatch = useDispatch();
@@ -29,12 +34,15 @@ function BuyForm() {
         return accum + currentValue.shares
     }, 0)
 
+    const [modalMessage, setModalMessage] = useState('');
+
+
     useEffect(() => {
         const errors = {};
         if (shares < 0) errors.shares = "Shares can't be negative"
         if (shares === "0") errors.shares = "Shares can't be zero"
         if (order === orderOption[1]) {
-            if(shares > shares_owned) {
+            if (shares > shares_owned) {
                 errors.shares = "Not enough shares to sell"
             }
         }
@@ -84,6 +92,7 @@ function BuyForm() {
         // setHasSubmitted(true);
 
         if (Object.values(errors).length) {
+
             return alert('Error please fix the underlying problems')
         };
 
@@ -100,7 +109,8 @@ function BuyForm() {
 
             if (successfully) {
                 setShares('')
-                return alert("Shares bought successfully")
+                // return alert("Shares bought successfully")
+                return;
             }
         }
         if (order === orderOption[1]) {
@@ -109,15 +119,14 @@ function BuyForm() {
 
             if (successfully) {
                 setShares('')
-                return alert("Shares sold successfully")
+                // return alert("Shares sold successfully")
+                return;
             }
         }
         setErrors({})
 
 
         history.push(`/stocks/${ticker}`)
-
-
     }
 
     useEffect(() => {
@@ -168,14 +177,35 @@ function BuyForm() {
                     <div className='estimated-cost'>${estimatedCost}</div>
                 </div>
                 <div className='centered-btn'>
-                    <button className='order-btn' type='submit'>Trade Now</button>
+                    {shares
+                        && order === orderOption[0]
+                        && !Object.values(errors).length
+                        && estimatedCost < portfolio?.cash ? (
+                        <OpenCustomModalButton
+                            className={'order-btn'}
+                            buttonText={'Trade Now'}
+                            modalComponent={<BuyMessage />}
+                        />
+                    ) : order === orderOption[1]
+                        && shares
+                        && !Object.values(errors).length ? (
+                        <OpenCustomModalButton
+                            className={'order-btn'}
+                            buttonText={'Trade Now'}
+                            modalComponent={<SellMessage />}
+                        />
+                    ) : (
+                        <button className='order-btn' type='submit'>Trade Now</button>
+
+                    )}
+
                 </div>
                 <div className='centered-one'>
                     <div className='buying-power'>${portfolio?.cash ? portfolio?.cash?.toLocaleString() : 0} buying power available</div>
                 </div>
 
-            </form>
-        </div>
+            </form >
+        </div >
 
 
     )

@@ -1,0 +1,28 @@
+.buy-message-container {
+	width: 320px;
+
+	padding: 20px;
+	text-align: center;
+	font-size: 13px;
+
+	border-radius: 5px;
+}
+
+.buy-message-container button {
+	width: 100%;
+	background: none;
+	border-radius: 44px;
+	height: 44px;
+	border: 1px solid #00c806;
+	background-color: #00c806;
+	color: white;
+	font-weight: 500;
+	font-size: 15px;
+    margin-top: 20px;
+}
+
+.buy-message-container button:hover {
+	cursor: pointer;
+	background-color: rgb(2, 167, 8);
+	border-color: rgb(2, 167, 8);
+}
