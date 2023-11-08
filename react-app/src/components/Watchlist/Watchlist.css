@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap");
 
 #list-container {
-	position: fixed;
+	/* position: relative;
 	right: 0px;
 	top: 60px;
 	width: 330px;
@@ -11,7 +11,7 @@
 	border-radius: 5px;
 	margin: 25px;
 	margin-top: 40px;
-	background-color: white;
+	background-color: white; */
 	/* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
 }
 

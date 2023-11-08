@@ -1,10 +1,31 @@
 #landingpage-left-container {
 	/* opacity: calc(50%); */
 	/* background-color: red; */
-	width: 70vw;
+	width: 1050px;
 	margin-top: 40px;
 	margin-left: 25px;
-	margin-right: 40px;
+	flex-shrink: 0;
+	/* margin-right: 40px; */
+}
+
+#landingpage-right-container {
+	/* width: 330px;
+	height: 85vh; */
+	width: 330px;
+	height: 85vh;
+	flex-shrink: 0;
+	overflow-y: auto;
+	border: 1px solid #cccccc98;
+	border-radius: 5px;
+	margin: 25px;
+	margin-top: 40px;
+	background-color: white;
+}
+
+#landingpage-whole-page-container{
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: scroll;
 }
 
 #currentPortfolioValue {
