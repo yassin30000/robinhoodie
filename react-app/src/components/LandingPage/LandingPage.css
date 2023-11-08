@@ -11,6 +11,8 @@
 #landingpage-right-container {
 	/* width: 330px;
 	height: 85vh; */
+	position: sticky;
+	top: 0;
 	width: 330px;
 	height: 85vh;
 	flex-shrink: 0;
@@ -22,10 +24,19 @@
 	background-color: white;
 }
 
-#landingpage-whole-page-container{
+.langing-page-bottom-container{
+	flex-shrink: 0;
+	overflow-x: scroll;
+}
+
+.landingpage-top-container{
 	display: flex;
 	flex-wrap: nowrap;
+}
+
+#landingpage-whole-page-container{
 	overflow-x: scroll;
+	overflow-y: scroll;
 }
 
 #currentPortfolioValue {

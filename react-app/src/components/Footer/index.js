@@ -1,15 +1,9 @@
 import React from "react";
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import './footer.css';
 
 
 
 function Footer () {
-
-    const location = useLocation();
-
-    if (location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/404" || location.pathname === "/portfolio/deposit-funds") return null
-
 
     return (
         <div className="footer-container">
