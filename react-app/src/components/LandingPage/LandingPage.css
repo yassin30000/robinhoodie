@@ -1,10 +1,22 @@
 #landingpage-left-container {
 	/* opacity: calc(50%); */
 	/* background-color: red; */
-	width: 70vw;
+	width: 70%;
 	margin-top: 40px;
 	margin-left: 25px;
 	margin-right: 40px;
+	overflow: auto;
+
+}
+
+#landingpage-whole-page-container {
+	width: 100%;
+	overflow: scroll;
+
+}
+body {
+	overflow-x: auto;
+
 }
 
 #currentPortfolioValue {
@@ -32,7 +44,7 @@
 
 #graph {
 	padding: 10px 0px;
-	width: 100%;
+	/* width: 100%; */
 
 	/* margin-left: 50px; */
 	margin-top: 0px;
