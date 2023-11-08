@@ -7,10 +7,7 @@
 	/* border: 1px solid black; */
 	width: 70%;
 	/* background-color: blue; */
-
 }
-
-
 
 #temp-nav-bar {
 	padding: 30px 0px;
@@ -86,10 +83,10 @@
 	/* background-color: red; */
 }
 
-
 #order-stock-container {
-	border: 1px solid rgb(227, 233, 237);
+	/* border: 1px solid rgb(227, 233, 237); */
 	/* height: 450px; */
+	background-color: white;
 	border-radius: 5px;
 	width: 330px;
 	height: 447px;
@@ -115,6 +112,7 @@
 	border-radius: 25px;
 	background: none;
 	font-weight: 500;
+	background-color: white;
 
 	display: flex;
 	align-items: center;
@@ -131,6 +129,8 @@
 }
 
 #add-to-lists-container button:hover {
-	background-color: rgba(0, 180, 6, 0.1);
+	background-color: rgb(228, 255, 229);
 	cursor: pointer;
+
+
 }
