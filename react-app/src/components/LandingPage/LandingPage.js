@@ -249,7 +249,6 @@ function LandingPage() {
 
                 <div id="landingpage-right-container">
                     <Watchlist portfolio_data={portfolio_data} latestPrices={latestPrices} chartDates={chartDates} graphData={graphData} />
-
                 </div>
 
             </div>
