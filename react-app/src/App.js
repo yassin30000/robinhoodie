@@ -29,7 +29,7 @@ function App() {
 					</Route>
 					<Route path="/signup">
 						<SignupFormPage />
-					</Route>					
+					</Route>
 
 					<Route path="/stocks/:ticker">
 						<StockDetails />
@@ -45,7 +45,6 @@ function App() {
 					</Route>
 				</Switch>
 			)}
-			<Footer isLoaded={isLoaded} />
 		</>
 	);
 }
