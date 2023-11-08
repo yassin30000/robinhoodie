@@ -1,21 +1,51 @@
 #landingpage-left-container {
 	/* opacity: calc(50%); */
 	/* background-color: red; */
-	width: 70%;
+
+	width: 1050px;
+	margin-top: 40px;
+	margin-left: 25px;
+	flex-shrink: 0;
+	/* margin-right: 40px; */
+}
+
+#landingpage-right-container {
+	position: sticky;
+	top: 100px;
+	/* position: sticky;
+	top: 100px; */
+	width: 330px;
+	height: 85vh;
+	flex-shrink: 0;
+	overflow-y: auto;
+	border: 1px solid #cccccc98;
+	border-radius: 5px;
+	margin: 25px;
+	margin-top: 40px;
+	background-color: white;
+}
+
+.langing-page-bottom-container{
+	flex-shrink: 0;
+}
+
+.landingpage-top-container{
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+#landingpage-whole-page-container{
+	/* overflow: scroll; */
+	/* width: 70%;
 	margin-top: 40px;
 	margin-left: 25px;
 	margin-right: 40px;
-	overflow: auto;
+	overflow: auto; */
 
 }
 
-#landingpage-whole-page-container {
-	width: 100%;
-	overflow: scroll;
-
-}
 body {
-	overflow-x: auto;
+	/* overflow-x: auto; */
 
 }
 

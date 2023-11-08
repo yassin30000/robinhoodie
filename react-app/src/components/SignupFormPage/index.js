@@ -37,7 +37,9 @@ function SignupFormPage() {
 	return (
 		<>
 			<div id="signup-container">
-				<img src={signup_image_2} alt="" id="signup-image" />
+				<div className="signup-image-container">
+					<img src={signup_image_2} alt="" id="signup-image" />
+				</div>
 
 				<div id="signup-form-container">
 					<div id="signup-form-wrapper">

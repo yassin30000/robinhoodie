@@ -29,15 +29,15 @@ function StockDetails() {
 
     const alpacaData = useSelector(state => state.stocks.alpacaData.bars[ticker].slice(-30))
 
-    
+
     const allOpinions = opinions_data ? [...opinions_data].reverse() : [];
     const allUsers = usersData ? Object.values(usersData.users) : [];
     const [viewAllOpinions, setViewAllOpinions] = useState(true);
 
     const userWatchlistsData = useSelector((state) => state.watchlists.userWatchlists);
     const userWatchlists = userWatchlistsData ? Object.values(userWatchlistsData.watchlists) : []
-    
-    const stockAddedToList = () => {    
+
+    const stockAddedToList = () => {
         for (let list of userWatchlists) {
             for (let stock of list.stocks) {
                 if (Number(stock.stock_id) === Number(stock_info.id)) {
@@ -55,7 +55,7 @@ function StockDetails() {
         }
     }
 
- 
+
     let latestPrice, latestDate, price_change, percent_change, openPrice;
 
     let dates_array;
@@ -196,7 +196,6 @@ function StockDetails() {
             </div>
 
             <div id="right-side-stock-details">
-
 
                 <div id="order-stock-container">
                     <BuyForm />

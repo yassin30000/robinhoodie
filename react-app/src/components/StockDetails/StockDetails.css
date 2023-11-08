@@ -4,8 +4,9 @@
 
 #stock-details-container {
 	margin: 40px 0 0 25px;
+	flex-shrink: 0;
 	/* border: 1px solid black; */
-	width: 70%;
+	width: 1050px;
 	/* background-color: blue; */
 }
 
@@ -71,11 +72,13 @@
 /* right side area */
 
 #right-side-stock-details {
-	position: fixed;
+	/* position: fixed;
 	top: 0;
-	right: 0;
+	right: 0; */
 	/* background-color: red; */
 	/* width: 330px; */
+	position: sticky;
+	top: 100px;
 	height: 100vh;
 	margin-top: 100px;
 	margin-right: 22px;
