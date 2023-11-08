@@ -10,8 +10,6 @@
 }
 
 #landingpage-right-container {
-	/* width: 330px;
-	height: 85vh; */
 	position: sticky;
 	top: 0;
 	width: 330px;
@@ -38,17 +36,16 @@
 #landingpage-whole-page-container{
 	overflow-x: scroll;
 	overflow-y: scroll;
-	width: 70%;
+	/* width: 70%;
 	margin-top: 40px;
 	margin-left: 25px;
 	margin-right: 40px;
-	overflow: auto;
+	overflow: auto; */
 
 }
 
 body {
 	overflow-x: auto;
-
 
 }
 
