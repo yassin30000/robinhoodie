@@ -2,20 +2,22 @@
 	overflow: hidden;
 } */
 
-.login-container {
+#login-container {
 	display: flex;
 }
 
 .login-image {
-	position: fixed;
-	width: 50vw;
-	top: -17%;
+	/* position: fixed; */
+	width: 750px;
+	/* height: 100vw; */
+	/* top: -17%; */
 }
 
 .login-form-container {
-	position: fixed;
+	/* position: fixed;
 	width: 50%;
-	left: 50%;
+	left: 50%; */
+	width: 50%;
 }
 
 .login-form-wrapper {
@@ -115,4 +117,22 @@ hr#line {
     border-top: 2px solid rgb(217, 212, 212);
     font-family: 'Courier New', Courier, monospace;
     background-color: whitesmoke;
+}
+
+@media screen and (max-width: 960px) {
+	.login-image-container{
+		display: none;
+		visibility: hidden;
+	}
+
+	.login-form-container{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		flex-grow: 1;
+	}
+
+	.footer-container-signin-page{
+		width: 100%;
+	}
 }
