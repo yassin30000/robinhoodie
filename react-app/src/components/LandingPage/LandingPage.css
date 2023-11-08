@@ -11,7 +11,9 @@
 
 #landingpage-right-container {
 	position: sticky;
-	top: 0;
+	top: 100px;
+	/* position: sticky;
+	top: 100px; */
 	width: 330px;
 	height: 85vh;
 	flex-shrink: 0;
@@ -25,7 +27,6 @@
 
 .langing-page-bottom-container{
 	flex-shrink: 0;
-	overflow-x: scroll;
 }
 
 .landingpage-top-container{
@@ -34,8 +35,7 @@
 }
 
 #landingpage-whole-page-container{
-	overflow-x: scroll;
-	overflow-y: scroll;
+	/* overflow: scroll; */
 	/* width: 70%;
 	margin-top: 40px;
 	margin-left: 25px;
@@ -45,7 +45,7 @@
 }
 
 body {
-	overflow-x: auto;
+	/* overflow-x: auto; */
 
 }
 
