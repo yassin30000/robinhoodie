@@ -4,8 +4,9 @@
     width: 100%;
     border-top: 2px solid rgb(217, 212, 212);
     font-family: 'Courier New', Courier, monospace;
-    background-color: whitesmoke;
+ 
 }
+
 
 .footer-title {
     margin: 20px;
@@ -14,6 +15,8 @@
 .developer-content{
     margin: 20px;
     display: flex;
+    height: 20px;
+    width: 200px;
 }
 
 .developers-name{
@@ -22,6 +25,7 @@
 
 .developers-github{
     flex-basis: 50px;
+    width: fit-content
 }
 
 .developers-github a {
@@ -34,6 +38,17 @@
     color: black;
 }
 
-.developers-github a:hover{
-    font-size: large;
+.developers-github i {
+    transition: all .3s ease;
+
+}
+
+.developers-github i:hover{
+    transform: scale(1.2);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
