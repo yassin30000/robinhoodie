@@ -35,17 +35,9 @@
 }
 
 #landingpage-whole-page-container{
-	/* overflow: scroll; */
-	/* width: 70%;
-	margin-top: 40px;
-	margin-left: 25px;
-	margin-right: 40px;
-	overflow: auto; */
-
-}
-
-body {
-	/* overflow-x: auto; */
+	margin: 0px auto;
+	max-width: 1440px;
+	min-width: 1029px;
 
 }
 
