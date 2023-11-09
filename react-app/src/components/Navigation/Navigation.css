@@ -30,6 +30,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap");
 
 #nav-container {
+	margin: 0 auto;
 	display: flex;
 	max-width: 1470px;
 	align-items: center;
