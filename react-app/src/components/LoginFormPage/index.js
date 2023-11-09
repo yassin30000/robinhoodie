@@ -35,8 +35,9 @@ function LoginFormPage() {
 	return (
 		<>
 			<div id="login-container">
-				<img src={login_image} alt="" className="login-image" />
-
+				<div className="login-image-container">
+					<img src={login_image} alt="" className="login-image" />
+				</div>
 				<div className="login-form-container">
 					<div className="login-form-wrapper">
 
