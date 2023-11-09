@@ -1,5 +1,8 @@
 #stock-details-wholepage {
 	display: flex;
+	margin: 0px auto;
+	max-width: 1440px;
+	min-width: 1029px;
 }
 
 #stock-details-container {
