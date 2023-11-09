@@ -21,7 +21,7 @@ function LoginFormPage() {
 
 	const demoUserLogin = (e) => {
 		setEmail('demo@aa.io')
-		setPassword('password')
+		setPassword('appacademy21!')
 	  }
 
 	const handleSubmit = async (e) => {
