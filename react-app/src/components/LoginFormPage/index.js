@@ -75,13 +75,12 @@ function LoginFormPage() {
 
 						</form>
 
-						<hr id="line" color="#E3E9ED"></hr>
 						<div id="notOnRobin">Not on Robinhoodie? <span onClick={handleCreateAccount}>Create an account</span></div>
 
 					</div>
 					<div className="footer-container-signin-page">
-           				 <div className="footer-wrapper">
-                			<div className="footer-content">
+           				 <div className="footer-wrapper-signin-page">
+                			<div className="footer-content-signin-page">
                     			<h1 className="footer-title">Meet The Developers</h1>
                    				 <div className="developers-container">
 									<div className="developer-content">

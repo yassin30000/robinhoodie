@@ -44,7 +44,7 @@ function SignupFormPage() {
 				<div id="signup-form-container">
 					<div id="signup-form-wrapper">
 
-						<p>Creat your login</p>
+						<p>Create your login</p>
 
 						<form onSubmit={handleSubmit}>
 							<div id="signup-errors-div">
