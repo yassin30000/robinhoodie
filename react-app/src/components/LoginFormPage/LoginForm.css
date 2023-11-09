@@ -111,12 +111,15 @@ hr#line {
 }
 
 .footer-container-signin-page{
-	margin-top: 25px;
-	height: 50vh;
-	width: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10rem;
+	/* height: 50vh; */
+	/* width: 100vh; */
     border-top: 2px solid rgb(217, 212, 212);
     font-family: 'Courier New', Courier, monospace;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
 }
 
 @media screen and (max-width: 960px) {
