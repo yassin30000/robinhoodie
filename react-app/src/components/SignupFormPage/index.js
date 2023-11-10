@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
-import signup_image from '../images/signup_image.jpg'
 import signup_image_2 from '../images/signup_image_2.jpg'
-import signup_image_3 from '../images/signup_image_3.jpg'
 import './SignupForm.css';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -16,7 +14,22 @@ function SignupFormPage() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState({});
+	const [signUpErrors, setSignUpErrors] = useState([])
+	const [hasSubmitted, setHasSubmitted] = useState(false);
+
+	useEffect(() => {
+		const errors = {};
+		if (!email.length) errors.email = "Email is required";
+		if (!username.length) errors.username = "Username is required"
+		if (username.length > 20 || username.length < 6) errors.usernameLength = "Username must be more than 6 characters and less than 20 characters"
+		if (!password.length) errors.password = "Password is required";
+		if (!confirmPassword.length) errors.confirmPassword = "Confirm password is required";
+		if (password !== confirmPassword) errors.passwordMatch = "Password and confirmed passwords must match"
+
+		setErrors(errors)
+
+	}, [email, username, password, confirmPassword])
 
 	if (sessionUser) return <Redirect to="/" />;
 
@@ -24,14 +37,20 @@ function SignupFormPage() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, email, password));
-			if (data) {
-				setErrors(data)
-			}
-		} else {
-			setErrors(['Confirm Password field must be the same as the Password field']);
+		setHasSubmitted(true);
+
+		if (Object.keys(errors).length) {
+			return
 		}
+
+		const data = await dispatch(signUp(username, email, password));
+		if (data) {
+			setSignUpErrors(data)
+			setErrors({})
+			setHasSubmitted(false);
+			return
+		}
+
 	};
 
 	return (
@@ -48,44 +67,55 @@ function SignupFormPage() {
 
 						<form onSubmit={handleSubmit}>
 							<div id="signup-errors-div">
-								{errors.map((error, idx) => <p id="signup-error" key={idx}>{error}</p>)}
+								{signUpErrors.map((error, idx) => <p id="signup-error" key={idx}>{error}</p>)}
 							</div>
 
-							<div id="signup-label">Email</div>
-							<input id="signup-input"
-								type="text"
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-								required
-							/>
+							<div className="signup-section">
+								<div id="signup-label">Email</div>
+								<input id="signup-input"
+									type="text"
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
+								/>
+								{hasSubmitted && errors.email && <p className='errors'>{errors.email}</p>}
+							</div>
 
-							<div id="signup-label">Username</div>
-							<input id="signup-input"
-								type="text"
-								value={username}
-								onChange={(e) => setUsername(e.target.value)}
-								required
-							/>
+							<div className="signup-section">
+								<div id="signup-label">Username</div>
+								<input id="signup-input"
+									type="text"
+									value={username}
+									onChange={(e) => setUsername(e.target.value)}
+								/>
+								{hasSubmitted && errors.username && <p className='errors'>{errors.username}</p>}
+								{hasSubmitted && errors.usernameLength && <p className='errors'>{errors.usernameLength}</p>}
+							</div>
 
-							<div id="signup-label">Password</div>
-							<input id="signup-input"
-								type="password"
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-								required
-							/>
+							<div className="signup-section">
 
-							<div id="signup-label">Confirm Password</div>
-							<input id="signup-input"
-								type="password"
-								value={confirmPassword}
-								onChange={(e) => setConfirmPassword(e.target.value)}
-								required
-							/>
+								<div id="signup-label">Password</div>
+								<input id="signup-input"
+									type="password"
+									value={password}
+									onChange={(e) => setPassword(e.target.value)}
+								/>
+								{hasSubmitted && errors.password && <p className='errors'>{errors.password}</p>}
+							</div>
+
+							<div className="signup-section">
+								<div id="signup-label">Confirm Password</div>
+								<input id="signup-input"
+									type="password"
+									value={confirmPassword}
+									onChange={(e) => setConfirmPassword(e.target.value)}
+								/>
+								{hasSubmitted && errors.confirmPassword && <p className='errors'>{errors.confirmPassword}</p>}
+								{hasSubmitted && errors.passwordMatch && <p className='errors'>{errors.passwordMatch}</p>}
+							</div>
 
 							<div>
 
-								<button type="submit" id="signup-submit-btn">Sign Up</button>
+								<button type="submit" id={Object.values(errors).length && hasSubmitted? "signup-submit-btn-disabled":"signup-submit-btn"}>Sign Up</button>
 							</div>
 						</form >
 
@@ -95,14 +125,14 @@ function SignupFormPage() {
 
 					</div>
 					<div className="footer-container-signin-page">
-           				 <div className="footer-wrapper">
-                			<div className="footer-content">
-                    			<h1 className="footer-title">Meet The Developers</h1>
-                   				 <div className="developers-container">
+						<div className="footer-wrapper">
+							<div className="footer-content">
+								<h1 className="footer-title">Meet The Developers</h1>
+								<div className="developers-container">
 									<div className="developer-content">
 										<div className="developers-github">
 											<a href='https://github.com/chauchau000' target='_blank'>
-											<i className="fa-brands fa-github fa-xl"></i>
+												<i className="fa-brands fa-github fa-xl"></i>
 											</a>
 										</div>
 										<div className="developers-name">Adrienne Tran</div>
@@ -124,9 +154,9 @@ function SignupFormPage() {
 										<div className="developers-name">Kevin Sy</div>
 									</div>
 								</div>
-                			</div>
-            			</div>
-      				</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</>
