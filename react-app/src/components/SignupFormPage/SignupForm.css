@@ -4,13 +4,20 @@
 
 #signup-container {
 	display: flex;
+	height: 100vh;
 }
-
+.signup-image-container {
+	display: flex;
+	flex-grow: 1;
+}
 #signup-image {
 	/* position: fixed;
 	width: 50vw;
     top: 0%; */
-	width: 750px;
+	height: 100%;
+	width: 50vw;
+	object-fit: cover;
+	overflow: hidden;
 }
 
 #signup-form-container {
@@ -35,8 +42,12 @@
 	margin-bottom: 10px;
 }
 
-#signup-input {
+.signup-section {
 	margin-bottom: 25px;
+
+}
+
+#signup-input {
 	height: 35px;
 	width: 415px;
 	border-radius: 5px;
@@ -71,6 +82,17 @@
 	padding: 14px;
 	width: 130px;
 	background-color: black;
+	color: white;
+}
+
+#signup-submit-btn-disabled {
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	border-radius: 25px;
+	font-size: 13px;
+	font-weight: 500;
+	padding: 14px;
+	width: 130px;
+	background-color: rgba(0, 0, 0, 0.3);
 	color: white;
 }
 

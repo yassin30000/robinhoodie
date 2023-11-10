@@ -7,7 +7,6 @@ import '../Navigation/Navigation.css'
 import login_image from '../images/login_image.jpeg'
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-//randomg comment
 
 function LoginFormPage() {
 	const dispatch = useDispatch();
@@ -15,21 +14,47 @@ function LoginFormPage() {
 	const history = useHistory()
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState({});
+	const [loginErrors, setLoginErrors] = useState([]);
+	const [hasSubmitted, setHasSubmitted] = useState(false);
+
+
+
+	useEffect(() => {
+		const errors = {};
+
+		if (!email.length) errors.email = "Email is required."
+		if (!password.length) errors.password = 'Password is required.'
+		setErrors(errors)
+
+	}, [email, password])
 
 	if (sessionUser) return <Redirect to="/" />;
+
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+
+		setLoginErrors([])
+		setHasSubmitted(true);
+
+		if (Object.keys(errors).length) {
+			return
+		}
+
+		const data = await dispatch(login(email, password));
+		if (data) {
+			setLoginErrors(data)
+			setErrors({})
+			setHasSubmitted(false);
+			return
+		}
+	};
 
 	const demoUserLogin = (e) => {
 		setEmail('demo@aa.io')
 		setPassword('appacademy21!')
-	  }
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		const data = await dispatch(login(email, password));
-		if (data) setErrors(data);
-	};
-
+	}
 	const handleCreateAccount = () => history.push('/signup') // go to sign up page
 
 	return (
@@ -46,48 +71,56 @@ function LoginFormPage() {
 						<form onSubmit={handleSubmit}>
 
 							<div id="login-errors-div">
-								{errors.map((error, idx) => (
+								{loginErrors.map((error, idx) => (
 									<p id="login-error" key={idx}>{error}</p>
 								))}
 							</div>
+							<div className='login-section-container'>
 
-							<div className="login-label">Email</div>
-							<input className="login-input"
-								type="text"
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-								required
-							/>
+								<div className="login-label">Email</div>
+								<input className="login-input"
+									type="text"
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
 
-							<div className="login-label">Password</div>
-							<input
-								className="login-input"
-								type="password"
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-								required
-							/>
+								/>
 
+								{hasSubmitted && errors.email && <p className='errors'>{errors.email}</p>}
+
+							</div>
+
+							<div className='login-section-container'>
+
+								<div className="login-label">Password</div>
+								<input
+									className="login-input"
+									type="password"
+									value={password}
+									onChange={(e) => setPassword(e.target.value)}
+
+								/>
+								{hasSubmitted && errors.password && <p className='errors'>{errors.password}</p>}
+
+							</div>
 							<div>
-								<button className="login-submit-btn" type="submit">Log In</button>
+								<button className={Object.values(errors).length && hasSubmitted? "login-submit-btn-disabled": "login-submit-btn"} type="submit">Log In</button>
 							</div>
 							<button type="submit" id="demo-user-login-btn" onClick={demoUserLogin}>Log in as demo user</button>
 
 						</form>
 
-						<hr id="line" color="#E3E9ED"></hr>
 						<div id="notOnRobin">Not on Robinhoodie? <span onClick={handleCreateAccount}>Create an account</span></div>
 
 					</div>
 					<div className="footer-container-signin-page">
-           				 <div className="footer-wrapper">
-                			<div className="footer-content">
-                    			<h1 className="footer-title">Meet The Developers</h1>
-                   				 <div className="developers-container">
+						<div className="footer-wrapper-signin-page">
+							<div className="footer-content-signin-page">
+								<h1 className="footer-title">Meet The Developers</h1>
+								<div className="developers-container">
 									<div className="developer-content">
 										<div className="developers-github">
 											<a href='https://github.com/chauchau000' target='_blank'>
-											<i className="fa-brands fa-github fa-xl"></i>
+												<i className="fa-brands fa-github fa-xl"></i>
 											</a>
 										</div>
 										<div className="developers-name">Adrienne Tran</div>
@@ -109,9 +142,9 @@ function LoginFormPage() {
 										<div className="developers-name">Kevin Sy</div>
 									</div>
 								</div>
-                			</div>
-            			</div>
-      				</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</>
