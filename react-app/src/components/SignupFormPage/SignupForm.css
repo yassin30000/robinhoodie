@@ -42,8 +42,12 @@
 	margin-bottom: 10px;
 }
 
-#signup-input {
+.signup-section {
 	margin-bottom: 25px;
+
+}
+
+#signup-input {
 	height: 35px;
 	width: 415px;
 	border-radius: 5px;
@@ -78,6 +82,17 @@
 	padding: 14px;
 	width: 130px;
 	background-color: black;
+	color: white;
+}
+
+#signup-submit-btn-disabled {
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	border-radius: 25px;
+	font-size: 13px;
+	font-weight: 500;
+	padding: 14px;
+	width: 130px;
+	background-color: rgba(0, 0, 0, 0.3);
 	color: white;
 }
 
