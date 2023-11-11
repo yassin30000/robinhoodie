@@ -130,24 +130,6 @@ hr#line {
 	margin: 5px;
 	color: red;
 }
-
-.footer-container-signin-page {
-	display: flex;
-	padding-left: 7%;
-	margin-top: 10rem;
-	/* height: 50vh; */
-	/* width: 100vh; */
-	/* border-top: 2px solid rgb(217, 212, 212); */
-	font-family: 'Courier New', Courier, monospace;
-	/* background-color: whitesmoke; */
-}
-
-.footer-content-signin-page {
-	width: 25rem;
-	border-top: 2px solid rgb(217, 212, 212);
-
-}
-
 .login-section-container {
 	display: flex;
 	flex-direction: column;
@@ -167,6 +149,32 @@ hr#line {
 
 
 }
+
+/* Footer CSS */
+.footer-container-signin-page {
+	display: flex;
+	padding-left: 7%;
+	margin-top: 10rem;
+    font-family: 'Rubik', sans-serif;
+}
+
+.footer-content-signin-page {
+	width: 25rem;
+	border-top: 2px solid rgb(217, 212, 212);
+
+}
+
+.footer-title-signin-page {
+	font-size: 21px;
+	margin: 20px 0;
+
+}
+.developer-content-signin {
+	margin: 20px;
+	display: flex;
+	align-items: center;
+}
+
 
 @media screen and (max-width: 960px) {
 	.login-image-container {

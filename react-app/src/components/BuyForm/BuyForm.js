@@ -34,8 +34,6 @@ function BuyForm() {
         return accum + currentValue.shares
     }, 0)
 
-    const [modalMessage, setModalMessage] = useState('');
-
 
     useEffect(() => {
         const errors = {};
