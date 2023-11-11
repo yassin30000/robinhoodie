@@ -1,3 +1,6 @@
+const apiKeyId = process.env.REACT_APP_APCA_API_KEY_ID;
+const apiSecretKey = process.env.REACT_APP_APCA_API_SECRET_KEY;
+
 //GET STOCK DATA
 
 const GET_STOCK = "stocks/SET_STOCK";
@@ -32,8 +35,8 @@ export const fetchAlpacaStocks = (tickers, end = '2023-09-21T0:00:00Z', start = 
     const url = `https://data.alpaca.markets/v2/stocks/bars?symbols=${tickers}&start=${start}&end=${end}&timeframe=1D`
     const res = await fetch(url, {
         headers: {
-            "Apca-Api-Key-Id": "PKLT4FTNVNQRX5EJ5ZCW",
-            "Apca-Api-Secret-Key": "EHrQxsSLWfqzfH5CP54WRk0Re1PZ42i2LITptDLh"
+            "Apca-Api-Key-Id": apiKeyId,
+            "Apca-Api-Secret-Key": apiSecretKey
         }
     })
 

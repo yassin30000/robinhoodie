@@ -12,6 +12,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import "./index.css";
 
+
 const store = configureStore();
 
 if (process.env.NODE_ENV !== "production") {
