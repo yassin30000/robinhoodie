@@ -11,7 +11,7 @@ import BuyMessage from '../BuyMessage';
 import OpenCustomModalButton from '../OpenModalButton/OpenModalButton2';
 import SellMessage from '../SellMessage';
 
-function BuyForm() {
+function BuyForm({latestPrice}) {
     const dispatch = useDispatch();
     const history = useHistory();
     const orderOption = ["Cost", "Gain"]
@@ -37,6 +37,7 @@ function BuyForm() {
 
     useEffect(() => {
         const errors = {};
+        if (shares > 0 && name === "Buy" && portfolio?.cash < (Number(shares) * Number(latestPrice))) errors.buyingPower = "Not enough buying power"
         if (shares < 0) errors.shares = "Shares can't be negative"
         if (shares === "0") errors.shares = "Shares can't be zero"
         if (order === orderOption[1]) {
@@ -59,27 +60,28 @@ function BuyForm() {
         }
     }
 
-    let latestDate;
-    let latestPrice;
+
     let estimatedCost;
 
     function buy() {
         setOrder(orderOption[0])
         setStyle(false)
         setName(orderName[0])
+        setShares('')
+        setErrors({})
     }
 
     function sell() {
         setOrder(orderOption[1])
         setStyle(true)
         setName(orderName[1])
+        setShares('')
+        setErrors({})
+
+
     }
 
-    if (stock) {
-        const stock_prices = stock['Time Series (Daily)']
-        latestDate = Object.keys(stock_prices).shift()
-        latestPrice = Number(stock_prices[latestDate]['4. close']).toFixed(2)
-    }
+
 
     estimatedCost = (Number(shares) * Number(latestPrice)).toFixed(2)
 
@@ -91,7 +93,7 @@ function BuyForm() {
 
         if (Object.values(errors).length) {
 
-            return alert('Error please fix the underlying problems')
+            return
         };
 
         const sharesData = {
@@ -101,9 +103,9 @@ function BuyForm() {
         if (order === orderOption[0]) {
             let successfully = await dispatch(addShares(stockId, latestPrice, sharesData));
             await dispatch(fetchPortfolio())
-            if (estimatedCost > portfolio?.cash) {
-                return alert("Sorry you don't have enough buying power")
-            }
+            // if (estimatedCost > portfolio?.cash) {
+            //     return alert("Sorry you don't have enough buying power")
+            // }
 
             if (successfully) {
                 setShares('')
@@ -165,6 +167,8 @@ function BuyForm() {
                 </div>
                 <div className='error-blocks'>
                     {errors.shares && (<p className="error">*{errors.shares}</p>)}
+                    {errors.buyingPower && (<p className="error">*{errors.buyingPower}</p>)}
+
                 </div>
                 <div id="line" className='section'>
                     <div className='market-price-label'>Market Price</div>
@@ -193,7 +197,7 @@ function BuyForm() {
                             modalComponent={<SellMessage />}
                         />
                     ) : (
-                        <button className='order-btn' type='submit'>Trade Now</button>
+                        <button className={Object.values(errors).length ? 'order-btn-disabled' : 'order-btn'} type='submit'>Trade Now</button>
 
                     )}
 
