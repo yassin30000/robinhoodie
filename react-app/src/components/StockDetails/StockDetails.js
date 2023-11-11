@@ -209,7 +209,7 @@ function StockDetails() {
                 <div id="right-side-stock-details">
 
                     <div id="order-stock-container">
-                        <BuyForm />
+                        <BuyForm latestPrice={Number(latestPrice)}/>
                     </div>
 
                     <div id="add-to-lists-container">
