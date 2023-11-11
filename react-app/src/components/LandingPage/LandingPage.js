@@ -114,6 +114,7 @@ function LandingPage() {
         dispatch(getTotalPortfolioValue(currentPortfolioValue))
     }, [dispatch, currentPortfolioValue]);
 
+    console.log(portfolio?.cash)
 
     return (
         <div id='landingpage-whole-page-container'>
@@ -145,7 +146,7 @@ function LandingPage() {
                                             <p>Buying Power</p>
                                         </div>
                                         <div id='buying-power-label-right'>
-                                            <p id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toLocaleString() : 0}</p>
+                                            <p id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toFixed(2) : 0}</p>
                                             <p id='buying-power-arrow' className={open ? "material-icons arrow rotate-180" : "material-icons arrow rotate-0"}>expand_more</p>
                                         </div>
                                     </>
@@ -163,12 +164,12 @@ function LandingPage() {
                                     </div> */}
                                     <div className='buying-power-row-container-1'>
                                         <div>Brokerage cash</div>
-                                        <div id='actual-cash'>${portfolio?.cash?.toLocaleString()}</div>
+                                        <div id='actual-cash'>${portfolio?.cash?.toFixed(2)}</div>
                                     </div>
 
                                     <div className='buying-power-row-container-2'>
                                         <div>Total</div>
-                                        <div>${portfolio?.cash?.toLocaleString()}</div>
+                                        <div>${portfolio?.cash?.toFixed(2)}</div>
                                     </div>
 
                                     <div className='transfer-button-container'>
@@ -190,7 +191,7 @@ function LandingPage() {
                             <div id="all-opinions"
                                 className={!viewAllOpinions ? 'unselected' : 'selected'}
                                 onClick={() => setViewAllOpinions(true)}
-                            >All Opinions</div>
+                            >Trending Opinions</div>
                             <div id="my-opinons"
                                 onClick={() => setViewAllOpinions(false)}
                                 className={viewAllOpinions ? 'unselected' : 'selected'}
