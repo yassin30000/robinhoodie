@@ -1,8 +1,13 @@
-#stock-details-wholepage {
-	display: flex;
+#stock-details-whole-page-container {
 	margin: 0px auto;
 	max-width: 1440px;
 	min-width: 1029px;
+}
+
+#stock-details-top-container {
+	display: flex;
+	flex-wrap: nowrap;
+	/* position: relative; */
 }
 
 #stock-details-container {
@@ -10,16 +15,23 @@
 	flex-shrink: 0;
 	/* border: 1px solid black; */
 	width: 1050px;
+	margin-top: 40px;
+	margin-left: 25px;
 	/* background-color: blue; */
+	
 }
 
-#temp-nav-bar {
-	padding: 30px 0px;
+#right-side-stock-details {
+	align-self: flex-start;
+	position: sticky;
+	width: 330px;
+	flex-shrink: 0;
+
+	top: 100px;
+	margin-left: 50px;
+	border-radius: 5px;
 }
 
-.temp-nav-link {
-	padding: 0px 20px;
-}
 
 #ticker-header,
 #ticker-price {
@@ -74,21 +86,7 @@
 
 /* right side area */
 
-#right-side-stock-details {
-	/* position: fixed;
-	top: 0;
-	right: 0; */
-	/* background-color: red; */
-	/* width: 330px; */
-	position: sticky;
-	top: 100px;
-	height: 100vh;
-	/* margin-top: 100px; */
-	margin-left: 50px;
-	/* margin-right: 22px; */
-	border-radius: 5px;
-	/* background-color: red; */
-}
+
 
 #order-stock-container {
 	/* border: 1px solid rgb(227, 233, 237); */
