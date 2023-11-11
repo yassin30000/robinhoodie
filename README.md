@@ -7,8 +7,7 @@
 
 <h3>Portfolio Home</h3>
 
-![Screenshot 2023-11-04 at 2 57 40 PM](https://github.com/yassin30000/robinhoodie/assets/117422078/132561f7-79a6-4821-bc7c-7c9497278c2b)
-
+![Screenshot 2023-11-11 at 12 44 52 PM](https://github.com/yassin30000/robinhoodie/assets/117422078/f213b877-5b70-4462-8534-f16e0a4b9d58)
 
 <h3>Stock Details</h3>
 
