@@ -28,7 +28,7 @@ const alpacaStocks = (stocks) => ({
     payload: stocks
 })
 
-export const fetchAlpacaStocks = (tickers, end = '2023-09-21T0:00:00Z', start = '2023-08-25T0:00:00Z') => async dispatch => {
+export const fetchAlpacaStocks = (tickers, start = '2023-09-25T0:00:00Z', end = '2023-09-21T0:00:00Z') => async dispatch => {
     //AAPL,TSLA
     //2020-04-01T0:00:00Z
     //2021-08-26T11:00:00Z

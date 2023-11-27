@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
 import { fetchAllStocks, fetchAlpacaStocks } from '../../store/stocks.js';
 import { fetchPortfolio, getTotalPortfolioValue } from '../../store/portfolio.js';
 import { Link } from 'react-router-dom';
+import { subMonths } from 'date-fns';
 import LineChart2 from '../LineChart2/LineChart2.js';
 import ConfirmDeleteOpinion from '../ConfirmDeleteOpinion/index.js';
 import OpenCustomModalButton from '../OpenModalButton/OpenModalButton2.js';
@@ -102,19 +103,21 @@ function LandingPage() {
 
     const currentPortfolioValue = chartValues[chartValues.length - 1]
     useEffect(() => {
-        let today = new Date().toISOString()
+        const today = new Date().toISOString()
         const seconds = "0:00:00Z"
-        let end = today.slice(0, 11) + seconds
-
+        const end = today.slice(0, 11) + seconds
+        const startDate = subMonths(new Date(), 1).toISOString()
+        const start = startDate.slice(0, 11) + seconds
+        
         dispatch(fetchAllStocks());
         dispatch(fetchOpinions());
         dispatch(fetchAllUsers());
-        dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER'], end));
+        dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER'], start, end));
         dispatch(fetchPortfolio())
         dispatch(getTotalPortfolioValue(currentPortfolioValue))
     }, [dispatch, currentPortfolioValue]);
 
-    console.log(portfolio?.cash)
+    // console.log(portfolio?.cash)
 
     return (
         <div id='landingpage-whole-page-container'>
