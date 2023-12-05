@@ -103,16 +103,12 @@ function LandingPage() {
 
     const currentPortfolioValue = chartValues[chartValues.length - 1]
     useEffect(() => {
-        const today = new Date().toISOString()
-        const seconds = "0:00:00Z"
-        const end = today.slice(0, 11) + seconds
-        const startDate = subMonths(new Date(), 1).toISOString()
-        const start = startDate.slice(0, 11) + seconds
+
         
         dispatch(fetchAllStocks());
         dispatch(fetchOpinions());
         dispatch(fetchAllUsers());
-        dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER'], start, end));
+        dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER']));
         dispatch(fetchPortfolio())
         dispatch(getTotalPortfolioValue(currentPortfolioValue))
     }, [dispatch, currentPortfolioValue]);

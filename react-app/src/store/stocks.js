@@ -1,6 +1,6 @@
+import { subMonths } from 'date-fns';
 const apiKeyId = process.env.REACT_APP_APCA_API_KEY_ID;
 const apiSecretKey = process.env.REACT_APP_APCA_API_SECRET_KEY;
-
 //GET STOCK DATA
 
 const GET_STOCK = "stocks/SET_STOCK";
@@ -28,11 +28,18 @@ const alpacaStocks = (stocks) => ({
     payload: stocks
 })
 
-export const fetchAlpacaStocks = (tickers, start = '2023-09-25T0:00:00Z', end = '2023-09-21T0:00:00Z') => async dispatch => {
+export const fetchAlpacaStocks = (tickers) => async dispatch => {
     //AAPL,TSLA
     //2020-04-01T0:00:00Z
     //2021-08-26T11:00:00Z
+    const today = new Date().toISOString();
+    const seconds = "0:00:00Z";
+    const end = today.slice(0, 11) + seconds;
+    const startDate = subMonths(new Date(), 1).toISOString();
+    const start = startDate.slice(0, 11) + seconds;
+
     const url = `https://data.alpaca.markets/v2/stocks/bars?symbols=${tickers}&start=${start}&end=${end}&timeframe=1D`
+    // console.log(url)
     const res = await fetch(url, {
         headers: {
             "Apca-Api-Key-Id": apiKeyId,
