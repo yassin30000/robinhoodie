@@ -28,7 +28,7 @@ function SearchBar({ placeholder, data }) {
         if (!newFilter.length) {
             setFilteredData([{
                 "ticker": "This ticker does not exist",
-                "description": "This ticker does not exist, please revise your search!"}])
+                "description": "This stock does not exist, please revise your search!"}])
         }
     }
 
