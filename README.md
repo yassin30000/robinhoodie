@@ -1,6 +1,6 @@
 
 <h1 align='center'> <img height="30" src='https://github.com/yassin30000/robinhoodie/assets/117422078/f89e499d-7e70-45b8-a5ef-799c08f7f231' />  robinhoodie</h1>
-
+``
 <h3>Description</h3>
 <p>While Robinhood is a commission-free investing platform, Robinhoodie is a paper trading platform that allows ordinary individuals to try their hand in the stock market. Robinhood's user friendly experience is mirrored in Robinhoodie, allowing users to add funds to their portfolio, buy/sell stocks, and create watchlists. Robinhoodie leverages the Alpaca API to incorporate accurate financial data by updating stock values daily and updating users' daily portfolio values.</p>
 
@@ -30,7 +30,7 @@ git clone https://github.com/yassin30000/robinhoodie.git
    
 2. Install backend dependencies, including python server. In the root folder:
 
-```
+````
 pipenv install
 ```
 
