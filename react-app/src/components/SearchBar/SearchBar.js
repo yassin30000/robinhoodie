@@ -24,6 +24,12 @@ function SearchBar({ placeholder, data }) {
         } else {
             setFilteredData(newFilter)
         }
+
+        if (!newFilter.length) {
+            setFilteredData([{
+                "ticker": "This ticker does not exist",
+                "description": "This ticker does not exist, please revise your search!"}])
+        }
     }
 
 
@@ -42,8 +48,6 @@ function SearchBar({ placeholder, data }) {
 
     }, [searchResults])
 
-    // console.log(filteredData)
-
 
     return (
         <div className="search">
@@ -58,10 +62,11 @@ function SearchBar({ placeholder, data }) {
                     {filteredData?.map((stock, key) => {
                         return (
                             <Link key={key} className='stockName' to={`/stocks/${stock?.ticker}`}>
-                                <div className="dataResults-container">
-                                    <p>{stock?.ticker}</p> <p>{stock?.name}</p>
-
-                                </div>
+                                {stock?.ticker === "This ticker does not exist" ?
+                                    <p id="ticker-does-not-exist">{stock?.description}</p> :
+                                    <div className="dataResults-container">
+                                        <p>{stock?.ticker}</p> <p>{stock?.name}</p>
+                                    </div>}
                             </Link>
                         )
                     })}
