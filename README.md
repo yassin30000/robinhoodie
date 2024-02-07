@@ -30,7 +30,7 @@ git clone https://github.com/yassin30000/robinhoodie.git
    
 2. Install backend dependencies, including python server. In the root folder:
 
-````
+```
 pipenv install
 ```
 
