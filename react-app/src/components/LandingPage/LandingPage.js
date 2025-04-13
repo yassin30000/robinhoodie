@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
 import { fetchAllStocks, fetchAlpacaStocks } from '../../store/stocks.js';
 import { fetchPortfolio, getTotalPortfolioValue } from '../../store/portfolio.js';
 import { Link } from 'react-router-dom';
+import { subMonths } from 'date-fns';
 import LineChart2 from '../LineChart2/LineChart2.js';
 import ConfirmDeleteOpinion from '../ConfirmDeleteOpinion/index.js';
 import OpenCustomModalButton from '../OpenModalButton/OpenModalButton2.js';
@@ -102,18 +103,17 @@ function LandingPage() {
 
     const currentPortfolioValue = chartValues[chartValues.length - 1]
     useEffect(() => {
-        let today = new Date().toISOString()
-        const seconds = "0:00:00Z"
-        let end = today.slice(0, 11) + seconds
 
+        
         dispatch(fetchAllStocks());
         dispatch(fetchOpinions());
         dispatch(fetchAllUsers());
-        dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER'], end));
+        dispatch(fetchAlpacaStocks(['AAPL', 'AMZN', 'BABA', 'BAD', 'DIS', 'F', 'GOOGL', 'META', 'MSFT', 'NFLX', 'NVDA', 'PYPL', 'RIVN', 'SNAP', 'TSLA', 'UBER']));
         dispatch(fetchPortfolio())
         dispatch(getTotalPortfolioValue(currentPortfolioValue))
     }, [dispatch, currentPortfolioValue]);
 
+    // console.log(portfolio?.cash)
 
     return (
         <div id='landingpage-whole-page-container'>
@@ -145,7 +145,7 @@ function LandingPage() {
                                             <p>Buying Power</p>
                                         </div>
                                         <div id='buying-power-label-right'>
-                                            <p id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toLocaleString() : 0}</p>
+                                            <p id={`buying-power`}>${portfolio?.cash ? portfolio?.cash?.toFixed(2) : 0}</p>
                                             <p id='buying-power-arrow' className={open ? "material-icons arrow rotate-180" : "material-icons arrow rotate-0"}>expand_more</p>
                                         </div>
                                     </>
@@ -163,12 +163,12 @@ function LandingPage() {
                                     </div> */}
                                     <div className='buying-power-row-container-1'>
                                         <div>Brokerage cash</div>
-                                        <div id='actual-cash'>${portfolio?.cash?.toLocaleString()}</div>
+                                        <div id='actual-cash'>${portfolio?.cash?.toFixed(2)}</div>
                                     </div>
 
                                     <div className='buying-power-row-container-2'>
                                         <div>Total</div>
-                                        <div>${portfolio?.cash?.toLocaleString()}</div>
+                                        <div>${portfolio?.cash?.toFixed(2)}</div>
                                     </div>
 
                                     <div className='transfer-button-container'>
@@ -190,7 +190,7 @@ function LandingPage() {
                             <div id="all-opinions"
                                 className={!viewAllOpinions ? 'unselected' : 'selected'}
                                 onClick={() => setViewAllOpinions(true)}
-                            >All Opinions</div>
+                            >Trending Opinions</div>
                             <div id="my-opinons"
                                 onClick={() => setViewAllOpinions(false)}
                                 className={viewAllOpinions ? 'unselected' : 'selected'}

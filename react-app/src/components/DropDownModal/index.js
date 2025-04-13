@@ -1,7 +1,7 @@
 
 import { logout } from "../../store/session";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useModal } from "../../context/Modal";
 import { logoutPortfolio } from "../../store/portfolio";
@@ -24,7 +24,7 @@ function DropDownModal() {
         <div className="dropdown-menu">
 
             {sessionUser && (<p className='user-name'>{sessionUser.username}</p>)} {/* if logged in, show username */}
-
+            <Link to='/'>Home</Link>
             <button onClick={handleLogout}>
                 <span className="material-icons logout">logout</span>
                 Log Out</button>

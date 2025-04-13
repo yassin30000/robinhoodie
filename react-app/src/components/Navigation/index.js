@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import SearchBar from '../SearchBar/SearchBar';
@@ -13,6 +13,8 @@ function Navigation() {
 	const stocksData = useSelector(state => state.stocks.allStocks);
 	const location = useLocation();
 	const [dropDownOpen, setDropDownOpen] = useState(false);
+	const accountRef = useRef(null);
+
 
 	// DARK MODE
 	const [theme, setTheme] = useState('light');
@@ -21,15 +23,33 @@ function Navigation() {
 		else setTheme('light')
 	}
 
+	const closeAccount = () => setDropDownOpen(false);
+
+
+	// useEffect(() => {
+	// 	document.body.className = theme;
+	// 	document.getElementById('nav-container').className = 'nav-container-' + theme;
+	// 	document.body.className = theme;
+	// 	document.body.className = theme;
+	// }, [theme]);
+
 	useEffect(() => {
-		// document.body.className = theme;
-		// document.getElementById('nav-container').className = 'nav-container-' + theme;
-		// document.body.className = theme;
-		// document.body.className = theme;
-	}, [theme]);
+
+        const handleClickOutside = (event) => {
+            if (accountRef.current && !accountRef.current.contains(event.target)) closeAccount();
+        };
+        if (dropDownOpen) window.addEventListener('click', handleClickOutside);
+
+
+        return () => {
+            window.removeEventListener('click', handleClickOutside)
+        };
+
+
+    }, [dropDownOpen])
 
 	// add link to list where you dont want navbar
-	if (location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/404" || location.pathname === "/portfolio/deposit-funds") return null
+	if (location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/portfolio/deposit-funds") return null
 
 	return (
 		<div id='nav-container'>
@@ -51,13 +71,9 @@ function Navigation() {
 				{/* <span>
 					<button onClick={toggleTheme}>Toggle theme</button>
 				</span> */}
-
-				<span>
-					<OpenModalButton
-						buttonText={"Account"}
-						modalComponent={<DropDownModal />}
-					/>
-				</span>
+				<div id="account-button" ref={accountRef} onClick={() => setDropDownOpen(!dropDownOpen)}>Account</div>
+				{dropDownOpen ? <DropDownModal /> : <></>}
+				
 			</div>
 		</div>
 	);

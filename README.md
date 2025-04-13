@@ -1,14 +1,14 @@
 
 <h1 align='center'> <img height="30" src='https://github.com/yassin30000/robinhoodie/assets/117422078/f89e499d-7e70-45b8-a5ef-799c08f7f231' />  robinhoodie</h1>
 
-<h3 align='center'>Commission-free investing platform for ordinary individuals to start investing easily and efficiently with little money.</h3>
+<h3>Description</h3>
+<p>While Robinhood is a commission-free investing platform, Robinhoodie is a paper trading platform that allows ordinary individuals to try their hand in the stock market. Robinhood's user friendly experience is mirrored in Robinhoodie, allowing users to add funds to their portfolio, buy/sell stocks, and create watchlists. Robinhoodie leverages the Alpaca API to incorporate accurate financial data by updating stock values daily and updating users' daily portfolio values.</p>
 
 <div align='center'> <a href='https://robinhoodie-9jff.onrender.com'>Demo Live Link</a> </div>
 
 <h3>Portfolio Home</h3>
 
-![Screenshot 2023-11-04 at 2 57 40 PM](https://github.com/yassin30000/robinhoodie/assets/117422078/132561f7-79a6-4821-bc7c-7c9497278c2b)
-
+![Screenshot 2023-11-11 at 12 44 52 PM](https://github.com/yassin30000/robinhoodie/assets/117422078/f213b877-5b70-4462-8534-f16e0a4b9d58)
 
 <h3>Stock Details</h3>
 
