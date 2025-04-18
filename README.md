@@ -4,7 +4,8 @@
 <h3>Description</h3>
 <p>While Robinhood is a commission-free investing platform, Robinhoodie is a paper trading platform that allows ordinary individuals to try their hand in the stock market. Robinhood's user friendly experience is mirrored in Robinhoodie, allowing users to add funds to their portfolio, buy/sell stocks, and create watchlists. Robinhoodie leverages the Alpaca API to incorporate accurate financial data by updating stock values daily and updating users' daily portfolio values.</p>
 
-<div align='center'> <a href='https://robinhoodie-9jff.onrender.com'>Demo Live Link</a> </div>
+<div align='center'> <a href='https://robinhoodie-rp84.onrender.com/'>Demo Live Link</a> </div>
+<div align='center'> <a href='https://robinhoodie-9jff.onrender.com'>BackUp Demo Live Link</a> </div>
 
 <h3>Portfolio Home</h3>
 
